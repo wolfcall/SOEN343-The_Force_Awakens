@@ -1,15 +1,25 @@
 <?php
 
 /* 
- * Author: Nicholas Burdet
- * Last Change Date: 23/09/16
+ * Original Creator: Nicholas Burdet
+ * Last Change Date: 25/09/16 (NB)
+ * 
+ * Version History: 
+ * 25/09/16(NB)
+ * -Added password validation concept
+ * -Added temporary reservation class association (reservation class
+ * at this point not yet started, so purely conceptual).
+ * -Added reservation get and sets
+ * 
+ * 23/09/16(NB)
+ * -Created skeleton for user class, gets and sets, rudimentary sql workings
  * 
  * NOTES:
  * This merely a bare-bones, first draft, template. More work is
  * to be done when documentation is finalized and processes defined.
  */
 
-    //The bare bones mySQL code to connect to the database.
+    //Below is bare bones mySQL code to connect to the database.
     //Values to be inserted later.
     //This might not be the correct method for doing this
     //but will act as placeholder in any case
@@ -33,15 +43,21 @@ class User
     */
     private $firstName = "";
     private $lastName = "";
+    
+    //Association to reservation class (class not created yet at time of coding)
+    private $reservation;
 
     //Should this just be the storage for user information or also
     //handle server authentication?
+    //NOTE(25/09/16): If password validation method used further below,
+    //should make this a null constructor, and let password validator
+    //populate object upon successful login.
     public function __construct($uName, $pWord) {
         /*
         $sql = "SELECT password FROM table_name WHERE username ='".$uName."'";
         $result = $connection->query($sql);
         $row = $result->fetch_assoc()
-        $password = 
+        $password = $row["password"];
         */
         $this->username = $uName;
         //$this->firstName = $fName;
@@ -66,6 +82,10 @@ class User
 	return $this->username;
     }
     
+    public function getReservation() {
+        return $this->reservation;
+    }
+    
     public function setFirstName($fName){
 	$this->firstName = $fName;
     }
@@ -76,6 +96,32 @@ class User
     
     public function setUserName($uName){
 	$this->username = $uName;
+    }
+    
+    //Returns reservation object
+    public function setReservation($reserve){
+	$this->reservation = $reserve;
+    }
+    //-Method to call to validate user password
+    //-If true, should populate the object with names
+    //-If false, destroy object?
+    //-If used this way, perhaps make a null constructor
+    public function validatePassword($userName, $enteredPassword) {
+        /*
+         * $sql = "SELECT username, password, firstname, lastname FROM table_name WHERE username ='".$uName."'";
+         * $result = $connection->query($sql);
+         * $row = $result->fetch_assoc()
+         * $password = $row["password"];
+        */
+       if($enteredPassword = $password)
+       {
+           $this->setFirstName($row["firstname"]);
+           $this->setLastName($row["lastname"]);
+           $this->setUserName($row["username"]);
+           return true;
+       }
+       else
+           return false;
     }
     
     //To clear the object in case user login fails?
