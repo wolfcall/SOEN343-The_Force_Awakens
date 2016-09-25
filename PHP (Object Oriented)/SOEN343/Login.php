@@ -1,17 +1,30 @@
 <?php
 class Login{
-	private $email = "";
-	private $password = "";
+
+	//to connect to Wolfcall server
+	private function openConnection()
+	{
+	$servernamelocal = "192.168.2.36";
+	$servernameremote = "wolfcall.ddns.net";
+	$port = 3306;
+	$username = "SOEN341user";
+	$password = "G3tR3ck3dS0n";
+	$schema = "soen341";
 	
-	function Login()
-	{
-		$email = "";
-		$password = "";
+	$conn = new mysqli($servernameremote, $username, $password, $schema, $port);
+	
+	if($conn->connect_error){
+		$conn  = new mysqli($servernamelocal, $username, $password, $schema, $port);
+		
+		if($conn->connect_error)
+			die("Connection failed: " . $conn->connect_error);
 	}
-	function Login($email, $password)
+	return $conn;
+	}
+	//to close connection to Wolfcall server
+	private function closeConnection()
 	{
-		$email = $email;
-		$password = $password;
+		$conn->close();
 	}
 	//get email from html
 	function getEmailFromBootstrap()
@@ -23,24 +36,73 @@ class Login{
 	{
 		return $_POST["password"];
 	}
-	
-	function getEmail()
+	//make sure the user logs in with good credentials
+	private function checkUserAndPass()
 	{
-		return $email;
+		openConnection();
+		
+		$sql = "SELECT email, password FROM student WHERE email =".getEmailFromBootstrap()." AND password = ".getPasswordFromBootstrap();
+		$result = $conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			return true;
+		}
+		else 
+			return false;
+		
+		closeConnection();
 	}
-	function getPassword()
+	//make sure the user exists in the db (to use if wrong password)
+	private function checkUserExist()
 	{
-		return $password;
+		openConnection();
+		
+		$sql = "SELECT email, password FROM student WHERE email =".getEmailFromBootstrap();
+		$result = $conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			return true;
+		}
+		else
+			return false;
+		
+			closeConnection();
 	}
-	//Call this to save an email
-	function setEmail($email)
+	//Call this to save credentials for a new user
+	function setCredentials()
 	{
+		openConnection();
+		$sql = "INSERT INTO student (email, password)
+		VALUES (".getEmailFromBootstrap().", ".getPasswordFromBootstrap().")";
+		
+		if ($conn->query($sql) === TRUE) {
+			echo "New record created successfully";
+		} else {
+			echo "Error: " . $sql . "<br>" . $conn->error;
+		}
 		$email = getEmailFromBootstrap();
+		closeConnection();
 	}
-	//call this to save a password
-	function setPassword($password)
+	//CALL THIS when a user wants to login
+	function allowLogin()
 	{
-		$password = getPasswordFromBootstrap();
+		if (checkUserAndPass() == true)
+		{
+			echo "Success";
+			//line to redirect to next page
+		}
+		else
+		{
+			if (checkUserExist() == true)
+			{
+			alert("Wrong Password");
+			}
+			else 
+				{
+					setCredentials();					
+				}	
+			
+		}
 	}
 	
 }
