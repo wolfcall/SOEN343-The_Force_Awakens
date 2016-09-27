@@ -21,11 +21,6 @@ h6 {
     font-weight: 700;
 }
 
-#myModal {
-top:35%;
-outline: none;
-}
-
 .topnav {
     font-size: 14px; 
 }
@@ -130,3 +125,19 @@ footer {
 p.copyright {
     margin: 15px 0 0;
 }
+
+.first-r  { 
+	left: 0%; position: relative; 
+}
+	
+.second-r { 
+	left: 85%; position: relative; 
+}
+
+.third-r  { 
+	left: 170%; position: relative; 
+	}
+	
+.fourth-r  { 
+	left: 255%; position: relative; 
+	}
