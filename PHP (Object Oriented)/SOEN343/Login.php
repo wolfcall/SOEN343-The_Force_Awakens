@@ -88,18 +88,20 @@ class Login{
 	{
 		if (checkUserAndPass() == true)
 		{
-			echo "Success";
+			header("Location: ../../HTML/Reservation.html");
 			//line to redirect to next page
 		}
 		else
 		{
 			if (checkUserExist() == true)
 			{
+			header("Location: ../../HTML/index.php");
 			alert("Wrong Password");
 			}
 			else 
 				{
-					setCredentials();					
+					setCredentials();	
+					header("Location: ../../HTML/Reservation.html");
 				}	
 			
 		}

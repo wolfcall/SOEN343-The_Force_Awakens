@@ -115,6 +115,19 @@
     </div>
 	</div>
 	</div>
+	<script
+	 $('.submit').click(function() {
+
+		$.ajax({
+			type: "POST",
+			url: "runtime.php",
+			data: { email: getElementById("email"), password: getElementById("password") }
+			}).done(function( msg ) {
+			alert( "Data Saved: " + msg );
+			});    
+
+    });
+	</script
     
     <!-- jQuery -->
     <script src="../Javascript/jquery.js"></script>
