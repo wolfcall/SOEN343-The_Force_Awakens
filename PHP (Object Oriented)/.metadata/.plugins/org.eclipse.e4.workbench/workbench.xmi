@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_yTBJYILnEeaayrTIECwA4g" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_yTBJYYLnEeaayrTIECwA4g" bindingContexts="_yTByFoLnEeaayrTIECwA4g">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.php.editor&quot; name=&quot;Login.php&quot; tooltip=&quot;SOEN343/Login.php&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SOEN343/Login.php&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.php.editor&quot; name=&quot;runtime.php&quot; tooltip=&quot;SOEN343/runtime.php&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SOEN343/runtime.php&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.php.editor&quot; name=&quot;Login.php&quot; tooltip=&quot;SOEN343/Login.php&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SOEN343/Login.php&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_yTBJYYLnEeaayrTIECwA4g" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_yTBJYoLnEeaayrTIECwA4g" label="%trimmedwindow.label.eclipseSDK" x="224" y="224" width="1024" height="768">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_yTBJYYLnEeaayrTIECwA4g" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_yTBJYoLnEeaayrTIECwA4g" label="%trimmedwindow.label.eclipseSDK" x="0" y="0" width="1024" height="768">
     <persistedState key="coolBarVisible" value="true"/>
     <persistedState key="perspectiveBarVisible" value="true"/>
     <persistedState key="isRestored" value="true"/>
@@ -60,6 +60,7 @@
           <tags>persp.actionSet:org.eclipse.php.ui.text.php.actionSet.presentation</tags>
           <children xsi:type="basic:PartSashContainer" xmi:id="_yTBJZYLnEeaayrTIECwA4g" selectedElement="_yTBJaILnEeaayrTIECwA4g" horizontal="true">
             <children xsi:type="basic:PartStack" xmi:id="_yTBJZoLnEeaayrTIECwA4g" elementId="topLeft" containerData="2200" selectedElement="_yTBJZ4LnEeaayrTIECwA4g">
+              <tags>noFocus</tags>
               <children xsi:type="advanced:Placeholder" xmi:id="_yTBJZ4LnEeaayrTIECwA4g" elementId="org.eclipse.php.ui.explorer" ref="_yTBKuYLnEeaayrTIECwA4g"/>
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_yTBJaILnEeaayrTIECwA4g" containerData="7800" selectedElement="_yTBJaYLnEeaayrTIECwA4g">
@@ -110,7 +111,7 @@
         <tags>EditorStack</tags>
         <tags>active</tags>
         <children xsi:type="basic:Part" xmi:id="_yTBKs4LnEeaayrTIECwA4g" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Login.php" iconURI="platform:/plugin/org.eclipse.php.ui/icons/full/obj16/phpfile.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.php.editor&quot; name=&quot;Login.php&quot; partName=&quot;Login.php&quot; title=&quot;Login.php&quot; tooltip=&quot;SOEN343/Login.php&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/SOEN343/Login.php&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;2220&quot; selectionTopPixel=&quot;1560&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.php.editor&quot; name=&quot;Login.php&quot; partName=&quot;Login.php&quot; title=&quot;Login.php&quot; tooltip=&quot;SOEN343/Login.php&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/SOEN343/Login.php&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;2393&quot; selectionTopPixel=&quot;1568&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.php.editor</tags>
           <tags>removeOnHide</tags>
@@ -144,6 +145,12 @@
             <tags>popup:org.eclipse.php.editor.source.RulerContext</tags>
             <tags>popup:org.eclipse.wst.sse.ui.StructuredTextEditor.RulerContext</tags>
           </menus>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_4BLhgIUVEeaCuudeu_8XPQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="runtime.php" iconURI="platform:/plugin/org.eclipse.php.ui/icons/full/obj16/phpfile.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.php.editor&quot; name=&quot;runtime.php&quot; partName=&quot;runtime.php&quot; title=&quot;runtime.php&quot; tooltip=&quot;SOEN343/runtime.php&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/SOEN343/runtime.php&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;46&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.php.editor</tags>
+          <tags>removeOnHide</tags>
         </children>
       </children>
     </sharedElements>
@@ -219,7 +226,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_yTBLJILnEeaayrTIECwA4g" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_bldN54NLEea36eHVPojyWA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_yTDBpILnEeaayrTIECwA4g"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_46rO8IUNEeaCuudeu_8XPQ" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_yTDBpILnEeaayrTIECwA4g"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_yTBLMYLnEeaayrTIECwA4g" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -240,7 +247,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_yTBLa4LnEeaayrTIECwA4g" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_bloNAYNLEea36eHVPojyWA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_yTDBB4LnEeaayrTIECwA4g"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_46trMIUNEeaCuudeu_8XPQ" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_yTDBB4LnEeaayrTIECwA4g"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_yTBLdoLnEeaayrTIECwA4g" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
