@@ -1,6 +1,13 @@
 <?php
 class Login{
-
+	
+	private $param;
+	
+	function __construct($param){
+		$this->param = $param;
+		var_dump($this->param);
+	}
+	
 	//to connect to Wolfcall server
 	private function openConnection()
 	{
@@ -9,7 +16,7 @@ class Login{
 	$port = 3306;
 	$username = "SOEN341user";
 	$password = "G3tR3ck3dS0n";
-	$schema = "soen341";
+	$schema = "soen343";
 	
 	$conn = new mysqli($servernameremote, $username, $password, $schema, $port);
 	
@@ -22,7 +29,7 @@ class Login{
 	return $conn;
 	}
 	//to close connection to Wolfcall server
-	private function closeConnection()
+	private function closeConnection($conn)
 	{
 		$conn->close();
 	}
@@ -39,18 +46,20 @@ class Login{
 	//make sure the user logs in with good credentials
 	private function checkUserAndPass()
 	{
-		openConnection();
+		$conn = $this->openConnection();
+		var_dump($_POST);
+		$sql = "SELECT email, password FROM student WHERE email ='".$this->getEmailFromBootstrap()."' AND password = password('".$this->getPasswordFromBootstrap()."')";
 		
-		$sql = "SELECT email, password FROM student WHERE email =".getEmailFromBootstrap()." AND password = ".getPasswordFromBootstrap();
 		$result = $conn->query($sql);
 		
+		$this->closeConnection($conn);
+		echo "<br /> ".$result->num_rows."<br />";
 		if ($result->num_rows > 0) {
 			return true;
 		}
 		else 
 			return false;
 		
-		closeConnection();
 	}
 	//make sure the user exists in the db (to use if wrong password)
 	private function checkUserExist()
@@ -71,7 +80,7 @@ class Login{
 	//Call this to save credentials for a new user
 	function setCredentials()
 	{
-		openConnection();
+		$this->openConnection();
 		$sql = "INSERT INTO student (email, password)
 		VALUES (".getEmailFromBootstrap().", ".getPasswordFromBootstrap().")";
 		
@@ -86,7 +95,9 @@ class Login{
 	//CALL THIS when a user wants to login
 	function allowLogin()
 	{
-		if (checkUserAndPass() == true)
+		echo "dfhasiugfhdafsi";
+		echo $this->checkUserAndPass()."pass";
+		if ($this->checkUserAndPass() == true)
 		{
 			header("Location: ../../HTML/Reservation.html");
 			//line to redirect to next page

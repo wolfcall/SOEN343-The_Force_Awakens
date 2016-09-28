@@ -104,11 +104,11 @@
           <form id="form">
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="text" class="form-control" id="email" placeholder="Enter your email address">
+              <input type="text" class="form-control" name="email" placeholder="Enter your email address">
             </div>
             <div class="form-group">
               <label>Password</label>
-              <input type="text" class="form-control" id="password" placeholder="Enter your password">
+              <input type="text" class="form-control" name="password" placeholder="Enter your password">
             </div>
             <button type="submit" class="btn btn-default btn-success btn-block">Login</button>
           </form>

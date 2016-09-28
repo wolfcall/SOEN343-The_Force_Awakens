@@ -1,5 +1,6 @@
 <?php
-$log = new Login;
+include "Login.php";
 
-$log.allowLogin();
+$log = new Login();
+$log->allowLogin();
 ?>
