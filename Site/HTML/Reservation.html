@@ -5,6 +5,15 @@
 	September 27, 2016 (Joey)
 	-Added jQuery 1.x, in order for datepicker to work (try to upgrade to 3.1.1)
 	-Added datepicker to basic img
+	
+	September 30, 2016 (Stefano)
+	-Added Modal to the Reservation page when users selects make reservation button
+	-Made table entities clickable to activate reservations
+	
+	!-Still necessary to pass entity ID of time selected
+	!-Colors are not permanent, was done to check if CSS worked for table
+	!-Red should indicate times that are booked
+	!-Grey should indicate times that are not booked
 -->
 
 <head>
@@ -28,7 +37,7 @@
 
 	<!-- Custom CSS -->
 	<link href="../CSS/landing-page-Registration.css" rel="stylesheet">
-
+	
 	<!--jQuery stuff-->
 	<!--Try to update to new jquery, doesn't seem to work with jquery 3.1.1-->
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -194,7 +203,7 @@
 					<table class="reservations" border="1" cellpadding="0" width="100%">
 						<tbody>
 							<tr class="today">
-								<td class="date">Tuesday, 27/09/2016</td>
+								<td class="date" id = "datetoday" >Tuesday, 27/09/2016</td>
 								<td class="time" colspan="2">00:00</td>
 								<td class="time" colspan="2">01:00</td>
 								<td class="time" colspan="2">02:00</td>
@@ -221,7 +230,7 @@
 								<td class="time" colspan="2">23:00</td>
 							</tr>
 							<tr class="today">
-								<td class="date">Room1</td>
+								<td class="room" id="room1">Room1</td>
 								<td class="slot" colspan="1">0</td>
 								<td class="slot" colspan="1">0</td>
 								<td class="slot" colspan="1">0</td>
@@ -273,7 +282,7 @@
 							</tr>
 
 							<tr class="today">
-								<td class="date">Room2</td>
+								<td class="room" id="room2">Room2</td>
 								<td class="slot" colspan="1">0</td>
 								<td class="slot" colspan="1">0</td>
 								<td class="slot" colspan="1">0</td>
@@ -325,7 +334,7 @@
 							</tr>
 
 							<tr class="today">
-								<td class="date">Room3</td>
+								<td class="room" id="room3">Room3</td>
 								<td class="slot" colspan="1">0</td>
 								<td class="slot" colspan="1">0</td>
 								<td class="slot" colspan="1">0</td>
@@ -377,7 +386,7 @@
 							</tr>
 
 							<tr class="today">
-								<td class="date">Room4</td>
+								<td class="room" id="room4">Room4</td>
 								<td class="slot" colspan="1">0</td>
 								<td class="slot" colspan="1">0</td>
 								<td class="slot" colspan="1">0</td>
@@ -429,7 +438,7 @@
 							</tr>
 
 							<tr class="today">
-								<td class="date">Room5</td>
+								<td class="room" id="room5">Room5</td>
 								<td class="slot" colspan="1">0</td>
 								<td class="slot" colspan="1">0</td>
 								<td class="slot" colspan="1">0</td>
