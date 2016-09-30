@@ -1,10 +1,13 @@
 <?php
-
 /* 
  * Original Creator: Nicholas Burdet
  * Last Change Date: 25/09/16 (NB)
  * 
  * Version History: 
+ * 30/09/16(NB)
+ * -Added email (as username?) to variables and appropriate gets and sets
+ * -Tested database connections but left in test code (except for personal password)
+ * 
  * 25/09/16(NB)
  * -Added password validation concept
  * -Added temporary reservation class association (reservation class
@@ -17,21 +20,17 @@
  * NOTES:
  * This merely a bare-bones, first draft, template. More work is
  * to be done when documentation is finalized and processes defined.
- */
 
-    //Below is bare bones mySQL code to connect to the database.
-    //Values to be inserted later.
-    //This might not be the correct method for doing this
-    //but will act as placeholder in any case
-/*
-    $server = "insert server name here";
-    $user = "insert username here";
-    $pass = "insert password here";
-    $db = "insert database name/location here";
-    
-    $connection = new mysqli($server, $user, $pass, $db);
+    $servernameremote = "wolfcall.ddns.net";
+    $user = "nicholas";
+    $pass = "******";
+    $port = 3306;
+    $scheme = "soen343";
+
+    $conn = new mysqli($servernameremote, $user, $pass, $schema, $port);
+ * 
+ * 
 */
-
 class User
 {
     private $username = "";
@@ -43,10 +42,11 @@ class User
     */
     private $firstName = "";
     private $lastName = "";
+    private $emailAddress = ""; //Added 9/30/16 NB
     
     //Association to reservation class (class not created yet at time of coding)
     private $reservation;
-
+   /
     //Should this just be the storage for user information or also
     //handle server authentication?
     //NOTE(25/09/16): If password validation method used further below,
@@ -54,7 +54,8 @@ class User
     //populate object upon successful login.
     public function __construct($uName, $pWord) {
         /*
-        $sql = "SELECT password FROM table_name WHERE username ='".$uName."'";
+         * //Username is email?
+        $sql = "SELECT password FROM student WHERE username ='".$uName."'";
         $result = $connection->query($sql);
         $row = $result->fetch_assoc()
         $password = $row["password"];
@@ -64,7 +65,7 @@ class User
         //$this->lastName = $lName;
         
     }
-
+    
     /* The general gets and sets are here
      * (Sets may be unneccessary since users should already be
      * created in the database, this would be to populate the
@@ -86,6 +87,10 @@ class User
         return $this->reservation;
     }
     
+    public function getEmailAddress() {
+        return $this->emailAddress;
+    }
+    
     public function setFirstName($fName){
 	$this->firstName = $fName;
     }
@@ -102,13 +107,17 @@ class User
     public function setReservation($reserve){
 	$this->reservation = $reserve;
     }
+    
+    public function setEmailAddress($email) {
+        $this->emailAddress = $email;
+    }
     //-Method to call to validate user password
     //-If true, should populate the object with names
     //-If false, destroy object?
     //-If used this way, perhaps make a null constructor
     public function validatePassword($userName, $enteredPassword) {
         /*
-         * $sql = "SELECT username, password, firstname, lastname FROM table_name WHERE username ='".$uName."'";
+         * $sql = "SELECT * FROM table_name WHERE username ='".$uName."'";
          * $result = $connection->query($sql);
          * $row = $result->fetch_assoc()
          * $password = $row["password"];
@@ -129,7 +138,6 @@ class User
        //echo "Object destroyed";
    }
 }
-
 //Code purely for testing purposes. To be deleted later
 $test = new User("n_burdet", "password");
 echo "First Name: " . $test->getFirstName();
@@ -137,6 +145,24 @@ echo "</br>";
 echo "Last Name: " . $test->getLastName();
 echo "</br>";
 echo "Username: " . $test->getUserName();
-
 echo "</br>";
 $test = null;
+
+echo hash('sha256', 'Test sentence.');
+
+$servernameremote = "wolfcall.ddns.net";
+$username = "nicholas";
+$password = "******";
+$schema = "soen343";
+$port = 3306;
+
+$conn = new mysqli($servernameremote, $username, $password, $schema, $port);
+
+$sql = "SELECT * FROM student";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$fname = $row["FirstName"];
+echo $fname;
+$row = $result->fetch_assoc();
+$fname = $row["FirstName"];
+echo $fname;
