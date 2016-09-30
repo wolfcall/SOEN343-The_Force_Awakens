@@ -21,15 +21,6 @@ h6 {
     font-weight: 700;
 }
 
-#myModal {
-top:35%;
-outline: none;
-}
-
-.second-r { 
-	left: 35%; position: relative; 
-}
-
 .topnav {
     font-size: 14px; 
 }
@@ -93,4 +84,13 @@ outline: none;
     .intro-divider {
         width: 100%;
     }
+}
+
+.second-r { 
+	left: 35%; position: relative; 
+}
+
+#myModal {
+top:35%;
+outline: none;
 }

@@ -17,6 +17,12 @@
 
 	<title>Room Reserver</title>
 
+	<!-- jQuery -->
+    <script src="../Javascript/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../Javascript/bootstrap.min.js"></script>
+		
 	<!-- Bootstrap Core CSS -->
 	<link href="../CSS/bootstrap.min.css" rel="stylesheet">
 
@@ -56,10 +62,10 @@
                     <span class="icon-bar"></span>
                 </button>
 
- 				<a class="navbar-brand topnav first-r" id="first-r" href="#">Home</a>
+ 				<a class="navbar-brand topnav first-r" id="first-r" href="#">LogOut</a>
 				<a class="navbar-brand topnav second-r" id="second-r" href="#">My Profile</a>
 				<a class="navbar-brand topnav third-r" id="third-r" href="#">My Reservations</a>
-				<a class="navbar-brand topnav fourth-r" id="fourth-r" href="#about">About</a>
+				<a class="navbar-brand topnav fourth-r" id="fourth-r" href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a>
 				
             </div>
       
@@ -83,345 +89,340 @@
 		<!-- /.container -->
 	</nav>
 
-
 	<!-- Header -->
-
     <div class="intro-header">
         <div class="container">
             <div class="row">
                 <div class="greeting">
                         <h1>Please select a Day to Begin</h1>
-                </div>
+                </div> <!-- class greeting -->
 
-			<!-- Hidden input for datepicker to work through -->
-			<div id="datepickerImg">
-				<input type="hidden" id="datepicker">
-			</div>
+				<!-- Hidden input for datepicker to work through -->
+				<div id="datepickerImg">
+					<input type="hidden" id="datepicker">
+				</div> <!-- id datepickerImg -->
 
-			<div>
-				<br>
-				<table class="reservations" border="1" cellpadding="0" width="100%">
-					<tbody>
-						<tr class="today">
-							<td class="resdate">Tuesday, 27/09/2016</td>
-							<td class="reslabel" colspan="2">00:00</td>
-							<td class="reslabel" colspan="2">01:00</td>
-							<td class="reslabel" colspan="2">02:00</td>
-							<td class="reslabel" colspan="2">03:00</td>
-							<td class="reslabel" colspan="2">04:00</td>
-							<td class="reslabel" colspan="2">05:00</td>
-							<td class="reslabel" colspan="2">06:00</td>
-							<td class="reslabel" colspan="2">07:00</td>
-							<td class="reslabel" colspan="2">08:00</td>
-							<td class="reslabel" colspan="2">09:00</td>
-							<td class="reslabel" colspan="2">10:00</td>
-							<td class="reslabel" colspan="2">11:00</td>
-							<td class="reslabel" colspan="2">12:00</td>
-							<td class="reslabel" colspan="2">13:00</td>
-							<td class="reslabel" colspan="2">14:00</td>
-							<td class="reslabel" colspan="2">15:00</td>
-							<td class="reslabel" colspan="2">16:00</td>
-							<td class="reslabel" colspan="2">17:00</td>
-							<td class="reslabel" colspan="2">18:00</td>
-							<td class="reslabel" colspan="2">19:00</td>
-							<td class="reslabel" colspan="2">20:00</td>
-							<td class="reslabel" colspan="2">21:00</td>
-							<td class="reslabel" colspan="2">22:00</td>
-							<td class="reslabel" colspan="2">23:00</td>
-						</tr>
-						<tr class="today">
-							<td class="resdate">Room1</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-						</tr>
+				<br><br>
+				
+				    <div class="intro-header">
+						<div class="container">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="intro-message">
+										<ul class="list-inline intro-social-buttons">
+											<li>
+												<a class="btn btn-default btn-lg" data-target="myModal" id="myBtn"><span class="network-name">Make a Reservation</span></a>  
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /.container -->
+					</div>
+				
+				
+				
+				
+				
+				<br><br>
+				
+				<div id="reservation-table"><br>
+					<table class="reservations" border="1" cellpadding="0" width="100%">
+						<tbody>
+							<tr class="today">
+								<td class="resdate">Tuesday, 27/09/2016</td>
+								<td class="reslabel" colspan="2">00:00</td>
+								<td class="reslabel" colspan="2">01:00</td>
+								<td class="reslabel" colspan="2">02:00</td>
+								<td class="reslabel" colspan="2">03:00</td>
+								<td class="reslabel" colspan="2">04:00</td>
+								<td class="reslabel" colspan="2">05:00</td>
+								<td class="reslabel" colspan="2">06:00</td>
+								<td class="reslabel" colspan="2">07:00</td>
+								<td class="reslabel" colspan="2">08:00</td>
+								<td class="reslabel" colspan="2">09:00</td>
+								<td class="reslabel" colspan="2">10:00</td>
+								<td class="reslabel" colspan="2">11:00</td>
+								<td class="reslabel" colspan="2">12:00</td>
+								<td class="reslabel" colspan="2">13:00</td>
+								<td class="reslabel" colspan="2">14:00</td>
+								<td class="reslabel" colspan="2">15:00</td>
+								<td class="reslabel" colspan="2">16:00</td>
+								<td class="reslabel" colspan="2">17:00</td>
+								<td class="reslabel" colspan="2">18:00</td>
+								<td class="reslabel" colspan="2">19:00</td>
+								<td class="reslabel" colspan="2">20:00</td>
+								<td class="reslabel" colspan="2">21:00</td>
+								<td class="reslabel" colspan="2">22:00</td>
+								<td class="reslabel" colspan="2">23:00</td>
+							</tr>
+							<tr class="today">
+								<td class="resdate">Room1</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+							</tr>
 
-						<tr class="today">
-							<td class="resdate">Room2</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-						</tr>
+							<tr class="today">
+								<td class="resdate">Room2</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+							</tr>
 
-						<tr class="today">
-							<td class="resdate">Room3</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-						</tr>
+							<tr class="today">
+								<td class="resdate">Room3</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+							</tr>
 
-						<tr class="today">
-							<td class="resdate">Room4</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-						</tr>
+							<tr class="today">
+								<td class="resdate">Room4</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+							</tr>
 
-						<tr class="today">
-							<td class="resdate">Room5</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-							<td class="reslabel" colspan="1">0</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<!-- The Drop down Menu selections go here-->
-
-			
-				<!--Need to be made into popup-->
-			<div>
-				<h3> Please select a date to start making reservations </h3>
-
-				<form>
-						Date: <input type="text" name="starttime">		Start Time: <input type="text" name="starttime"><br><br>
-						Date: <input type="text" name="starttime">		End Time: <input type="text" name="endtime"><br><br>
-										
-						Title of Registration:<br><input type="text" name="title"><br><br>
-						
-						Description of Registration:<br><textarea rows="4" cols="50"></textarea><br>
-												
-						First name:<br><input type="text" name="firstname"><br>	
-						Last name:<br><input type="text" name="lastname"><br>
-
-						Student ID:<br><input type="text" name="studentID"><br>
-						Program:<br><input type="text" name="program"><br>
-						Email Addres:<br><input type="text" name="email"><br>
-										
-				</form>
-
-
-			</div>
-			
-			
-		</div>
-	</div>
+							<tr class="today">
+								<td class="resdate">Room5</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+								<td class="reslabel" colspan="1">0</td>
+							</tr>
+						</tbody>
+					</table>
+				</div> <!-- id reservation-table -->	
+			</div><!-- Class row -->
+		</div> <!-- class containter -->
+	</div> <!-- class="intro-header" -->		
+	
 </body>
 
 </html>

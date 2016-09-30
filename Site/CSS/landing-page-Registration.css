@@ -10,7 +10,6 @@ html {
     height: 100%;
     text-align: center;
 }
-
 body,
 h1,
 h2,
@@ -31,10 +30,6 @@ h6 {
     font-weight: 400;
 }
 
-.greeting {
-	text-align: center;	
-}
-
 .intro-header {
     padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
@@ -46,27 +41,44 @@ h6 {
     background-size: cover;
 }
 
-footer {
-    padding: 50px 0;
-    background-color: #f8f8f8;
+@media(max-width:767px) {
+    ul.intro-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.intro-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
 }
+
 
 .first-r  { 
 	left: 0%; position: relative; 
 }
 	
 .second-r { 
-	left: 85%; position: relative; 
+	left: 70%; position: relative; 
 }
 
 .third-r  { 
-	left: 170%; position: relative; 
+	left: 140%; position: relative; 
 	}
 	
 .fourth-r  { 
-	left: 255%; position: relative; 
+	left: 210%; position: relative; 
 	}
 
 #datepickerImg :hover {
     cursor: pointer;
+}
+
+#myModal {
+top:35%;
+outline: none;
+}
+
+.greeting {
+	text-align: center;	
 }
