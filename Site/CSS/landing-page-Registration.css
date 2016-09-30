@@ -51,10 +51,6 @@ footer {
     background-color: #f8f8f8;
 }
 
-p.copyright {
-    margin: 15px 0 0;
-}
-
 .first-r  { 
 	left: 0%; position: relative; 
 }
@@ -70,9 +66,6 @@ p.copyright {
 .fourth-r  { 
 	left: 255%; position: relative; 
 	}
-p.copyright {
-    margin: 15px 0 0;
-}
 
 #datepickerImg :hover {
     cursor: pointer;
