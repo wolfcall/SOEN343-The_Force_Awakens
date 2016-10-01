@@ -56,22 +56,29 @@ h6 {
     }
 }
 
-
-.first-r  { 
-	left: 0%; position: relative; 
-}
-	
-.second-r { 
-	left: 70%; position: relative; 
+.r :hover { 
+	cursor: pointer;
 }
 
-.third-r  { 
-	left: 140%; position: relative; 
-	}
+.first { 
+	left: 0%; 
+	position: relative; 
+}
 	
-.fourth-r  { 
-	left: 210%; position: relative; 
-	}
+.second { 
+	left: 70%; 
+	position: relative; 
+}
+
+.third  { 
+	left: 140%; 
+	position: relative; 
+}
+	
+.fourth  { 
+	left: 210%;
+	position: relative; 
+}
 
 #datepickerImg{
 	text-align:center;
