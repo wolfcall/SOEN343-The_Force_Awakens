@@ -51,7 +51,42 @@
         		changeYear: true,
         		showOn: 'both',
      		});
+			var currentDate = $( ".selector" ).datepicker( "getDate" );
+			document.getElementById("datetoday").innerHTML = currentDate;
   		});
+	</script>
+
+	<!-- Pop-up for reservation (by clicking Button)
+	Will have to include a way of indicating that start time must be 8:00am
+	-->
+	<script>
+		$(document).ready(function(){
+			$("#myBtn").click(function(){
+				$("#myModal").modal();
+			});
+		});
+	</script>
+	
+	<br><br>
+	
+	<!-- Pop-up for reservation (by clicking table)
+	Will have to include some way of passing the time from the block chosen to popup
+	-->
+	<script>
+		$(document).ready(function(){
+			$(".slot").click(function(){
+				$("#myModal").modal();
+			});
+		});
+	</script>
+	
+	<!-- Pop-up for profile editing (by clicking My Profile)-->
+	<script>
+		$(document).ready(function(){
+			$("#second-r").click(function(){
+				$("#profilemyModal").modal();
+			});
+		});
 	</script>
 
 </head>
@@ -100,7 +135,6 @@
 					
 					<a class="btn btn-default btn-lg" data-target="myModal" id="myBtn"><span class="network-name">Make a Reservation</span></a>  
 					
-					
 				</div> <!-- id datepickerImg -->
 
 				<br><br>
@@ -126,6 +160,7 @@
 										<input textarea rows="4" cols="50" class="form-control" id="description" placeholder="Enter your Description">
 									</div>
 									
+									<!-- Time slots should be inserted here-->
 									
 									
 									<!-- Should be Auto-Populated and Non-Editable-->
@@ -157,34 +192,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
-							
-				<script>
-					$(document).ready(function(){
-						$("#myBtn").click(function(){
-							$("#myModal").modal();
-						});
-					});
-				</script>
-				
-				<br><br>
-				
-				<script>
-					$(document).ready(function(){
-						$(".slot").click(function(){
-							$("#myModal").modal();
-						});
-					});
-				</script>
-				
-				<script>
-					$(document).ready(function(){
-						$("#second-r").click(function(){
-							$("#profilemyModal").modal();
-						});
-					});
-				</script>
-				
+				</div>				
 				
 				<!-- Profile Modal -->
 				<div class="modal fade" id="profilemyModal" role="dialog">
@@ -234,14 +242,12 @@
 						</div>
 					</div>
 				</div>
-				
-				
-				
-				<div id="reservation-table"><br>
+			
+			<div id="reservation-table"><br>
 					<table class="reservations" border="1" cellpadding="0" width="100%">
 						<tbody>
 							<tr class="today">
-								<td class="date" id = "datetoday" >Tuesday, 27/09/2016</td>
+								<td class="date" id ="datepicker"></td>
 								<td class="time" colspan="2">00:00</td>
 								<td class="time" colspan="2">01:00</td>
 								<td class="time" colspan="2">02:00</td>
@@ -253,7 +259,7 @@
 								<td class="time" colspan="2">08:00</td>
 								<td class="time" colspan="2">09:00</td>
 								<td class="time" colspan="2">10:00</td>
-								<td class="time"" colspan="2">11:00</td>
+								<td class="time" colspan="2">11:00</td>
 								<td class="time" colspan="2">12:00</td>
 								<td class="time" colspan="2">13:00</td>
 								<td class="time" colspan="2">14:00</td>
@@ -267,6 +273,18 @@
 								<td class="time" colspan="2">22:00</td>
 								<td class="time" colspan="2">23:00</td>
 							</tr>
+			
+			<!-- Must be placed after element is created		
+			<script>
+				var tD = new Date();
+				var datestr = (tD.getMonth()+ 1) + "/" + tD.getDate() + "/" + tD.getFullYear();
+				document.getElementById("datetoday").innerHTML = datestr;
+			</script>
+			
+			<script>
+				var currentDate = $( ".selector" ).datepicker( "getDate" );
+				document.getElementById("datetoday").innerHTML = currentDate;
+			</script> -->
 							<tr class="today">
 								<td class="room" id="room1">Room1</td>
 								<td class="slot" colspan="1">0</td>
@@ -527,10 +545,10 @@
 								<td class="slot" colspan="1">0</td>
 							</tr>
 						</tbody>
-					</table>
+					</table>				
 				</div> <!-- id reservation-table -->	
 			</div><!-- Class row -->
-		</div> <!-- class containter -->
+		</div> <!-- class containter -->		
 	</div> <!-- class="intro-header" -->		
 	    
 </body>
