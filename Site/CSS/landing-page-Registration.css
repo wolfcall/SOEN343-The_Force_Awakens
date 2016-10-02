@@ -80,12 +80,13 @@ h6 {
 	position: relative; 
 }
 
-#datepickerImg{
-	text-align:center;
+#datepickerContainer {
+    text-align: center;
 }
-	
-#datepickerImg :hover {
-    cursor: pointer;
+
+#datepickerInline {
+    display:inline-block;
+    margin:0 auto;
 }
 
 #myModal {

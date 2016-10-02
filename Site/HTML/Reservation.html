@@ -27,32 +27,56 @@
 	<title>Room Reserver</title>
 
 	<!-- jQuery -->
-    <script src="../Javascript/jquery.js"></script>
+	<script src="../Javascript/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../Javascript/bootstrap.min.js"></script>
-		
+	<!-- Bootstrap Core JavaScript -->
+	<script src="../Javascript/bootstrap.min.js"></script>
+
 	<!-- Bootstrap Core CSS -->
 	<link href="../CSS/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom CSS -->
 	<link href="../CSS/landing-page-Registration.css" rel="stylesheet">
-	
+
 	<!--jQuery stuff-->
 	<!--Try to update to new jquery, doesn't seem to work with jquery 3.1.1-->
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<script type="text/javascript">
+
 		$(document).ready(function() {
-    		$("#datepicker").datepicker({
-        		buttonImage: '../img/calendar.png',
-        		buttonImageOnly: true,
+			var monthNames = ["January", "February", "March", "April", "May", "June",
+				"July", "August", "September", "October", "November", "December"];
+			var dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+			var currentDate = new Date();
+			
+			/******
+			 * This date generation should be made into a function, including the arrays above,
+			 * and would accept a Date object
+			 */
+			todayDate = dayNames[currentDate.getDay()] + ", " 
+								+ monthNames[currentDate.getMonth()] + " " 
+								+ currentDate.getDate() + " "
+								+ currentDate.getUTCFullYear();
+
+			document.getElementById("datetoday").innerHTML = todayDate;
+			/** end of the function, resued in "onSelect" feature of datepicker */
+			
+    		$("#datepickerInline").datepicker({
+        	//	buttonImage: '../img/calendar.png',
+        	//	buttonImageOnly: true,
         		changeMonth: true,
         		changeYear: true,
         		showOn: 'both',
+				onSelect: function(event) {
+					var pickedDate = $("#datepickerInline").datepicker("getDate");
+					todayDate = dayNames[pickedDate.getDay()] + ", " 
+								+ monthNames[pickedDate.getMonth()] + " " 
+								+ pickedDate.getDate() + " "
+								+ pickedDate.getUTCFullYear();
+					document.getElementById("datetoday").innerHTML = todayDate;
+				}
      		});
-			var currentDate = $( ".selector" ).datepicker( "getDate" );
-			document.getElementById("datetoday").innerHTML = currentDate;
   		});
 	</script>
 
@@ -66,9 +90,9 @@
 			});
 		});
 	</script>
-	
+
 	<br><br>
-	
+
 	<!-- Pop-up for reservation (by clicking table)
 	Will have to include some way of passing the time from the block chosen to popup
 	-->
@@ -79,7 +103,7 @@
 			});
 		});
 	</script>
-	
+
 	<!-- Pop-up for profile editing (by clicking My Profile)-->
 	<script>
 		$(document).ready(function(){
@@ -105,52 +129,52 @@
                     <span class="icon-bar"></span>
                 </button>
 
- 				<a class="navbar-brand topnav first r" id="first-r" href="index.html">LogOut</a>
-				<a class="navbar-brand topnav second r" id="second-r"  href="#">My Profile</a>
+				<a class="navbar-brand topnav first r" id="first-r" href="index.html">LogOut</a>
+				<a class="navbar-brand topnav second r" id="second-r" href="#">My Profile</a>
 				<a class="navbar-brand topnav third r" id="third-r" href="#">My Reservations</a>
 				<a class="navbar-brand topnav fourth r" id="fourth-r" href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a>
-				
-            </div>
-      
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-				
+
+			</div>
+
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
 	<!-- Header -->
-    <div class="intro-header">
-        <div class="container">
-            <div class="row">
-                <div class="greeting">
-                    <h1>Please select a Day to Begin</h1>
-                </div> <!-- class greeting -->
+	<div class="intro-header">
+		<div class="container">
+			<div class="row">
+				<div class="greeting">
+					<h1>Please select a Day to Begin</h1>
+				</div>
+				<!-- class greeting -->
 
 				<br><br>
-				
-				<!-- Hidden input for datepicker to work through -->
-				<div id="datepickerImg">
-					<input type="hidden" id="datepicker">
-					
+
+				<!-- Div for datepicker -->
+				<div id="datepickerContainer">
+					<div id="datepickerInline"></div>
 					<br><br>
-					
-					<a class="btn btn-default btn-lg" data-target="myModal" id="myBtn"><span class="network-name">Make a Reservation</span></a>  
-					
-				</div> <!-- id datepickerImg -->
+					<div id="reserveButton">
+						<a class="btn btn-default btn-lg" data-target="myModal" id="myBtn"><span class="network-name">Make a Reservation</span></a>
+					</div>
+				</div>
 
 				<br><br>
-				
+
 				<!-- Reservation Modal -->
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog">
-					<!-- Modal content-->
+						<!-- Modal content-->
 						<div class="modal-content">
 							<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 style="color:red;">Please enter the specifications for your Reservation</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 style="color:red;">Please enter the specifications for your Reservation</h4>
 							</div>
 							<div class="modal-body">
 								<form id="form">
-									
+
 									<div class="form-group">
 										<label>Title of Reservation</label>
 										<input type="text" class="form-control" id="title" placeholder="Enter a Title">
@@ -159,10 +183,10 @@
 										<label>Description of Reservation</label>
 										<input textarea rows="4" cols="50" class="form-control" id="description" placeholder="Enter your Description">
 									</div>
-									
+
 									<!-- Time slots should be inserted here-->
-									
-									
+
+
 									<!-- Should be Auto-Populated and Non-Editable-->
 									<div class="form-group">
 										<label>First Name</label>
@@ -184,24 +208,24 @@
 										<label>Email Address</label>
 										<input disabled type="text" class="form-control" id="email" placeholder="Auto-Populated Email">
 									</div>
-									
+
 									<!-- Requires Back-end connection -->
 									<button type="submit" class="btn btn-default btn-success btn-block">Submit</button>
-									
+
 								</form>
 							</div>
 						</div>
 					</div>
-				</div>				
-				
+				</div>
+
 				<!-- Profile Modal -->
 				<div class="modal fade" id="profilemyModal" role="dialog">
 					<div class="modal-dialog">
-					<!-- Modal content-->
+						<!-- Modal content-->
 						<div class="modal-content">
 							<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 style="color:red;">Edit any of your profile info!</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 style="color:red;">Edit any of your profile info!</h4>
 							</div>
 							<div class="modal-body">
 								<form id="form">
@@ -233,21 +257,21 @@
 										<label>Email Address</label>
 										<input type="text" class="form-control" id="email" placeholder="Email Address">
 									</div>
-									
+
 									<!-- Requires Back-end connection -->
 									<button type="submit" class="btn btn-default btn-success btn-block">Submit</button>
-									
+
 								</form>
 							</div>
 						</div>
 					</div>
 				</div>
-			
-			<div id="reservation-table"><br>
+
+				<div id="reservation-table"><br>
 					<table class="reservations" border="1" cellpadding="0" width="100%">
 						<tbody>
 							<tr class="today">
-								<td class="date" id ="datepicker"></td>
+								<td class="date" id="datetoday"></td>
 								<td class="time" colspan="2">00:00</td>
 								<td class="time" colspan="2">01:00</td>
 								<td class="time" colspan="2">02:00</td>
@@ -273,8 +297,8 @@
 								<td class="time" colspan="2">22:00</td>
 								<td class="time" colspan="2">23:00</td>
 							</tr>
-			
-			<!-- Must be placed after element is created		
+
+							<!-- Must be placed after element is created		
 			<script>
 				var tD = new Date();
 				var datestr = (tD.getMonth()+ 1) + "/" + tD.getDate() + "/" + tD.getFullYear();
@@ -545,12 +569,16 @@
 								<td class="slot" colspan="1">0</td>
 							</tr>
 						</tbody>
-					</table>				
-				</div> <!-- id reservation-table -->	
-			</div><!-- Class row -->
-		</div> <!-- class containter -->		
-	</div> <!-- class="intro-header" -->		
-	    
+					</table>
+				</div>
+				<!-- id reservation-table -->
+			</div>
+			<!-- Class row -->
+		</div>
+		<!-- class containter -->
+	</div>
+	<!-- class="intro-header" -->
+
 </body>
 
 </html>
