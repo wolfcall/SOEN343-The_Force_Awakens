@@ -74,7 +74,7 @@
 </div>
 
   <!-- Modal -->
-  <form action="../PHP/SOEN343/runtime.php" method="post">
+  <form action="../PHP/pages/runtime.php" method="post">
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 <!-- Modal content-->
