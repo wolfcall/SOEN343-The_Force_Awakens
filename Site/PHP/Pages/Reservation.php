@@ -22,26 +22,26 @@
 
 <head>
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	<title>Room Reserver</title>
+    <title>Room Reserver</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../CSS/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../CSS/landing-page-Registration.css" rel="stylesheet">
 
 	<!-- jQuery -->
-	<script src="../Javascript/jquery.js"></script>
+    <script src="../../Javascript/jquery.js"></script>
 
-	<!-- Bootstrap Core JavaScript -->
-	<script src="../Javascript/bootstrap.min.js"></script>
-
-	<!-- Bootstrap Core CSS -->
-	<link href="../CSS/bootstrap.min.css" rel="stylesheet">
-
-	<!-- Custom CSS -->
-	<link href="../CSS/landing-page-Registration.css" rel="stylesheet">
-
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../Javascript/bootstrap.min.js"></script>
+	
 	<!--jQuery stuff-->
 	<!--Try to update to new jquery, doesn't seem to work with jquery 3.1.1-->
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -116,36 +116,35 @@
 			});
 		});
 	</script>
-
+		
 </head>
 
 <body>
 
-	<!-- Navigation -->
-	<nav class="navbar navbar-default navbar-fixed-top topnav">
-		<div class="container topnav">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
-				<a class="navbar-brand topnav first r" id="first-r" href="../index.php">Log Out</a>
+                
+				<a class="navbar-brand topnav first r" id="first-r" href="../../index.php">Log Out</a>
 				<a class="navbar-brand topnav second r" id="second-r" href="#">My Profile</a>
 				<a class="navbar-brand topnav third r" id="third-r" href="#">My Reservations</a>
 				<a class="navbar-brand topnav fourth r" id="fourth-r" href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a>
+        
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
-			</div>
-
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container -->
-	</nav>
-
-	<!-- Header -->
+    <!-- Header -->
 	<div class="intro-header">
 		<div class="container">
 			<div class="row">

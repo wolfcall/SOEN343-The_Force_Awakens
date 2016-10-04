@@ -99,7 +99,7 @@ class Login{
 		echo $this->checkUserAndPass()."pass";
 		if ($this->checkUserAndPass() == true)
 		{
-			header("Location: ../../HTML/Reservation.html");
+			header("Location: ../Pages/Reservation.php");
 			//line to redirect to next page
 		}
 		else
@@ -112,7 +112,7 @@ class Login{
 			else 
 				{
 					setCredentials();	
-					header("Location: ../../HTML/Reservation.html");
+					header("Location: ../../Pages/Reservation.php");
 				}	
 			
 		}
