@@ -17,14 +17,12 @@
     <!-- Custom CSS -->
     <link href="../CSS/landing-page.css" rel="stylesheet">
 
+	<!-- jQuery -->
+    <script src="../Javascript/jquery.js"></script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../Javascript/bootstrap.min.js"></script>
+	
 </head>
 
 <body>
@@ -40,22 +38,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="#">Home</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#about">About</a>
-                    </li>
-                  
-                </ul>
+                
+				<a class="navbar-brand topnav second-r" id="second-r" href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">Welcome to Concorida's Official Room Reservation System! Click here for access to MyConcordia</a>
+			            
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
-
 
     <!-- Header -->
 
@@ -70,14 +60,8 @@
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                             <li>
-                                <a class="btn btn-default btn-lg" data-target="myModal" id="myBtn"><span class="network-name">Login</span></a>  
-                                
+                                <a class="btn btn-default btn-lg" data-target="myModal" id="myBtn"><span class="network-name">Login</span></a>   
                             </li>
-
-                            <li>
-                                <a href = "Reservation.html" class = "btn btn-default btn-lg"><span class="network-name">Make A Reservation</span></a>
-                            </li>
-                          
                             <li>
                                 <a href="https://github.com/wolfcall/SOEN343" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
                             </li>
@@ -85,11 +69,10 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- /.container -->
-
 </div>
+
   <!-- Modal -->
   <form action="../PHP/SOEN343/runtime.php" method="post">
   <div class="modal fade" id="myModal" role="dialog">
@@ -118,20 +101,13 @@
 	</div>
 	</form>
 	
-    
-    <!-- jQuery -->
-    <script src="../Javascript/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../Javascript/bootstrap.min.js"></script>
-	
 	<script>
-$(document).ready(function(){
-    $("#myBtn").click(function(){
-        $("#myModal").modal();
-    });
-});
-</script>
+		$(document).ready(function(){
+			$("#myBtn").click(function(){
+				$("#myModal").modal();
+			});
+		});
+	</script>
 
 </body>
 
