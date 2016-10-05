@@ -1,9 +1,12 @@
 <?php
 
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Original creator: (Unknown)
+ * Last change date: 10/05/16
+ *
+ * Version history:
+ * 10/05/16
+ * Changed connection schema to soen343 to access correct tables (NB)
  */
 
 function getCon(){
@@ -12,7 +15,7 @@ function getCon(){
 	$port = 3306;
 	$username = "SOEN341user";
 	$password = "G3tR3ck3dS0n";
-	$schema = "soen341";
+	$schema = "soen343";
 	
 	$conn = new mysqli($servernameremote, $username, $password, $schema, $port);
 	
