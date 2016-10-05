@@ -91,7 +91,7 @@
             </div>
             <div class="form-group">
               <label>Password</label>
-              <input type="text" class="form-control" name="password" placeholder="Enter your password">
+              <input type="password" class="form-control" name="password" placeholder="Enter your password">
             </div>
             <button type="submit" class="btn btn-default btn-success btn-block">Login</button>
           </form>
