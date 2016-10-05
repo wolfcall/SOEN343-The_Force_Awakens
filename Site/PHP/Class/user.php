@@ -4,6 +4,9 @@
  * Last Change Date: 10/02/16 (NB)
  * 
  * Version History:
+ * 10/05/16(NB)
+ * -Added program value and gets and sets
+ * 
  * 10/02/16(NB)
  * -Removed username, email will handle username usage
  * -Added inclusion to server connection handling
@@ -13,11 +16,6 @@
  * -Added email (as username?) to variables and appropriate gets and sets
  * -Tested database connections but left in test code (except for personal password)
  * 
- * 25/09/16(NB)
- * -Added password validation concept
- * -Added temporary reservation class association (reservation class
- * at this point not yet started, so purely conceptual).
- * -Added reservation get and sets
  * 
  * NOTES:
  * This merely a bare-bones, first draft, template. More work is
@@ -29,13 +27,15 @@
 // '../Utilities/ServerConnection.php';
 //$conn = getCon();
 
+//Temporary use only, delete this server connection at a later date
 $servernameremote = "wolfcall.ddns.net";
-    $user = "nicholas";
-    $pass = "helloworld";
-    $port = 3306;
-    $schema = "soen343";
+$user = "nicholas";
+$pass = "*******";
+$port = 3306;
+$schema = "soen343";
+$conn = new mysqli($servernameremote, $user, $pass, $schema, $port);
 
-    $conn = new mysqli($servernameremote, $user, $pass, $schema, $port);
+
 
 class User
 {
@@ -48,7 +48,8 @@ class User
     */
     private $firstName = "";
     private $lastName = "";
-    private $emailAddress = ""; //Added 9/30/16 NB
+    private $emailAddress = "";
+    private $program = ""; //Added 05/10/16 NB
     
     //Association to reservation class (class not created yet at time of coding)
     private $reservation;
@@ -94,6 +95,10 @@ class User
         return $this->emailAddress;
     }
     
+    public function getProgram() {
+        return $this->program;
+    }
+    
     public function setFirstName($fName){
 	$this->firstName = $fName;
     }
@@ -109,6 +114,10 @@ class User
     public function setEmailAddress($email) {
         $this->emailAddress = $email;
     }
+    
+    public function setProgram($prog) {
+        $this->program = $prog;
+    }
     //-Method to call to validate user password
     //-If true, should populate the object with names
     //-If false, destroy object?
@@ -123,13 +132,16 @@ class User
        //Add hash check here later once hashing has been done
        if($enteredPassword = $password)
        {
-           $this->setFirstName($row["firstname"]);
-           $this->setLastName($row["lastname"]);
+           $this->setFirstName($row["firstName"]);
+           $this->setLastName($row["lastName"]);
            $this->setEmailAddress($email);
+           $this->setProgram($row["program"]);
            return true;
        }
        else
+       {
            return false;
+       }
     }
     
     //To clear the object in case user login fails?
@@ -137,3 +149,12 @@ class User
        //echo "Object destroyed";
    }
 }
+//FOR TESTING PURPOSES, TO BE DELETED LATER
+$sql = "SELECT * FROM student";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$fname = $row["firstName"];
+echo $fname;
+$row = $result->fetch_assoc();
+$fname = $row["firstName"];
+echo $fname;
