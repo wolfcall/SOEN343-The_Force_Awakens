@@ -9,7 +9,7 @@
  * Changed connection schema to soen343 to access correct tables (NB)
  */
 
-function getCon(){
+function getServerCon(){
 	$servernamelocal = "192.168.2.36";
 	$servernameremote = "wolfcall.ddns.net";
 	$port = 3306;
@@ -28,7 +28,7 @@ function getCon(){
 	return $conn;
 }
 //closes a connection takes a connection object
-function closeCon($conn){
+function closeServerCon($conn){
 	$conn->close();
 }
 

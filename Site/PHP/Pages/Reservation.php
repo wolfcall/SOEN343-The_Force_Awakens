@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<?php
+
+	//Start session
+    session_start();
+
+    $email = $_SESSION['email'];
+    
+?>
+
+
 <html lang="en">
 
 <!--
@@ -209,7 +219,7 @@
 									</div>
 									<div class="form-group">
 										<label>Email Address</label>
-										<input disabled type="text" class="form-control" id="email" placeholder="Auto-Populated Email">
+										<input disabled type="text" class="form-control" id="email" value = "<?php echo $email; ?>">
 									</div>
 
 									<!-- Requires Back-end connection -->

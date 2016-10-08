@@ -1,4 +1,10 @@
 <?php
+
+	// Start the session
+	session_start();
+
+	$_SESSION["email"] = htmlspecialchars($_POST["email"]);
+
 class Login{
 	
 	private $param;
@@ -101,6 +107,7 @@ class Login{
 		{
 			header("Location: ../Pages/Reservation.php");
 			//line to redirect to next page
+			exit();
 		}
 		else
 		{
@@ -108,11 +115,13 @@ class Login{
 			{
 			header("Location: ../../HTML/index.php");
 			alert("Wrong Password");
+			//exit();
 			}
 			else 
 				{
 					setCredentials();	
 					header("Location: ../../Pages/Reservation.php");
+					exit();
 				}	
 			
 		}
