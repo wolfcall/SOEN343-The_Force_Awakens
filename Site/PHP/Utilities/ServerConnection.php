@@ -9,7 +9,7 @@
  * Changed connection schema to soen343 to access correct tables (NB)
  */
 
-function getServerCon(){
+public function getServerConn(){
 	$servernamelocal = "192.168.2.36";
 	$servernameremote = "wolfcall.ddns.net";
 	$port = 3306;
@@ -17,7 +17,7 @@ function getServerCon(){
 	$password = "G3tR3ck3dS0n";
 	$schema = "soen343";
 	
-	$conn = new mysqli($servernameremote, $username, $password, $schema, $port);
+	gloabl $conn = new mysqli($servernameremote, $username, $password, $schema, $port);
 	
 	if($conn->connect_error){
 		$conn  = new mysqli($servernamelocal, $username, $password, $schema, $port);
@@ -25,10 +25,13 @@ function getServerCon(){
 		if($conn->connect_error)
 			die("Connection failed: " . $conn->connect_error);
 	}
+	
+	echo $conn;
 	return $conn;
+	
 }
 //closes a connection takes a connection object
-function closeServerCon($conn){
+public ,function closeServerConn($conn){
 	$conn->close();
 }
 
