@@ -22,19 +22,23 @@
  * to be done when documentation is finalized and processes defined.
 */
 
-//MySQL Database Connect 
-//session_start();
-// '../Utilities/ServerConnection.php';
-//$conn = getCon();
-
-//Temporary use only, delete this server connection at a later date
+/** 
+Temporary use only, delete this server connection at a later date
 $servernameremote = "wolfcall.ddns.net";
 $user = "nicholas";
 $pass = "*******";
 $port = 3306;
 $schema = "soen343";
 $conn = new mysqli($servernameremote, $user, $pass, $schema, $port);
+*/
 
+// Start the session
+session_start();
+
+include_once dirname(__FILE__).'\\..\\Utilities\\ServerConnection.php';
+include "../Utilities/ServerConneciton.php";
+
+$_SESSION["email"] = htmlspecialchars($_POST["email"]);
 
 
 class User
@@ -50,6 +54,7 @@ class User
     private $lastName = "";
     private $emailAddress = "";
     private $program = ""; //Added 05/10/16 NB
+	private $sID = ""; //Added 09/10/16 SP
     
     //Association to reservation class (class not created yet at time of coding)
     private $reservation;
@@ -59,19 +64,24 @@ class User
     //NOTE(25/09/16): If password validation method used further below,
     //should make this a null constructor, and let password validator
     //populate object upon successful login.
-    public function __construct($uName) {
-        /*
-         * //Username is email?
-        $sql = "SELECT password FROM student WHERE username ='".$uName."'";
-        $result = $connection->Something is wrong($sql);
-        $row = $result->fetch_assoc()
-        $password = $row["password"];
-        */
-        $this->username = $uName;
-        //$this->firstName = $fName;
-        //$this->lastName = $lName;
-        
-    }
+	public function __construct($email) {
+
+		$conn = getServerConn();
+		
+		$sql = "SELECT * FROM student WHERE email = '".$email."'";
+		$result = $conn->query($sql);
+
+		$row = $result->fetch_assoc()
+		$password = $row["password"];
+		
+		setFirstName($row["firstName"]);
+		setLastName($row["lastName"]);
+		setEmailAddress($row["email"]);
+		setProgram($row["porogram"]);
+		setSID($row["studentID"])
+				
+		closeServerConn($conn);
+	}
     
     /* The general gets and sets are here
      * (Sets may be unneccessary since users should already be
@@ -79,11 +89,11 @@ class User
      * object)
      */
     public function getFirstName(){
-	return $this->firstName;
+		return $this->firstName;
     }
     
     public function getLastName(){
-	return $this->lastName;
+		return $this->lastName;
     }
     
     //Returns reservation object
@@ -98,17 +108,21 @@ class User
     public function getProgram() {
         return $this->program;
     }
+	
+	public function getSID() {
+        return $this->$sID;
+    }
     
     public function setFirstName($fName){
-	$this->firstName = $fName;
+		$this->firstName = $fName;
     }
     
     public function setLastName($lName){
-	$this->lastName = $lName;
+		$this->lastName = $lName;
     }
     
     public function setReservation($reserve){
-	$this->reservation = $reserve;
+		$this->reservation = $reserve;
     }
     
     public function setEmailAddress($email) {
@@ -118,30 +132,9 @@ class User
     public function setProgram($prog) {
         $this->program = $prog;
     }
-    //-Method to call to validate user password
-    //-If true, should populate the object with names
-    //-If false, destroy object?
-    //-If used this way, perhaps make a null constructor
-    public function validatePassword($email, $enteredPassword) {
-        
-         $sql = "SELECT * FROM student WHERE email ='".$email."'";
-         $result = $conn->query($sql);
-         $row = $result->fetch_assoc();
-         $password = $row["password"];
-        
-       //Add hash check here later once hashing has been done
-       if($enteredPassword = $password)
-       {
-           $this->setFirstName($row["firstName"]);
-           $this->setLastName($row["lastName"]);
-           $this->setEmailAddress($email);
-           $this->setProgram($row["program"]);
-           return true;
-       }
-       else
-       {
-           return false;
-       }
+	
+	public function setSID($sID) {
+        $this->$sID = $sIDg;
     }
     
     //To clear the object in case user login fails?
@@ -149,7 +142,10 @@ class User
        //echo "Object destroyed";
    }
 }
-//FOR TESTING PURPOSES, TO BE DELETED LATER
+
+
+/**
+FOR TESTING PURPOSES, TO BE DELETED LATER
 $sql = "SELECT * FROM student";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
@@ -158,3 +154,5 @@ echo $fname;
 $row = $result->fetch_assoc();
 $fname = $row["firstName"];
 echo $fname;
+
+*/

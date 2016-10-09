@@ -10,7 +10,7 @@ $noUser = "Account not Found. Please enter an email for an Existing Account";
 
 if ($validate == true)
 {
-	header("Location: ../Pages/Reservation.php");
+	header("Location: ../Pages/Home.php");
 	exit();
 }
 else
