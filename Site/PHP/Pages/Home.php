@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <?php
 
-	//Start session
-    session_start();
+//Start session
+session_start();
 
-    $email = $_SESSION['email'];
+//include_once dirname(__FILE__).'\\..\\Class\\user.php';
+//include "../Class/user.php";
+
+$email = $_SESSION['email'];
+	
+	/**
+	$user = new User($email);
     
+	$firstName = $user->getFirstName();
+	$lastName = $user->getLastName();
+	$emailAddress = $user->getEmailAddress();
+	$program = $user->getProgram();
+	$sID = $user->getSID();
+	*/
 ?>
 
 
@@ -203,19 +215,19 @@
 									<!-- Should be Auto-Populated and Non-Editable-->
 									<div class="form-group">
 										<label>First Name</label>
-										<input disabled type="text" class="form-control" id="firstname" placeholder="Auto-Populated Name">
+										<input disabled type="text" class="form-control" id="firstname" value = "<?php echo $firstName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Last Name</label>
-										<input disabled type="text" class="form-control" id="lastname" placeholder="Auto-Populated Name">
+										<input disabled type="text" class="form-control" id="lastname" value = "<?php echo $lastName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
-										<input disabled type="text" class="form-control" id="studentID" placeholder="Auto-Populated ID">
+										<input disabled type="text" class="form-control" id="studentID" value = "<?php echo $sID; ?>">
 									</div>
 									<div class="form-group">
 										<label>Program</label>
-										<input disabled type="text" class="form-control" id="program" placeholder="Auto-Populated Program">
+										<input disabled type="text" class="form-control" id="program" value = "<?php echo $program; ?>">
 									</div>
 									<div class="form-group">
 										<label>Email Address</label>

@@ -66,21 +66,21 @@ class User
     //populate object upon successful login.
 	public function __construct($email) {
 
+		setEmailAddress($email);
+		/**
 		$conn = getServerConn();
-		
-		$sql = "SELECT * FROM student WHERE email = '".$email."'";
+					
+		$sql = "SELECT * FROM student WHERE email ='".$this->getEmailAddress()."'";
 		$result = $conn->query($sql);
-
 		$row = $result->fetch_assoc()
-		$password = $row["password"];
 		
 		setFirstName($row["firstName"]);
 		setLastName($row["lastName"]);
-		setEmailAddress($row["email"]);
 		setProgram($row["porogram"]);
 		setSID($row["studentID"])
 				
 		closeServerConn($conn);
+		*/
 	}
     
     /* The general gets and sets are here
