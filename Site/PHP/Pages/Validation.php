@@ -4,6 +4,7 @@ include "../Class/Login.php";
 $log = new Login();
 
 $validate = $log->checkUserAndPass();
+var_dump($validate);
 $wrongPass = "Invalid Password Entered. Please try again";
 $noUser = "Account not Found. Please enter an email for an Existing Account";
 

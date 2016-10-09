@@ -3,6 +3,9 @@
 
 // Start the session
 session_start();
+
+include_once dirname(__FILE__).'\\..\\Utilities\\ServerConnection.php';
+var_dump(dirname(__FILE__).'\\..\\Utilities\\ServerConnection.php');
 $_SESSION["email"] = htmlspecialchars($_POST["email"]);
 
 include "../Utilities/ServerConneciton.php";
@@ -18,7 +21,7 @@ class Login
 	}
 
 	//Open connection to Wolfcall Server
-	private function openConnection()
+	/*private function openConnection()
 	{
 		$servernamelocal = "192.168.2.36";
 		$servernameremote = "wolfcall.ddns.net";
@@ -42,7 +45,7 @@ class Login
 	private function closeConnection($conn)
 	{
 		$conn->close();
-	}
+	}*/
 	
 	//Obtain email from Index.php
 	private function getEmailFromBootstrap()
@@ -59,7 +62,8 @@ class Login
 	//Verify User Credentials
 	public function checkUserAndPass()
 	{
-		$conn = $this->openConnection();
+		var_dump("hello");
+		$conn = getServerConn();
 		
 		$sql = "SELECT email, password FROM student WHERE email ='".$this->getEmailFromBootstrap()."' AND password = password('".$this->getPasswordFromBootstrap()."')";
 		$result = $conn->query($sql);
@@ -68,13 +72,13 @@ class Login
 			return true;
 		else 
 			return false;
-		$this->closeConnection($conn);
+		closeServerConn($conn);
 	}
 	
 	//Verify User exsitence in the db
 	public function checkUserExist()
 	{
-		$conn = $this->openConnection();
+		$conn = getServerConn();
 		
 		$sql = "SELECT * FROM student WHERE email ='".$this->getEmailFromBootstrap()."'";
 		$result = $conn->query($sql);
@@ -83,7 +87,7 @@ class Login
 			return true;
 		else 
 			return false;
-		$this->closeConnection($conn);
+		closeServerConn($conn);
 	}
 }
 ?>

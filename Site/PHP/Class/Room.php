@@ -53,7 +53,7 @@ class Room
 		
 		return $row['roomID'];
 		*/
-		return this->roomID;
+		return $this->roomID;
 		
     }
     

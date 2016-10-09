@@ -1,15 +1,15 @@
 <?php
 
 /* 
- * Original creator: (Unknown)
- * Last change date: 10/05/16
+ * Original creator: (Georges )
+ * Last change date: 10/08/16
  *
  * Version history:
  * 10/05/16
  * Changed connection schema to soen343 to access correct tables (NB)
  */
 
-public function getServerConn(){
+function getServerConn(){
 	$servernamelocal = "192.168.2.36";
 	$servernameremote = "wolfcall.ddns.net";
 	$port = 3306;
@@ -17,21 +17,21 @@ public function getServerConn(){
 	$password = "G3tR3ck3dS0n";
 	$schema = "soen343";
 	
-	gloabl $conn = new mysqli($servernameremote, $username, $password, $schema, $port);
+	$conn = new mysqli($servernameremote, $username, $password, $schema, $port);
 	
-	if($conn->connect_error){
+	if($conn->connect_error||$conn == NULL){
 		$conn  = new mysqli($servernamelocal, $username, $password, $schema, $port);
 		
 		if($conn->connect_error)
 			die("Connection failed: " . $conn->connect_error);
 	}
 	
-	echo $conn;
+	//echo $conn;
 	return $conn;
 	
 }
 //closes a connection takes a connection object
-public ,function closeServerConn($conn){
+function closeServerConn($conn){
 	$conn->close();
 }
 
