@@ -258,19 +258,19 @@ $email = $_SESSION['email'];
 								<form id="form">
 									<div class="form-group">
 										<label>First Name</label>
-										<input type="text" class="form-control" id="firstname" placeholder="First Name">
+										<input type="text" class="form-control" id="firstname" placeholder="First Name" value = "<?php echo $firstName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Last Name</label>
-										<input type="text" class="form-control" id="lastname" placeholder="Last Name">
+										<input type="text" class="form-control" id="lastname" placeholder="Last Name" value = "<?php echo $lastName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
-										<input type="text" class="form-control" id="studentID" placeholder="Student ID">
+										<input type="text" class="form-control" id="studentID" placeholder="Student ID" value = "<?php echo $sID; ?>">
 									</div>
 									<div class="form-group">
 										<label>Program</label>
-										<input type="text" class="form-control" id="program" placeholder="Program">
+										<input type="text" class="form-control" id="program" placeholder="Program" "<?php echo $program; ?>">
 									</div>
 									<div class="form-group">
 										<label>Old Password</label>
@@ -282,7 +282,7 @@ $email = $_SESSION['email'];
 									</div>
 									<div class="form-group">
 										<label>Email Address</label>
-										<input type="text" class="form-control" id="email" placeholder="Email Address">
+										<input type="text" class="form-control" id="email" placeholder="Email Address" value = "<?php echo $email; ?>">
 									</div>
 
 									<!-- Requires Back-end connection -->
