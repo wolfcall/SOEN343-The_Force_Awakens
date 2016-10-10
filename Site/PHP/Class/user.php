@@ -66,7 +66,7 @@ class User
     //populate object upon successful login.
 	public function __construct($email) {
 
-		setEmailAddress($email);
+		$this->setEmailAddress($email);
 		/**
 		$conn = getServerConn();
 					
@@ -110,7 +110,7 @@ class User
     }
 	
 	public function getSID() {
-        return $this->$sID;
+        return $this->sID;
     }
     
     public function setFirstName($fName){
@@ -134,7 +134,7 @@ class User
     }
 	
 	public function setSID($sID) {
-        $this->$sID = $sIDg;
+        $this->sID = $sID;
     }
     
     //To clear the object in case user login fails?

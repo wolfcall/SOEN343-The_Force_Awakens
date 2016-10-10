@@ -5,11 +5,11 @@
 session_start();
 
 //include_once dirname(__FILE__).'\\..\\Class\\user.php';
-//include "../Class/user.php";
+include "../Class/user.php";
 
 $email = $_SESSION['email'];
 	
-	/**
+	
 	$user = new User($email);
     
 	$firstName = $user->getFirstName();
@@ -17,7 +17,7 @@ $email = $_SESSION['email'];
 	$emailAddress = $user->getEmailAddress();
 	$program = $user->getProgram();
 	$sID = $user->getSID();
-	*/
+	
 ?>
 
 
