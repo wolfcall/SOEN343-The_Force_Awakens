@@ -53,7 +53,7 @@ class User
     //populate object upon successful login.
 	public function __construct($email) {
 
-		$this->setEmailAddress($email);
+		$this->emailAddress = $email;
 		
 		$conn = getServerConn();
 		
@@ -61,16 +61,18 @@ class User
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		$this->setFirstName($row["firstName"]);
-		$this->setLastName($row["lastName"]);
-		$this->setProgram($row["program"]);
-		$this->setSID($row["studentID"]);
+		$this->firstName = $row["firstName"];
+		$this->lastName  = $row["lastName"];
+		$this->program = $row["program"];
+		$this->sID = $row["studentID"];
 				
 		closeServerConn($conn);
 	}
     
     /* The general gets and sets are here
-     * Only necessary set should be for the new password
+     * (Sets may be unneccessary since users should already be
+     * created in the database, this would be to populate the
+     * object)
      */
     public function getFirstName(){
 		return $this->firstName;
@@ -92,29 +94,27 @@ class User
     public function getProgram() {
         return $this->program;
     }
+	
+	public function getSID() {
+        return $this->sID;
+    }
+ 
+    public function setReservation($reserve){
+		$this->reservation = $reserve;
+    }
     
-	/*
-	*	Needs to add reference to the database
-	* 	Should not have $this
-	*/
     public function setEmailAddress($email) {
         $this->emailAddress = $email;
     }
-    
+	
 	/*
-		This function will be responsible for checking the old password
-		And updating it with the new password set by the user
-		It should not matter if the email field is left empty
+		Should be called by a changedetails.php file
+		Should validate previous password to set new one
 	*/
 	public function setNewPassword(){
 		
 	}
-	
-	public function setReservation($reserve){
-		$this->reservation = $reserve;
-    }
-    
-	
+
     //To clear the object in case user login fails?
     function __destruct() {
        //echo "Object destroyed";
