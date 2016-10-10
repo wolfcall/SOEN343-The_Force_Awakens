@@ -8,16 +8,15 @@ session_start();
 include "../Class/user.php";
 
 $email = $_SESSION['email'];
-	
-	
-	$user = new User($email);
-    
-	$firstName = $user->getFirstName();
-	$lastName = $user->getLastName();
-	$emailAddress = $user->getEmailAddress();
-	$program = $user->getProgram();
-	$sID = $user->getSID();
-	
+
+$user = new User($email);
+
+$firstName = $user->getFirstName();
+$lastName = $user->getLastName();
+$emailAddress = $user->getEmailAddress();
+$program = $user->getProgram();
+$sID = $user->getSID();
+
 ?>
 
 
@@ -35,6 +34,9 @@ $email = $_SESSION['email'];
 	October 1, 2016 (Joey)
 	-Added calender as default, no image required
 	-Added auto-generation of date in reservation table, based on user click of the calender
+
+	October 9, 2016 (Joey)
+	-Fixed connection to db for populating Make Reservation popup
 	
 	!-Still necessary to pass entity ID of time selected
 	!-Colors are not permanent, was done to check if CSS worked for table
@@ -256,19 +258,19 @@ $email = $_SESSION['email'];
 								<form id="form">
 									<div class="form-group">
 										<label>First Name</label>
-										<input type="text" class="form-control" id="firstname" placeholder="First Name">
+										<input disabled type="text" class="form-control" id="firstname" placeholder="First Name" value = "<?php echo $firstName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Last Name</label>
-										<input type="text" class="form-control" id="lastname" placeholder="Last Name">
+										<input disabled type="text" class="form-control" id="lastname" placeholder="Last Name" value = "<?php echo $lastName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
-										<input type="text" class="form-control" id="studentID" placeholder="Student ID">
+										<input disabled type="text" class="form-control" id="studentID" placeholder="Student ID" value = "<?php echo $sID; ?>">
 									</div>
 									<div class="form-group">
 										<label>Program</label>
-										<input type="text" class="form-control" id="program" placeholder="Program">
+										<input disabled type="text" class="form-control" id="program" placeholder="Program" value = "<?php echo $program; ?>">
 									</div>
 									<div class="form-group">
 										<label>Old Password</label>
@@ -280,7 +282,7 @@ $email = $_SESSION['email'];
 									</div>
 									<div class="form-group">
 										<label>Email Address</label>
-										<input type="text" class="form-control" id="email" placeholder="Email Address">
+										<input type="text" class="form-control" id="email" placeholder="Email Address" value = "<?php echo $email; ?>">
 									</div>
 
 									<!-- Requires Back-end connection -->

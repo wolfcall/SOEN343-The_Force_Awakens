@@ -3,8 +3,7 @@
 // Start the session
 session_start();
 
-include_once dirname(__FILE__).'\\..\\Utilities\\ServerConnection.php';
-include "../Utilities/ServerConneciton.php";
+include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
 $_SESSION["email"] = htmlspecialchars($_POST["email"]);
 

@@ -22,24 +22,10 @@
  * to be done when documentation is finalized and processes defined.
 */
 
-/** 
-Temporary use only, delete this server connection at a later date
-$servernameremote = "wolfcall.ddns.net";
-$user = "nicholas";
-$pass = "*******";
-$port = 3306;
-$schema = "soen343";
-$conn = new mysqli($servernameremote, $user, $pass, $schema, $port);
-*/
-
 // Start the session
 session_start();
 
-include_once dirname(__FILE__).'\\..\\Utilities\\ServerConnection.php';
-include "../Utilities/ServerConneciton.php";
-
-$_SESSION["email"] = htmlspecialchars($_POST["email"]);
-
+include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
 class User
 {
@@ -50,11 +36,11 @@ class User
     * obtained from the database, and returns whether or not they were a
     * match.
     */
-    private $firstName = "";
-    private $lastName = "";
-    private $emailAddress = "";
-    private $program = ""; //Added 05/10/16 NB
-	private $sID = ""; //Added 09/10/16 SP
+    private $firstName;
+    private $lastName;
+    private $emailAddress;
+    private $program;
+	private $sID;
     
     //Association to reservation class (class not created yet at time of coding)
     private $reservation;
@@ -67,20 +53,19 @@ class User
 	public function __construct($email) {
 
 		$this->setEmailAddress($email);
-		/**
+		
 		$conn = getServerConn();
-					
+		
 		$sql = "SELECT * FROM student WHERE email ='".$this->getEmailAddress()."'";
 		$result = $conn->query($sql);
-		$row = $result->fetch_assoc()
+		$row = $result->fetch_assoc();
 		
-		setFirstName($row["firstName"]);
-		setLastName($row["lastName"]);
-		setProgram($row["porogram"]);
-		setSID($row["studentID"])
+		$this->setFirstName($row["firstName"]);
+		$this->setLastName($row["lastName"]);
+		$this->setProgram($row["program"]);
+		$this->setSID($row["studentID"]);
 				
 		closeServerConn($conn);
-		*/
 	}
     
     /* The general gets and sets are here
@@ -142,17 +127,3 @@ class User
        //echo "Object destroyed";
    }
 }
-
-
-/**
-FOR TESTING PURPOSES, TO BE DELETED LATER
-$sql = "SELECT * FROM student";
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
-$fname = $row["firstName"];
-echo $fname;
-$row = $result->fetch_assoc();
-$fname = $row["firstName"];
-echo $fname;
-
-*/
