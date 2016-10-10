@@ -7,25 +7,27 @@ include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
 $_SESSION["email"] = htmlspecialchars($_POST["email"]);
 
+
 class Login
 {
-	private $param;
+	private $password;
+	private $email;
 	
-	function __construct($param)
-	{
-		$this->param = $param;
+	public function __construct() { 
+		$this->email = htmlspecialchars($_POST["email"]);
+		$this->password = htmlspecialchars($_POST["password"]);
 	}
-	
+
 	//Obtain email from Index.php
 	private function getEmailFromBootstrap()
 	{
-		return $_POST["email"];
+		return $this->email;
 	}
 	
 	//Obtain password from Index.php
 	private function getPasswordFromBootstrap()
 	{
-		return $_POST["password"];
+		return $this->password;
 	}
 	
 	//Verify User Credentials
