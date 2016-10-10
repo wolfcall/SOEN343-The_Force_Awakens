@@ -325,17 +325,6 @@ $sID = $user->getSID();
 								<td class="time" colspan="2">23:00</td>
 							</tr>
 
-							<!-- Must be placed after element is created		
-			<script>
-				var tD = new Date();
-				var datestr = (tD.getMonth()+ 1) + "/" + tD.getDate() + "/" + tD.getFullYear();
-				document.getElementById("datetoday").innerHTML = datestr;
-			</script>
-			
-			<script>
-				var currentDate = $( ".selector" ).datepicker( "getDate" );
-				document.getElementById("datetoday").innerHTML = currentDate;
-			</script> -->
 							<tr class="today">
 								<td class="room" id="room1">Room1</td>
 								<td class="slot" colspan="1">0</td>
