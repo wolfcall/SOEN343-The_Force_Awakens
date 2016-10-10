@@ -17,7 +17,7 @@ function getServerConn(){
 	$password = "G3tR3ck3dS0n";
 	$schema = "soen343";
 	
-	$conn = new mysqli($servernameremote, $username, $password, $schema, $port);
+	$conn  = new mysqli($servernamelocal, $username, $password, $schema, $port);
 	
 	if($conn->connect_error||$conn == NULL){
 		$conn  = new mysqli($servernamelocal, $username, $password, $schema, $port);

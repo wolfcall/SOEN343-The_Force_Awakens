@@ -35,7 +35,7 @@ $conn = new mysqli($servernameremote, $user, $pass, $schema, $port);
 // Start the session
 session_start();
 
-include "../Utilities/ServerConnection.php";
+include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
 
 
