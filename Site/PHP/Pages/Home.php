@@ -255,34 +255,38 @@ $sID = $user->getSID();
 								<h4 style="color:red;">Edit any of your profile info!</h4>
 							</div>
 							<div class="modal-body">
-								<form id="form">
+								<form id="form" action="../changeDetails.php" method="post">
 									<div class="form-group">
 										<label>First Name</label>
-										<input disabled type="text" class="form-control" id="firstname" placeholder="First Name" value = "<?php echo $firstName; ?>">
+										<input disabled type="text" class="form-control" name="firstname" placeholder="First Name" value = "<?php echo $firstName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Last Name</label>
-										<input disabled type="text" class="form-control" id="lastname" placeholder="Last Name" value = "<?php echo $lastName; ?>">
+										<input disabled type="text" class="form-control" name="lastname" placeholder="Last Name" value = "<?php echo $lastName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
-										<input disabled type="text" class="form-control" id="studentID" placeholder="Student ID" value = "<?php echo $sID; ?>">
+										<input disabled type="text" class="form-control" name="studentID" placeholder="Student ID" value = "<?php echo $sID; ?>">
 									</div>
 									<div class="form-group">
 										<label>Program</label>
-										<input disabled type="text" class="form-control" id="program" placeholder="Program" value = "<?php echo $program; ?>">
+										<input disabled type="text" class="form-control" name="program" placeholder="Program" value = "<?php echo $program; ?>">
 									</div>
 									<div class="form-group">
 										<label>Old Password</label>
-										<input type="text" class="form-control" id="program" placeholder="Old Password">
+										<input type="text" class="form-control" name="oldPass" placeholder="Old Password">
 									</div>
 									<div class="form-group">
 										<label>New Password</label>
-										<input type="text" class="form-control" id="program" placeholder="New Password">
+										<input type="text" class="form-control" name="newPass" placeholder="New Password">
 									</div>
 									<div class="form-group">
-										<label>Email Address</label>
-										<input type="text" class="form-control" id="email" placeholder="Email Address" value = "<?php echo $email; ?>">
+										<label>Current Email Address</label>
+										<input disabled type="text" class="form-control" name="curEmail" placeholder="Email Address" value = "<?php echo $email; ?>">
+									</div>
+									<div class="form-group">
+										<label>New Email Address</label>
+										<input type="text" class="form-control" id="newEmail" placeholder="Email Address">
 									</div>
 
 									<!-- Requires Back-end connection -->
