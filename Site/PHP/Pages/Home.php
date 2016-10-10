@@ -8,14 +8,14 @@ session_start();
 include "../Class/user.php";
 
 $email = $_SESSION['email'];
-	
+
 	 $user = new User($email);
-    
-	// $firstName = $user->getFirstName();
-	// $lastName = $user->getLastName();
+
+	 $firstName = $user->getFirstName();
+	 $lastName = $user->getLastName();
 	 $emailAddress = $user->getEmailAddress();
-	// $program = $user->getProgram();
-	// $sID = $user->getSID();
+	 $program = $user->getProgram();
+	 $sID = $user->getSID();
 	
 ?>
 
@@ -34,6 +34,9 @@ $email = $_SESSION['email'];
 	October 1, 2016 (Joey)
 	-Added calender as default, no image required
 	-Added auto-generation of date in reservation table, based on user click of the calender
+
+	October 9, 2016 (Joey)
+	-Fixed connection to db for populating Make Reservation popup
 	
 	!-Still necessary to pass entity ID of time selected
 	!-Colors are not permanent, was done to check if CSS worked for table

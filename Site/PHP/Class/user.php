@@ -65,20 +65,20 @@ class User
 	public function __construct($email) {
 
 		$this->setEmailAddress($email);
-		/*
+		
 		$conn = getServerConn();
-					
+		
 		$sql = "SELECT * FROM student WHERE email ='".$this->getEmailAddress()."'";
 		$result = $conn->query($sql);
-		$row = $result->fetch_assoc()
+		$row = $result->fetch_assoc();
 		
-		setFirstName($row["firstName"]);
-		setLastName($row["lastName"]);
-		setProgram($row["porogram"]);
-		setSID($row["studentID"])
+		$this->setFirstName($row["firstName"]);
+		$this->setLastName($row["lastName"]);
+		$this->setProgram($row["porogram"]);
+		$this->setSID($row["studentID"]);
 				
 		closeServerConn($conn);
-		*/
+		
 	}
     
     /* The general gets and sets are here
