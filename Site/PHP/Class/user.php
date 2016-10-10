@@ -22,7 +22,7 @@
  * to be done when documentation is finalized and processes defined.
 */
 
-/** 
+/*
 Temporary use only, delete this server connection at a later date
 $servernameremote = "wolfcall.ddns.net";
 $user = "nicholas";
@@ -35,10 +35,8 @@ $conn = new mysqli($servernameremote, $user, $pass, $schema, $port);
 // Start the session
 session_start();
 
-include_once dirname(__FILE__).'\\..\\Utilities\\ServerConnection.php';
-include "../Utilities/ServerConneciton.php";
+include "../Utilities/ServerConnection.php";
 
-$_SESSION["email"] = htmlspecialchars($_POST["email"]);
 
 
 class User
@@ -67,7 +65,7 @@ class User
 	public function __construct($email) {
 
 		$this->setEmailAddress($email);
-		/**
+		/*
 		$conn = getServerConn();
 					
 		$sql = "SELECT * FROM student WHERE email ='".$this->getEmailAddress()."'";
@@ -144,7 +142,7 @@ class User
 }
 
 
-/**
+/*
 FOR TESTING PURPOSES, TO BE DELETED LATER
 $sql = "SELECT * FROM student";
 $result = $conn->query($sql);

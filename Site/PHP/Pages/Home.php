@@ -9,14 +9,13 @@ include "../Class/user.php";
 
 $email = $_SESSION['email'];
 	
-	
-	$user = new User($email);
+	 $user = new User($email);
     
-	$firstName = $user->getFirstName();
-	$lastName = $user->getLastName();
-	$emailAddress = $user->getEmailAddress();
-	$program = $user->getProgram();
-	$sID = $user->getSID();
+	// $firstName = $user->getFirstName();
+	// $lastName = $user->getLastName();
+	 $emailAddress = $user->getEmailAddress();
+	// $program = $user->getProgram();
+	// $sID = $user->getSID();
 	
 ?>
 
