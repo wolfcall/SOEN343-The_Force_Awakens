@@ -9,14 +9,14 @@ include "../Class/user.php";
 
 $email = $_SESSION['email'];
 
-	 $user = new User($email);
+$user = new User($email);
 
-	 $firstName = $user->getFirstName();
-	 $lastName = $user->getLastName();
-	 $emailAddress = $user->getEmailAddress();
-	 $program = $user->getProgram();
-	 $sID = $user->getSID();
-	
+$firstName = $user->getFirstName();
+$lastName = $user->getLastName();
+$emailAddress = $user->getEmailAddress();
+$program = $user->getProgram();
+$sID = $user->getSID();
+
 ?>
 
 
@@ -258,19 +258,19 @@ $email = $_SESSION['email'];
 								<form id="form">
 									<div class="form-group">
 										<label>First Name</label>
-										<input type="text" class="form-control" id="firstname" placeholder="First Name" value = "<?php echo $firstName; ?>">
+										<input disabled type="text" class="form-control" id="firstname" placeholder="First Name" value = "<?php echo $firstName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Last Name</label>
-										<input type="text" class="form-control" id="lastname" placeholder="Last Name" value = "<?php echo $lastName; ?>">
+										<input disabled type="text" class="form-control" id="lastname" placeholder="Last Name" value = "<?php echo $lastName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
-										<input type="text" class="form-control" id="studentID" placeholder="Student ID" value = "<?php echo $sID; ?>">
+										<input disabled type="text" class="form-control" id="studentID" placeholder="Student ID" value = "<?php echo $sID; ?>">
 									</div>
 									<div class="form-group">
 										<label>Program</label>
-										<input type="text" class="form-control" id="program" placeholder="Program" "<?php echo $program; ?>">
+										<input disabled type="text" class="form-control" id="program" placeholder="Program" value = "<?php echo $program; ?>">
 									</div>
 									<div class="form-group">
 										<label>Old Password</label>
