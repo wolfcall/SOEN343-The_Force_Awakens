@@ -16,10 +16,11 @@
  * -Added email (as username?) to variables and appropriate gets and sets
  * -Tested database connections but left in test code (except for personal password)
  * 
- * 
- * NOTES:
- * This merely a bare-bones, first draft, template. More work is
- * to be done when documentation is finalized and processes defined.
+ * 09/10/16
+ * -Connection to server established
+ * -Removed unnecessary set methods
+ * -created the object based on session email passed in by through Login
+ * -Added description of the setNewPassword method
 */
 
 // Start the session
@@ -69,9 +70,7 @@ class User
 	}
     
     /* The general gets and sets are here
-     * (Sets may be unneccessary since users should already be
-     * created in the database, this would be to populate the
-     * object)
+     * Only necessary set should be for the new password
      */
     public function getFirstName(){
 		return $this->firstName;
@@ -93,35 +92,29 @@ class User
     public function getProgram() {
         return $this->program;
     }
-	
-	public function getSID() {
-        return $this->sID;
-    }
     
-    public function setFirstName($fName){
-		$this->firstName = $fName;
-    }
-    
-    public function setLastName($lName){
-		$this->lastName = $lName;
-    }
-    
-    public function setReservation($reserve){
-		$this->reservation = $reserve;
-    }
-    
+	/*
+	*	Needs to add reference to the database
+	* 	Should not have $this
+	*/
     public function setEmailAddress($email) {
         $this->emailAddress = $email;
     }
     
-    public function setProgram($prog) {
-        $this->program = $prog;
-    }
+	/*
+		This function will be responsible for checking the old password
+		And updating it with the new password set by the user
+		It should not matter if the email field is left empty
+	*/
+	public function setNewPassword(){
+		
+	}
 	
-	public function setSID($sID) {
-        $this->sID = $sID;
+	public function setReservation($reserve){
+		$this->reservation = $reserve;
     }
     
+	
     //To clear the object in case user login fails?
     function __destruct() {
        //echo "Object destroyed";
