@@ -7,7 +7,7 @@ Be sure you place the appropriate files in their corresponding folders!!!!!!!
   
 Milestone Dates can be found here: https://github.com/wolfcall/SOEN343/milestones  
   
-~~Finish the Shell of the Site -- Due by September 28, 2016  ~~
+(Deadline Passed) Finish the Shell of the Site Due by September 28, 2016  
   
 Reserve, Cancel, Modify, View Reservation -- Due by October 15, 2016  
 Waiting List and Room Cancellation -- Due by October 29, 2016  
