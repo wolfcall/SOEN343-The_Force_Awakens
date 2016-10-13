@@ -255,7 +255,7 @@ $sID = $user->getSID();
 								<h4 style="color:red;">Edit any of your profile info!</h4>
 							</div>
 							<div class="modal-body">
-								<form id="form" action="../changeDetails.php" method="post">
+								<form id="form" action="changeDetails.php" method="post">
 									<div class="form-group">
 										<label>First Name</label>
 										<input disabled type="text" class="form-control" name="firstname" placeholder="First Name" value = "<?php echo $firstName; ?>">
@@ -274,19 +274,19 @@ $sID = $user->getSID();
 									</div>
 									<div class="form-group">
 										<label>Old Password</label>
-										<input type="text" class="form-control" name="oldPass" placeholder="Old Password">
+										<input type="password" class="form-control" name="oldPass" placeholder="Old Password">
 									</div>
 									<div class="form-group">
 										<label>New Password</label>
-										<input type="text" class="form-control" name="newPass" placeholder="New Password">
+										<input type="password" class="form-control" name="newPass" placeholder="New Password">
 									</div>
 									<div class="form-group">
 										<label>Current Email Address</label>
-										<input disabled type="text" class="form-control" name="curEmail" placeholder="Email Address" value = "<?php echo $email; ?>">
+										<input disabled type="text" class="form-control" name="oldEmail" placeholder="Email Address" value = "<?php echo $email; ?>">
 									</div>
 									<div class="form-group">
 										<label>New Email Address</label>
-										<input type="text" class="form-control" id="newEmail" placeholder="Email Address">
+										<input type="text" class="form-control" name="newEmail" placeholder="Email Address">
 									</div>
 
 									<!-- Requires Back-end connection -->

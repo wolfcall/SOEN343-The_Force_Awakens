@@ -111,8 +111,23 @@ class User
 		Should be called by a changedetails.php file
 		Should validate previous password to set new one
 	*/
-	public function setNewPassword(){
+	public function setNewPassword($old, $new)
+	{
+		$conn = getServerConn();
 		
+		$sql = "SELECT password FROM student WHERE email ='".$this->getEmailAddress()."'";
+		$verify = $conn->query($sql);
+				
+		if($old == $verify)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
+		closeServerConn($conn);
 	}
 
     //To clear the object in case user login fails?

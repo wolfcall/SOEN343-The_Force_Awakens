@@ -6,15 +6,27 @@ session_start();
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 include "../Class/user.php";
 
-$oldEmail = htmlspecialchars($_POST["curEmail"];
-$newEmail = htmlspecialchars($_POST["newEmail"];
-$newPass = htmlspecialchars($_POST["oldPass"];
-$oldPass = htmlspecialchars($_POST["newPass"];
+$oldEmail = $_SESSION['email'];
+$newEmail = htmlspecialchars($_POST["newEmail"]);
+$oldPass = htmlspecialchars($_POST["oldPass"]);
+$newPass = htmlspecialchars($_POST["newPass"]);
 
 $user = new User($oldEmail);
 
+$valid = $user->setNewPassword($oldPass, $newPass);
 
-echo var_dump($oldEmail);
+if($valid == true)
+{
+	echo "old password matches";
+}
+else
+{
+	eccho "doesn't match";
+}
+
+
+//header("Location: Home.php");
+exit();
 
 /*
 *	Get old data from the user
