@@ -115,17 +115,16 @@ class User
 	{
 		$conn = getServerConn();
 		
-		$sql = "SELECT password FROM student WHERE email ='".$this->getEmailAddress()."'";
-		$verify = $conn->query($sql);
-				
-		if($old == $verify)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		$sql = "SELECT * FROM student WHERE ='".$this->getEmailAddress()."' AND password = password('"$old"')"
+		
+		//$sql = "SELECT * FROM student WHERE email ='".$this->getEmailAddress()."'";
+		$result = $conn->query($sql);
+		$row = $result->fetch_assoc();
+		
+		$temp = $row["email"];
+		//$temp = $row["password"];
+		
+		return $temp;
 		
 		closeServerConn($conn);
 	}

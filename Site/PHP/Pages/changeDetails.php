@@ -11,18 +11,20 @@ $newEmail = htmlspecialchars($_POST["newEmail"]);
 $oldPass = htmlspecialchars($_POST["oldPass"]);
 $newPass = htmlspecialchars($_POST["newPass"]);
 
+/**
+echo $oldPass;
+echo $newPass;
+echo $oldEmail;
+echo $newEmail;
+*/
 $user = new User($oldEmail);
 
-$valid = $user->setNewPassword($oldPass, $newPass);
+echo $valid = $user->setNewPassword($oldPass, $newPass);
 
-if($valid == true)
-{
-	echo "old password matches";
-}
-else
-{
-	eccho "doesn't match";
-}
+
+/**echo $valid = $user->setNewPassword($oldPass, $newPass);
+echo "go fuck yourself";*/
+
 
 
 //header("Location: Home.php");
