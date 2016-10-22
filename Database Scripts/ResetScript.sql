@@ -2,7 +2,7 @@ Drop schema if exists soen343;
 Create schema Soen343;
 
 -- -----------------------------------------------------
--- Table `soen341`.`Student`
+-- Table `soen343`.`Student`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `soen343`.`Student` (
   `idStudent` INT NOT NULL AUTO_INCREMENT,
