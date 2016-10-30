@@ -19,4 +19,4 @@ Insert into `soen343`.`Student` (FirstName, LastName, `password`, email) values 
 Insert into `soen343`.`Student` (FirstName, LastName, `password`, email) values ('Nicholas','Burdet',password('pass123'),'nb@email.com');
 Insert into `soen343`.`Student` (FirstName, LastName, `password`, email) values ('Joey','T',password('pass123'),'jt@email.com');
 Insert into `soen343`.`Student` (FirstName, LastName, `password`, email) values ('Julien','P',password('pass123'),'jp@email.com');
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email) values ('Adam','Acaro',password('pass123'),'aa@email.com');
+Insert into `soen343`.`Student` (FirstName, LastName, `password`, email) values ('Adam','Acaro',password('123'),'aa@email.com');
