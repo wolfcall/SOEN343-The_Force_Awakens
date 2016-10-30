@@ -4,7 +4,7 @@
 session_start();
 
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
-include "../Class/user.php";
+include "../Class/Student.php";
 
 $oldEmail = $_SESSION['email'];
 $newEmail = htmlspecialchars($_POST["newEmail"]);
@@ -17,7 +17,7 @@ echo $newPass;
 echo $oldEmail;
 echo $newEmail;
 */
-$user = new User($oldEmail);
+$user = new Student($oldEmail);
 
 echo $valid = $user->setNewPassword($oldPass, $newPass);
 

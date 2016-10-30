@@ -5,12 +5,12 @@
 session_start();
 
 //include_once dirname(__FILE__).'\\..\\Class\\user.php';
-include "../Class/user.php";
+include "../Class/Student.php";
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
 
-$user = new User($email);
+$user = new Student($email);
 
 $firstName = $user->getFirstName();
 $lastName = $user->getLastName();

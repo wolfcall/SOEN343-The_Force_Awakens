@@ -28,7 +28,7 @@ session_start();
 
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
-class User
+class Student
 {
     private $username = "";
     /* For the sake of security, password will not be stored in the user
