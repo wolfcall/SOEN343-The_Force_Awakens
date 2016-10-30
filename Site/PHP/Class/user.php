@@ -115,7 +115,7 @@ class User
 	{
 		$conn = getServerConn();
 		
-		$sql = "SELECT * FROM student WHERE ='".$this->getEmailAddress()."' AND password = password('"$old"')"
+		$sql = "SELECT * FROM student WHERE ='".$this->getEmailAddress()."' AND password = password('".$old."')";
 		
 		//$sql = "SELECT * FROM student WHERE email ='".$this->getEmailAddress()."'";
 		$result = $conn->query($sql);

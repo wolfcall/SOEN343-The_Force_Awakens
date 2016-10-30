@@ -6,6 +6,7 @@ session_start();
 
 //include_once dirname(__FILE__).'\\..\\Class\\user.php';
 include "../Class/user.php";
+include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
 
@@ -119,7 +120,7 @@ $sID = $user->getSID();
 		});
 	</script>
 
-	<br><br>
+	
 
 	<!-- Pop-up for reservation (by clicking table)
 	Will have to include some way of passing the time from the block chosen to popup
@@ -208,7 +209,8 @@ $sID = $user->getSID();
 									</div>
 									<div class="form-group">
 										<label>Description of Reservation</label>
-										<input textarea rows="4" cols="50" class="form-control" id="description" placeholder="Enter your Description">
+										<textarea rows="4" cols="50" class="form-control" id="description" placeholder="Enter your Description">
+										</textarea>
 									</div>
 
 									<!-- Time slots should be inserted here-->
@@ -299,6 +301,33 @@ $sID = $user->getSID();
 				</div>
 
 				<div id="reservation-table"><br>
+					<?php
+						$thelper = new tableHelper();
+						
+						$params = array("class"=>"reservations");
+						
+						$table = $thelper->initTable($params);
+						
+						$values = array();
+						for($x = 0 ; $x < 24 ; $x++){
+							$values[] = sprintf("%02.0f",$x).":00";
+						}
+						
+						var_dump($values);
+						
+						$table .= $thelper->populateHeader(array("colspan" => "2"), "time", $values, " ", "date");
+						
+						$values = array();
+						for($x = 0 ; $x < 48 ; $x++){
+							$values[] = "00";
+						}
+						
+						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "1", "room");
+						
+						$table .= $thelper->closeTable();
+						
+						echo $table;
+					?>
 					<table class="reservations" border="1" cellpadding="0" width="100%">
 						<tbody>
 							<tr class="today">

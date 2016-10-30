@@ -26,11 +26,11 @@ class tableHelper {
 		foreach ($params as $key => $value) {
 			$table .= "'".$key."' = '".$value."' ";
 		}
-		$table .= "><tbody>";
+		$table .= "  border='1' cellpadding='0' width='100%'><tbody>";
 		return $table;
 	}
 	
-	public function populateRow($params,$class,$content){
+	public function populateRow($params,$class,$content, $initCell = NULL, $initCellClass = NULL){
 		$row = "<tr ";
 		
 		foreach ($params as $key => $value){
@@ -39,25 +39,41 @@ class tableHelper {
 		
 		$row .= ">";
 		
+		if(!is_null($initCell)){
+			$row .= "<th class='".(!is_null($initCellClass)?$initCellClass:"")."' >".$initCell."</th>";
+		}
+		
 		foreach ($content as $key => $value){
-			$row .= "<td class='".$class."'>".$value."</td>";
+			$row .= "<td class='".$class."' ";
+			
+			foreach ($params as $key => $pvalue){
+				$row .= $key." = '".$pvalue."' ";
+			}
+		
+			$row .= ">".$value."</th>";
 		}
 		
 		$row .= "</tr>";
 		return $row;
 	}
 	
-	public function populateHeader($params,$class,$content){
+	public function populateHeader($params,$class,$content, $initCell = NULL, $initCellClass = NULL){
 		$row = "<tr ";
-		
-		foreach ($params as $key => $value){
-			$row .= "'".$key."' = '".$value."' ";
-		}
 		
 		$row .= ">";
 		
+		if(!is_null($initCell)){
+			$row .= "<th class='".(!is_null($initCellClass)?$initCellClass:"")."' >".$initCell."</th>";
+		}
+		
 		foreach ($content as $key => $value){
-			$row .= "<th class='".$class."'>".$value."</th>";
+			$row .= "<th class='".$class."' ";
+			
+			foreach ($params as $key => $pvalue){
+				$row .= $key." = '".$pvalue."' ";
+			}
+		
+			$row .= ">".$value."</th>";
 		}
 		
 		$row .= "</tr>";
