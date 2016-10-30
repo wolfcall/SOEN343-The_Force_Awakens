@@ -313,22 +313,24 @@ $sID = $user->getSID();
 							$values[] = sprintf("%02.0f",$x).":00";
 						}
 						
-						var_dump($values);
-						
-						$table .= $thelper->populateHeader(array("colspan" => "2"), "time", $values, " ", "date");
+						$table .= $thelper->populateHeader(array("colspan" => "2"), "time", $values, " ", "date", "datetoday");
 						
 						$values = array();
 						for($x = 0 ; $x < 48 ; $x++){
 							$values[] = "00";
 						}
 						
-						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "1", "room");
+						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room1", "room");
+						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room2", "room");
+						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room3", "room");
+						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room4", "room");
+						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room5", "room");
 						
 						$table .= $thelper->closeTable();
 						
 						echo $table;
 					?>
-					<table class="reservations" border="1" cellpadding="0" width="100%">
+					<!--table class="reservations" border="1" cellpadding="0" width="100%">
 						<tbody>
 							<tr class="today">
 								<td class="date" id="datetoday"></td>
@@ -618,7 +620,7 @@ $sID = $user->getSID();
 								<td class="slot" colspan="1">0</td>
 							</tr>
 						</tbody>
-					</table>
+					</table-->
 				</div>
 				<!-- id reservation-table -->
 			</div>

@@ -57,13 +57,13 @@ class tableHelper {
 		return $row;
 	}
 	
-	public function populateHeader($params,$class,$content, $initCell = NULL, $initCellClass = NULL){
+	public function populateHeader($params,$class,$content, $initCell = NULL, $initCellClass = NULL, $initId = NULL){
 		$row = "<tr ";
 		
 		$row .= ">";
 		
 		if(!is_null($initCell)){
-			$row .= "<th class='".(!is_null($initCellClass)?$initCellClass:"")."' >".$initCell."</th>";
+			$row .= "<th class='".(!is_null($initCellClass)?$initCellClass:"")."' id = '".(!is_null($initId)?$initId:"")."' >".$initCell."</th>";
 		}
 		
 		foreach ($content as $key => $value){
