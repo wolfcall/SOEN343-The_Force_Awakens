@@ -6,6 +6,8 @@ session_start();
 
 //include_once dirname(__FILE__).'\\..\\Class\\user.php';
 include "../Class/Student.php";
+
+include dirname(__FILE__)."/../Class/StudentMapper.php";
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
@@ -17,6 +19,11 @@ $lastName = $user->getLastName();
 $emailAddress = $user->getEmailAddress();
 $program = $user->getProgram();
 $sID = $user->getSID();
+
+//echo "here";
+
+//$student = new StudentMapper();
+
 
 ?>
 

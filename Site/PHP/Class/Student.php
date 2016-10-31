@@ -106,31 +106,4 @@ class Student
     public function setEmailAddress($email) {
         $this->emailAddress = $email;
     }
-	
-	/*
-		Should be called by a changedetails.php file
-		Should validate previous password to set new one
-	*/
-	public function setNewPassword($old, $new)
-	{
-		$conn = getServerConn();
-		
-		$sql = "SELECT * FROM student WHERE ='".$this->getEmailAddress()."' AND password = password('".$old."')";
-		
-		//$sql = "SELECT * FROM student WHERE email ='".$this->getEmailAddress()."'";
-		$result = $conn->query($sql);
-		$row = $result->fetch_assoc();
-		
-		$temp = $row["email"];
-		//$temp = $row["password"];
-		
-		return $temp;
-		
-		closeServerConn($conn);
-	}
-
-    //To clear the object in case user login fails?
-    function __destruct() {
-       //echo "Object destroyed";
-   }
 }

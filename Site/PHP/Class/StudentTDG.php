@@ -72,6 +72,18 @@ class studentTDG
 		return $row["studentID"];
     }
 	
+	public function getPassword($email){
+		
+		$conn = getServerConn();
+		
+		$sql = "SELECT password FROM student WHERE email ='".$email."'";
+		$result = $conn->query($sql);
+		$row = $result->fetch_assoc();
+		
+		closeServerConn($conn);
+		return $row["password"];
+    }
+	
 	/* The Update methods for all Entities in the Student table can be found here
      */
     public function updateFirstName($email, $first){
@@ -124,5 +136,25 @@ class studentTDG
 		closeServerConn($conn);
     }
 	
-	
+	/*
+		Should be called by a changedetails.php file
+		Should validate previous password to set new one
+	*/
+	public function updatePassword($email, $pass){
+		
+		$conn = getServerConn();
+		
+		$sql = "SELECT * FROM student WHERE ='".$this->getEmailAddress()."' AND password = password('".$old."')";
+		
+		//$sql = "SELECT * FROM student WHERE email ='".$this->getEmailAddress()."'";
+		$result = $conn->query($sql);
+		$row = $result->fetch_assoc();
+		
+		$temp = $row["email"];
+		//$temp = $row["password"];
+		
+		return $temp;
+		
+		closeServerConn($conn);
+    }
 }
