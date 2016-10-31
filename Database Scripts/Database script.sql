@@ -115,13 +115,13 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Georges','Mathieu',password('pass123'),'gm@email.com', 'SOEN' );
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Stephano','Pace',password('pass123'),'sp@email.com', 'SOEN' );
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Olivier','C',password('pass123'),'oc@email.com', 'SOEN' );
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Nicholas','Burdet',password('pass123'),'nb@email.com', 'SOEN' );
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Joey','T',password('pass123'),'jt@email.com', 'SOEN' );
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Julien','P',password('pass123'),'jp@email.com', 'SOEN' );
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Adam','Acaro',password('123'),'aa@email.com', 'SOEN' );
+Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Georges','Mathieu',password('pass123'),'gm@email.com', 'SOEN');
+Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Stephano','Pace',password('pass123'),'sp@email.com', 'SOEN');
+Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Olivier','C',password('pass123'),'oc@email.com', 'SOEN');
+Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Nicholas','Burdet',password('pass123'),'nb@email.com', 'SOEN');
+Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Joey','T',password('pass123'),'jt@email.com', 'SOEN');
+Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Julien','P',password('pass123'),'jp@email.com', 'SOEN');
+Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Adam','Acaro',password('123'),'aa@email.com', 'SOEN');
 
 Insert into `soen343`.`room` (name, location) values ('California', 'H9327');
 Insert into `soen343`.`room` (name, location) values ('Hawaii', 'H9337');
