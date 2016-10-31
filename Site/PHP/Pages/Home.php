@@ -9,9 +9,9 @@ include "../Class/StudentMapper.php";
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
-
 $student = new StudentMapper($email);
 
+$student->updateSID($email, "27454716");
 
 $firstName = $student->getFirstName();
 $lastName = $student->getLastName();

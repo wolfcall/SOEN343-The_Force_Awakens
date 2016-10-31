@@ -27,12 +27,12 @@ class StudentMapper
 		$sql = "SELECT * FROM student WHERE email ='".$email."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
-		
-		$this->studentActive->setFirstName($row["firstName"]);
-		$this->studentActive->setLastName($row["lastName"]);
-		$this->studentActive->setEmailAddress($row["email"]);
-		$this->studentActive->setProgram($row["program"]);
-		$this->studentActive->setSID($row["studentID"]);
+				
+		$this->setFirstName($row["firstName"]);
+		$this->setLastName($row["lastName"]);
+		$this->setEmailAddress($row["email"]);
+		$this->setProgram($row["program"]);
+		$this->setSID($row["studentID"]);
 		
 		closeServerConn($conn);
 	}
@@ -44,23 +44,23 @@ class StudentMapper
 	/* Set methods for the Student Domain object
 	*/
 	public function setFirstName($first){
-		$this->$studentActive->setFirstName($first);
+		$this->studentActive->setFirstName($first);
     }
     
     public function setLastName($last){
-		$this->$studentActive->setLastName($last);
+		$this->studentActive->setLastName($last);
     }
     
     public function setEmailAddress($new) {
-        $this->$studentActive->setEmailAddress($new);
+        $this->studentActive->setEmailAddress($new);
     }
     
     public function setProgram($program) {
-        $this->$studentActive->setProgram($program);
+        $this->studentActive->setProgram($program);
     }
 	
 	public function setSID($sID) {
-        $this->$studentActive->setSID($sID);
+        $this->studentActive->setSID($sID);
     }
 	
 	/* Get methods for the Student Domain object
@@ -86,30 +86,30 @@ class StudentMapper
     }
 		
 	/*	Update methods for the Student TDG object
-	
+	*/
 	public function updateFirstName($email, $first){
-		$studentData->updateFirstName($email, $first);
-		$studentActive->setFirstName($first);
+		$this->studentData->updateFirstName($email, $first);
+		$this->setFirstName($first);
     }
     
-    public function updateLastName($last){
-		$studentData->updateFirstName($email, $last);
-		$studentActive->setLastName($last);
+    public function updateLastName($email,$last){
+		$this->studentData->updateLastName($email, $last);
+		$this->setLastName($last);
     }
     
     public function updateEmailAddress($email, $new) {
-        $studentData->updateEmailAddress($email, $new);
-		$studentActive->setEmailAddress($new);
+        $this->studentData->updateEmailAddress($email, $new);
+		$this->setEmailAddress($new);
     }
     
     public function updateProgram($email, $program) {
-        $studentData->updateProgram($email,$program);
-		$studentActive->setProgram($program);
+        $this->studentData->updateProgram($email,$program);
+		$this->setProgram($program);
     }
 	
 	public function updateSID($email, $sID) {
-        $studentData->updateSID($email, $sID);
-		$studentActive->setSID($sID);
-    }*/
+        $this->studentData->updateSID($email, $sID);
+		$this->setSID($sID);
+    }
 }
 ?>
