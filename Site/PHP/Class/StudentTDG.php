@@ -5,7 +5,7 @@ session_start();
 
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
-class studentTDG
+class StudentTDG
 {
 	/* No insert methods are necessary for this class, as the Student cannot edit the information for any Room
 	*/
@@ -103,7 +103,7 @@ class studentTDG
 		$sql = "Update student SET lastName ='".$last."' WHERE email ='".$email."'";
 		$result = $conn->query($sql);
 		
-		closeServerConn($conn);;
+		closeServerConn($conn);
     }
   
     public function updateEmailAddress($email, $new){
@@ -158,3 +158,4 @@ class studentTDG
 		closeServerConn($conn);
     }
 }
+?>

@@ -26,7 +26,7 @@ class ReservationDomain
 		$this->description = $desc;
     }
 	
-	/* Get methods for the Room Domain object
+	/* Get methods for the Reservation Domain object
 	*/
 	public function getREID(){
 		return $this->reID;
@@ -56,7 +56,7 @@ class ReservationDomain
         return $this->description;
     }
 	
-	/* Set methods for the Room Domain object
+	/* Set methods for the Reservation Domain object
 	*/
 	public function setREID($reID){
 		$this->reID = $reID;
@@ -86,3 +86,4 @@ class ReservationDomain
 		$this->description = $desc;
     }
 }
+?>

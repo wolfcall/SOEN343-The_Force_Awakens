@@ -5,21 +5,11 @@ session_start();
 
 class StudentDomain
 {
-	private $firstName;
-    private $lastName;
-    private $emailAddress;
-    private $program;
-	private $sID;	
-	
-	/* Default Constructor for the Student Domain object
-	*/
-	public function __construct($first, $last, $email, $program, $sID) {
-		$this->firstName = $first;
-		$this->lastName = $last;
-        $this->emailAddress = $email;
-        $this->program = $program;
-        $this->sID = $sid;
-    }
+	private $firstName = "";
+    private $lastName = "";
+    private $emailAddress = "";
+    private $program = "";
+	private $sID = "";
 	
 	/* Get methods for the Student Domain object
 	*/
@@ -65,3 +55,4 @@ class StudentDomain
         $this->sID = $sID;
     }
 }
+?>

@@ -4,26 +4,19 @@
 //Start session
 session_start();
 
-//include_once dirname(__FILE__).'\\..\\Class\\user.php';
 include "../Class/Student.php";
-
-include dirname(__FILE__)."/../Class/StudentMapper.php";
+include "../Class/StudentMapper.php";
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
 
-$user = new Student($email);
+$student = new StudentMapper($email);
 
-$firstName = $user->getFirstName();
-$lastName = $user->getLastName();
-$emailAddress = $user->getEmailAddress();
-$program = $user->getProgram();
-$sID = $user->getSID();
 
-//echo "here";
-
-//$student = new StudentMapper();
-
+$firstName = $student->getFirstName();
+$lastName = $student->getLastName();
+$program = $student->getProgram();
+$sID = $student->getSID();
 
 ?>
 
@@ -212,11 +205,11 @@ $sID = $user->getSID();
 
 									<div class="form-group">
 										<label>Title of Reservation</label>
-										<input type="text" class="form-control" id="title" placeholder="Enter a Title">
+										<input type="text" class="form-control" name="title" placeholder="Enter a Title">
 									</div>
 									<div class="form-group">
 										<label>Description of Reservation</label>
-										<textarea rows="4" cols="50" class="form-control" id="description" placeholder="Enter your Description">
+										<textarea rows="4" cols="50" class="form-control" name="description" placeholder="Enter your Description">
 										</textarea>
 									</div>
 
@@ -226,23 +219,23 @@ $sID = $user->getSID();
 									<!-- Should be Auto-Populated and Non-Editable-->
 									<div class="form-group">
 										<label>First Name</label>
-										<input disabled type="text" class="form-control" id="firstname" value = "<?php echo $firstName; ?>">
+										<input disabled type="text" class="form-control" name="firstname" value = "<?php echo $firstName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Last Name</label>
-										<input disabled type="text" class="form-control" id="lastname" value = "<?php echo $lastName; ?>">
+										<input disabled type="text" class="form-control" name="lastname" value = "<?php echo $lastName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
-										<input disabled type="text" class="form-control" id="studentID" value = "<?php echo $sID; ?>">
+										<input disabled type="text" class="form-control" name="studentID" value = "<?php echo $sID; ?>">
 									</div>
 									<div class="form-group">
 										<label>Program</label>
-										<input disabled type="text" class="form-control" id="program" value = "<?php echo $program; ?>">
+										<input disabled type="text" class="form-control" name="program" value = "<?php echo $program; ?>">
 									</div>
 									<div class="form-group">
 										<label>Email Address</label>
-										<input disabled type="text" class="form-control" id="email" value = "<?php echo $email; ?>">
+										<input disabled type="text" class="form-control" name="email" value = "<?php echo $email; ?>">
 									</div>
 
 									<!-- Requires Back-end connection -->
