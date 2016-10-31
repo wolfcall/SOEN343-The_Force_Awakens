@@ -2,7 +2,7 @@ Drop schema if exists soen343;
 Create schema Soen343;
 
 -- -----------------------------------------------------
--- Table `soen341`.`Student`
+-- Table `soen343`.`Student`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `soen343`.`Student` (
   `idStudent` INT NOT NULL AUTO_INCREMENT,
@@ -19,4 +19,4 @@ Insert into `soen343`.`Student` (FirstName, LastName, `password`, email) values 
 Insert into `soen343`.`Student` (FirstName, LastName, `password`, email) values ('Nicholas','Burdet',password('pass123'),'nb@email.com');
 Insert into `soen343`.`Student` (FirstName, LastName, `password`, email) values ('Joey','T',password('pass123'),'jt@email.com');
 Insert into `soen343`.`Student` (FirstName, LastName, `password`, email) values ('Julien','P',password('pass123'),'jp@email.com');
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email) values ('Adam','Acaro',password('pass123'),'aa@email.com');
+Insert into `soen343`.`Student` (FirstName, LastName, `password`, email) values ('Adam','Acaro',password('123'),'aa@email.com');

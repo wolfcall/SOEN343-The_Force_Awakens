@@ -4,18 +4,19 @@
 //Start session
 session_start();
 
-//include_once dirname(__FILE__).'\\..\\Class\\user.php';
-include "../Class/user.php";
+include "../Class/Student.php";
+include "../Class/StudentMapper.php";
+include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
 
-$user = new User($email);
+$student = new StudentMapper($email);
 
-$firstName = $user->getFirstName();
-$lastName = $user->getLastName();
-$emailAddress = $user->getEmailAddress();
-$program = $user->getProgram();
-$sID = $user->getSID();
+
+$firstName = $student->getFirstName();
+$lastName = $student->getLastName();
+$program = $student->getProgram();
+$sID = $student->getSID();
 
 ?>
 
@@ -119,7 +120,7 @@ $sID = $user->getSID();
 		});
 	</script>
 
-	<br><br>
+	
 
 	<!-- Pop-up for reservation (by clicking table)
 	Will have to include some way of passing the time from the block chosen to popup
@@ -204,11 +205,12 @@ $sID = $user->getSID();
 
 									<div class="form-group">
 										<label>Title of Reservation</label>
-										<input type="text" class="form-control" id="title" placeholder="Enter a Title">
+										<input type="text" class="form-control" name="title" placeholder="Enter a Title">
 									</div>
 									<div class="form-group">
 										<label>Description of Reservation</label>
-										<input textarea rows="4" cols="50" class="form-control" id="description" placeholder="Enter your Description">
+										<textarea rows="4" cols="50" class="form-control" name="description" placeholder="Enter your Description">
+										</textarea>
 									</div>
 
 									<!-- Time slots should be inserted here-->
@@ -217,23 +219,23 @@ $sID = $user->getSID();
 									<!-- Should be Auto-Populated and Non-Editable-->
 									<div class="form-group">
 										<label>First Name</label>
-										<input disabled type="text" class="form-control" id="firstname" value = "<?php echo $firstName; ?>">
+										<input disabled type="text" class="form-control" name="firstname" value = "<?php echo $firstName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Last Name</label>
-										<input disabled type="text" class="form-control" id="lastname" value = "<?php echo $lastName; ?>">
+										<input disabled type="text" class="form-control" name="lastname" value = "<?php echo $lastName; ?>">
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
-										<input disabled type="text" class="form-control" id="studentID" value = "<?php echo $sID; ?>">
+										<input disabled type="text" class="form-control" name="studentID" value = "<?php echo $sID; ?>">
 									</div>
 									<div class="form-group">
 										<label>Program</label>
-										<input disabled type="text" class="form-control" id="program" value = "<?php echo $program; ?>">
+										<input disabled type="text" class="form-control" name="program" value = "<?php echo $program; ?>">
 									</div>
 									<div class="form-group">
 										<label>Email Address</label>
-										<input disabled type="text" class="form-control" id="email" value = "<?php echo $email; ?>">
+										<input disabled type="text" class="form-control" name="email" value = "<?php echo $email; ?>">
 									</div>
 
 									<!-- Requires Back-end connection -->
@@ -299,297 +301,36 @@ $sID = $user->getSID();
 				</div>
 
 				<div id="reservation-table"><br>
-					<table class="reservations" border="1" cellpadding="0" width="100%">
-						<tbody>
-							<tr class="today">
-								<td class="date" id="datetoday"></td>
-								<td class="time" colspan="2">00:00</td>
-								<td class="time" colspan="2">01:00</td>
-								<td class="time" colspan="2">02:00</td>
-								<td class="time" colspan="2">03:00</td>
-								<td class="time" colspan="2">04:00</td>
-								<td class="time" colspan="2">05:00</td>
-								<td class="time" colspan="2">06:00</td>
-								<td class="time" colspan="2">07:00</td>
-								<td class="time" colspan="2">08:00</td>
-								<td class="time" colspan="2">09:00</td>
-								<td class="time" colspan="2">10:00</td>
-								<td class="time" colspan="2">11:00</td>
-								<td class="time" colspan="2">12:00</td>
-								<td class="time" colspan="2">13:00</td>
-								<td class="time" colspan="2">14:00</td>
-								<td class="time" colspan="2">15:00</td>
-								<td class="time" colspan="2">16:00</td>
-								<td class="time" colspan="2">17:00</td>
-								<td class="time" colspan="2">18:00</td>
-								<td class="time" colspan="2">19:00</td>
-								<td class="time" colspan="2">20:00</td>
-								<td class="time" colspan="2">21:00</td>
-								<td class="time" colspan="2">22:00</td>
-								<td class="time" colspan="2">23:00</td>
-							</tr>
-
-							<tr class="today">
-								<td class="room" id="room1">Room1</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-							</tr>
-
-							<tr class="today">
-								<td class="room" id="room2">Room2</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-							</tr>
-
-							<tr class="today">
-								<td class="room" id="room3">Room3</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-							</tr>
-
-							<tr class="today">
-								<td class="room" id="room4">Room4</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-							</tr>
-
-							<tr class="today">
-								<td class="room" id="room5">Room5</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-								<td class="slot" colspan="1">0</td>
-							</tr>
-						</tbody>
-					</table>
+					<?php
+						$thelper = new tableHelper();
+						
+						$params = array("class"=>"reservations");
+						
+						$table = $thelper->initTable($params);
+						
+						$values = array();
+						for($x = 0 ; $x < 24 ; $x++){
+							$values[] = sprintf("%02.0f",$x).":00";
+						}
+						
+						$table .= $thelper->populateHeader(array("colspan" => "2"), "time", $values, " ", "date", "datetoday");
+						
+						$values = array();
+						for($x = 0 ; $x < 48 ; $x++){
+							$values[] = "00";
+						}
+						
+						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room1", "room");
+						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room2", "room");
+						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room3", "room");
+						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room4", "room");
+						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room5", "room");
+						
+						$table .= $thelper->closeTable();
+						
+						echo $table;
+					?>
+				
 				</div>
 				<!-- id reservation-table -->
 			</div>
