@@ -246,14 +246,17 @@ function getHours(){
 
 									<!-- Time slots should be inserted here-->
 									<div class="form-group">
-										<label>Start Time:</label>
+										<label>Date:</label>
+										<input disabled type="text" class="form-control" name = "dateDrop" id="dateDrop" placeholder = "Nothing" />
+										<br>										
+										<label>Start Time:</label> 
 											<select name = "startTime">
 												<?php getHours()?>
-											</select>
+											</select>&nbsp &nbsp &nbsp
 										<label>End Time:</label>
 											<select name = "endTime">
 												<?php getHours()?>
-											</select>
+											</select>&nbsp &nbsp &nbsp
 										<label>Room Number:</label>
 											<select name = "roomNum">
 												<option>Room 1 </option>
@@ -262,8 +265,6 @@ function getHours(){
 												<option>Room 4 </option>
 												<option>Room 5 </option>
 											</select>
-											<label>Date:</label>
-											<input disabled type="text" class="form-control" name = "dateDrop" id="dateDrop" placeholder = "Nothing" />
 									</div>
 																		
 									<!-- Should be Auto-Populated and Non-Editable-->

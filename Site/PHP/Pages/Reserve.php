@@ -25,5 +25,33 @@ $student = new StudentMapper($email);
 $room = new RoomMapper($rID);
 $reservation = new ReservationMapper();
 
+var_dump($title);	//confirmed
+echo "<br>";
+var_dump($desc);	//confirmed
+echo "<br>";
+var_dump($date);
+echo "<br>";
+var_dump($start);	//confirmed
+echo "<br>";
+var_dump($end);		//Confirmed
+echo "<br>";
+var_dump($first);
+echo "<br>";
+var_dump($last);
+echo "<br>";
+var_dump($sID);
+echo "<br>";
+var_dump($prog);
+echo "<br>";
+var_dump($email);
+echo "<br>";
+var_dump($rID);		//confirmed
 
+
+
+
+die();
+
+
+header("Location: Home.php");
 ?>
