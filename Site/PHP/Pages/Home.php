@@ -226,12 +226,11 @@ $sID = $student->getSID();
 									</div>
 									<div class="form-group">
 										<label>Description of Reservation</label>
-										<textarea rows="4" cols="50" class="form-control" name="description" placeholder="Enter your Description">
-										</textarea>
-									</div>
+										<textarea rows="4" cols="50" placeholder="Describe the Reservation here..." class="form-control" name="description"></textarea>
+
+									</div
 
 									<!-- Time slots should be inserted here-->
-									
 									<?php
 										function getHours(){
 											for($x = 0; $x < 48; $x++){
@@ -245,12 +244,17 @@ $sID = $student->getSID();
 											}
 										}
 									?>
-									<select>
-										<?php getHours()?>
-									</select>
-									<select>
-										<?php getHours()?>
-									</select>
+									<div>
+										<label>Start Time:</label>
+										<select>
+												<?php getHours()?>
+										</select>
+										<label>End Time:</label>
+										<select>
+											<?php getHours()?>
+										</select>
+									</div><br>
+									
 									<!-- Should be Auto-Populated and Non-Editable-->
 									<div class="form-group">
 										<label>First Name</label>
