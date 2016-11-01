@@ -8,6 +8,9 @@ include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 class ReservationTDG
 {
     /* All times should be in the following format : STR_TO_DATE('10/24/11 10:00 PM','%m/%d/%Y %h:%i %p').
+	 * 
+	 * STR_TO_DATED('".date('m/j/Y g:i' , $start)."', '%m/%d/%Y %h:%i %p')
+	 * STR_TO_DATED('".date('m/j/Y g:i' , $end)."', '%m/%d/%Y %h:%i %p')
 	*/
 	
 	/* The Insert method to add a new reservation into the reservation table
