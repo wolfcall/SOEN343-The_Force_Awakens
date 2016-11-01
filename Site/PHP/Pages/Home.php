@@ -106,6 +106,13 @@ $sID = $student->getSID();
 			document.getElementById("datetoday").innerHTML = todayDate;
 			/** end of the function, resued in "onSelect" feature of datepicker */
 			
+			function getDateStr(){
+				return dayNames[currentDate.getDay()] + ", " 
+								+ monthNames[currentDate.getMonth()] + " " 
+								+ currentDate.getDate() + " "
+								+ currentDate.getUTCFullYear();
+			}
+			
     		$("#datepickerInline").datepicker({
         	//	buttonImage: '../img/calendar.png',
         	//	buttonImageOnly: true,
@@ -245,6 +252,11 @@ $sID = $student->getSID();
 											}
 										}
 									?>
+									<select>
+										<?php
+											$date = new DateTime()
+										?>
+									</select>
 									<select>
 										<?php getHours()?>
 									</select>
