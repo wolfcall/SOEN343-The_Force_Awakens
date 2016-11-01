@@ -33,6 +33,18 @@ $lastName = $student->getLastName();
 $program = $student->getProgram();
 $sID = $student->getSID();
 
+
+function getHours(){
+	for($x = 0; $x < 48; $x++){
+	$time = (int)($x/2) . ":";
+	if($x % 2 == 1){
+		$time .= "30";
+	}else{
+		$time .= "00";
+	}
+	echo "<option value = '".$time."'>".$time."</option>";
+	}
+}
 ?>
 
 
@@ -104,7 +116,7 @@ $sID = $student->getSID();
 								+ currentDate.getUTCFullYear();
 
 			document.getElementById("datetoday").innerHTML = todayDate;
-			document.getElementById("datetodayDrop").innerHTML = todayDate;
+			document.getElementById("dateDrop").value = todayDate;
 			/** end of the function, resued in "onSelect" feature of datepicker */
 			
 			$("#datepickerInline").datepicker({
@@ -122,7 +134,7 @@ $sID = $student->getSID();
 								+ pickedDate.getDate() + " "
 								+ pickedDate.getUTCFullYear();
 					document.getElementById("datetoday").innerHTML = todayDate;
-					document.getElementById("datetodayDrop").innerHTML = todayDate;
+					document.getElementById("dateDrop").value = todayDate;
 				}
      		});
   		});
@@ -230,25 +242,12 @@ $sID = $student->getSID();
 										<label>Description of Reservation</label>
 										<textarea rows="4" cols="50" placeholder="Describe the Reservation here..." class="form-control" name="description"></textarea>
 
-									</div
+									</div>
 
 									<!-- Time slots should be inserted here-->
-									<?php
-										function getHours(){
-											for($x = 0; $x < 48; $x++){
-											$time = (int)($x/2) . ":";
-											if($x % 2 == 1){
-												$time .= "30";
-											}else{
-												$time .= "00";
-											}
-											echo "<option value = '".$time."'>".$time."</option>";
-											}
-										}
-									?>
-									<div>
+									<div class="form-group">
 										<label>Date:</label>
-											<input disabled type="text" id = "datetodayDrop"/> &nbsp &nbsp &nbsp
+											<input disabled type="text" id="dateDrop" placeholder = "Nothing" /> &nbsp &nbsp &nbsp
 										<label>Start Time:</label>
 										<select>
 											<?php getHours()?>
@@ -257,7 +256,7 @@ $sID = $student->getSID();
 										<select>
 											<?php getHours()?>
 										</select>
-									</div><br>
+									</div>
 																		
 									<!-- Should be Auto-Populated and Non-Editable-->
 									<div class="form-group">
