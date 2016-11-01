@@ -232,7 +232,7 @@ function getHours(){
 								<h4 style="color:red;">Please enter the specifications for your Reservation</h4>
 							</div>
 							<div class="modal-body">
-								<form id="form">
+								<form id="form" action="Reserve.php" method="post">
 
 									<div class="form-group">
 										<label>Title of Reservation</label>
