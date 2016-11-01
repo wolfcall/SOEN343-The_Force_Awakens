@@ -112,6 +112,8 @@ $sID = $student->getSID();
         		changeMonth: true,
         		changeYear: true,
         		showOn: 'both',
+				minDate: 0,
+				maxDate: new Date(2018, 11, 31),
 				onSelect: function(event) {
 					var pickedDate = $("#datepickerInline").datepicker("getDate");
 					todayDate = dayNames[pickedDate.getDay()] + ", " 
