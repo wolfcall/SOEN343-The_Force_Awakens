@@ -11,6 +11,10 @@ class StudentDomain
     private $program = "";
 	private $sID = "";
 	
+	/*
+		No Default Constructor is Necessary for this class
+	*/
+	
 	/* Get methods for the Student Domain object
 	*/
 	public function getFirstName(){

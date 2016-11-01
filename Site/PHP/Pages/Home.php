@@ -6,12 +6,15 @@ session_start();
 
 include "../Class/Student.php";
 include "../Class/StudentMapper.php";
+include "../Class/RoomMapper.php";
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
 $student = new StudentMapper($email);
 
-$student->updateSID($email, "27454716");
+//Tested - Gives California
+//$room = new RoomMapper(1);
+//$program = $room->getName();
 
 $firstName = $student->getFirstName();
 $lastName = $student->getLastName();

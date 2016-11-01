@@ -12,8 +12,7 @@ class StudentMapper
 {
 	private $studentActive;
 	private $studentData;
-	private $test;
-	
+		
 	/* 
 		Constructors for the Student Mapper object
 	*/
@@ -36,11 +35,7 @@ class StudentMapper
 		
 		closeServerConn($conn);
 	}
-	
-	public function getTest(){
-		return $this->test;
-    }
-	
+
 	/* Set methods for the Student Domain object
 	*/
 	public function setFirstName($first){

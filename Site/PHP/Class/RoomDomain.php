@@ -10,14 +10,9 @@ class RoomDomain
     private $description;
 	private $rID;	
 	
-	/* Default Constructor for the Room Domain object
+	/*
+		No Default Constructor is Necessary for this class
 	*/
-	public function __construct($name, $location, $desc, $rID) {
-		$this->name = $name;
-		$this->location = $location;
-        $this->description = $desc;
-        $this->rID = $rID;
-    }
 	
 	/* Get methods for the Room Domain object
 	*/
@@ -40,7 +35,7 @@ class RoomDomain
 	/* Set methods for the Room Domain object
 	*/
 	public function setName($name){
-		$this->name = $fname;
+		$this->name = $name;
     }
     
     public function setLocation($location){

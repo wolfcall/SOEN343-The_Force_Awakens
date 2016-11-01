@@ -7,11 +7,17 @@ include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
 class StudentTDG
 {
-	/* No insert methods are necessary for this class, as the Student cannot edit the information for any Room
+	/*
+		No Default Constructor is Necessary for this class
+	*/
+		
+	/* 
+		No insert methods are necessary for this class, as the Student cannot edit the information for any Room
 	*/
 
-   /* The Get methods for all Entities in the Student table can be found here
-     */
+    /* 
+		The Get methods for all Entities in the Student table can be found here
+    */
     public function getFirstName($email){
 		
 		$conn = getServerConn();

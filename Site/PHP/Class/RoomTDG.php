@@ -5,15 +5,21 @@ session_start();
 
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
-class roomTDG
+class RoomTDG
 {
-    /* No Set methods are necessary for this class, as the Student cannot edit the information for any Room
+    /*
+		No Default Constructor is Necessary for this class
+	*/
+	/* 
+		No Set methods are necessary for this class, as the Student cannot edit the information for any Room
 	*/
 	
-	/* No insert methods are necessary for this class, as the Student cannot edit the information for any Room
+	/* 
+		No insert/update methods are necessary for this class, as the Student cannot edit the information for any Room
 	*/
 	
-	/* The Get methods for all Entities in the room table can be found here
+	/* 
+		The Get methods for all Entities in the room table can be found here
      */
     public function getName($rID){
 		
