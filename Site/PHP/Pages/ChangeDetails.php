@@ -14,6 +14,18 @@ $newEmail = htmlspecialchars($_POST["newEmail"]);
 
 $student = new StudentMapper($oldEmail);
 
+var_dump($oldPass);	
+echo "<br>";
+var_dump($newPass);		
+echo "<br>";
+var_dump($oldEmail);
+echo "<br>";
+var_dump($newEmail);
+echo "<br>";
+
+
+die();
+
 
 
 header("Location: Home.php");
