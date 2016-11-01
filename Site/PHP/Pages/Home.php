@@ -104,16 +104,10 @@ $sID = $student->getSID();
 								+ currentDate.getUTCFullYear();
 
 			document.getElementById("datetoday").innerHTML = todayDate;
+			document.getElementById("datetodayDrop").innerHTML = todayDate;
 			/** end of the function, resued in "onSelect" feature of datepicker */
 			
-			function getDateStr(){
-				return dayNames[currentDate.getDay()] + ", " 
-								+ monthNames[currentDate.getMonth()] + " " 
-								+ currentDate.getDate() + " "
-								+ currentDate.getUTCFullYear();
-			}
-			
-    		$("#datepickerInline").datepicker({
+			$("#datepickerInline").datepicker({
         	//	buttonImage: '../img/calendar.png',
         	//	buttonImageOnly: true,
         		changeMonth: true,
@@ -128,6 +122,7 @@ $sID = $student->getSID();
 								+ pickedDate.getDate() + " "
 								+ pickedDate.getUTCFullYear();
 					document.getElementById("datetoday").innerHTML = todayDate;
+					document.getElementById("datetodayDrop").innerHTML = todayDate;
 				}
      		});
   		});
@@ -251,37 +246,39 @@ $sID = $student->getSID();
 											}
 										}
 									?>
-
 									<div>
+										<label>Date:</label>
+											<input disabled type="text" id = "datetodayDrop"/> &nbsp &nbsp &nbsp
 										<label>Start Time:</label>
 										<select>
-												<?php getHours()?>
+											<?php getHours()?>
 										</select>
 										<label>End Time:</label>
 										<select>
 											<?php getHours()?>
 										</select>
 									</div><br>
+																		
 									<!-- Should be Auto-Populated and Non-Editable-->
 									<div class="form-group">
 										<label>First Name</label>
-										<input disabled type="text" class="form-control" name="firstname" value = "<?php echo $firstName; ?>">
+										<input disabled type="text" class="form-control" name="firstname" value = "<?php echo $firstName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Last Name</label>
-										<input disabled type="text" class="form-control" name="lastname" value = "<?php echo $lastName; ?>">
+										<input disabled type="text" class="form-control" name="lastname" value = "<?php echo $lastName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
-										<input disabled type="text" class="form-control" name="studentID" value = "<?php echo $sID; ?>">
+										<input disabled type="text" class="form-control" name="studentID" value = "<?php echo $sID; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Program</label>
-										<input disabled type="text" class="form-control" name="program" value = "<?php echo $program; ?>">
+										<input disabled type="text" class="form-control" name="program" value = "<?php echo $program; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Email Address</label>
-										<input disabled type="text" class="form-control" name="email" value = "<?php echo $email; ?>">
+										<input disabled type="text" class="form-control" name="email" value = "<?php echo $email; ?>"/>
 									</div>
 
 									<!-- Requires Back-end connection -->
@@ -306,35 +303,35 @@ $sID = $student->getSID();
 								<form id="form" action="ChangeDetails.php" method="post">
 									<div class="form-group">
 										<label>First Name</label>
-										<input disabled type="text" class="form-control" name="firstname" placeholder="First Name" value = "<?php echo $firstName; ?>">
+										<input disabled type="text" class="form-control" name="firstname" placeholder="First Name" value = "<?php echo $firstName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Last Name</label>
-										<input disabled type="text" class="form-control" name="lastname" placeholder="Last Name" value = "<?php echo $lastName; ?>">
+										<input disabled type="text" class="form-control" name="lastname" placeholder="Last Name" value = "<?php echo $lastName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
-										<input disabled type="text" class="form-control" name="studentID" placeholder="Student ID" value = "<?php echo $sID; ?>">
+										<input disabled type="text" class="form-control" name="studentID" placeholder="Student ID" value = "<?php echo $sID; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Program</label>
-										<input disabled type="text" class="form-control" name="program" placeholder="Program" value = "<?php echo $program; ?>">
+										<input disabled type="text" class="form-control" name="program" placeholder="Program" value = "<?php echo $program; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Old Password</label>
-										<input type="password" class="form-control" name="oldPass" placeholder="Old Password">
+										<input type="password" class="form-control" name="oldPass" placeholder="Old Password"/>
 									</div>
 									<div class="form-group">
 										<label>New Password</label>
-										<input type="password" class="form-control" name="newPass" placeholder="New Password">
+										<input type="password" class="form-control" name="newPass" placeholder="New Password"/>
 									</div>
 									<div class="form-group">
 										<label>Current Email Address</label>
-										<input disabled type="text" class="form-control" name="oldEmail" placeholder="Email Address" value = "<?php echo $email; ?>">
+										<input disabled type="text" class="form-control" name="oldEmail" placeholder="Email Address" value = "<?php echo $email; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>New Email Address</label>
-										<input type="text" class="form-control" name="newEmail" placeholder="Email Address">
+										<input type="text" class="form-control" name="newEmail" placeholder="Email Address"/>
 									</div>
 
 									<!-- Requires Back-end connection -->
