@@ -23,7 +23,7 @@ class WaitlistDomain
 	
 	/* Get methods for the Room Domain object
 	*/
-	public function getwID(){
+	public function getWID(){
 		return $this->wID;
     }
     
@@ -65,3 +65,4 @@ class WaitlistDomain
         $this->endTimeDate = $end;
     }
 }
+?>

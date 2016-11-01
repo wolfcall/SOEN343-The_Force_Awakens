@@ -13,7 +13,7 @@ class ReservationMapper
 	private $reservationActive;
 	private $reservationData;
 		
-	public function __construct($reID) {
+	public function __construct() {
 
 		$this->reservationActive = new ReservationDomain();
 		$this->reservationData = new ReservationTDG();

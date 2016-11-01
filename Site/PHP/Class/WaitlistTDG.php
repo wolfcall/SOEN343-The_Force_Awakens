@@ -5,7 +5,7 @@ session_start();
 
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
-class waitlistTDG
+class WaitlistTDG
 {
 	/* All times should be in the following format : STR_TO_DATE('10/24/11 10:00 PM','%m/%d/%Y %h:%i %p').
 	*/
@@ -17,7 +17,7 @@ class waitlistTDG
 		$conn = getServerConn();
 		
 		$sql = "INSERT INTO waitlist (studentID, roomID, startTimeDate, endTimeDate) " +
-		"Values ('".$sID."','".$rID."','".$start."','".$end."'";
+		"Values ('".$sID."','".$rID."','".$start."','".$end."')";
 		
 		$result = $conn->query($sql);
 				
@@ -84,8 +84,7 @@ class waitlistTDG
 		
 		closeServerConn($conn);
 		return $row["endTimeDate"];
-    }
-	
+    }	
 	
 	/* The Update methods for all Entities in the waitlist table can be found here
      */
@@ -139,3 +138,4 @@ class waitlistTDG
 		closeServerConn($conn);
     }
 }
+?>

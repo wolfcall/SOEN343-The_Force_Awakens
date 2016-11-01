@@ -5,79 +5,92 @@ session_start();
 
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
-include_once dirname(__FILE__).'StudentDomain.php';
-include_once dirname(__FILE__).'StudentTDG.php';
+include "WaitlistDomain.php";
+include "WaitlistTDG.php";
 
-class StudentMapper
+class WaitlistMapper
 {
-	student = new StudentDomain();
-    studentData = new StudentTDG();
-	
-	/* Constructors for the Student Mapper object
-	
-	public function __construct($email) {
+	private $waitlistActive;
+	private $waitlistData;
+		
+	public function __construct(){
+		$this->waitlistActive = new WaitlistDomain();
+		$this->waitlistData = new WaitlistTDG();
+	}	
 
-		$conn = getServerConn();
+	public function addWaitlist($sID, $rID, $start, $end){
+		$this->waitlistData->addWaitlist($sID, $rID, $start, $end);
+    }	
 		
-		$sql = "SELECT * FROM student WHERE email ='".$this->getEmailAddress()."'";
-		$result = $conn->query($sql);
-		$row = $result->fetch_assoc();
-		
-		$student->setFirstName($row["firstName"]);
-		$student->setLastName($row["lastName"]);
-		$student->setEmailAddress($row["email"]);
-		$student->setProgram($row["program"]);
-		$student->setSID($row["studentID"]);
-		
-		closeServerConn($conn);
-	}
+	/* Set methods for the Reservation Domain object
 	*/
-	/* Get methods for the Student Domain object
-	*/
-	public function getFirstName(){
-		return $student->getFirstName();
+	public function setWID($wID){
+		$this->waitlistActive->setWID($wID);
     }
     
-    public function getLastName(){
-		return $student->getLastName();
+    public function setSID($sID) {
+        $this->waitlistActive->setSID($sID);
     }
     
-    public function getEmailAddress() {
-        return $studnet->getEmailAddress();
-    }
-    
-    public function getProgram() {
-        return $student->getProgram();
+    public function setRID($rID) {
+        $this->waitlistActive->setRID($rID);
     }
 	
-	public function getSID() {
-        return $student->getSID();
+	public function setStartTimeDate($start) {
+        $this->waitlistActive->setStartTimeDate($start);
+    }	
+	
+	public function setEndTimeDate($end) {
+        $this->waitlistActive->setEndTimeDate($end);
     }
 	
-	/* Set methods for the Student Domain object
+	/* Get methods for the Reservation Domain object
 	*/
-	public function setFirstName($email, $first){
-		$studentData->updateFirstName($email, $first);
-		$student->setFirstName($first);
+	public function getWID(){
+		return $this->waitlistActive->getWID();
     }
     
-    public function setLastName($last){
-		$studentData->updateFirstName($email, $last);
-		$student->setLastName($last);
+    public function getSID() {
+        return $this->waitlistActive->getSID();
     }
     
-    public function setEmailAddress($email, $new) {
-        $studentData->updateEmailAddress($email, $new);
-		$student->setEmailAddress($new);
-    }
-    
-    public function setProgram($email, $program) {
-        $studentData->updateProgram($email,$program);
-		$student->setProgram($program);
+    public function getRID() {
+        return $this->waitlistActive->getRID();
     }
 	
-	public function setSID($email, $sID) {
-        $studentData->updateSID($email, $sID);
-		$student->setSID($sID);
+	public function getStartTimeDate() {
+        return $this->waitlistActive->getStartTimeDate();
+    }	
+	
+	public function getEndTimeDate() {
+        return $this->waitlistActive->getEndTimeDate();
+    }
+	
+	/*	Update methods for the Reservation TDG and Domain objects
+	*/
+	public function updateWailistID($wID, $new){
+		$this->waitlistData->updateWaitlistID($wID, $new);
+		$this->waitlistActive->setREID($new);
+    }
+	
+	public function updateStudentID($reID, $sID){
+		$this->waitlistData->updateStudentID($reID, $sID);
+		$this->waitlistActive->setSID($sID);
+    }
+	
+	public function updateRoomID($reID, $rID){
+		$this->waitlistData->updateRoomID($reID, $rID);
+		$this->waitlistActive->setRID($rID);
+    }
+	
+	public function updateStart($reID, $start){
+		$this->waitlistData->updateStart($reID, $start);
+		$this->waitlistActive->setStartTimeDate($start);
+    }
+	
+	public function updateEnd($reID, $end){
+		$this->waitlistData->updateEnd($reID, $end);
+		$this->waitlistActive->setEndTimeDate($end);
     }
 }
+?>

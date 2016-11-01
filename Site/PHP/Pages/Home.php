@@ -8,13 +8,18 @@ include "../Class/Student.php";
 include "../Class/StudentMapper.php";
 include "../Class/RoomMapper.php";
 include "../Class/ReservationMapper.php";
+include "../Class/WaitlistMapper.php";
+
+
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
 $student = new StudentMapper($email);
 $reserve = new ReservationMapper();
+$waitlist = new WaitlistMapper();
 
 //$reserve->addReservation(1,1,1, , ,"Test", "InnerTest");
+//$waitlist->addWaitlist(1,1,1, , );
 
 //Tested - Gives California
 //$room = new RoomMapper(1);
