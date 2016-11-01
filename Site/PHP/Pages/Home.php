@@ -15,11 +15,14 @@ include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
 $student = new StudentMapper($email);
-$reserve = new ReservationMapper();
-$waitlist = new WaitlistMapper();
+//$reserve = new ReservationMapper();
+//$waitlist = new WaitlistMapper();
 
-//$reserve->addReservation(1,1,1, , ,"Test", "InnerTest");
-//$waitlist->addWaitlist(1,1,1, , );
+//Tested - Successfully added
+//$reserve->addReservation(1,1,"10/24/2011 10:00 PM","10/24/2011 11:00 PM","Test", "InnerTest");
+
+//Tested - Successfully added 
+//$waitlist->addWaitlist(1,1,"10/24/2011 10:00 PM","10/24/2011 11:00 PM");
 
 //Tested - Gives California
 //$room = new RoomMapper(1);

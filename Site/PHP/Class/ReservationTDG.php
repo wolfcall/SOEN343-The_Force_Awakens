@@ -9,8 +9,9 @@ class ReservationTDG
 {
     /* All times should be in the following format : STR_TO_DATE('10/24/11 10:00 PM','%m/%d/%Y %h:%i %p').
 	 * 
-	 * STR_TO_DATED('".date('m/j/Y g:i' , $start)."', '%m/%d/%Y %h:%i %p')
-	 * STR_TO_DATED('".date('m/j/Y g:i' , $end)."', '%m/%d/%Y %h:%i %p')
+	 * STR_TO_DATE('".$start."', '%m/%d/%Y %h:%i %p')
+	 * STR_TO_DATE('".$end."', '%m/%d/%Y %h:%i %p')
+	 * 
 	*/
 	
 	/* The Insert method to add a new reservation into the reservation table
@@ -19,12 +20,15 @@ class ReservationTDG
 	{
 		$conn = getServerConn();
 		
-		$sql = "INSERT INTO reservation (studentID, roomID, startTimeDate, endTimeDate, title, description) " +
-		"Values ('".$sID."','".$rID."','".$start."','".$end."','".$title."','".$desc."'";
+		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %h:%i %p')";
+		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %h:%i %p')";
+		
+		$sql = "INSERT INTO reservation (studentID, roomID, startTimeDate, endTimeDate, title, description) 
+			Values ('".$sID."','".$rID."',".$startTrans.",".$endTrans.",'".$title."','".$desc."')";
 		
 		$result = $conn->query($sql);
-				
-		closeServerConn($conn);				
+		
+		closeServerConn($conn);		
 	}
 			
 	/* The Get methods for all Entities in the reservation table can be found here
