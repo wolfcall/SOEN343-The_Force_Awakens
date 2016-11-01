@@ -231,8 +231,26 @@ $sID = $student->getSID();
 									</div>
 
 									<!-- Time slots should be inserted here-->
-
-
+									
+									<?php
+										function getHours(){
+											for($x = 0; $x < 48; $x++){
+											$time = (int)($x/2) . ":";
+											if($x % 2 == 1){
+												$time .= "30";
+											}else{
+												$time .= "00";
+											}
+											echo "<option value = '".$time."'>".$time."</option>";
+											}
+										}
+									?>
+									<select>
+										<?php getHours()?>
+									</select>
+									<select>
+										<?php getHours()?>
+									</select>
 									<!-- Should be Auto-Populated and Non-Editable-->
 									<div class="form-group">
 										<label>First Name</label>
