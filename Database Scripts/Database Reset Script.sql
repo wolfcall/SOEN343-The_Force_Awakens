@@ -89,7 +89,7 @@ DROP TABLE IF EXISTS `soen343`.`waitlist` ;
 
 CREATE TABLE IF NOT EXISTS `soen343`.`waitlist` (
   `roomID` INT(11) NOT NULL,
-  `waitlistID` INT(11) NOT NULL,
+  `waitlistID` INT(11) NOT NULL AUTO_INCREMENT,
   `startTimeDate` DATETIME NOT NULL,
   `endTimeDate` DATETIME NOT NULL,
   `studentID` INT(11) NOT NULL,
@@ -115,21 +115,21 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Georges','Mathieu',password('pass123'),'gm@email.com', 'SOEN');
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Stephano','Pace',password('pass123'),'sp@email.com', 'SOEN');
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Olivier','C',password('pass123'),'oc@email.com', 'SOEN');
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Nicholas','Burdet',password('pass123'),'nb@email.com', 'SOEN');
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Joey','T',password('pass123'),'jt@email.com', 'SOEN');
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Julien','P',password('pass123'),'jp@email.com', 'SOEN');
-Insert into `soen343`.`Student` (FirstName, LastName, `password`, email, program) values ('Adam','Acaro',password('123'),'aa@email.com', 'SOEN');
+Insert into `soen343`.`Student` (studentID, FirstName, LastName, `password`, email, program) values (26863477,'Georges','Mathieu',password('pass123'),'gm@email.com', 'Software Engineering');
+Insert into `soen343`.`Student` (studentID, FirstName, LastName, `password`, email, program) values (27454716,'Stefano','Pace',password('pass123'),'sp@email.com', 'Software Engineering');
+Insert into `soen343`.`Student` (studentID, FirstName, LastName, `password`, email, program) values (27228805,'Olivier','Cameron-Chevrier',password('pass123'),'oc@email.com', 'Software Engineering');
+Insert into `soen343`.`Student` (studentID, FirstName, LastName, `password`, email, program) values (29613773,'Nicholas','Burdet',password('pass123'),'nb@email.com', 'Software Engineering');
+Insert into `soen343`.`Student` (studentID, FirstName, LastName, `password`, email, program) values (27513062,'Joey','Tedeschi',password('pass123'),'jt@email.com', 'Software Engineering');
+Insert into `soen343`.`Student` (studentID, FirstName, LastName, `password`, email, program) values (27419112,'Julian','Ippolito',password('pass123'),'jp@email.com', 'Software Engineering');
+Insert into `soen343`.`Student` (studentID, FirstName, LastName, `password`, email, program) values (27459157,'Adam','Trudeau-Acaro',password('123'),'aa@email.com', 'Software Engineering');
 
-Insert into `soen343`.`room` (name, location) values ('California', 'H9327');
-Insert into `soen343`.`room` (name, location) values ('Hawaii', 'H9337');
-Insert into `soen343`.`room` (name, location) values ('Iowa', 'H9323');
-Insert into `soen343`.`room` (name, location) values ('Florida', 'H9345');
-Insert into `soen343`.`room` (name, location) values ('Navada', 'H9822');
-Insert into `soen343`.`room` (name, location) values ('New Mexico', 'H9312');
-Insert into `soen343`.`room` (name, location) values ('New York', 'H9145');
-Insert into `soen343`.`room` (name, location) values ('Texas', 'H9311');
-Insert into `soen343`.`room` (name, location) values ('Oklahoma', 'H9312');
-Insert into `soen343`.`room` (name, location) values ('Maine', 'H9329');
+Insert into `soen343`.`room` (name, location, description) values ('California', 'H9327', 'Beautiful');
+Insert into `soen343`.`room` (name, location, description) values ('Hawaii', 'H9337', 'Beautiful');
+Insert into `soen343`.`room` (name, location, description) values ('Iowa', 'H9323', 'Beautiful');
+Insert into `soen343`.`room` (name, location, description) values ('Florida', 'H9345', 'Beautiful');
+Insert into `soen343`.`room` (name, location, description) values ('Navada', 'H9822', 'Beautiful');
+Insert into `soen343`.`room` (name, location, description) values ('New Mexico', 'H9312', 'Beautiful');
+Insert into `soen343`.`room` (name, location, description) values ('New York', 'H9145', 'Beautiful');
+Insert into `soen343`.`room` (name, location, description) values ('Texas', 'H9311', 'Beautiful');
+Insert into `soen343`.`room` (name, location, description) values ('Oklahoma', 'H9312', 'Beautiful');
+Insert into `soen343`.`room` (name, location, description) values ('Maine', 'H9329', 'Beautiful');
