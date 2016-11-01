@@ -7,10 +7,14 @@ session_start();
 include "../Class/Student.php";
 include "../Class/StudentMapper.php";
 include "../Class/RoomMapper.php";
+include "../Class/ReservationMapper.php";
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
 $student = new StudentMapper($email);
+$reserve = new ReservationMapper();
+
+//$reserve->addReservation(1,1,1, , ,"Test", "InnerTest");
 
 //Tested - Gives California
 //$room = new RoomMapper(1);

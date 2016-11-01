@@ -80,7 +80,7 @@ class StudentMapper
         return $this->studentActive->getSID();
     }
 		
-	/*	Update methods for the Student TDG object
+	/*	Update methods for the Student TDG and Domain objects
 	*/
 	public function updateFirstName($email, $first){
 		$this->studentData->updateFirstName($email, $first);
