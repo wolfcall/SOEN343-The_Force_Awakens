@@ -269,7 +269,7 @@ $sID = $student->getSID();
 								<h4 style="color:red;">Edit any of your profile info!</h4>
 							</div>
 							<div class="modal-body">
-								<form id="form" action="changeDetails.php" method="post">
+								<form id="form" action="ChangeDetails.php" method="post">
 									<div class="form-group">
 										<label>First Name</label>
 										<input disabled type="text" class="form-control" name="firstname" placeholder="First Name" value = "<?php echo $firstName; ?>">
