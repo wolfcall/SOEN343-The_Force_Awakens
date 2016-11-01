@@ -19,32 +19,6 @@ class ReservationMapper
 		$this->reservationData = new ReservationTDG();
 	}	
 	
-	/* 
-		Constructors for the Student Mapper object
-	
-	
-	public function __construct($reID) {
-
-		$this->reservationActive = new ReservationDomain();
-		$this->reservationData = new ReservationTDG();
-		
-		$conn = getServerConn();
-						
-		$sql = "SELECT * FROM reservation WHERE reservationID ='".$reID."'";
-		$result = $conn->query($sql);
-		$row = $result->fetch_assoc();
-				
-		$this->setFirstName($row["firstName"]);
-		$this->setLastName($row["lastName"]);
-		$this->setEmailAddress($row["email"]);
-		$this->setProgram($row["program"]);
-		$this->setSID($row["studentID"]);
-		
-		closeServerConn($conn);
-	}
-	
-	*/
-
 	public function addReservation($sID, $rID, $start, $end, $title, $desc){
 		$this->reservationData->addReservation($sID, $rID, $start, $end, $title, $desc);
     }	

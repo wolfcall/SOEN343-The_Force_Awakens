@@ -236,7 +236,7 @@ function getHours(){
 
 									<div class="form-group">
 										<label>Title of Reservation</label>
-										<input type="text" class="form-control" name="title" placeholder="Enter a Title">
+										<input type="text" class="form-control" placeholder="Enter a Title"  name="title" >
 									</div>
 									<div class="form-group">
 										<label>Description of Reservation</label>
@@ -246,26 +246,34 @@ function getHours(){
 
 									<!-- Time slots should be inserted here-->
 									<div class="form-group">
-										<label>Date:</label>
-											<input disabled type="text" id="dateDrop" placeholder = "Nothing" /> &nbsp &nbsp &nbsp
 										<label>Start Time:</label>
-										<select>
-											<?php getHours()?>
-										</select>
+											<select name = "startTime">
+												<?php getHours()?>
+											</select>
 										<label>End Time:</label>
-										<select>
-											<?php getHours()?>
-										</select>
+											<select name = "endTime">
+												<?php getHours()?>
+											</select>
+										<label>Room Number:</label>
+											<select name = "roomNum">
+												<option>Room 1 </option>
+												<option>Room 2 </option>
+												<option>Room 3 </option>
+												<option>Room 4 </option>
+												<option>Room 5 </option>
+											</select>
+											<label>Date:</label>
+											<input disabled type="text" class="form-control" name = "dateDrop" id="dateDrop" placeholder = "Nothing" />
 									</div>
 																		
 									<!-- Should be Auto-Populated and Non-Editable-->
 									<div class="form-group">
 										<label>First Name</label>
-										<input disabled type="text" class="form-control" name="firstname" value = "<?php echo $firstName; ?>"/>
+										<input disabled type="text" class="form-control" name="firstName" value = "<?php echo $firstName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Last Name</label>
-										<input disabled type="text" class="form-control" name="lastname" value = "<?php echo $lastName; ?>"/>
+										<input disabled type="text" class="form-control" name="lastName" value = "<?php echo $lastName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
@@ -302,11 +310,11 @@ function getHours(){
 								<form id="form" action="ChangeDetails.php" method="post">
 									<div class="form-group">
 										<label>First Name</label>
-										<input disabled type="text" class="form-control" name="firstname" placeholder="First Name" value = "<?php echo $firstName; ?>"/>
+										<input disabled type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Last Name</label>
-										<input disabled type="text" class="form-control" name="lastname" placeholder="Last Name" value = "<?php echo $lastName; ?>"/>
+										<input disabled type="text" class="form-control" name="lastName" placeholder="Last Name" value = "<?php echo $lastName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
