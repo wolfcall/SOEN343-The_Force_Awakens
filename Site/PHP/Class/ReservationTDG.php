@@ -33,16 +33,22 @@ class ReservationTDG
 			
 	/* The Get methods for all Entities in the reservation table can be found here
      */
-    public function getReservationID($reID){
+    public function getREID($sID){
 		
 		$conn = getServerConn();
 		
-		$sql = "SELECT reservationID FROM reservation WHERE reservationID ='".reID."'";
+		$sql = "SELECT reservationID FROM reservation WHERE studentID ='".$sID."'";
 		$result = $conn->query($sql);
-		$row = $result->fetch_assoc();
 		
+		$num = array();
+		while($row = $result->fetch_assoc())
+		{
+			array_push($num, $row["reservationID"]);
+		}
+				
 		closeServerConn($conn);
-		return $row["reservationID"];
+		
+		return $num;
     }
     
     public function getStudentID($reID){

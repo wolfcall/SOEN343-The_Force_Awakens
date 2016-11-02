@@ -15,7 +15,7 @@ include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
 $student = new StudentMapper($email);
-//$reserve = new ReservationMapper();
+$reserve = new ReservationMapper();
 //$waitlist = new WaitlistMapper();
 
 //Tested - Successfully added
@@ -33,6 +33,11 @@ $lastName = $student->getLastName();
 $program = $student->getProgram();
 $sID = $student->getSID();
 
+$test = $reserve->getREID($sID);
+
+var_dump($test);
+//var_dump($test["reservationID"]);
+die();
 
 function getHours(){
 	for($x = 0; $x < 48; $x++){

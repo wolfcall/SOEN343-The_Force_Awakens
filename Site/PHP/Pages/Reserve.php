@@ -28,6 +28,9 @@ $student = new StudentMapper($email);
 $room = new RoomMapper($rID);
 $reservation = new ReservationMapper();
 
+/*
+*	Must Consider the case of a reservation of 30 mins!!!
+*/
 if ( ($end-$start) > 3)
 {
 	echo "<script type='text/javascript'>alert('$tooLong');

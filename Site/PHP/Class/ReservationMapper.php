@@ -17,12 +17,13 @@ class ReservationMapper
 
 		$this->reservationActive = new ReservationDomain();
 		$this->reservationData = new ReservationTDG();
-	}	
+	}
+	
 	
 	public function addReservation($sID, $rID, $start, $end, $title, $desc){
 		$this->reservationData->addReservation($sID, $rID, $start, $end, $title, $desc);
     }	
-		
+	
 	/* Set methods for the Reservation Domain object
 	*/
 	public function setREID($reID){
@@ -55,31 +56,35 @@ class ReservationMapper
 	
 	/* Get methods for the Reservation Domain object
 	*/
-	public function getREID(){
-		return $this->reservationActive->getREID();
+	
+	/*	The REID takes the sID as a parameter so it can find the appropriate information of the student's reservation
+	*	Only get from the database
+	*/
+	public function getREID($sID){
+		return $this->reservationData->getREID($sID);
     }
     
-    public function getSID() {
+    public function getSID($reID) {
         return $this->reservationActive->getSID();
     }
     
-    public function getRID() {
+    public function getRID($reID) {
         return $this->reservationActive->getRID();
     }
 	
-	public function getStartTimeDate() {
+	public function getStartTimeDate($reID) {
         return $this->reservationActive->getStartTimeDate();
     }	
 	
-	public function getEndTimeDate() {
+	public function getEndTimeDate($reID) {
         return $this->reservationActive->getEndTimeDate();
     }
 	
-	public function getTitle() {
+	public function getTitle($reID) {
         return $this->reservationActive->getTitle();
     }
 	
-	public function getDescription() {
+	public function getDescription($reID) {
         return $this->reservationActive->getDescription();
     }
 	
