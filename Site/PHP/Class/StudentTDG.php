@@ -116,7 +116,7 @@ class StudentTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "Update student SET email ='".$new."' WHERE email ='".$email."'";
+		$sql = "Update student SET email ='".$new."' WHERE email ='".$email."' ";
 		$result = $conn->query($sql);
 		
 		closeServerConn($conn);
@@ -152,6 +152,7 @@ class StudentTDG
 		
         $sql = "Update student SET password = password('".$newPass."') WHERE email ='".$email."' AND password = password('".$oldPass."')";
 		$result = $conn->query($sql);
+		
 		closeServerConn($conn);
     }
 }
