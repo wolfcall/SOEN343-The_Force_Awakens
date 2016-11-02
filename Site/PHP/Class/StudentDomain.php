@@ -58,5 +58,9 @@ class StudentDomain
 	public function setSID($sID) {
         $this->sID = $sID;
     }
+    
+    public function setPassword($password) {
+        $this->password = $password;
+    }
 }
 ?>

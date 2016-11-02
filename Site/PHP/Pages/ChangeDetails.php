@@ -14,7 +14,7 @@ $newEmail = htmlspecialchars($_POST["newEmail"]);
 
 $student = new StudentMapper($oldEmail);
 
-
+$student->updatePassword($oldEmail, $oldPass, $newPass);
 
 header("Location: Home.php");
 ?>

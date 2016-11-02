@@ -146,21 +146,12 @@ class StudentTDG
 		Should be called by a changedetails.php file
 		Should validate previous password to set new one
 	*/
-	public function updatePassword($email, $pass){
+	public function updatePassword($email, $oldPass, $newPass) {
 		
 		$conn = getServerConn();
 		
-		$sql = "SELECT * FROM student WHERE ='".$this->getEmailAddress()."' AND password = password('".$old."')";
-		
-		//$sql = "SELECT * FROM student WHERE email ='".$this->getEmailAddress()."'";
+        $sql = "Update student SET password = password('".$newPass."') WHERE email ='".$email."' AND password = password('".$oldPass."')";
 		$result = $conn->query($sql);
-		$row = $result->fetch_assoc();
-		
-		$temp = $row["email"];
-		//$temp = $row["password"];
-		
-		return $temp;
-		
 		closeServerConn($conn);
     }
 }

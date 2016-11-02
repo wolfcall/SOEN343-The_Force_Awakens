@@ -106,5 +106,9 @@ class StudentMapper
         $this->studentData->updateSID($email, $sID);
 		$this->setSID($sID);
     }
+    
+    public function updatePassword($email, $oldPass, $newPass) {
+        $this->studentData->updatePassword($email, $oldPass, $newPass);
+    }
 }
 ?>
