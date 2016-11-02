@@ -247,7 +247,7 @@ function getHours(){
 									<!-- Time slots should be inserted here-->
 									<div class="form-group">
 										<label>Date:</label>
-										<input disabled type="text" class="form-control" name = "dateDrop" id="dateDrop" placeholder = "Nothing" />
+										<input readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" placeholder = "Nothing" />
 										<br>										
 										<label>Start Time:</label> 
 											<select name = "startTime">
@@ -270,26 +270,25 @@ function getHours(){
 									<!-- Should be Auto-Populated and Non-Editable-->
 									<div class="form-group">
 										<label>First Name</label>
-										<input disabled type="text" class="form-control" name="firstName" value = "<?php echo $firstName; ?>"/>
+										<input readonly="readonly" type="text" class="form-control" name="firstName" value = "<?php echo $firstName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Last Name</label>
-										<input disabled type="text" class="form-control" name="lastName" value = "<?php echo $lastName; ?>"/>
+										<input readonly="readonly" type="text" class="form-control" name="lastName" value = "<?php echo $lastName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
-										<input disabled type="text" class="form-control" name="studentID" value = "<?php echo $sID; ?>"/>
+										<input readonly="readonly" type="text" class="form-control" name="studentID" value = "<?php echo $sID; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Program</label>
-										<input disabled type="text" class="form-control" name="program" value = "<?php echo $program; ?>"/>
+										<input readonly="readonly" type="text" class="form-control" name="program" value = "<?php echo $program; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Email Address</label>
-										<input disabled type="text" class="form-control" name="email" value = "<?php echo $email; ?>"/>
+										<input readonly="readonly" type="text" class="form-control" name="email" value = "<?php echo $email; ?>"/>
 									</div>
 
-									<!-- Requires Back-end connection -->
 									<button type="submit" class="btn btn-default btn-success btn-block">Submit</button>
 
 								</form>
@@ -311,19 +310,19 @@ function getHours(){
 								<form id="form" action="ChangeDetails.php" method="post">
 									<div class="form-group">
 										<label>First Name</label>
-										<input disabled type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName; ?>"/>
+										<input readonly="readonly" type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Last Name</label>
-										<input disabled type="text" class="form-control" name="lastName" placeholder="Last Name" value = "<?php echo $lastName; ?>"/>
+										<input readonly="readonly" type="text" class="form-control" name="lastName" placeholder="Last Name" value = "<?php echo $lastName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
-										<input disabled type="text" class="form-control" name="studentID" placeholder="Student ID" value = "<?php echo $sID; ?>"/>
+										<input readonly="readonly" type="text" class="form-control" name="studentID" placeholder="Student ID" value = "<?php echo $sID; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Program</label>
-										<input disabled type="text" class="form-control" name="program" placeholder="Program" value = "<?php echo $program; ?>"/>
+										<input readonly="readonly" type="text" class="form-control" name="program" placeholder="Program" value = "<?php echo $program; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Old Password</label>
@@ -335,14 +334,13 @@ function getHours(){
 									</div>
 									<div class="form-group">
 										<label>Current Email Address</label>
-										<input disabled type="text" class="form-control" name="oldEmail" placeholder="Email Address" value = "<?php echo $email; ?>"/>
+										<input readonly="readonly" type="text" class="form-control" name="oldEmail" placeholder="Email Address" value = "<?php echo $email; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>New Email Address</label>
 										<input type="text" class="form-control" name="newEmail" placeholder="Email Address"/>
 									</div>
 
-									<!-- Requires Back-end connection -->
 									<button type="submit" class="btn btn-default btn-success btn-block">Submit</button>
 
 								</form>
