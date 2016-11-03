@@ -30,6 +30,7 @@ $(document).ready(function() {
 								+ pickedDate.getUTCFullYear();
 					document.getElementById("datetoday").innerHTML = todayDate;
 					document.getElementById("dateDrop").value = todayDate;
+                    return false;
 				}
      		});
   		});
@@ -43,12 +44,14 @@ $(document).ready(function() {
 		$(document).ready(function(){
 			$(".slot").click(function(){
 				$("#myModal").modal();
+                return false;
 			});
 		});
 	
 		$(document).ready(function(){
 			$("#second-r").click(function(){
 				$("#profilemyModal").modal();
+                return false;
 			});
 		});
 	
