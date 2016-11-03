@@ -35,9 +35,9 @@ $sID = $student->getSID();
 
 $test = $reserve->getREID($sID);
 
-var_dump($test);
+//var_dump($test);
 //var_dump($test["reservationID"]);
-die();
+//die();
 
 function getHours(){
 	for($x = 0; $x < 48; $x++){
