@@ -19,7 +19,7 @@ $student = new StudentMapper($oldEmail);
 
 if(empty($newEmail))
 {
-	header("Location: Home.php");
+	$newEmail = $oldEmail;
 }
 else
 {
