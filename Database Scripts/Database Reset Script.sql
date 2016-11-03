@@ -88,11 +88,13 @@ COMMENT = 'Room reservations will be stored here\nWill be associated to the ID o
 DROP TABLE IF EXISTS `soen343`.`waitlist` ;
 
 CREATE TABLE IF NOT EXISTS `soen343`.`waitlist` (
-  `roomID` INT(11) NOT NULL,
   `waitlistID` INT(11) NOT NULL AUTO_INCREMENT,
+  `studentID` INT(11) NOT NULL,
+  `roomID` INT(11) NOT NULL,
   `startTimeDate` DATETIME NOT NULL,
   `endTimeDate` DATETIME NOT NULL,
-  `studentID` INT(11) NOT NULL,
+  `title` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`waitlistID`),
   INDEX `fk_waitlist_room1_idx` (`roomID` ASC),
   INDEX `fk_waitlist_student1_idx` (`studentID` ASC),
@@ -133,3 +135,11 @@ Insert into `soen343`.`room` (name, location, description) values ('New York', '
 Insert into `soen343`.`room` (name, location, description) values ('Texas', 'H9311', 'Beautiful');
 Insert into `soen343`.`room` (name, location, description) values ('Oklahoma', 'H9312', 'Beautiful');
 Insert into `soen343`.`room` (name, location, description) values ('Maine', 'H9329', 'Beautiful');
+
+Insert into `soen343`.`reservation` (studentID, roomId, startTimeDate, endTimeDate, title, description)
+	values (26863477, 1, STR_TO_DATE('17/3/2016 13:00:00', '%e/%c/%Y %T'), str_to_date('17/3/2016 15:00:00', '%e/%c/%Y %T'), ';lkhdsa','dodoahohj');
+Insert into `soen343`.`waitlist` (studentID, roomId, startTimeDate, endTimeDate, title, description)
+	values (26863477, 1, STR_TO_DATE('17/3/2016 13:00:00', '%e/%c/%Y %T'), str_to_date('17/3/2016 15:00:00', '%e/%c/%Y %T'), ';09886','794179');
+    
+Delete from reservation
+where reservationID = 3;
