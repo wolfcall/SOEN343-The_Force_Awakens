@@ -30,7 +30,28 @@ class ReservationTDG
 		
 		closeServerConn($conn);		
 	}
-			
+	
+	/*
+	*	The Check method will take the Original start time and end time of the reservation as well as the room ID
+	*	It will check check all 30 minute increments between the start and end times of the game
+	*	Select time(startTimeDate) as time, date(startTimeDate) as date from reservation; 
+	*	Allows us to seperate the time from the date
+	
+	public function checkAvailabilities($start, $end, $rID)
+	{
+		$conn = getServerConn();
+		
+		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %h:%i %p')";
+		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %h:%i %p')";
+				
+		$sql = "SELECT time(startTimeDate) as time, date(startTimeDate) as date FROM reservation WHERE roomID ='".$rID."'";
+		
+		$result = $conn->query($sql);
+		
+		closeServerConn($conn);		
+	}
+	*/
+				
 	/* The Get methods for all Entities in the reservation table can be found here
      */
     public function getREID($sID){
@@ -160,7 +181,9 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "Update reservation SET startTimeDate ='".$start."' WHERE reservationID ='".reID."'";
+		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %h:%i %p')";
+		
+		$sql = "Update reservation SET startTimeDate ='".$startTrans."' WHERE reservationID ='".reID."'";
 		$result = $conn->query($sql);
 		
 		closeServerConn($conn);
@@ -170,7 +193,9 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "Update reservation SET endTimeDate ='".$end."' WHERE reservationID ='".reID."'";
+		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %h:%i %p')";
+		
+		$sql = "Update reservation SET endTimeDate ='".$endTrans."' WHERE reservationID ='".reID."'";
 		$result = $conn->query($sql);
 		
 		closeServerConn($conn);
