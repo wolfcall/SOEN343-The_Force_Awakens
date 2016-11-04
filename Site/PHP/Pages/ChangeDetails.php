@@ -37,6 +37,6 @@ else
 	$student->updatePassword($oldEmail, $oldPass, $newPass);
 	$_SESSION["email"] = $newEmail;
 	header("Location: Home.php");	
-}
+} 
 
 ?>

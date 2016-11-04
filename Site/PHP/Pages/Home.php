@@ -239,7 +239,7 @@ function getHours(){
 								<h4 style="color:red;">Edit any of your profile info!</h4>
 							</div>
 							<div class="modal-body">
-								<form id="form" action="ChangeDetails.php" method="post">
+								<form id="form" name = "profileForm" action="ChangeDetails.php" method="post">
 									<div class="form-group">
 										<label>First Name</label>
 										<input readonly="readonly" type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName; ?>"/>
