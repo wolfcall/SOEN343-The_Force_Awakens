@@ -53,6 +53,7 @@ function getHours(){
 
 $userMSG = $_SESSION["userMSG"] ;
 
+session_destroy();
 
 ?>
 <html lang="en">
