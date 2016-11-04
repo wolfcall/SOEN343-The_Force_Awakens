@@ -30,20 +30,12 @@ class StudentMapper
 		{
 			$this->studentActive = new StudentDomain();
 			$this->studentData = new StudentTDG();
-			
-			$conn = getServerConn();
-							
-			$sql = "SELECT * FROM student WHERE email ='".$email."'";
-			$result = $conn->query($sql);
-			$row = $result->fetch_assoc();
-					
-			$this->setFirstName($row["firstName"]);
-			$this->setLastName($row["lastName"]);
-			$this->setEmailAddress($row["email"]);
-			$this->setProgram($row["program"]);
-			$this->setSID($row["studentID"]);
-			
-			closeServerConn($conn);
+		
+			$this->setFirstName($this->studentData->getFirstName($email));
+			$this->setLastName($this->studentData->getLastName($email));
+			$this->setEmailAddress($email);
+			$this->setProgram($this->studentData->getProgram($email));
+			$this->setSID($this->studentData->getSID($email));			
 		}
 	}
 
