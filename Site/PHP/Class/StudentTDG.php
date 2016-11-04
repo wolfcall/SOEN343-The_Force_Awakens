@@ -14,8 +14,36 @@ class StudentTDG
 	/* 
 		No insert methods are necessary for this class, as the Student cannot edit the information for any Room
 	*/
-
-    /* 
+	
+	//Verify User Credentials
+    public function checkUserAndPass($email, $pass){
+		$conn = getServerConn();
+		
+		$sql = "SELECT email, password FROM student WHERE email ='".$email."' AND password = password('".$pass."')";
+		$result = $conn->query($sql);
+		
+		if ($result->num_rows > 0)
+			return true;
+		else 
+			return false;
+		closeServerConn($conn);
+	}
+	
+	//Verify User exsitence in the db
+	public function checkUserExist($email){
+		$conn = getServerConn();
+		
+		$sql = "SELECT * FROM student WHERE email ='".$email."'";
+		$result = $conn->query($sql);
+		
+		if ($result->num_rows > 0)
+			return true;
+		else 
+			return false;
+		closeServerConn($conn);
+	}
+		
+	/* 
 		The Get methods for all Entities in the Student table can be found here
     */
     public function getFirstName($email){

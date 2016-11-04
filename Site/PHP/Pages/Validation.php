@@ -1,9 +1,13 @@
 <?php
-include "../Class/Login.php";
+include "../Class/StudentMapper.php";
 
-$log = new Login();
+$email = htmlspecialchars($_POST["email"]);
+$password = htmlspecialchars($_POST["password"]);
 
-$validate = $log->checkUserAndPass();
+$_SESSION["email"] = $email;
+
+$log = new StudentMapper($email);
+$validate = $log->checkUserAndPass($email,$password);
 
 $wrongPass = "Invalid Password Entered. Please try again";
 $noUser = "Account not Found. Please enter an email for an Existing Account";
@@ -11,11 +15,10 @@ $noUser = "Account not Found. Please enter an email for an Existing Account";
 if ($validate == true)
 {
 	header("Location: ../Pages/Home.php");
-	exit();
 }
 else
 {
-	$exist = $log->checkUserExist();
+	$exist = $log->checkUserExist($email);
 	
 	if ($exist == true)
 	{

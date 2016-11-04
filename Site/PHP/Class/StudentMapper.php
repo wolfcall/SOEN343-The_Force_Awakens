@@ -14,28 +14,47 @@ class StudentMapper
 	private $studentData;
 		
 	/* 
-		Constructors for the Student Mapper object
+	*	Constructors for the Student Mapper object
+	*	If the parameter is null, the student is logging in from the Index page
+	*	In which case they simply need access to the checkUserAndPass or checkUserExist methods
+	*	No variables need to be instantiated until they actually log in
 	*/
 	public function __construct($email) {
 
-		$this->studentActive = new StudentDomain();
-		$this->studentData = new StudentTDG();
-		
-		$conn = getServerConn();
-						
-		$sql = "SELECT * FROM student WHERE email ='".$email."'";
-		$result = $conn->query($sql);
-		$row = $result->fetch_assoc();
-				
-		$this->setFirstName($row["firstName"]);
-		$this->setLastName($row["lastName"]);
-		$this->setEmailAddress($row["email"]);
-		$this->setProgram($row["program"]);
-		$this->setSID($row["studentID"]);
-		
-		closeServerConn($conn);
+		if(empty($email))
+		{
+			$this->studentActive = new StudentDomain();
+			$this->studentData = new StudentTDG();
+		}
+		else
+		{
+			$this->studentActive = new StudentDomain();
+			$this->studentData = new StudentTDG();
+			
+			$conn = getServerConn();
+							
+			$sql = "SELECT * FROM student WHERE email ='".$email."'";
+			$result = $conn->query($sql);
+			$row = $result->fetch_assoc();
+					
+			$this->setFirstName($row["firstName"]);
+			$this->setLastName($row["lastName"]);
+			$this->setEmailAddress($row["email"]);
+			$this->setProgram($row["program"]);
+			$this->setSID($row["studentID"]);
+			
+			closeServerConn($conn);
+		}
 	}
 
+	public function checkUserAndPass($email, $pass){
+		return $this->studentData->checkUserAndPass($email, $pass); 
+	}
+	
+	public function checkUserExist($email){
+		return $this->studentData->checkUserExist($email);
+	}
+	
 	/* Set methods for the Student Domain object
 	*/
 	public function setFirstName($first){
