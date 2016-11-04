@@ -50,9 +50,11 @@ function getHours(){
 	echo "<option value = '".$time."'>".$time."</option>";
 	}
 }
+
+$userMSG = $_SESSION["userMSG"] ;
+
+
 ?>
-
-
 <html lang="en">
 
 <!--
@@ -103,7 +105,9 @@ function getHours(){
 	<!--Try to update to new jquery, doesn't seem to work with jquery 3.1.1-->
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script src="../../Javascript/Home.js"></script>
+    
+	<!-- All Javascript for Home.php page -->
+	<script src="../../Javascript/Home.js"></script>
 		
 </head>
 
@@ -136,11 +140,16 @@ function getHours(){
 	<div class="intro-header">
 		<div class="container">
 			<div class="row">
+				<!-- Id space to confirm if the data was saved or not -->
+				<div>
+					<h6 id = "details" class = "details"><?php echo $userMSG;?></h6>
+				</div>
+				
+				<!-- class greeting -->
 				<div class="greeting">
 					<h1>Please select a Day to Begin</h1>
 				</div>
-				<!-- class greeting -->
-
+				
 				<br><br>
 
 				<!-- Div for datepicker -->
@@ -239,7 +248,7 @@ function getHours(){
 								<h4 style="color:red;">Edit any of your profile info!</h4>
 							</div>
 							<div class="modal-body">
-								<form id="form" name = "form" action="ChangeDetails.php" method="post">
+								<form id="profileForm" name = "form" action="ChangeDetails.php" method="post" onclick "showResult();">
 									<div class="form-group">
 										<label>First Name</label>
 										<input readonly="readonly" type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName; ?>"/>
@@ -274,13 +283,12 @@ function getHours(){
 									</div>
 
 									<button type="submit" class="btn btn-default btn-success btn-block">Submit</button>
-
 								</form>
 							</div>
 						</div>
 					</div>
 				</div>
-
+				
 				<div id="reservation-table"><br>
 					<?php
 						$thelper = new tableHelper();

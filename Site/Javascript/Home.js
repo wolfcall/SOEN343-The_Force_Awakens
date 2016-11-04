@@ -35,21 +35,21 @@ $(document).ready(function() {
      		});
   		});
 
-		$(document).ready(function(){
-			$("#myBtn").click(function(){
-				$("#myModal").modal();
-			});
-		});
+$(document).ready(function(){
+	$("#myBtn").click(function(){
+		$("#myModal").modal();
+	});
+});
 
-		$(document).ready(function(){
-			$(".slot").click(function(){
-				$("#myModal").modal();
-			});
-		});
-	
-		$(document).ready(function(){
-			$("#second-r").click(function(){
-				$("#profilemyModal").modal();
-			});
-		});
+$(document).ready(function(){
+	$(".slot").click(function(){
+		$("#myModal").modal();
+	});
+});
+
+$(document).ready(function(){
+	$("#second-r").click(function(){
+		$("#profilemyModal").modal();
+	});
+});
 

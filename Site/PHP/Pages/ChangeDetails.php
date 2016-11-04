@@ -2,6 +2,8 @@
 include "../Class/StudentMapper.php";
 include "../Class/RoomMapper.php";
 include "../Class/ReservationMapper.php";
+include "../../Javascript/Home.js";
+
 
 // Start the session
 session_start();
@@ -14,29 +16,43 @@ $newEmail = htmlspecialchars($_POST["newEmail"]);
 
 $student = new StudentMapper($oldEmail);
 
+$begin = "You have successfully changed your";
+$changePass = " password";
+$changeEmail = " email";
+
+$msg = "";
+
 //Should pop up with Javascript if old password doesn't match
 //Although it will not overwrite in the database.
 
-if(empty($newEmail))
+if(empty($newEmail) and empty($newPass))
 {
-	$newEmail = $oldEmail;
+	$msg = "No Data has been saved!";
 }
-else
+else if (empty($newEmail))
 {
+	$msg = $begin.$changePass."!";
+	$student->updatePassword($oldEmail, $oldPass, $newPass);
+}
+else if (empty($newPass))
+{
+	$msg = $begin.$changeEmail."!";
 	$student->updateEmailAddress($oldEmail, $newEmail);
 	$_SESSION["email"] = $newEmail;
-	header("Location: Home.php");	
-}
-
-if(empty($newPass))
-{
-	header("Location: Home.php");
 }
 else
 {
+	$msg = $begin.$changeEmail." and".$changePass."!";
 	$student->updatePassword($oldEmail, $oldPass, $newPass);
+	$student->updateEmailAddress($oldEmail, $newEmail);
 	$_SESSION["email"] = $newEmail;
-	header("Location: Home.php");	
-} 
+}
+
+$_SESSION["userMSG"] = $msg;
+
+//var_dump($msg);
+//die();
+
+header("Location: Home.php");
 
 ?>
