@@ -33,18 +33,22 @@ $reservation = new ReservationMapper();
 */
 if ( ($end-$start) > 3)
 {
+	/*
 	echo "<script type='text/javascript'>alert('$tooLong');
 	window.location.replace('Home.php');
 	</script>";
-	die();
+	*/
+	$_SESSION["userMSG"] = $tooLong;
 }
 
 else if ($end <= $start)
 {
+	/*
 	echo "<script type='text/javascript'>alert('$wrongTime');
 	window.location.replace('Home.php');
 	</script>";
-	die();
+	*/
+	$_SESSION["userMSG"] = $wrongTime;
 }	
 else
 {
@@ -86,10 +90,13 @@ else
 
 	$reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
 
+	$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end;
 //	checkWeek($date, $sID, $currentReservations);
 
-	header("Location: Home.php");
 }
+
+header("Location: Home.php");
+
 
 function checkWeek($d, $s, $current) {
 	//Reformate date and check for week in the year (of date being added)
