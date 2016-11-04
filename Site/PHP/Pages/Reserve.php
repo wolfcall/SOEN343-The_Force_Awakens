@@ -78,8 +78,39 @@ else
 	$start = $date." ".$start." ".$Meridiem1;
 	$end = $date." ".$end." ".$Meridiem2;
 
+//Check for presence of more than 3 reservations in the same week 
+//before actually adding the reservation
+
+//	$currentReservations = $reservation->getReservations($sID);
+//	var_dump($currentReservations);
+
 	$reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
 
+//	checkWeek($date, $sID, $currentReservations);
+
 	header("Location: Home.php");
+}
+
+function checkWeek($d, $s, $current) {
+	//Reformate date and check for week in the year (of date being added)
+	$reformatDate = date("j/m/Y", strtotime($d));
+	$year = date("Y", strtotime($d));
+	$week = date("W", strtotime($reformatDate));
+
+	//Create counter, to be used to track if less than 3 reservations were made for that week 
+	$counter = 0;
+
+	//Check database table for all reservations under this student's ID
+	// Compare the dates pulled with the week found
+	for($x = 0; $x < $current.count; $x++) {
+
+		echo $current[0];
+		 $tempDate = date("j/m/Y", strtotime($current[$x]));
+		 $tempWeek = date("W", strtotime($tempDate));
+
+		echo $week . " " . $tempWeek;
+		echo "<br>";
+
+	}
 }
 ?>

@@ -76,7 +76,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "SELECT studentID FROM reservation WHERE reservationID ='".reID."'";
+		$sql = "SELECT studentID FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
@@ -88,7 +88,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "SELECT roomID FROM reservation WHERE reservationID ='".reID."'";
+		$sql = "SELECT roomID FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
@@ -100,7 +100,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "SELECT startTimeDate FROM reservation WHERE reservationID ='".reID."'";
+		$sql = "SELECT startTimeDate FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
@@ -112,7 +112,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "SELECT endTimeDate FROM reservation WHERE reservationID ='".reID."'";
+		$sql = "SELECT endTimeDate FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
@@ -124,7 +124,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "SELECT title FROM reservation WHERE reservationID ='".reID."'";
+		$sql = "SELECT title FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
@@ -136,13 +136,32 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "SELECT description FROM reservation WHERE reservationID ='".reID."'";
+		$sql = "SELECT description FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
 		closeServerConn($conn);
 		return $row["description"];
     }
+
+	public function getReservations($sID) {
+
+		$conn = getServerConn();
+
+		$sql = "SELECT * FROM reservation WHERE studentID = '".$sID."'";
+		$result = $conn->query($sql);
+
+		$reservesDates = array();
+		while($row = $result->fetch_assoc())
+		{
+			array_push($reservesDates, $row["startTimeDate"]);
+		}
+
+		var_dump($reservesDates);
+
+		 closerServerConn($conn);
+		 return $reservesDates;
+	}
 	
 	/* The Update methods for all Entities in the reservation table can be found here
      */
@@ -151,7 +170,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "Update reservation SET reservationID ='".$new."' WHERE reservationID ='".reID."'";
+		$sql = "Update reservation SET reservationID ='".$new."' WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		
 		closeServerConn($conn);
@@ -161,7 +180,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "Update reservation SET studentID ='".$sID."' WHERE reservationID ='".reID."'";
+		$sql = "Update reservation SET studentID ='".$sID."' WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		
 		closeServerConn($conn);
@@ -171,7 +190,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "Update reservation SET roomID ='".$rID."' WHERE reservationID ='".reID."'";
+		$sql = "Update reservation SET roomID ='".$rID."' WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		
 		closeServerConn($conn);
@@ -184,6 +203,7 @@ class ReservationTDG
 		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %h:%i %p')";
 		
 		$sql = "Update reservation SET startTimeDate ='".$startTrans."' WHERE reservationID ='".reID."'";
+
 		$result = $conn->query($sql);
 		
 		closeServerConn($conn);
@@ -196,6 +216,7 @@ class ReservationTDG
 		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %h:%i %p')";
 		
 		$sql = "Update reservation SET endTimeDate ='".$endTrans."' WHERE reservationID ='".reID."'";
+
 		$result = $conn->query($sql);
 		
 		closeServerConn($conn);
@@ -205,7 +226,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "Update reservation SET title ='".$title."' WHERE reservationID ='".reID."'";
+		$sql = "Update reservation SET title ='".$title."' WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		
 		closeServerConn($conn);
@@ -215,7 +236,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$sql = "Update reservation SET description ='".$desc."' WHERE reservationID ='".reID."'";
+		$sql = "Update reservation SET description ='".$desc."' WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		
 		closeServerConn($conn);

@@ -65,28 +65,32 @@ class ReservationMapper
     }
     
     public function getSID($reID) {
-        return $this->reservationActive->getSID();
+        return $this->reservationActive->getSID($reID);
     }
     
     public function getRID($reID) {
-        return $this->reservationActive->getRID();
+        return $this->reservationActive->getRID($reID);
     }
 	
 	public function getStartTimeDate($reID) {
-        return $this->reservationActive->getStartTimeDate();
+        return $this->reservationActive->getStartTimeDate($reID);
     }	
 	
 	public function getEndTimeDate($reID) {
-        return $this->reservationActive->getEndTimeDate();
+        return $this->reservationActive->getEndTimeDate($reID);
     }
 	
 	public function getTitle($reID) {
-        return $this->reservationActive->getTitle();
+        return $this->reservationActive->getTitle($reID);
     }
 	
 	public function getDescription($reID) {
-        return $this->reservationActive->getDescription();
+        return $this->reservationActive->getDescription($reID);
     }
+
+	public function getReservations($sID) {
+		return $this->reservationData->getReservations($sID);
+	}
 	
 	/*	Update methods for the Reservation TDG and Domain objects
 	*/
