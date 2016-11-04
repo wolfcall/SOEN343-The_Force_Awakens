@@ -1,4 +1,5 @@
 //The Javascript file containing the javascript from PHP/Pages/Home.php.
+
 $(document).ready(function() {
 			var monthNames = ["January", "February", "March", "April", "May", "June",
 				"July", "August", "September", "October", "November", "December"];
@@ -52,7 +53,3 @@ $(document).ready(function() {
 			});
 		});
 
-       
-    
-	
-		
