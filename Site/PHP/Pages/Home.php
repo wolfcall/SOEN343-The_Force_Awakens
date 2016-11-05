@@ -14,19 +14,10 @@ include "../Class/WaitlistMapper.php";
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
+$userMSG = $_SESSION["userMSG"] ;
+
 $student = new StudentMapper($email);
 $reserve = new ReservationMapper();
-//$waitlist = new WaitlistMapper();
-
-//Tested - Successfully added
-//$reserve->addReservation(1,1,"10/24/2011 10:00 PM","10/24/2011 11:00 PM","Test", "InnerTest");
-
-//Tested - Successfully added 
-//$waitlist->addWaitlist(1,1,"10/24/2011 10:00 PM","10/24/2011 11:00 PM");
-
-//Tested - Gives California
-//$room = new RoomMapper(1);
-//$program = $room->getName();
 
 $firstName = $student->getFirstName();
 $lastName = $student->getLastName();
@@ -34,10 +25,6 @@ $program = $student->getProgram();
 $sID = $student->getSID();
 
 $test = $reserve->getREID($sID);
-
-//var_dump($test);
-//var_dump($test["reservationID"]);
-//die();
 
 function getHours(){
 	for($x = 0; $x < 48; $x++){
@@ -50,10 +37,6 @@ function getHours(){
 	echo "<option value = '".$time."'>".$time."</option>";
 	}
 }
-
-$userMSG = $_SESSION["userMSG"] ;
-
-session_destroy();
 
 ?>
 <html lang="en">
@@ -126,7 +109,7 @@ session_destroy();
                     <span class="icon-bar"></span>
                 </button>
                 
-				<a class="navbar-brand topnav first r" id="first-r" href="../../index.php">Log Out</a>
+				<a class="navbar-brand topnav first r" id="first-r" href="LogOut.php">Log Out</a>
 				<a class="navbar-brand topnav second r" id="second-r" href="#">My Profile</a>
 				<a class="navbar-brand topnav third r" id="third-r" href="#">My Reservations</a>
 				<a class="navbar-brand topnav fourth r" id="fourth-r" href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a>
