@@ -92,9 +92,10 @@ else
 
 	//Check for presence of more than 3 reservations in the same week 
 	//before actually adding the reservation
-
+	
 //	$reservation->getReservationsByDate($start);
 	$currentReservations = $reservation->getReservations($sID);
+	
 	if(checkWeek($date, $sID, $currentReservations)) {
 		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
 		$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end. " in Room ".$name."!";
