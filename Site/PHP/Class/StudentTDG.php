@@ -190,7 +190,7 @@ class StudentTDG
 		}
 		else{
 			
-			$string = "Wrong Password";
+			$string = "Your current Password is not the one you entered. Please try again!";
 		}
 		closeServerConn($conn);
 		

@@ -31,10 +31,7 @@ if(empty($newEmail) and empty($newPass))
 }
 else if (empty($newEmail))
 {
-	
 	$msg = $student->updatePassword($oldEmail, $oldPass, $newPass);
-	
-	
 }
 else if (empty($newPass))
 {
@@ -47,7 +44,7 @@ else if (empty($newPass))
 	}
 	else 
 	{
-		$msg = "Email already exists!</br>Please select a new one.";
+		$msg = "Email already exists! Please select a new one.";
 	}
 }
 else
@@ -60,9 +57,5 @@ else
 
 $_SESSION["userMSG"] = $msg;
 
-//var_dump($msg);
-//die();
-
 header("Location: Home.php");
-
 ?>
