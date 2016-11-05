@@ -85,13 +85,16 @@ else
 //Check for presence of more than 3 reservations in the same week 
 //before actually adding the reservation
 
-//	$currentReservations = $reservation->getReservations($sID);
-//	var_dump($currentReservations);
+	$currentReservations = $reservation->getReservations($sID);
+	if(checkWeek($date, $sID, $currentReservations)) {
+		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
+		$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end;
+	}
 
-	$reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
 
-	$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end;
-//	checkWeek($date, $sID, $currentReservations);
+	// $reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
+
+	// $_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end;
 
 }
 
@@ -106,18 +109,25 @@ function checkWeek($d, $s, $current) {
 
 	//Create counter, to be used to track if less than 3 reservations were made for that week 
 	$counter = 0;
-
+	echo count($current);
 	//Check database table for all reservations under this student's ID
 	// Compare the dates pulled with the week found
-	for($x = 0; $x < $current.count; $x++) {
+	for($x = 0; $x < count($current); $x++) {
 
-		echo $current[0];
-		 $tempDate = date("j/m/Y", strtotime($current[$x]));
-		 $tempWeek = date("W", strtotime($tempDate));
+		echo $current[$x];
+		echo "<br>";
+		$tempDate = date("j/m/Y", strtotime($current[$x]));
+		$tempWeek = date("W", strtotime($tempDate));
 
 		echo $week . " " . $tempWeek;
 		echo "<br>";
 
 	}
+
+	//return true if there aren't already 3 reservations made for that week
+	if($counter < 3) {
+		return true;
+	}
+	return false;
 }
 ?>

@@ -148,7 +148,7 @@ class ReservationTDG
 
 		$conn = getServerConn();
 
-		$sql = "SELECT * FROM reservation WHERE studentID = '".$sID."'";
+		$sql = "SELECT * FROM reservation WHERE studentID ='".$sID."'";
 		$result = $conn->query($sql);
 
 		$reservesDates = array();
@@ -156,11 +156,9 @@ class ReservationTDG
 		{
 			array_push($reservesDates, $row["startTimeDate"]);
 		}
-
-		var_dump($reservesDates);
-
-		 closerServerConn($conn);
-		 return $reservesDates;
+		
+		closeServerConn($conn);
+		return $reservesDates;
 	}
 	
 	/* The Update methods for all Entities in the reservation table can be found here
