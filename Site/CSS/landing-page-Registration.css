@@ -86,15 +86,33 @@ h6 {
 
 #datepickerInline {
     display:inline-block;
-    margin:0 auto;
+    margin: auto;
 }
 
 #myModal {
 	outline: none;
 }
 
+.details{
+	text-align: center;
+	border-radius: 20px;
+    padding: 20px;
+}
+
+.success{
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
+	color: #3c763d;
+}
+
+.failure{
+	background-color: #ff9999;
+	border-color: #b30000;
+	color: #800000;
+}
+
 .roomNum{
-	 width: 200px;
+	width: 200px;
 }
 
 .greeting {

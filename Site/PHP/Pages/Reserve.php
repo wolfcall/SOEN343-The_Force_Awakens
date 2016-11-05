@@ -54,11 +54,13 @@ $name = $room->getName();
 if ( ($end-$start) > 3)
 {
 	$_SESSION["userMSG"] = $tooLong;
+	$_SESSION["msgClass"] = "failure";
 }
 
 else if ($end <= $start)
 {
 	$_SESSION["userMSG"] = $wrongTime;
+	$_SESSION["msgClass"] = "failure";
 }	
 else
 {
@@ -96,10 +98,12 @@ else
 	if(checkWeek($date, $sID, $currentReservations)) {
 		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
 		$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end. " in Room ".$name."!";
+		$_SESSION["msgClass"] = "success";
 	}
 
 	else {
 		$_SESSION["userMSG"] = "You have already made 3 reservations this week";
+		$_SESSION["msgClass"] = "failure";
 	}
 }
 
