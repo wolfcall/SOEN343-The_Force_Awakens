@@ -6,7 +6,7 @@ include "../Class/ReservationMapper.php";
 // Start the session
 session_start();
 
-$wrongTime = "Your End Time cannot be the same as/before your Start Time! Please try again.";
+$wrongTime = "Your End Time must be after your Start Time! Please try again.";
 $tooLong = "You cannot reserve for a time of more than 3 hours!";
 
 $title = htmlspecialchars($_POST["title"]);
