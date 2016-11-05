@@ -1,33 +1,19 @@
-Drop trigger if exists check_waitlist;
 
+Drop procedure if exists check_waitpro;
 Delimiter $$
-create trigger soen343.check_waitlist after delete on reservation
+Create procedure check_waitpro (startTime DATETIME, endTime DATETIME, rmID INT(11))
+begin
+	Update reservation
+		set waitlisted = false
+        where reservation.startTimeDate = startTime
+			and reservation.endTimeDate = endTime
+            and reservation.roomID = rmID;
+end$$
+
+Drop trigger if exists check_waitlist$$
+
+create trigger soen343.check_waitlist before delete on reservation
 for each row 
-	
-Begin
-	
-    Insert into  reservation 
-		/*Select wl.* from waitlist as wl;
-        /*Where wl.roomID = OLD.room
-		and wl.startTimeDate = OLD.startTimeDate
-		and wl.endTimeDate = OLD.endTimeDate ;*/
-        (Select studentID, roomID, startTimeDate, endTimeDate, title, description fROM 
-			(Select waitlistID, studentID, roomID, startTimeDate, endTimeDate, title, description from waitlist as wl
-					Where roomID = OLD.roomID
-					and startTimeDate = OLD.startTimeDate
-					and endTimeDate = Old.endTimeDate) as T1
-			where roomID = min(roomID));
-                    
-	Delete from waitlist
-    where  roomID = OLD.roomID
-			and startTimeDate = OLD.startTimeDate
-			and endTimeDate = Old.endTimeDate;
+begin
+	call check_waitpro(OLD.startTimeDate, OLD.endTimeDate, OLD.roomID);
 end;
-
-
-/*(Select studentID, roomID, startTimeDate, endTimeDate, title, description fROM 
-(Select waitlistID, roomID, startTimeDate, endTimeDate, title, description from waitlist
-					Where roomID = OLD.room
-					and startTimeDate = OLD.startTimeDate
-					and endTimeDate = Old.endTimeDate)
-                    where waitlistID = min(waitlistID));*/
