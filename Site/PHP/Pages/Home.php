@@ -15,9 +15,11 @@ include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
 $userMSG = $_SESSION["userMSG"] ;
+$msgClass = $_SESSION["msgClass"] ;
 
 if(isset($_SESSION["userMSG"])){
 	unset($_SESSION["userMSG"]);
+    unset($_SESSION["msgClass"]);
 }
 
 $student = new StudentMapper($email);
@@ -132,7 +134,7 @@ function getHours(){
 				<div>
 					<?php
 						if(!empty($userMSG)){
-							echo '<h6 id = "details" class = "details">'.$userMSG.'</h6>';
+							echo '<div id = "details" class = "details '.$msgClass.'">'.$userMSG.'</div>';
 						}
 					?>
 				</div>

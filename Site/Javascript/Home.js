@@ -58,7 +58,7 @@ $(document).ready(function(){
 function disappear(){
 	setTimeout(function(){ 
 
-		$("#details").slideUp(600);
+		$("#details").slideUp(1000);
 	}, 3000); 
 
 }
