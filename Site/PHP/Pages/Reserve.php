@@ -91,6 +91,10 @@ else
 		$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end;
 	}
 
+	else {
+		$_SESSION["userMSG"] = "You have already made 3 reservations this week";
+	}
+
 
 	// $reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
 
@@ -109,21 +113,20 @@ function checkWeek($d, $s, $current) {
 
 	//Create counter, to be used to track if less than 3 reservations were made for that week 
 	$counter = 0;
-	echo count($current);
+	
 	//Check database table for all reservations under this student's ID
 	// Compare the dates pulled with the week found
 	for($x = 0; $x < count($current); $x++) {
 
-		echo $current[$x];
-		echo "<br>";
 		$tempDate = date("j/m/Y", strtotime($current[$x]));
 		$tempWeek = date("W", strtotime($tempDate));
 
-		echo $week . " " . $tempWeek;
-		echo "<br>";
+		if($week == $tempWeek) {
+			$counter++;
+		}
 
 	}
-
+	
 	//return true if there aren't already 3 reservations made for that week
 	if($counter < 3) {
 		return true;
