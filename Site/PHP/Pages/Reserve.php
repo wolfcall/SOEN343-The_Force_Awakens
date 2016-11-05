@@ -28,6 +28,8 @@ $email = htmlspecialchars($_POST["email"]);
 *	Correlates to the Database ID's for the rooms!
 */
 
+//Getting the ID of the Room 1
+//Should Obtain Either 1,2,3,4,5
 $rID = htmlspecialchars($_POST["roomNum"]);
 
 $student = new StudentMapper($email);
@@ -60,10 +62,6 @@ else if ($end <= $start)
 }	
 else
 {
-	//Getting the ID of the Room 1
-	//Should Obtain Either 1,2,3,4,5
-	$rID = substr($rID,4);
-
 	//Converting the Date to the Proper Format
 	//Should Obtain DD/MM/YYYY
 	$date = date('d/m/Y', strtotime($date));
@@ -93,7 +91,7 @@ else
 	//Check for presence of more than 3 reservations in the same week 
 	//before actually adding the reservation
 
-//	$reservation->getReservationsByDate($start);
+	//$reservation->getReservationsByDate($start);
 	$currentReservations = $reservation->getReservations($sID);
 	if(checkWeek($date, $sID, $currentReservations)) {
 		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
