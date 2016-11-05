@@ -31,14 +31,24 @@ if(empty($newEmail) and empty($newPass))
 }
 else if (empty($newEmail))
 {
-	$msg = $begin.$changePass."!";
-	$student->updatePassword($oldEmail, $oldPass, $newPass);
+	
+	$msg = $student->updatePassword($oldEmail, $oldPass, $newPass);
+	
+	
 }
 else if (empty($newPass))
 {
+	$checkEmail = $student->getEmailAddressFromDB($newEmail);
+	if (empty($checkEmail))
+	{
 	$msg = $begin.$changeEmail."!";
 	$student->updateEmailAddress($oldEmail, $newEmail);
 	$_SESSION["email"] = $newEmail;
+	}
+	else 
+	{
+		$msg = "Email already exists!</br>Please select a new one.";
+	}
 }
 else
 {

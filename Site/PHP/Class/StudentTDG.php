@@ -21,12 +21,12 @@ class StudentTDG
 		
 		$sql = "SELECT email, password FROM student WHERE email ='".$email."' AND password = password('".$pass."')";
 		$result = $conn->query($sql);
-		
+		closeServerConn($conn);
 		if ($result->num_rows > 0)
 			return true;
 		else 
 			return false;
-		closeServerConn($conn);
+		
 	}
 	
 	//Verify User exsitence in the db
@@ -35,12 +35,12 @@ class StudentTDG
 		
 		$sql = "SELECT * FROM student WHERE email ='".$email."'";
 		$result = $conn->query($sql);
-		
+		closeServerConn($conn);
 		if ($result->num_rows > 0)
 			return true;
 		else 
 			return false;
-		closeServerConn($conn);
+		
 	}
 		
 	/* 
@@ -179,9 +179,23 @@ class StudentTDG
 		$conn = getServerConn();
 		
         $sql = "Update student SET password = password('".$newPass."') WHERE email ='".$email."' AND password = password('".$oldPass."')";
-		$result = $conn->query($sql);
+		 $result = $conn->query($sql);
+		 
 		
+		if ($conn->affected_rows > 0)
+		{
+			
+			$string = "Password Updated Successfully";
+		
+		}
+		else{
+			
+			$string = "Wrong Password";
+		}
 		closeServerConn($conn);
+		
+		return $string;
+		
     }
 }
 ?>

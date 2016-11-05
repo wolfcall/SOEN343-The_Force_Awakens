@@ -82,6 +82,9 @@ class StudentMapper
     public function getEmailAddress() {
         return $this->studentActive->getEmailAddress();
     }
+    public function getEmailAddressFromDB($email) {
+    	return $this->studentData->getEmailAddress($email);
+    }
     
     public function getProgram() {
         return $this->studentActive->getProgram();
@@ -119,7 +122,8 @@ class StudentMapper
     }
     
     public function updatePassword($email, $oldPass, $newPass) {
-        $this->studentData->updatePassword($email, $oldPass, $newPass);
+        $temp = $this->studentData->updatePassword($email, $oldPass, $newPass);
+        return $temp;
     }
 }
 ?>
