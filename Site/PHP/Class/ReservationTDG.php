@@ -145,7 +145,6 @@ class ReservationTDG
     }
 
 	public function getReservations($sID) {
-
 		$conn = getServerConn();
 
 		$sql = "SELECT * FROM reservation WHERE studentID ='".$sID."'";
@@ -159,6 +158,24 @@ class ReservationTDG
 		
 		closeServerConn($conn);
 		return $reservesDates;
+	}
+
+	public function getReservationsByDate($start) {
+		$conn = getServerConn();
+
+		$sql = "SELECT * FROM reservation WHERE startTimeDate LIKE '%".$start."%'";
+		echo $sql;
+		$result = $conn->query($sql);
+
+		$reservesTimes = array();
+		while($row = $result->fetch_assoc())
+		{
+			$temp = array($row["startTimeDate"], $row["endTimeDate"]);
+			array_push($reservesDates, $temp);
+		}
+		
+		closeServerConn($conn);
+		return $reservesDates; 
 	}
 	
 	/* The Update methods for all Entities in the reservation table can be found here

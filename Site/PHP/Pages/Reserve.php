@@ -93,6 +93,7 @@ else
 	//Check for presence of more than 3 reservations in the same week 
 	//before actually adding the reservation
 
+//	$reservation->getReservationsByDate($start);
 	$currentReservations = $reservation->getReservations($sID);
 	if(checkWeek($date, $sID, $currentReservations)) {
 		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
@@ -133,5 +134,9 @@ function checkWeek($d, $s, $current) {
 		return true;
 	}
 	return false;
+}
+
+function checkOverlap($start) {
+
 }
 ?>
