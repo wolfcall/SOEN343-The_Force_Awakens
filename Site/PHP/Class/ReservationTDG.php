@@ -163,7 +163,14 @@ class ReservationTDG
 	public function getReservationsByDate($start) {
 		$conn = getServerConn();
 
-		$sql = "SELECT * FROM reservation WHERE startTimeDate LIKE '%".$start."%'";
+		$date = substr($start,0,10);
+
+		//Need to reformate date so that it can be used in the database
+		$dateElements = explode("/", $date);
+		$reformateDate = $dateElements[2]."-".$dateElements[0]."-".$dateElements[1];
+
+		$sql = "SELECT * FROM reservation WHERE startTimeDate LIKE '".$reformateDate."%'";
+
 		echo $sql;
 		$result = $conn->query($sql);
 
@@ -171,11 +178,11 @@ class ReservationTDG
 		while($row = $result->fetch_assoc())
 		{
 			$temp = array($row["startTimeDate"], $row["endTimeDate"]);
-			array_push($reservesDates, $temp);
+			array_push($reservesTimes, $temp);
 		}
 		
 		closeServerConn($conn);
-		return $reservesDates; 
+		return $reservesTimes; 
 	}
 	
 	/* The Update methods for all Entities in the reservation table can be found here
