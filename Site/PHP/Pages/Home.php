@@ -199,13 +199,13 @@ session_destroy();
 											<select name = "endTime">
 												<?php getHours()?>
 											</select>&nbsp &nbsp &nbsp
-										<label>Room Number:</label>
-											<select name = "roomNum">
-												<option>Room 1 </option>
-												<option>Room 2 </option>
-												<option>Room 3 </option>
-												<option>Room 4 </option>
-												<option>Room 5 </option>
+										<label>Room:</label>
+											<select id = "options" class = "roomNum" name = "roomNum">
+												<option value = "1">California</option>
+												<option value = "2">Hawaii</option>
+												<option value = "3">Iowa</option>
+												<option value = "4">Florida</option>
+												<option value = "5">Navada</option>
 											</select>
 									</div>
 																		

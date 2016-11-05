@@ -22,32 +22,40 @@ $sID = htmlspecialchars($_POST["studentID"]);
 $prog = htmlspecialchars($_POST["program"]);
 $email = htmlspecialchars($_POST["email"]);
 
+/*
+*	Getting the ID of the Room 1
+*	Should Obtain Either 1,2,3,4,5
+*	Correlates to the Database ID's for the rooms!
+*/
+
 $rID = htmlspecialchars($_POST["roomNum"]);
 
 $student = new StudentMapper($email);
 $room = new RoomMapper($rID);
 $reservation = new ReservationMapper();
 
+$name = $room->getName();
+
 /*
+	var_dump($start);
+	echo "<br>";
+	var_dump($end);	
+	echo "<br>";
+	
+	var_dump(double($end-$start));
+	echo "<br>";
+	
+	die();
+
 *	Must Consider the case of a reservation of 30 mins!!!
 */
 if ( ($end-$start) > 3)
 {
-	/*
-	echo "<script type='text/javascript'>alert('$tooLong');
-	window.location.replace('Home.php');
-	</script>";
-	*/
 	$_SESSION["userMSG"] = $tooLong;
 }
 
 else if ($end <= $start)
 {
-	/*
-	echo "<script type='text/javascript'>alert('$wrongTime');
-	window.location.replace('Home.php');
-	</script>";
-	*/
 	$_SESSION["userMSG"] = $wrongTime;
 }	
 else
@@ -82,24 +90,18 @@ else
 	$start = $date." ".$start." ".$Meridiem1;
 	$end = $date." ".$end." ".$Meridiem2;
 
-//Check for presence of more than 3 reservations in the same week 
-//before actually adding the reservation
+	//Check for presence of more than 3 reservations in the same week 
+	//before actually adding the reservation
 
 	$currentReservations = $reservation->getReservations($sID);
 	if(checkWeek($date, $sID, $currentReservations)) {
 		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
-		$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end;
+		$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end. " in Room ".$name."!";
 	}
 
 	else {
 		$_SESSION["userMSG"] = "You have already made 3 reservations this week";
 	}
-
-
-	// $reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
-
-	// $_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end;
-
 }
 
 header("Location: Home.php");
@@ -124,7 +126,6 @@ function checkWeek($d, $s, $current) {
 		if($week == $tempWeek) {
 			$counter++;
 		}
-
 	}
 	
 	//return true if there aren't already 3 reservations made for that week
