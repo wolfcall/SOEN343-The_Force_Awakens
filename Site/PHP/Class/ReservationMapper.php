@@ -87,9 +87,12 @@ class ReservationMapper
 	public function getDescription($reID) {
         return $this->reservationActive->getDescription($reID);
     }
-
-	public function getReservations($sID) {
+        public function getReservations($sID) {
 		return $this->reservationData->getReservations($sID);
+	}
+        
+	public function getReservationsDates($sID) {
+		return $this->reservationData->getReservationsDates($sID);
 	}
 
 	public function getReservationsByDate($start) {
@@ -132,5 +135,8 @@ class ReservationMapper
 		$this->reservationData->updateDescription($reID, $desc);
 		$this->reservationActive->setDescription($desc);
     }	
+        public function deleteReservation($reID) {
+                $this->reservationData->deleteReservation($reID);
+       }
 }
 ?>
