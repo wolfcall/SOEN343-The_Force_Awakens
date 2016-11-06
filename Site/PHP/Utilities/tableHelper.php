@@ -15,14 +15,18 @@ class tableHelper {
 	//put your code here
 	
 	private $table;
+	private $row;
+	private $tableID;
 	
 	public function __construct() {
 		$this->table = "";
+		$this->rowNum = 0;
 	}
 			
 	public function initTable($params){
 		$table = "";
 		$table .= "<table ";
+		$this->tableID = $params["id"];
 		foreach ($params as $key => $value) {
 			$table .= "'".$key."' = '".$value."' ";
 		}
@@ -43,8 +47,8 @@ class tableHelper {
 			$row .= "<th class='".(!is_null($initCellClass)?$initCellClass:"")."' >".$initCell."</th>";
 		}
 		
-		foreach ($content as $key => $value){
-			$row .= "<td class='".$class."' ";
+		foreach ($content as $cellkey => $value){
+			$row .= "<td id='".$this->tableID."_".$this->rowNum."_".$cellkey."' class='".$class."' ";
 			
 			foreach ($params as $key => $pvalue){
 				$row .= $key." = '".$pvalue."' ";
@@ -54,6 +58,8 @@ class tableHelper {
 		}
 		
 		$row .= "</tr>";
+		
+		$this->rowNum++;
 		return $row;
 	}
 	

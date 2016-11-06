@@ -12,6 +12,7 @@
  * @author Georges
  */
 include_once 'RoomTDG.php';
+include_once 'RoomDomain.php';
 
 class RoomList {
 	//put your code here
@@ -21,7 +22,17 @@ class RoomList {
 	public function __construct() {
 		$this->roomList = array();
 		$this->tdg = new RoomTDG();
-		$this->roomList = $this->tdg->getAllRooms();
+		//$this->roomList = $this->tdg->getAllRooms();
+		
+		
+		foreach($this->tdg->getAllRooms() as $val){
+			$tmp = new RoomDomain();
+			$tmp->setRID($val["roomID"]);
+			$tmp->setName($val["name"]);
+			$tmp->setLocation($val["location"]);
+			$tmp->setDescription($val["description"]);
+			$this->roomList[] = $tmp;
+		}
 	}
 	
 	public function getRoomList(){

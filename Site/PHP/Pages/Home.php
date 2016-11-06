@@ -202,7 +202,7 @@ function getHours(){
 											<select id = "options" class = "roomNum" name = "roomNum">
 												<?php
 													foreach($rooms->getRoomList() as $val){
-														echo "<option value = '{$val["roomID"]}'>{$val["name"]}</option>\n";
+														echo "<option value = '{$val->getRID()}'>{$val->getName()}</option>\n";
 													}
 												?>
 											</select>
@@ -328,7 +328,7 @@ function getHours(){
 					<?php
 						$thelper = new tableHelper();
 						
-						$params = array("class"=>"reservations");
+						$params = array("class"=>"reservations", "id"=>"reservations");
 						
 						$table = $thelper->initTable($params);
 						
@@ -344,11 +344,9 @@ function getHours(){
 							$values[] = "00";
 						}
 						
-						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room1", "room");
-						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room2", "room");
-						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room3", "room");
-						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room4", "room");
-						$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, "Room5", "room");
+						foreach($rooms->getRoomList() as $val){
+							$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, $val->getName()." (".$val->getLocation().")", "room");
+						}
 						
 						$table .= $thelper->closeTable();
 						

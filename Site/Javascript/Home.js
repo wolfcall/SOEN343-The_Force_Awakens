@@ -45,6 +45,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	$(".slot").click(function(){
+		alert(this.id);
 		$("#myModal").modal();
 	});
 });
