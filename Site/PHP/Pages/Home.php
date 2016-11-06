@@ -31,6 +31,7 @@ $program = $student->getProgram();
 $sID = $student->getSID();
 
 $test = $reserve->getREID($sID);
+$studentReservations = $reserve->getReservations($student->getSID());
 
 function getHours(){
 	for($x = 0; $x < 48; $x++){
@@ -282,7 +283,31 @@ function getHours(){
 						</div>
 					</div>
 				</div>
-				
+                                
+                                <!-- My Reservations Modal -->
+				<div class="modal fade" id="reservationmyModal" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 style="color:red;">Current reservations for this week!</h4>
+							</div>
+							<div class="modal-body">
+                                                            <?php 
+                                                            foreach($studentReservations as &$singleReservation)
+                                                            {   
+                                                                echo "Reservation ID: " . $singleReservation["reservationID"] . "<br/>";
+                                                                echo "Room ID: " . $singleReservation["roomID"] . "<br/>";
+                                                                echo "Start Time: " . $singleReservation["startTimeDate"] . "<br/>";
+                                                                echo "End Time: " . $singleReservation["endTimeDate"] . "<br/>";
+                                                                echo "<br/>";
+                                                            }
+                                                            ?>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div id="reservation-table"><br>
 					<?php
 						$thelper = new tableHelper();

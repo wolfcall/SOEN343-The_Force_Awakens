@@ -55,6 +55,12 @@ $(document).ready(function(){
 	});
 });
 
+$(document).ready(function(){
+	$("#third-r").click(function(){
+		$("#reservationmyModal").modal();
+	});
+});
+
 function disappear(){
 	setTimeout(function(){ 
 

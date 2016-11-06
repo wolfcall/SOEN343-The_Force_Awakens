@@ -144,7 +144,7 @@ class ReservationTDG
 		return $row["description"];
     }
 
-	public function getReservations($sID) {
+	public function getReservationsDates($sID) {
 		$conn = getServerConn();
 
 		$sql = "SELECT * FROM reservation WHERE studentID ='".$sID."'";
@@ -152,14 +152,36 @@ class ReservationTDG
 
 		$reservesDates = array();
 		while($row = $result->fetch_assoc())
-		{
+		{   
 			array_push($reservesDates, $row["startTimeDate"]);
 		}
 		
 		closeServerConn($conn);
 		return $reservesDates;
 	}
+        
+        public function getReservations($sID) {
+		$conn = getServerConn();
 
+		$sql = "SELECT * FROM reservation WHERE studentID ='".$sID."'";
+		$result = $conn->query($sql);
+
+		$reservesDates = array();
+                $singleReservation = array();
+		while($row = $result->fetch_assoc())
+		{   
+                        $singleReservation = array("reservationID" => $row["reservationID"],
+                                                   "studentID" => $row["studentID"],
+                                                   "roomID" => $row["roomID"],
+                                                   "startTimeDate" => $row["startTimeDate"],
+                                                   "endTimeDate" => $row["endTimeDate"]);
+			array_push($reservesDates, $singleReservation);
+		}
+		
+		closeServerConn($conn);
+		return $reservesDates;
+	}
+        
 	public function getReservationsByDate($start) {
 		$conn = getServerConn();
 
@@ -263,5 +285,14 @@ class ReservationTDG
 		
 		closeServerConn($conn);
     }
+    
+        public function deleteReservation($reID) {
+                $conn = getServerConn();
+		
+		$sql = "DELETE FROM reservation WHERE reservationID ='".$reID."'";
+		$result = $conn->query($sql);
+		
+		closeServerConn($conn);
+        }
 }
 ?>
