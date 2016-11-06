@@ -9,6 +9,7 @@ include "../Class/StudentMapper.php";
 include "../Class/RoomMapper.php";
 include "../Class/ReservationMapper.php";
 include "../Class/WaitlistMapper.php";
+include "../Class/RoomList.php";
 
 
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
@@ -24,6 +25,7 @@ if(isset($_SESSION["userMSG"])){
 
 $student = new StudentMapper($email);
 $reserve = new ReservationMapper();
+$rooms = new RoomList();
 
 $firstName = $student->getFirstName();
 $lastName = $student->getLastName();
@@ -194,11 +196,11 @@ function getHours(){
 											</select>&nbsp &nbsp &nbsp
 										<label>Room:</label>
 											<select id = "options" class = "roomNum" name = "roomNum">
-												<option value = "1">California</option>
-												<option value = "2">Hawaii</option>
-												<option value = "3">Iowa</option>
-												<option value = "4">Florida</option>
-												<option value = "5">Navada</option>
+												<?php
+													foreach($rooms->getRoomList() as $val){
+														echo "<option value = '{$val["roomID"]}'>{$val["name"]}</option>\n";
+													}
+												?>
 											</select>
 									</div>
 																		
@@ -242,7 +244,7 @@ function getHours(){
 								<h4 style="color:red;">Edit any of your profile info!</h4>
 							</div>
 							<div class="modal-body">
-								<form id="profileForm" name = "form" action="ChangeDetails.php" method="post" onclick "showResult();">
+								<form id="profileForm" name = "form" action="ChangeDetails.php" method="post" onclick ="showResult();">
 									<div class="form-group">
 										<label>First Name</label>
 										<input readonly="readonly" type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName; ?>"/>

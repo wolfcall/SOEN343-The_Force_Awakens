@@ -68,4 +68,20 @@ class RoomTDG
 		closeServerConn($conn);
 		return $row["description"];
     }
+	
+	public function getAllRooms(){
+		$conn = getServerConn();
+		$sql = "Select * from room";
+		$result = $conn->query($sql);
+		
+		$resultSet = array();
+		
+		while($row = $result->fetch_assoc()){
+			$resultSet[] = $row;
+		}
+		
+		closeServerConn($conn);
+		
+		return $resultSet;
+	}
 }
