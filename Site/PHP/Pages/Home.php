@@ -66,6 +66,9 @@ function getHours(){
 	October 9, 2016 (Joey)
 	-Fixed connection to db for populating Make Reservation popup
 	
+        Novemeber 6, 2016 (Nick)
+        -Added reservation tab functionality
+
 	!-Still necessary to pass entity ID of time selected
 	!-Colors are not permanent, was done to check if CSS worked for table
 	!-Red should indicate times that are booked
@@ -293,19 +296,30 @@ function getHours(){
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 style="color:red;">Current reservations for this week!</h4>
+								<h4 style="color:red;">Your current reservations</h4>
 							</div>
 							<div class="modal-body">
+                                                            <form id="form" action="deleteReservation.php" method="post">
                                                             <?php 
+                                                            $deleteCheckbox;
+                                                            $startDateTime;
+                                                            $endDateTime;
                                                             foreach($studentReservations as &$singleReservation)
                                                             {   
+                                                                $startDateTime = explode(" ", $singleReservation["startTimeDate"]);
+                                                                $endDateTime = explode(" ", $singleReservation["endTimeDate"]);
+                                                                $deleteCheckbox = '<input type="checkbox" name="deleteList[]" value="'.$singleReservation["reservationID"].'" />';
+                                                                echo $deleteCheckbox;
                                                                 echo "Reservation ID: " . $singleReservation["reservationID"] . "<br/>";
                                                                 echo "Room ID: " . $singleReservation["roomID"] . "<br/>";
-                                                                echo "Start Time: " . $singleReservation["startTimeDate"] . "<br/>";
-                                                                echo "End Time: " . $singleReservation["endTimeDate"] . "<br/>";
-                                                                echo "<br/>";
+                                                                echo "Date: " . $startDateTime[0] . "<br/>";
+                                                                echo "Start Time: " . $startDateTime[1] . "<br/>";
+                                                                echo "End Time: " . $endDateTime[1] . "<br/>";
+                                                                echo "<br/><br/>";
                                                             }
                                                             ?>
+                                                                <button type="Submit" class="btn btn-default btn-success btn-block">Delete Selected Reservations</button>
+                                                            </form>
 							</div>
 						</div>
 					</div>

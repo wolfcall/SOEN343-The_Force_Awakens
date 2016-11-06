@@ -16,6 +16,7 @@ class RoomMapper
 	/* 
 		Constructors for the Student Mapper object
 	*/
+        
 	public function __construct($rID) {
 
 		$this->roomActive = new RoomDomain();
@@ -47,6 +48,14 @@ class RoomMapper
 	 
 	public function getRID(){
 		return $this->roomActive->getRID();
+    }
+    
+    public function getRoomName($rID){
+        return $this->roomActive->getName($rID);
+    }
+    
+    public function getRoomLocation($rID){
+        return $this->roomActive->getLocation($rID);
     }
 }
 ?>
