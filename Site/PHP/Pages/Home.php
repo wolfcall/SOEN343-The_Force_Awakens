@@ -309,8 +309,10 @@ function getHours(){
 								<?php 
 								$startDateTime;
 								$endDateTime;
+                                                                $deleteButton;
 								foreach($studentReservations as &$singleReservation)
 								{   
+                                                                        $deleteButton = '<br><button type="Submit" name="delete" value="'.$singleReservation["reservationID"].'" class="center btn btn-default btn-lg"> Delete Reservation '.$singleReservation["reservationID"].'</button>';
 									$startDateTime = explode(" ", $singleReservation["startTimeDate"]);
 									$endDateTime = explode(" ", $singleReservation["endTimeDate"]);
 									echo "<form id='myReservationform' action='DeleteReservation.php' method='post'>";
@@ -322,7 +324,7 @@ function getHours(){
 											echo "End Time : ".$endDateTime[1]."<br>";
 										echo "</div>";
 										echo "<div class = 'rightcolumn'>";
-											echo "<br><button type= 'Submit' class=' center btn btn-default btn-lg' > Delete Reservation ".$singleReservation['reservationID']."</button>";
+											echo $deleteButton;
 										echo "</div>";
 									echo "</form>";
 									
