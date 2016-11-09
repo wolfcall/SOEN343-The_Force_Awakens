@@ -291,7 +291,7 @@ function getHours(){
 					</div>
 				</div>
                                 
-                                <!-- My Reservations Modal -->
+				<!-- My Reservations Modal -->
 				<div class="modal fade" id="reservationmyModal" role="dialog">
 					<div class="modal-dialog">
 						<!-- Modal content-->
@@ -301,27 +301,33 @@ function getHours(){
 								<h4 style="color:red;">Your current reservations</h4>
 							</div>
 							<div class="modal-body">
-                                                            <form id="form" action="deleteReservation.php" method="post">
-                                                            <?php 
-                                                            $deleteCheckbox;
-                                                            $startDateTime;
-                                                            $endDateTime;
-                                                            foreach($studentReservations as &$singleReservation)
-                                                            {   
-                                                                $startDateTime = explode(" ", $singleReservation["startTimeDate"]);
-                                                                $endDateTime = explode(" ", $singleReservation["endTimeDate"]);
-                                                                $deleteCheckbox = '<input type="checkbox" name="deleteList[]" value="'.$singleReservation["reservationID"].'" />';
-                                                                echo $deleteCheckbox;
-                                                                echo "Reservation ID: " . $singleReservation["reservationID"] . "<br/>";
-                                                                echo "Room ID: " . $singleReservation["roomID"] . "<br/>";
-                                                                echo "Date: " . $startDateTime[0] . "<br/>";
-                                                                echo "Start Time: " . $startDateTime[1] . "<br/>";
-                                                                echo "End Time: " . $endDateTime[1] . "<br/>";
-                                                                echo "<br/><br/>";
-                                                            }
-                                                            ?>
-                                                                <button type="Submit" class="btn btn-default btn-success btn-block">Delete Selected Reservations</button>
-                                                            </form>
+								<form id="form" action="DeleteReservation.php" method="post">
+								<?php 
+								$deleteCheckbox;
+								$startDateTime;
+								$endDateTime;
+								foreach($studentReservations as &$singleReservation)
+								{   
+									$startDateTime = explode(" ", $singleReservation["startTimeDate"]);
+									$endDateTime = explode(" ", $singleReservation["endTimeDate"]);
+									$deleteCheckbox = '<input type="checkbox" name="deleteList[]" value="'.$singleReservation["reservationID"].'" />';
+									echo "<div class = 'leftcolumn'>";
+										echo $deleteCheckbox;
+										echo "	Reservation ID: " . $singleReservation["reservationID"] . "<br/>";
+										echo "	Room ID: " . $singleReservation["roomID"] . "<br/>";
+										echo "	Date: " . $startDateTime[0] . "<br/>";
+										echo "	Start Time: " . $startDateTime[1] . "<br/>";
+										echo "	End Time: " . $endDateTime[1] . "<br/>";
+									echo "</div>";
+									echo "<div class = 'rightcolumn'>";
+										echo "<br/>";
+										echo "<button type= 'Submit' class='btn btn-default btn-lg' > Delete </button>";
+									echo "</div>";
+									echo "<br/><br/>";
+								}
+								?>
+									<br><button type="Submit" class="btn btn-default btn-success btn-block">Delete Selected Reservations</button>
+								</form>
 							</div>
 						</div>
 					</div>
