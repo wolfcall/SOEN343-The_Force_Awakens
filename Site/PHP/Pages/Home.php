@@ -147,7 +147,7 @@ function getHours(){
 				
 				<!-- class greeting -->
 				<div class="greeting">
-					<h1>Please select a Day to Begin</h1>
+					<h1>Please select a Day and Room to Begin!</h1>
 				</div>
 				
 				<br><br>
@@ -156,12 +156,20 @@ function getHours(){
 				<div id="datepickerContainer">
 					<div id="datepickerInline"></div>
 					<br><br>
+					<div>
+						<select id = "roomOptions" class="btn btn-default btn-lg network-name" name = "roomNum">
+							<?php
+								foreach($rooms->getRoomList() as $val){
+									echo "<option value = '{$val->getRID()}'>{$val->getName()}</option>\n";
+								}
+							?>
+						</select>
+					</div>
+					<br>
 					<div id="reserveButton">
 						<a class="btn btn-default btn-lg" data-target="myModal" id="myBtn"><span class="network-name">Make a Reservation</span></a>
 					</div>
 				</div>
-
-				<br><br>
 
 				<!-- Reservation Modal -->
 				<div class="modal fade" id="myModal" role="dialog">
@@ -199,15 +207,9 @@ function getHours(){
 												<?php getHours()?>
 											</select>&nbsp &nbsp &nbsp
 										<label>Room:</label>
-											<select id = "options" class = "roomNum" name = "roomNum">
-												<?php
-													foreach($rooms->getRoomList() as $val){
-														echo "<option value = '{$val->getRID()}'>{$val->getName()}</option>\n";
-													}
-												?>
-											</select>
+											<input readonly="readonly" type="text" class="roomNum" id = "roomChosen" name="roomNum" value = "document.getElementById('roomOptions').value"  />
 									</div>
-																		
+																	
 									<!-- Should be Auto-Populated and Non-Editable-->
 									<div class="form-group">
 										<label>First Name</label>

@@ -67,5 +67,4 @@ function disappear(){
 
 		$("#details").slideUp(1000);
 	}, 3000); 
-
 }
