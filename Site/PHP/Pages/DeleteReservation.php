@@ -6,23 +6,15 @@ session_start();
 
 $reservation = new ReservationMapper();
 
-$deleteList = $_POST['deleteList'];
-$count = count($deleteList);
+$delete = $_POST['reID'];
+$date = $_POST['date'];
+$room = $_POST['rID'];
 
-foreach($deleteList as &$reserve)
-{
-    $reservation->deleteReservation($reserve);
-}
+$reservation->deleteReservation($delete);
 
-if($count > 0)
-{
-    $_SESSION["userMSG"] = "You have successfully deleted " . $count . " reservations!";
-    $_SESSION["msgClass"] = "success";
-}
-else
-{
-    $_SESSION["userMSG"] = "You have not selected any reservations for deletion!";
-    $_SESSION["msgClass"] = "failure";
-}
+$_SESSION["userMSG"] = "You have successfully deleted Reservation #" .$delete . " on " .$date;
+$_SESSION["msgClass"] = "success";
+
+
 header("Location: Home.php");
 ?>

@@ -287,12 +287,13 @@ class ReservationTDG
     }
     
         public function deleteReservation($reID) {
-                $conn = getServerConn();
-		
-		$sql = "DELETE FROM reservation WHERE reservationID ='".$reID."'";
-		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
+			
+			$conn = getServerConn();
+			
+			$sql = "DELETE FROM reservation WHERE reservationID ='".$reID."'";
+			$result = $conn->query($sql);
+			
+			closeServerConn($conn);
         }
 }
 ?>

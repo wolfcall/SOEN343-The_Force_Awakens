@@ -206,8 +206,13 @@ function getHours(){
 											<select name = "endTime">
 												<?php getHours()?>
 											</select>&nbsp &nbsp &nbsp
-										<label>Room:</label>
-											<input readonly="readonly" type="text" class="roomNum" id = "roomChosen" name="roomNum" value = "document.getElementById('roomOptions').value"  />
+										<select readonly = "readonly" id = "roomOptions" class="roomNum" name = "roomNum">
+											<?php
+												foreach($rooms->getRoomList() as $val){
+													echo "<option value = '{$val->getRID()}'>{$val->getName()}</option>\n";
+												}
+											?>
+										</select>
 									</div>
 																	
 									<!-- Should be Auto-Populated and Non-Editable-->
@@ -298,40 +303,38 @@ function getHours(){
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 style="color:red;">Your current reservations</h4>
+								<h4 style="color:red;">Your Reservations:</h4>
 							</div>
-							<div class="modal-body">
-								<form id="form" action="DeleteReservation.php" method="post">
+							<div class="modal-body height">
 								<?php 
-								$deleteCheckbox;
 								$startDateTime;
 								$endDateTime;
 								foreach($studentReservations as &$singleReservation)
 								{   
 									$startDateTime = explode(" ", $singleReservation["startTimeDate"]);
 									$endDateTime = explode(" ", $singleReservation["endTimeDate"]);
-									$deleteCheckbox = '<input type="checkbox" name="deleteList[]" value="'.$singleReservation["reservationID"].'" />';
-									echo "<div class = 'leftcolumn'>";
-										echo $deleteCheckbox;
-										echo "	Reservation ID: " . $singleReservation["reservationID"] . "<br/>";
-										echo "	Room ID: " . $singleReservation["roomID"] . "<br/>";
-										echo "	Date: " . $startDateTime[0] . "<br/>";
-										echo "	Start Time: " . $startDateTime[1] . "<br/>";
-										echo "	End Time: " . $endDateTime[1] . "<br/>";
-									echo "</div>";
-									echo "<div class = 'rightcolumn'>";
-										echo "<br/>";
-										echo "<button type= 'Submit' class='btn btn-default btn-lg' > Delete </button>";
-									echo "</div>";
-									echo "<br/><br/>";
+									echo "<form id='myReservationform' action='DeleteReservation.php' method='post'>";
+										echo "<div class = 'leftcolumn'>";
+											echo "Reservation ID : ".$singleReservation['reservationID']."<br>";
+											echo "Room ID : ".$singleReservation["roomID"]."<br>";
+											echo "Date : ".$startDateTime[0]."<br>";
+											echo "Start Time : ".$startDateTime[1]."<br>";
+											echo "End Time : ".$endDateTime[1]."<br>";
+										echo "</div>";
+										echo "<div class = 'rightcolumn'>";
+											echo "<br><button type= 'Submit' class=' center btn btn-default btn-lg' > Delete Reservation ".$singleReservation['reservationID']."</button>";
+										echo "</div>";
+									echo "</form>";
+									
+									echo "<br><br><br><br><br><br>";
+									
+									
 								}
 								?>
-									<br><button type="Submit" class="btn btn-default btn-success btn-block">Delete Selected Reservations</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+							</div><!-- End modal-body -->
+						</div><!-- End modal content -->
+					</div><!-- End modal-dialog -->
+				</div><!-- End MyReservations Modal -->
 				<div id="reservation-table"><br>
 					<?php
 						$thelper = new tableHelper();
