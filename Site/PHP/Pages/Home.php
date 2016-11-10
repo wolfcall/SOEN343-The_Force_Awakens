@@ -257,12 +257,8 @@ function getHours(){
 							<div class="modal-body">
 								<form id="profileForm" name = "form" action="ChangeDetails.php" method="post" onclick ="showResult();">
 									<div class="form-group">
-										<label>First Name</label>
-										<input readonly="readonly" type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName; ?>"/>
-									</div>
-									<div class="form-group">
-										<label>Last Name</label>
-										<input readonly="readonly" type="text" class="form-control" name="lastName" placeholder="Last Name" value = "<?php echo $lastName; ?>"/>
+										<label>Name</label>
+										<input readonly="readonly" type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName." ".$lastName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
