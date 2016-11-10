@@ -39,13 +39,17 @@ $(document).ready(function() {
 
 $(document).ready(function(){
 	$("#myBtn").click(function(){
+		var selected = document.getElementById("roomOptions").selectedIndex;
+		//selected = document.getElementById("roomOptions").options[selected].text;
+		document.getElementById("roomOptionsMod").selectedIndex = selected;
+		
 		$("#myModal").modal();
 	});
 });
 
 $(document).ready(function(){
 	$(".slot").click(function(){
-		alert(this.id);
+		
 		$("#myModal").modal();
 	});
 });

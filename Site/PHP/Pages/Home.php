@@ -206,7 +206,7 @@ function getHours(){
 											<select name = "endTime">
 												<?php getHours()?>
 											</select>&nbsp &nbsp &nbsp
-										<select readonly = "readonly" id = "roomOptions" class="roomNum" name = "roomNum">
+										<select readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum">
 											<?php
 												foreach($rooms->getRoomList() as $val){
 													echo "<option value = '{$val->getRID()}'>{$val->getName()}</option>\n";
