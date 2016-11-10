@@ -20,8 +20,8 @@ class WaitlistTDG
 	{
 		$conn = getServerConn();
 		
-		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %h:%i %p')";
-		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %h:%i %p')";
+		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %H:%i')";
+		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";
 		
 		$sql = "INSERT INTO waitlist (studentID, roomID, startTimeDate, endTimeDate) 
 			Values ('".$sID."','".$rID."',".$startTrans.",".$endTrans.")";

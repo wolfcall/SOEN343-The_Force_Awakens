@@ -70,7 +70,7 @@ else
 
 	//Converting Start Time to the Proper Format
 	//Should Obtain DD/MM/YYYY TIME AM/PM
-	$Meridiem1 = "AM";
+	/*$Meridiem1 = "AM";
 	$Meridiem2 = "AM";
 
 	if($start >= 12 and $start <= 24)
@@ -85,10 +85,10 @@ else
 		$Meridiem2 = "PM";
 		$end=$end-12;
 		$end=$end.":00";
-	}
+	}*/
 
-	$start = $date." ".$start." ".$Meridiem1;
-	$end = $date." ".$end." ".$Meridiem2;
+	$start = $date." ".$start;//." ".$Meridiem1;
+	$end = $date." ".$end;//." ".$Meridiem2;
 
 	//Check for presence of more than 3 reservations in the same week 
 	//before actually adding the reservation

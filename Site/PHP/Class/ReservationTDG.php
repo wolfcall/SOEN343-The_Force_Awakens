@@ -20,8 +20,8 @@ class ReservationTDG
 	{
 		$conn = getServerConn();
 		
-		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %h:%i %p')";
-		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %h:%i %p')";
+		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %H:%i')";
+		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";
 		
 		$sql = "INSERT INTO reservation (studentID, roomID, startTimeDate, endTimeDate, title, description) 
 			Values ('".$sID."','".$rID."',".$startTrans.",".$endTrans.",'".$title."','".$desc."')";
@@ -244,7 +244,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %h:%i %p')";
+		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %H:%i')";
 		
 		$sql = "Update reservation SET startTimeDate ='".$startTrans."' WHERE reservationID ='".reID."'";
 
@@ -257,7 +257,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %h:%i %p')";
+		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";
 		
 		$sql = "Update reservation SET endTimeDate ='".$endTrans."' WHERE reservationID ='".reID."'";
 
