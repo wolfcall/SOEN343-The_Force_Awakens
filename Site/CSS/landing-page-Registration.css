@@ -146,17 +146,19 @@ td {
 }
 
 .leftcolumn {
-    float : left;
+    float: left;
+    max-width: 40%;
+    margin: 0;
+    padding: 1em;
 }
 
 .rightcolumn {
-   float : right;
+	margin-left: 50%;
+    border-left: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
 }
 
 .disLen{
 	width: 100px;
-}
-
-.height{
-	height : 1000px;
 }
