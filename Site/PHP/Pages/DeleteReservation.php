@@ -6,13 +6,14 @@ session_start();
 
 $reservation = new ReservationMapper();
 
-$delete = $_POST['reID'];
+$delete = $_POST['delete'];
+//Dropped date from message for the moment since its not being posted - NB
 $date = $_POST['date'];
 $room = $_POST['rID'];
 
 $reservation->deleteReservation($delete);
 
-$_SESSION["userMSG"] = "You have successfully deleted Reservation #" .$delete . " on " .$date;
+$_SESSION["userMSG"] = "You have successfully deleted Reservation ID#" .$delete;
 $_SESSION["msgClass"] = "success";
 
 
