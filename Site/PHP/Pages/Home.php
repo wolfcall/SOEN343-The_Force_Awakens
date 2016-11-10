@@ -305,32 +305,34 @@ function getHours(){
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4 style="color:red;">Your Reservations:</h4>
 							</div>
-							<div class="modal-body height">
+						<div class="modal-body height">
 								<?php 
 								$startDateTime;
 								$endDateTime;
-                                                                $deleteButton;
+                                $deleteButton;
+								$count = 1;
 								foreach($studentReservations as &$singleReservation)
 								{   
-                                                                        $deleteButton = '<br><button type="Submit" name="delete" value="'.$singleReservation["reservationID"].'" class="center btn btn-default btn-lg"> Delete Reservation '.$singleReservation["reservationID"].'</button>';
+                                    $active = new RoomMapper($singleReservation["roomID"]);
+									$activeRoom = $active->getName();
+									$deleteButton = '<br><button type="Submit" name="delete" value="'.$singleReservation["reservationID"].'" class="center btn btn-default"> Delete Reservation '.$count.'</button>';
+									$modifyButton = '<br><button type="Submit" name="modify" value="'.$singleReservation["reservationID"].'" class="center btn btn-default"> Modify Reservation '.$count.'</button>';
 									$startDateTime = explode(" ", $singleReservation["startTimeDate"]);
 									$endDateTime = explode(" ", $singleReservation["endTimeDate"]);
 									echo "<form id='myReservationform' action='DeleteReservation.php' method='post'>";
-										echo "<div class = 'leftcolumn'>";
-											echo "Reservation ID : ".$singleReservation['reservationID']."<br>";
-											echo "Room ID : ".$singleReservation["roomID"]."<br>";
+										echo "<section class = 'leftcolumn'>";
+											echo "Room Name : ".$activeRoom."<br>";
+											echo "Title : ".$singleReservation['title']."<br>";
 											echo "Date : ".$startDateTime[0]."<br>";
 											echo "Start Time : ".$startDateTime[1]."<br>";
 											echo "End Time : ".$endDateTime[1]."<br>";
-										echo "</div>";
-										echo "<div class = 'rightcolumn'>";
-											echo $deleteButton;
-										echo "</div>";
+										echo "</section>";
+										echo "<aside class = 'rightcolumn'>";
+											echo $deleteButton."<br>";
+											echo $modifyButton;
+										echo "</aside>";
 									echo "</form>";
-									
-									echo "<br><br><br><br><br><br>";
-									
-									
+									$count = $count + 1;
 								}
 								?>
 							</div><!-- End modal-body -->

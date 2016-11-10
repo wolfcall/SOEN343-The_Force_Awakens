@@ -1,5 +1,6 @@
 <?php
 include "../Class/ReservationMapper.php";
+include "../Class/RoomMapper.php";
 
 // Start the session
 session_start();
@@ -9,7 +10,6 @@ $reservation = new ReservationMapper();
 $delete = $_POST['delete'];
 //Dropped date from message for the moment since its not being posted - NB
 $date = $_POST['date'];
-$room = $_POST['rID'];
 
 $reservation->deleteReservation($delete);
 

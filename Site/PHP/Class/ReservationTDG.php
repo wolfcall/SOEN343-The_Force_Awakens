@@ -167,14 +167,17 @@ class ReservationTDG
 		$result = $conn->query($sql);
 
 		$reservesDates = array();
-                $singleReservation = array();
+        $singleReservation = array();
+		
 		while($row = $result->fetch_assoc())
 		{   
-                        $singleReservation = array("reservationID" => $row["reservationID"],
-                                                   "studentID" => $row["studentID"],
-                                                   "roomID" => $row["roomID"],
-                                                   "startTimeDate" => $row["startTimeDate"],
-                                                   "endTimeDate" => $row["endTimeDate"]);
+                        $singleReservation = array("title" => $row["title"],
+												"description" => $row["description"],
+												"reservationID" => $row["reservationID"],
+                                                "studentID" => $row["studentID"],
+                                                "roomID" => $row["roomID"],
+                                                "startTimeDate" => $row["startTimeDate"],
+                                                "endTimeDate" => $row["endTimeDate"]);
 			array_push($reservesDates, $singleReservation);
 		}
 		
