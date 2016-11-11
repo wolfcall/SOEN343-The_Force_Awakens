@@ -7,7 +7,14 @@ session_start();
 
 $reservation = new ReservationMapper();
 
-$delete = $_POST['delete'];
+$action = $_POST['action'];
+$rID = $_POST['rID'];
+var_dump($action);
+
+var_dump($rID);
+
+die();
+
 //Dropped date from message for the moment since its not being posted - NB
 $date = $_POST['date'];
 
