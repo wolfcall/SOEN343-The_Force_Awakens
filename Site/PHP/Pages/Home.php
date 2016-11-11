@@ -34,7 +34,8 @@ $sID = $student->getSID();
 
 $test = $reserve->getREID($sID);
 $studentReservations = $reserve->getReservations($student->getSID());
-
+$non_studentRes = $reserve->getReservationsByDate("2016-11-11");
+var_dump($non_studentRes);
 function getHours(){
 	for($x = 0; $x < 48; $x++){
 	$time = (int)($x/2) . ":";
