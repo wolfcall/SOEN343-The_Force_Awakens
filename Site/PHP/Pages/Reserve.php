@@ -38,26 +38,22 @@ $reservation = new ReservationMapper();
 
 $name = $room->getName();
 
-/*
-	var_dump($start);
-	echo "<br>";
-	var_dump($end);	
-	echo "<br>";
-	
-	var_dump(double($end-$start));
-	echo "<br>";
-	
-	die();
+$startEx = explode(":", $start);
+$startFloat = ($startEx[0] + ($startEx[1]/60));
 
-*	Must Consider the case of a reservation of 30 mins!!!
+$endEx = explode(":", $end);
+$endFloat = ($endEx[0] + ($endEx[1]/60));
+
+/*
+*	If reservation will last more than 3 hours
 */
-if ( ($end-$start) > 3)
+if ( ($endFloat-$startFloat) > 3)
 {
 	$_SESSION["userMSG"] = $tooLong;
 	$_SESSION["msgClass"] = "failure";
 }
 
-else if ($end <= $start)
+else if ($endFloat <= $startFloat)
 {
 	$_SESSION["userMSG"] = $wrongTime;
 	$_SESSION["msgClass"] = "failure";
@@ -67,25 +63,6 @@ else
 	//Converting the Date to the Proper Format
 	//Should Obtain DD/MM/YYYY
 	$date = date('d/m/Y', strtotime($date));
-
-	//Converting Start Time to the Proper Format
-	//Should Obtain DD/MM/YYYY TIME AM/PM
-	/*$Meridiem1 = "AM";
-	$Meridiem2 = "AM";
-
-	if($start >= 12 and $start <= 24)
-	{
-		$Meridiem1 = "PM";
-		$start=$start-12;
-		$start=$start.":00";
-	}
-
-	if($end >= 12 and $end <= 24)
-	{
-		$Meridiem2 = "PM";
-		$end=$end-12;
-		$end=$end.":00";
-	}*/
 
 	$start = $date." ".$start;//." ".$Meridiem1;
 	$end = $date." ".$end;//." ".$Meridiem2;

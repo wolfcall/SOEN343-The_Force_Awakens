@@ -189,10 +189,8 @@ function getHours(){
 									</div>
 									<div class="form-group">
 										<label>Description of Reservation</label>
-										<textarea rows="4" cols="50" placeholder="Describe the Reservation here..." class="form-control" name="description"></textarea>
-
+										<textarea rows="3" cols="50" placeholder="Describe the Reservation here..." class="form-control" name="description"></textarea>
 									</div>
-
 									<!-- Time slots should be inserted here-->
 									<div class="form-group">
 										<label>Date:</label>
@@ -214,15 +212,9 @@ function getHours(){
 											?>
 										</select>
 									</div>
-																	
-									<!-- Should be Auto-Populated and Non-Editable-->
 									<div class="form-group">
-										<label>First Name</label>
-										<input readonly="readonly" type="text" class="form-control" name="firstName" value = "<?php echo $firstName; ?>"/>
-									</div>
-									<div class="form-group">
-										<label>Last Name</label>
-										<input readonly="readonly" type="text" class="form-control" name="lastName" value = "<?php echo $lastName; ?>"/>
+										<label>Name</label>
+										<input readonly="readonly" type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName." ".$lastName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
