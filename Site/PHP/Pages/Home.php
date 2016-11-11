@@ -16,12 +16,19 @@ include dirname(__FILE__)."/../Utilities/tableHelper.php";
 
 $email = $_SESSION['email'];
 $userMSG = $_SESSION["userMSG"] ;
-$msgClass = $_SESSION["msgClass"] ;
+$msgClass = $_SESSION["msgClass"];
+$modify = $_SESSION["modify"];
+
 
 if(isset($_SESSION["userMSG"])){
 	unset($_SESSION["userMSG"]);
     unset($_SESSION["msgClass"]);
 }
+/*
+if($modify)
+{
+	echo "<script type='text/javascript'> $('#reservationmyModal').modal(); </script>";
+}*/
 
 $student = new StudentMapper($email);
 $reserve = new ReservationMapper();
@@ -54,6 +61,16 @@ function getHours(){
 }
 
 ?>
+
+<script type="text/javascript">
+   $(document).ready(function(){
+		alert("suck me off");
+		$("#profilemyModal").modal();
+	
+});
+</script>
+
+
 <html lang="en">
 
 <!--
@@ -242,6 +259,54 @@ function getHours(){
 						</div>
 					</div>
 				</div>
+				
+				<!-- Edit Reservation Modal -->
+				<div class="modal fade" id="editModal" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 style="color:red;">Please Edit the specifications of your Reservation</h4>
+							</div>
+							<div class="modal-body">
+								<form id="form" action="Reserve.php" method="post">
+
+									<div class="form-group">
+										<label>Title of Reservation</label>
+										<input type="text" class="form-control" placeholder="Enter a Title"  name="title" >
+									</div>
+									<div class="form-group">
+										<label>Description of Reservation</label>
+										<textarea rows="3" cols="50" placeholder="Describe the Reservation here..." class="form-control" name="description"></textarea>
+									</div>
+									<!-- Time slots should be inserted here-->
+									<div class="form-group">
+										<label>Date:</label>
+										<input readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" placeholder = "Nothing" />
+										<br>										
+										<label>Start Time:</label> 
+											<select name = "startTime">
+												<?php getHours()?>
+											</select>&nbsp &nbsp &nbsp
+										<label>End Time:</label>
+											<select name = "endTime">
+												<?php getHours()?>
+											</select>&nbsp &nbsp &nbsp
+										<select readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum">
+											<?php
+												foreach($rooms->getRoomList() as $val){
+													echo "<option value = '{$val->getRID()}'>{$val->getName()}</option>\n";
+												}
+											?>
+										</select>
+									</div>
+									<button type="submit" class="btn btn-default btn-success btn-block">Submit</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>				
 
 				<!-- Profile Modal -->
 				<div class="modal fade" id="profilemyModal" role="dialog">
@@ -310,7 +375,7 @@ function getHours(){
 										$active = new RoomMapper($singleReservation["roomID"]);
 										$activeRoom = $active->getName();
 										$deleteButton = '<br><button type="Submit" name="action" value = "delete" class="center btn btn-default"> Delete Reservation '.$count.'</button>';
-										$modifyButton = '<br><button type="Submit" name="action" value = "modify" class="center btn btn-default"> Modify Reservation '.$count.'</button>';
+										$modifyButton = '<br><button type="Submit" data-target="myModal" id = "modify" name="action" value = "modify" class="center btn btn-default"> Modify Reservation '.$count.'</button>';
 										$hidden = '<input type="hidden" name="rID" value="'.$singleReservation["reservationID"].'"></input>';
 										$startDateTime = explode(" ", $singleReservation["startTimeDate"]);
 										$endDateTime = explode(" ", $singleReservation["endTimeDate"]);

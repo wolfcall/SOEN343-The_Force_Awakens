@@ -40,16 +40,13 @@ $(document).ready(function() {
 $(document).ready(function(){
 	$("#myBtn").click(function(){
 		var selected = document.getElementById("roomOptions").selectedIndex;
-		//selected = document.getElementById("roomOptions").options[selected].text;
 		document.getElementById("roomOptionsMod").selectedIndex = selected;
-		
 		$("#myModal").modal();
 	});
 });
 
 $(document).ready(function(){
 	$(".slot").click(function(){
-		
 		$("#myModal").modal();
 	});
 });
@@ -68,7 +65,6 @@ $(document).ready(function(){
 
 function disappear(){
 	setTimeout(function(){ 
-
 		$("#details").slideUp(1000);
 	}, 3000); 
 }

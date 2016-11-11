@@ -9,20 +9,23 @@ $reservation = new ReservationMapper();
 
 $action = $_POST['action'];
 $rID = $_POST['rID'];
-var_dump($action);
 
-var_dump($rID);
+if($action == "delete")
+{	
+	//Dropped date from message for the moment since its not being posted - NB
+	$date = $_POST['date'];
 
-die();
+	$reservation->deleteReservation($rID);
 
-//Dropped date from message for the moment since its not being posted - NB
-$date = $_POST['date'];
+	$_SESSION["userMSG"] = "You have successfully deleted Reservation ID#" .$rID;
+	$_SESSION["msgClass"] = "success";
 
-$reservation->deleteReservation($delete);
+	header("Location: Home.php");
+}
+else
+{
+	$_SESSION['modify'] = true;
+	header("Location: Home.php");
+}
 
-$_SESSION["userMSG"] = "You have successfully deleted Reservation ID#" .$delete;
-$_SESSION["msgClass"] = "success";
-
-
-header("Location: Home.php");
 ?>
