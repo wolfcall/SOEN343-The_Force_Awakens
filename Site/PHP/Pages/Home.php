@@ -34,8 +34,13 @@ $sID = $student->getSID();
 
 $test = $reserve->getREID($sID);
 $studentReservations = $reserve->getReservations($student->getSID());
+
 $non_studentRes = $reserve->getReservationsByDate("2016-11-11");
 var_dump($non_studentRes);
+
+$today = date("d/m/Y");
+$today = $reserve->getReservationsByDate($today);
+
 function getHours(){
 	for($x = 0; $x < 48; $x++){
 	$time = (int)($x/2) . ":";
@@ -190,10 +195,8 @@ function getHours(){
 									</div>
 									<div class="form-group">
 										<label>Description of Reservation</label>
-										<textarea rows="4" cols="50" placeholder="Describe the Reservation here..." class="form-control" name="description"></textarea>
-
+										<textarea rows="3" cols="50" placeholder="Describe the Reservation here..." class="form-control" name="description"></textarea>
 									</div>
-
 									<!-- Time slots should be inserted here-->
 									<div class="form-group">
 										<label>Date:</label>
@@ -207,18 +210,17 @@ function getHours(){
 											<select name = "endTime">
 												<?php getHours()?>
 											</select>&nbsp &nbsp &nbsp
-										<label>Room:</label>
-											<input readonly="readonly" type="text" class="roomNum" id = "roomChosen" name="roomNum" value = "document.getElementById('roomOptions').value"  />
+										<select readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum">
+											<?php
+												foreach($rooms->getRoomList() as $val){
+													echo "<option value = '{$val->getRID()}'>{$val->getName()}</option>\n";
+												}
+											?>
+										</select>
 									</div>
-																	
-									<!-- Should be Auto-Populated and Non-Editable-->
 									<div class="form-group">
-										<label>First Name</label>
-										<input readonly="readonly" type="text" class="form-control" name="firstName" value = "<?php echo $firstName; ?>"/>
-									</div>
-									<div class="form-group">
-										<label>Last Name</label>
-										<input readonly="readonly" type="text" class="form-control" name="lastName" value = "<?php echo $lastName; ?>"/>
+										<label>Name</label>
+										<input readonly="readonly" type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName." ".$lastName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
@@ -253,12 +255,8 @@ function getHours(){
 							<div class="modal-body">
 								<form id="profileForm" name = "form" action="ChangeDetails.php" method="post" onclick ="showResult();">
 									<div class="form-group">
-										<label>First Name</label>
-										<input readonly="readonly" type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName; ?>"/>
-									</div>
-									<div class="form-group">
-										<label>Last Name</label>
-										<input readonly="readonly" type="text" class="form-control" name="lastName" placeholder="Last Name" value = "<?php echo $lastName; ?>"/>
+										<label>Name</label>
+										<input readonly="readonly" type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName." ".$lastName; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Student ID</label>
@@ -299,40 +297,44 @@ function getHours(){
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 style="color:red;">Your current reservations</h4>
+								<h4 style="color:red;">Your Reservations:</h4>
 							</div>
 							<div class="modal-body">
-								<form id="form" action="DeleteReservation.php" method="post">
-								<?php 
-								$deleteCheckbox;
-								$startDateTime;
-								$endDateTime;
-								foreach($studentReservations as &$singleReservation)
-								{   
-									$startDateTime = explode(" ", $singleReservation["startTimeDate"]);
-									$endDateTime = explode(" ", $singleReservation["endTimeDate"]);
-									$deleteCheckbox = '<input type="checkbox" name="deleteList[]" value="'.$singleReservation["reservationID"].'" />';
-									echo "<div class = 'leftcolumn'>";
-										echo $deleteCheckbox;
-										echo "	Reservation ID: " . $singleReservation["reservationID"] . "<br/>";
-										echo "	Room ID: " . $singleReservation["roomID"] . "<br/>";
-										echo "	Date: " . $startDateTime[0] . "<br/>";
-										echo "	Start Time: " . $startDateTime[1] . "<br/>";
-										echo "	End Time: " . $endDateTime[1] . "<br/>";
-									echo "</div>";
-									echo "<div class = 'rightcolumn'>";
-										echo "<br/>";
-										echo "<button type= 'Submit' class='btn btn-default btn-lg' > Delete </button>";
-									echo "</div>";
-									echo "<br/><br/>";
-								}
-								?>
-									<br><button type="Submit" class="btn btn-default btn-success btn-block">Delete Selected Reservations</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+									<?php 
+									$startDateTime;
+									$endDateTime;
+									$deleteButton;
+									$count = 1;
+									foreach($studentReservations as &$singleReservation)
+									{   
+										$active = new RoomMapper($singleReservation["roomID"]);
+										$activeRoom = $active->getName();
+										$deleteButton = '<br><button type="Submit" name="action" value = "delete" class="center btn btn-default"> Delete Reservation '.$count.'</button>';
+										$modifyButton = '<br><button type="Submit" name="action" value = "modify" class="center btn btn-default"> Modify Reservation '.$count.'</button>';
+										$hidden = '<input type="hidden" name="rID" value="'.$singleReservation["reservationID"].'"></input>';
+										$startDateTime = explode(" ", $singleReservation["startTimeDate"]);
+										$endDateTime = explode(" ", $singleReservation["endTimeDate"]);
+										echo "<form id='myReservationform' action='ModifyReservation.php' method='post'>";
+											echo "<section class = 'leftcolumn'>";
+												echo $hidden;
+												echo "Room Name : ".$activeRoom."<br>";
+												echo "Title : ".$singleReservation['title']."<br>";
+												echo "Date : ".$startDateTime[0]."<br>";
+												echo "Start Time : ".$startDateTime[1]."<br>";
+												echo "End Time : ".$endDateTime[1];
+											echo "</section>";
+											echo "<aside class = 'rightcolumn'>";
+												echo $deleteButton."<br>";
+												echo $modifyButton;
+											echo "</aside>";
+										echo "</form>";
+										$count = $count + 1;
+									}
+									?>
+							</div><!-- End modal-body -->
+						</div><!-- End modal content -->
+					</div><!-- End modal-dialog -->
+				</div><!-- End MyReservations Modal -->
 				<div id="reservation-table"><br>
 					<?php
 						$thelper = new tableHelper();

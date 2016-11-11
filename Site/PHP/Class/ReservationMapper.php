@@ -87,7 +87,8 @@ class ReservationMapper
 	public function getDescription($reID) {
         return $this->reservationActive->getDescription($reID);
     }
-        public function getReservations($sID) {
+    
+	public function getReservations($sID) {
 		return $this->reservationData->getReservations($sID);
 	}
         

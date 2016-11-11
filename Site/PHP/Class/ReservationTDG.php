@@ -20,8 +20,8 @@ class ReservationTDG
 	{
 		$conn = getServerConn();
 		
-		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %h:%i %p')";
-		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %h:%i %p')";
+		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %H:%i')";
+		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";
 		
 		$sql = "INSERT INTO reservation (studentID, roomID, startTimeDate, endTimeDate, title, description) 
 			Values ('".$sID."','".$rID."',".$startTrans.",".$endTrans.",'".$title."','".$desc."')";
@@ -167,14 +167,17 @@ class ReservationTDG
 		$result = $conn->query($sql);
 
 		$reservesDates = array();
-                $singleReservation = array();
+        $singleReservation = array();
+		
 		while($row = $result->fetch_assoc())
 		{   
-                        $singleReservation = array("reservationID" => $row["reservationID"],
-                                                   "studentID" => $row["studentID"],
-                                                   "roomID" => $row["roomID"],
-                                                   "startTimeDate" => $row["startTimeDate"],
-                                                   "endTimeDate" => $row["endTimeDate"]);
+                        $singleReservation = array("title" => $row["title"],
+												"description" => $row["description"],
+												"reservationID" => $row["reservationID"],
+                                                "studentID" => $row["studentID"],
+                                                "roomID" => $row["roomID"],
+                                                "startTimeDate" => $row["startTimeDate"],
+                                                "endTimeDate" => $row["endTimeDate"]);
 			array_push($reservesDates, $singleReservation);
 		}
 		
@@ -191,15 +194,16 @@ class ReservationTDG
 		$dateElements = explode("/", $date);
 		$reformateDate = $dateElements[2]."-".$dateElements[0]."-".$dateElements[1];
 
-		$sql = "SELECT * FROM reservation WHERE startTimeDate LIKE '".$reformateDate."%'";
+		$sql = "SELECT * FROM reservation WHERE date(startTimeDate) = date '".$reformateDate."'"
+				. " and waitlisted = false";
 
-		echo $sql;
+		//echo $sql;
 		$result = $conn->query($sql);
 
 		$reservesTimes = array();
 		while($row = $result->fetch_assoc())
 		{
-			$temp = array($row["startTimeDate"], $row["endTimeDate"]);
+			$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $start["endTimeDate"], $row["title"], $row["description"]);
 			array_push($reservesTimes, $temp);
 		}
 		
@@ -244,7 +248,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %h:%i %p')";
+		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %H:%i')";
 		
 		$sql = "Update reservation SET startTimeDate ='".$startTrans."' WHERE reservationID ='".reID."'";
 
@@ -257,7 +261,7 @@ class ReservationTDG
 		
 		$conn = getServerConn();
 		
-		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %h:%i %p')";
+		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";
 		
 		$sql = "Update reservation SET endTimeDate ='".$endTrans."' WHERE reservationID ='".reID."'";
 
@@ -287,12 +291,13 @@ class ReservationTDG
     }
     
         public function deleteReservation($reID) {
-                $conn = getServerConn();
-		
-		$sql = "DELETE FROM reservation WHERE reservationID ='".$reID."'";
-		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
+			
+			$conn = getServerConn();
+			
+			$sql = "DELETE FROM reservation WHERE reservationID ='".$reID."'";
+			$result = $conn->query($sql);
+			
+			closeServerConn($conn);
         }
 }
 ?>
