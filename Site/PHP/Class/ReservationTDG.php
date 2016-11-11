@@ -194,15 +194,16 @@ class ReservationTDG
 		$dateElements = explode("/", $date);
 		$reformateDate = $dateElements[2]."-".$dateElements[0]."-".$dateElements[1];
 
-		$sql = "SELECT * FROM reservation WHERE startTimeDate LIKE '".$reformateDate."%'";
+		$sql = "SELECT * FROM reservation WHERE date(startTimeDate) = date '".$reformateDate."'"
+				. " and waitlisted = false";
 
-		echo $sql;
+		//echo $sql;
 		$result = $conn->query($sql);
 
 		$reservesTimes = array();
 		while($row = $result->fetch_assoc())
 		{
-			$temp = array($row["startTimeDate"], $row["endTimeDate"]);
+			$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $start["endTimeDate"], $row["title"], $row["description"]);
 			array_push($reservesTimes, $temp);
 		}
 		

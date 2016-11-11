@@ -34,6 +34,8 @@ $sID = $student->getSID();
 
 $test = $reserve->getREID($sID);
 $studentReservations = $reserve->getReservations($student->getSID());
+$today = date("d/m/Y");
+$today = $reserve->getReservationsByDate($today);
 
 function getHours(){
 	for($x = 0; $x < 48; $x++){

@@ -31,7 +31,7 @@ class RoomList {
 			$tmp->setName($val["name"]);
 			$tmp->setLocation($val["location"]);
 			$tmp->setDescription($val["description"]);
-			$this->roomList[] = $tmp;
+			$this->roomList[$val["roomID"]] = $tmp;
 		}
 	}
 	
