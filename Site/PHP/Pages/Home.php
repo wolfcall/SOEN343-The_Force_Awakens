@@ -42,8 +42,8 @@ $sID = $student->getSID();
 $test = $reserve->getREID($sID);
 $studentReservations = $reserve->getReservations($student->getSID());
 
-$non_studentRes = $reserve->getReservationsByDate("2016-11-11");
-var_dump($non_studentRes);
+//$non_studentRes = $reserve->getReservationsByDate("2016-11-11");
+//var_dump($non_studentRes);
 
 $today = date("d/m/Y");
 $today = $reserve->getReservationsByDate($today);
@@ -420,6 +420,7 @@ function getHours(){
 							$values[] = "00";
 						}
 						
+						var_dump($rooms->getRoomList());
 						foreach($rooms->getRoomList() as $val){
 							$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, $val->getName()." (".$val->getLocation().")", "room");
 						}

@@ -26,6 +26,7 @@ elseif (empty($password))
     
 $log = new StudentMapper($email);
 $validate = $log->checkUserAndPass($email,$password);
+$_SESSION["sID"] = $validate;
 
 if ($validate == true)
 {

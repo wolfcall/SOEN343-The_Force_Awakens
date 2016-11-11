@@ -19,12 +19,13 @@ class StudentTDG
     public function checkUserAndPass($email, $pass){
 		$conn = getServerConn();
 		
-		$sql = "SELECT email, password FROM student WHERE email ='".$email."' AND password = password('".$pass."')";
+		$sql = "SELECT studentId, email, password FROM student WHERE email ='".$email."' AND password = password('".$pass."')";
 		$result = $conn->query($sql);
 		closeServerConn($conn);
-		if ($result->num_rows > 0)
-			return true;
-		else 
+		if ($result->num_rows == 1){
+			$row = $result->fetch_assoc();
+			return $row["studentId"];
+		}else 
 			return false;
 		
 	}
