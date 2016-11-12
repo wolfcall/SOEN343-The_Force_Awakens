@@ -23,6 +23,8 @@ class ReservationTDG
 		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %H:%i')";
 		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";
 		
+		// echo $startTrans . "<br>";
+		// echo $endTrans . "<br>";
 		$sql = "INSERT INTO reservation (studentID, roomID, startTimeDate, endTimeDate, title, description) 
 			Values ('".$sID."','".$rID."',".$startTrans.",".$endTrans.",'".$title."','".$desc."')";
 		
@@ -163,24 +165,8 @@ class ReservationTDG
 		closeServerConn($conn);
 		return $row["description"];
     }
-
-	public function getReservationsDates($sID) {
-		$conn = getServerConn();
-
-		$sql = "SELECT * FROM reservation WHERE studentID ='".$sID."'";
-		$result = $conn->query($sql);
-
-		$reservesDates = array();
-		while($row = $result->fetch_assoc())
-		{   
-			array_push($reservesDates, $row["startTimeDate"]);
-		}
-		
-		closeServerConn($conn);
-		return $reservesDates;
-	}
-        
-        public function getReservations($sID) {
+	
+	public function getReservations($sID) {
 		$conn = getServerConn();
 
 		$sql = "SELECT * FROM reservation WHERE studentID ='".$sID."'";
@@ -212,22 +198,29 @@ class ReservationTDG
 
 		//Need to reformate date so that it can be used in the database
 		$dateElements = explode("/", $date);
-		$reformateDate = $dateElements[2]."-".$dateElements[0]."-".$dateElements[1];
+		$reformatDate = $dateElements[2]."-".$dateElements[0]."-".$dateElements[1];
 
-		$sql = "SELECT * FROM reservation WHERE date(startTimeDate) = date '".$reformateDate."'"
+		$sql = "SELECT * FROM reservation WHERE date(startTimeDate) = date '".$reformatDate."'"
 				. " and waitlisted = false";
 
 		//echo $sql;
 		$result = $conn->query($sql);
 
 		$reservesTimes = array();
-		while($row = $result->fetch_assoc())
-		{
-			$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $start["endTimeDate"], $row["title"], $row["description"]);
-			array_push($reservesTimes, $temp);
-		}
+		// var_dump($result);
 		
+		// echo "<br>ASASASASASASKLHSJKGS<br>";
+		
+		if($result != null) {
+			while($row = $result->fetch_assoc())
+			{
+				$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $start["endTimeDate"], $row["title"], $row["description"]);
+				array_push($reservesTimes, $temp);
+			}
+		}
+
 		closeServerConn($conn);
+
 		return $reservesTimes; 
 	}
 	

@@ -85,7 +85,7 @@ class ReservationMapper
     }
 	
 	public function getTitle($reID) {
-        return $this->reservationActive->getTitle($reID);
+       return $this->reservationActive->getTitle($reID);
     }
 	
 	public function getDescription($reID) {
@@ -95,12 +95,8 @@ class ReservationMapper
 	public function getReservations($sID) {
 		return $this->reservationData->getReservations($sID);
 	}
-        
-	public function getReservationsDates($sID) {
-		return $this->reservationData->getReservationsDates($sID);
-	}
 
-	public function getReservationsByDate($start) {
+	public function getReservationsByDate($start, $sID) {
 		return $this->reservationData->getReservationsByDate($start);
 	}
 	
