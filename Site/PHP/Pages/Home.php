@@ -43,6 +43,8 @@ $studentReservations = $reserve->getReservations($student->getSID());
 $modReserve = array();
 if($modify)
 {
+	//echo $_SESSION['reserveDate'];
+	
 	foreach($studentReservations as &$singleReservation)
 	{ 
 		if($_SESSION['reservation'] == $singleReservation['reservationID'])
@@ -292,7 +294,7 @@ function getHours(){
 									<!-- Time slots should be inserted here-->
 									<div class="form-group">
 										<label>Date:</label>
-										<input readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" placeholder = "Nothing" />
+										<input readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" value="<?php echo $_SESSION['reserveDate']; ?>"/>
 										<br>										
 										<label>Start Time:</label> 
 											<select name = "startTime">

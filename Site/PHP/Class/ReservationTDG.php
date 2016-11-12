@@ -54,6 +54,26 @@ class ReservationTDG
 				
 	/* The Get methods for all Entities in the reservation table can be found here
      */
+	
+	public function getReservation($reID)
+	{
+		//This needs to be fixed, doesnt work right now
+		$conn = getServerConn();
+
+		$sql = "SELECT * FROM reservation WHERE reservationID ='".$reID."'";
+		$result = $conn->query($sql);
+		$singleReservation = array("title" => $result["title"],
+												"description" => $result["description"],
+												"reservationID" => $result["reservationID"],
+                                                "studentID" => $result["studentID"],
+                                                "roomID" => $result["roomID"],
+                                                "startTimeDate" => $result["startTimeDate"],
+                                                "endTimeDate" => $result["endTimeDate"]);
+		
+		closeServerConn($conn);
+		return $singleReservation;
+	}	
+	 
     public function getREID($sID){
 		
 		$conn = getServerConn();

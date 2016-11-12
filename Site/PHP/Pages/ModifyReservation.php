@@ -26,6 +26,14 @@ else
 {
 	$_SESSION['modify'] = true;
 	$_SESSION['reservation'] = $rID;
+	
+	
+	//Really shouldn't be calling the database all the time (need that identity map eventually)
+	$reserve = array();
+	//$reserve = $reservation->getReservation($rID);
+	//$startDateTime = explode(" ", $reserve["startTimeDate"]);
+	$_SESSION['reserveDate'] = $reserve["startTimeDate"];
+	
 	header("Location: Home.php");
 }
 
