@@ -4,15 +4,13 @@
 //Start session
 session_start();
 
-include "../Class/Student.php";
 include "../Class/StudentMapper.php";
 include "../Class/RoomMapper.php";
 include "../Class/ReservationMapper.php";
 include "../Class/WaitlistMapper.php";
 include "../Class/RoomList.php";
-
-
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
+
 
 $email = $_SESSION['email'];
 $userMSG = $_SESSION["userMSG"] ;
@@ -416,14 +414,15 @@ function getHours(){
 						$thelper = new tableHelper();
 						
 						$params = array("class"=>"reservations", "id"=>"reservations");
-						
+
 						$table = $thelper->initTable($params);
 						$values = array();
 						for($x = 0 ; $x < 24 ; $x++){
 							$values[] = sprintf("%02.0f",$x).":00";
 						}
-						$table .= $thelper->populateHeader(array("colspan" => "2"), "time", $values, " ", "date", "datetoday");
 						
+						$table .= $thelper->populateHeader(array("colspan" => "2"), "time", $values, " ", "date", "datetoday");
+
 						$roomRes = $rooms->getRoomList();
 						foreach($today as $res){
 							$start = $res->getStartTimeDate();
@@ -432,7 +431,7 @@ function getHours(){
 							$end = $res->getEndTimeDate();
 							$end = explode(" ", $end);
 							$end = explode(":", $end[1]);
-							
+
 							$slots = (2*($end[0] - $start[0])) + (($end[1] == $start[1])?0:1);
 							$begin = (2*$start[0]) + ((strcmp($start[1],"00")==0)?0:1);
 							for($x = 0 ; $x < $slots ; $x++){
@@ -441,16 +440,15 @@ function getHours(){
 								$roomRes[$id][1][$pos] = '11';
 							}
 						}
-						
+
 						foreach($roomRes as $val){
 							$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $val[1], $val[0]->getName()." (".$val[0]->getLocation().")", "room");
 						}
-						
+
 						$table .= $thelper->closeTable();
-						
+
 						echo $table;
 					?>
-				
 				</div>
 				<!-- id reservation-table -->
 			</div>

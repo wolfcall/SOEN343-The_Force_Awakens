@@ -13,6 +13,7 @@ $(document).ready(function() {
 						+ currentDate.getDate() + " "
 						+ currentDate.getUTCFullYear();
 
+	//loadTable(currentDate.getUTCFullYear() + "/" + (currentDate.getMonth()+1) + "/" + currentDate.getDate());
 	document.getElementById("datetoday").innerHTML = todayDate;
 	document.getElementById("dateDrop").value = todayDate;
 	/** end of the function, resued in "onSelect" feature of datepicker */
@@ -31,8 +32,10 @@ $(document).ready(function() {
 						+ monthNames[pickedDate.getMonth()] + " " 
 						+ pickedDate.getDate() + " "
 						+ pickedDate.getUTCFullYear();
+			//loadTable(pickedDate.getUTCFullYear() + "/" + (pickedDate.getMonth()+1) + "/" + pickedDate.getDate());
 			document.getElementById("datetoday").innerHTML = todayDate;
 			document.getElementById("dateDrop").value = todayDate;
+			
 		}
 	});
 });
@@ -70,3 +73,14 @@ function disappear(){
 		$("#details").slideUp(1000);
 	}, 3000); 
 }
+
+function loadTable(date) {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+	   document.getElementById("reservation-table").innerHTML = this.responseText;
+	  }
+	};
+	xhttp.open("GET", "reservationTable.php?Date=" + date + "", false);
+	xhttp.send();
+} 

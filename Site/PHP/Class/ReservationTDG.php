@@ -16,6 +16,13 @@ class ReservationTDG
 	
 	/* The Insert method to add a new reservation into the reservation table
 	*/
+	
+	private $star;
+	
+	public function __construct() {
+		$this->star = "reservationID, studentID, roomID, date_format(startTimeDate,'%Y/%m/%d %H:%i') as startTimeDate, date_format(endTimeDate,'%Y/%m/%d %H:%i') as endTimeDate, title, description, waitlisted";
+	}
+	
 	public function addReservation($sID, $rID, $start, $end, $title, $desc)
 	{
 		$conn = getServerConn();
@@ -60,7 +67,7 @@ class ReservationTDG
 		//This needs to be fixed, doesnt work right now
 		$conn = getServerConn();
 
-		$sql = "SELECT * FROM reservation WHERE reservationID ='".$reID."'";
+		$sql = "SELECT {$this->star} FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$singleReservation = array("title" => $result["title"],
 												"description" => $result["description"],
@@ -167,7 +174,7 @@ class ReservationTDG
 	public function getReservations($sID) {
 		$conn = getServerConn();
 
-		$sql = "SELECT * FROM reservation WHERE studentID ='".$sID."'";
+		$sql = "SELECT {$this->star} FROM reservation WHERE studentID ='".$sID."'";
 		$result = $conn->query($sql);
 
 		$reservesDates = array();
@@ -193,20 +200,20 @@ class ReservationTDG
 		$conn = getServerConn();
 
 		$date = substr($start,0,10);
-
+		
 		//Need to reformate date so that it can be used in the database
 		$dateElements = explode("/", $date);
 		$reformatDate = $dateElements[2]."-".$dateElements[0]."-".$dateElements[1];
 
-		$sql = "SELECT * FROM reservation WHERE date(startTimeDate) = date '".$reformatDate."'"
+		$sql = "SELECT {$this->star} FROM reservation WHERE date(startTimeDate) = str_to_date('".$reformatDate."','%Y-%d-%m')"
 				. " and waitlisted = false";
 
-		echo $sql;
+		//var_dump($sql);
 		$result = $conn->query($sql);
 
 		$reservesTimes = array();
 
-		if($result != null) {
+		if(!is_null($reservesTimes)) {
 			while($row = $result->fetch_assoc())
 			{
 				$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $row["endTimeDate"], $row["title"], $row["description"]);
