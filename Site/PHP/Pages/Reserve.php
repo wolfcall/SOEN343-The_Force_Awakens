@@ -62,7 +62,7 @@ else
 {
 	//Converting the Date to the Proper Format
 	//Should Obtain DD/MM/YYYY
-	$date = date('d-m-Y', strtotime($passedDate));
+	$dateEU = date('d-m-Y', strtotime($passedDate));
 
 	//Check for presence of more than 3 reservations in the same week 
 	//before actually adding the reservation
@@ -71,10 +71,10 @@ else
 	//NOT BASED ON DATE
 	$currentReservations = $reservation->getReservations($sID);
 	
-	if(checkWeek($date, $sID, $currentReservations)) {
-		$date = date('m/d/Y', strtotime($passedDate));
-		$start = $date." ".$start;//." ".$Meridiem1;
-		$end = $date." ".$end;//." ".$Meridiem2;
+	if(checkWeek($dateEU, $sID, $currentReservations)) {
+		$dateAmer = date('m/d/Y', strtotime($passedDate));
+		$start = $dateAmer." ".$start;//." ".$Meridiem1;
+		$end = $dateAmer." ".$end;//." ".$Meridiem2;
 
 		//Just realize display message is in format mm/dd/yyyy
 		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc);

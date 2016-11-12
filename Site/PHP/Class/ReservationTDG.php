@@ -22,9 +22,7 @@ class ReservationTDG
 		
 		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %H:%i')";
 		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";
-		
-		// echo $startTrans . "<br>";
-		// echo $endTrans . "<br>";
+
 		$sql = "INSERT INTO reservation (studentID, roomID, startTimeDate, endTimeDate, title, description) 
 			Values ('".$sID."','".$rID."',".$startTrans.",".$endTrans.",'".$title."','".$desc."')";
 		
