@@ -25,6 +25,7 @@ if($action == "delete")
 else
 {
 	$_SESSION['modify'] = true;
+	$_SESSION['reservation'] = $rID;
 	header("Location: Home.php");
 }
 

@@ -39,6 +39,18 @@ $sID = $student->getSID();
 $test = $reserve->getREID($sID);
 $studentReservations = $reserve->getReservations($student->getSID());
 
+//If user selects a reservation to modify, this will obtain the reservation details
+$modReserve = array();
+if($modify)
+{
+	foreach($studentReservations as &$singleReservation)
+	{ 
+		if($_SESSION['reservation'] == $singleReservation['reservationID'])
+		{
+			$modReserve = $singleReservation;
+		}
+	}
+}
 //$non_studentRes = $reserve->getReservationsByDate("2016-11-11");
 //var_dump($non_studentRes);
 
@@ -271,11 +283,11 @@ function getHours(){
 
 									<div class="form-group">
 										<label>Title of Reservation</label>
-										<input type="text" class="form-control" placeholder="Enter a Title"  name="title" >
+										<input type="text" class="form-control" placeholder="Enter a Title"  name="title" value = "<?php echo $modReserve['title']; ?>">
 									</div>
 									<div class="form-group">
 										<label>Description of Reservation</label>
-										<textarea rows="3" cols="50" placeholder="Describe the Reservation here..." class="form-control" name="description"></textarea>
+										<textarea rows="3" cols="50" placeholder="Describe the Reservation here..." class="form-control" name="description"><?php echo $modReserve['description']; ?></textarea>
 									</div>
 									<!-- Time slots should be inserted here-->
 									<div class="form-group">
