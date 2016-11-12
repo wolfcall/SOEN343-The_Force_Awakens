@@ -217,11 +217,11 @@ function getHours(){
 
 									<div class="form-group">
 										<label>Title of Reservation</label>
-										<input type="text" class="form-control" placeholder="Enter a Title"  name="title" >
+										<input required type="text" class="form-control" placeholder="Enter a Title"  name="title" >
 									</div>
 									<div class="form-group">
 										<label>Description of Reservation</label>
-										<textarea rows="3" cols="50" placeholder="Describe the Reservation here..." class="form-control" name="description"></textarea>
+										<textarea rows="3" cols="50" placeholder="Describe the Reservation here..." class="form-control" name="description" required></textarea>
 									</div>
 									<!-- Time slots should be inserted here-->
 									<div class="form-group">
