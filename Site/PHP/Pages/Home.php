@@ -24,11 +24,8 @@ if(isset($_SESSION["userMSG"])){
 	unset($_SESSION["userMSG"]);
     unset($_SESSION["msgClass"]);
 }
-/*
-if($modify)
-{
-	echo "<script type='text/javascript'> $('#reservationmyModal').modal(); </script>";
-}*/
+
+
 
 $student = new StudentMapper($email);
 $reserve = new ReservationMapper();
@@ -62,13 +59,6 @@ function getHours(){
 
 ?>
 
-<script type="text/javascript">
-   $(document).ready(function(){
-		alert("suck me off");
-		$("#profilemyModal").modal();
-	
-});
-</script>
 
 
 <html lang="en">
@@ -127,7 +117,14 @@ function getHours(){
     
 	<!-- All Javascript for Home.php page -->
 	<script src="../../Javascript/Home.js"></script>
-		
+        
+<?php
+    if($modify)
+    {
+            echo '<script> $(document).ready(function(){$("#editModal").modal("show");}); </script>';
+            $_SESSION['modify'] = NULL; //Should clear out modify session if user refreshes
+    }
+?>
 </head>
 
 <body>

@@ -37,6 +37,8 @@ $(document).ready(function() {
 	});
 });
 
+
+
 $(document).ready(function(){
 	$("#myBtn").click(function(){
 		var selected = document.getElementById("roomOptions").selectedIndex;
