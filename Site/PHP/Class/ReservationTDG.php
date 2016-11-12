@@ -23,6 +23,8 @@ class ReservationTDG
 		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %H:%i')";
 		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";
 		
+		// echo $startTrans . "<br>";
+		// echo $endTrans . "<br>";
 		$sql = "INSERT INTO reservation (studentID, roomID, startTimeDate, endTimeDate, title, description) 
 			Values ('".$sID."','".$rID."',".$startTrans.",".$endTrans.",'".$title."','".$desc."')";
 		
@@ -54,6 +56,26 @@ class ReservationTDG
 				
 	/* The Get methods for all Entities in the reservation table can be found here
      */
+	
+	public function getReservation($reID)
+	{
+		//This needs to be fixed, doesnt work right now
+		$conn = getServerConn();
+
+		$sql = "SELECT * FROM reservation WHERE reservationID ='".$reID."'";
+		$result = $conn->query($sql);
+		$singleReservation = array("title" => $result["title"],
+												"description" => $result["description"],
+												"reservationID" => $result["reservationID"],
+                                                "studentID" => $result["studentID"],
+                                                "roomID" => $result["roomID"],
+                                                "startTimeDate" => $result["startTimeDate"],
+                                                "endTimeDate" => $result["endTimeDate"]);
+		
+		closeServerConn($conn);
+		return $singleReservation;
+	}	
+	 
     public function getREID($sID){
 		
 		$conn = getServerConn();
@@ -143,24 +165,8 @@ class ReservationTDG
 		closeServerConn($conn);
 		return $row["description"];
     }
-
-	public function getReservationsDates($sID) {
-		$conn = getServerConn();
-
-		$sql = "SELECT * FROM reservation WHERE studentID ='".$sID."'";
-		$result = $conn->query($sql);
-
-		$reservesDates = array();
-		while($row = $result->fetch_assoc())
-		{   
-			array_push($reservesDates, $row["startTimeDate"]);
-		}
-		
-		closeServerConn($conn);
-		return $reservesDates;
-	}
-        
-        public function getReservations($sID) {
+	
+	public function getReservations($sID) {
 		$conn = getServerConn();
 
 		$sql = "SELECT * FROM reservation WHERE studentID ='".$sID."'";
@@ -192,22 +198,26 @@ class ReservationTDG
 
 		//Need to reformate date so that it can be used in the database
 		$dateElements = explode("/", $date);
-		$reformateDate = $dateElements[2]."-".$dateElements[0]."-".$dateElements[1];
+		$reformatDate = $dateElements[2]."-".$dateElements[0]."-".$dateElements[1];
 
-		$sql = "SELECT * FROM reservation WHERE date(startTimeDate) = date '".$reformateDate."'"
+		$sql = "SELECT * FROM reservation WHERE date(startTimeDate) = date '".$reformatDate."'"
 				. " and waitlisted = false";
 
 		echo $sql;
 		$result = $conn->query($sql);
 
 		$reservesTimes = array();
-		while($row = $result->fetch_assoc())
-		{
-			$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $row["endTimeDate"], $row["title"], $row["description"]);
-			array_push($reservesTimes, $temp);
+
+		if($result != null) {
+			while($row = $result->fetch_assoc())
+			{
+				$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $row["endTimeDate"], $row["title"], $row["description"]);
+				array_push($reservesTimes, $temp);
+			}
 		}
-		
+
 		closeServerConn($conn);
+
 		return $reservesTimes; 
 	}
 	

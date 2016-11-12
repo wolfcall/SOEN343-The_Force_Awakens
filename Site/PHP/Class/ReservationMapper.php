@@ -60,6 +60,10 @@ class ReservationMapper
 	/*	The REID takes the sID as a parameter so it can find the appropriate information of the student's reservation
 	*	Only get from the database
 	*/
+	public function getReservation($reID){
+		return $this->reservationData->getReservation($reID);
+	}
+	
 	public function getREID($sID){
 		return $this->reservationData->getREID($sID);
     }
@@ -81,7 +85,7 @@ class ReservationMapper
     }
 	
 	public function getTitle($reID) {
-        return $this->reservationActive->getTitle($reID);
+       return $this->reservationActive->getTitle($reID);
     }
 	
 	public function getDescription($reID) {
@@ -91,12 +95,8 @@ class ReservationMapper
 	public function getReservations($sID) {
 		return $this->reservationData->getReservations($sID);
 	}
-        
-	public function getReservationsDates($sID) {
-		return $this->reservationData->getReservationsDates($sID);
-	}
 
-	public function getReservationsByDate($start) {
+	public function getReservationsByDate($start, $sID) {
 		return $this->reservationData->getReservationsByDate($start);
 	}
 	
