@@ -1451,3 +1451,11 @@ org.eclipse.dltk.core.ModelException:   does not exist
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
 !SUBENTRY 1 org.eclipse.dltk.core 4 969 2016-11-05 14:12:00.184
 !MESSAGE   does not exist
+
+!ENTRY org.eclipse.core.jobs 4 2 2016-11-05 14:33:51.970
+!MESSAGE An internal error occurred during: "Updating occurence annotations".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.php.ui.editor.SharedASTProvider.getAST(SharedASTProvider.java:143)
+	at org.eclipse.php.internal.ui.editor.PHPStructuredEditor$4.run(PHPStructuredEditor.java:3055)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
