@@ -44,7 +44,6 @@ $studentReservations = $reserve->getReservations($student->getSID());
 
 $today = date("d/m/Y");
 $today = $reserve->getReservationsByDate($today);
-
 function getHours(){
 	for($x = 0; $x < 48; $x++){
 	$time = (int)($x/2) . ":";
@@ -124,6 +123,7 @@ function getHours(){
             echo '<script> $(document).ready(function(){$("#editModal").modal("show");}); </script>';
             $_SESSION['modify'] = NULL; //Should clear out modify session if user refreshes
     }
+	
 ?>
 </head>
 
@@ -180,7 +180,7 @@ function getHours(){
 						<select id = "roomOptions" class="btn btn-default btn-lg network-name" name = "roomNum">
 							<?php
 								foreach($rooms->getRoomList() as $val){
-									echo "<option value = '{$val->getRID()}'>{$val->getName()}</option>\n";
+									echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
 								}
 							?>
 						</select>
@@ -227,7 +227,7 @@ function getHours(){
 										<select readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum">
 											<?php
 												foreach($rooms->getRoomList() as $val){
-													echo "<option value = '{$val->getRID()}'>{$val->getName()}</option>\n";
+													echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
 												}
 											?>
 										</select>
@@ -293,7 +293,7 @@ function getHours(){
 										<select readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum">
 											<?php
 												foreach($rooms->getRoomList() as $val){
-													echo "<option value = '{$val->getRID()}'>{$val->getName()}</option>\n";
+													echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
 												}
 											?>
 										</select>
@@ -404,22 +404,32 @@ function getHours(){
 						$params = array("class"=>"reservations", "id"=>"reservations");
 						
 						$table = $thelper->initTable($params);
-						
 						$values = array();
 						for($x = 0 ; $x < 24 ; $x++){
 							$values[] = sprintf("%02.0f",$x).":00";
 						}
-						
 						$table .= $thelper->populateHeader(array("colspan" => "2"), "time", $values, " ", "date", "datetoday");
 						
-						$values = array();
-						for($x = 0 ; $x < 48 ; $x++){
-							$values[] = "00";
+						$roomRes = $rooms->getRoomList();
+						foreach($today as $res){
+							$start = $res->getStartTimeDate();
+							$start = explode(" ", $start);
+							$start = explode(":", $start[1]);
+							$end = $res->getEndTimeDate();
+							$end = explode(" ", $end);
+							$end = explode(":", $end[1]);
+							
+							$slots = (2*($end[0] - $start[0])) + (($end[1] == $start[1])?0:1);
+							$begin = (2*$start[0]) + ((strcmp($start[1],"00")==0)?0:1);
+							for($x = 0 ; $x < $slots ; $x++){
+								$id = $res->getRID();
+								$pos = $begin + $x;
+								$roomRes[$id][1][$pos] = '11';
+							}
 						}
 						
-						var_dump($rooms->getRoomList());
-						foreach($rooms->getRoomList() as $val){
-							$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $values, $val->getName()." (".$val->getLocation().")", "room");
+						foreach($roomRes as $val){
+							$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $val[1], $val[0]->getName()." (".$val[0]->getLocation().")", "room");
 						}
 						
 						$table .= $thelper->closeTable();

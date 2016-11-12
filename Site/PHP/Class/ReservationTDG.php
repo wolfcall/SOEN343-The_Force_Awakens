@@ -197,13 +197,13 @@ class ReservationTDG
 		$sql = "SELECT * FROM reservation WHERE date(startTimeDate) = date '".$reformateDate."'"
 				. " and waitlisted = false";
 
-		//echo $sql;
+		echo $sql;
 		$result = $conn->query($sql);
 
 		$reservesTimes = array();
 		while($row = $result->fetch_assoc())
 		{
-			$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $start["endTimeDate"], $row["title"], $row["description"]);
+			$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $row["endTimeDate"], $row["title"], $row["description"]);
 			array_push($reservesTimes, $temp);
 		}
 		

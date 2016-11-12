@@ -31,8 +31,14 @@ class RoomList {
 			$tmp->setName($val["name"]);
 			$tmp->setLocation($val["location"]);
 			$tmp->setDescription($val["description"]);
-			$this->roomList[$val["roomID"]] = $tmp;
+			$this->roomList[$val["roomID"]][0] = $tmp;
+			$values = array();
+			for($x = 0 ; $x < 48 ; $x++){
+				$values[] = "00";
+			}
+			$this->roomList[$val["roomID"]][1] = $values;
 		}
+		
 	}
 	
 	public function getRoomList(){
