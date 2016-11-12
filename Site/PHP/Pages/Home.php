@@ -411,7 +411,7 @@ function getHours(){
 				</div><!-- End MyReservations Modal -->
 				<div id="reservation-table"><br>
 					<?php
-						$thelper = new tableHelper();
+						/*$thelper = new tableHelper();
 						
 						$params = array("class"=>"reservations", "id"=>"reservations");
 
@@ -447,7 +447,7 @@ function getHours(){
 
 						$table .= $thelper->closeTable();
 
-						echo $table;
+						echo $table;*/
 					?>
 				</div>
 				<!-- id reservation-table -->

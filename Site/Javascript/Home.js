@@ -13,7 +13,7 @@ $(document).ready(function() {
 						+ currentDate.getDate() + " "
 						+ currentDate.getUTCFullYear();
 
-	//loadTable(currentDate.getUTCFullYear() + "/" + (currentDate.getMonth()+1) + "/" + currentDate.getDate());
+	loadTable(currentDate.getUTCFullYear() + "/" + (currentDate.getMonth()+1) + "/" + currentDate.getDate());
 	document.getElementById("datetoday").innerHTML = todayDate;
 	document.getElementById("dateDrop").value = todayDate;
 	/** end of the function, resued in "onSelect" feature of datepicker */
@@ -32,7 +32,7 @@ $(document).ready(function() {
 						+ monthNames[pickedDate.getMonth()] + " " 
 						+ pickedDate.getDate() + " "
 						+ pickedDate.getUTCFullYear();
-			//loadTable(pickedDate.getUTCFullYear() + "/" + (pickedDate.getMonth()+1) + "/" + pickedDate.getDate());
+			loadTable(pickedDate.getUTCFullYear() + "/" + (pickedDate.getMonth()+1) + "/" + pickedDate.getDate());
 			document.getElementById("datetoday").innerHTML = todayDate;
 			document.getElementById("dateDrop").value = todayDate;
 			

@@ -11,7 +11,7 @@ include dirname(__FILE__)."/../Utilities/tableHelper.php";
 include "../Class/RoomList.php";
 
 $reserve = new ReservationMapper();
-
+echo "<br />"; 
 $rooms = new RoomList();
 if(isset($_GET["Date"])){
 	$date = explode("/", $_GET["Date"]);
