@@ -56,7 +56,7 @@
                 <div class="col-lg-12">
                     <div class="intro-message">
                         <h1>Room Reserver</h1>
-                        <h3>SOEN331 Fall 2016</h3>
+                        <h3>SOEN343 Fall 2016</h3>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                             <li>
