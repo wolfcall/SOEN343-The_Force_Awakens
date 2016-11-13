@@ -171,6 +171,7 @@ class ReservationTDG
 		return $row["description"];
     }
 	
+	//Get reservations by Student ID
 	public function getReservations($sID) {
 		$conn = getServerConn();
 
@@ -195,7 +196,8 @@ class ReservationTDG
 		closeServerConn($conn);
 		return $reservesDates;
 	}
-        
+    
+	//Get reservations by Date ONLY
 	public function getReservationsByDate($start) {
 		$conn = getServerConn();
 
@@ -208,7 +210,6 @@ class ReservationTDG
 		$sql = "SELECT {$this->star} FROM reservation WHERE date(startTimeDate) = str_to_date('".$reformatDate."','%Y-%d-%m')"
 				. " and waitlisted = false";
 
-		//var_dump($sql);
 		$result = $conn->query($sql);
 
 		$reservesTimes = array();
@@ -226,6 +227,36 @@ class ReservationTDG
 		return $reservesTimes; 
 	}
 	
+	//Get reservations by room ID AND Date (for overlap checking)
+	public function getReservationsByRoomAndDate($roomID, $start) {
+		$conn = getServerConn();
+
+		$date = substr($start,0,10);
+
+		//Need to reformate date so that it can be used in the database
+		$dateElements = explode("/", $date);
+		$reformatDate = $dateElements[2]."-".$dateElements[0]."-".$dateElements[1];
+
+		$sql = "SELECT * FROM reservation WHERE date(startTimeDate) = date '".$reformatDate."'"
+				. " AND roomID = '".$roomID."' and waitlisted = false";
+		
+		$result = $conn->query($sql);
+
+		$reservesTimes = array();
+
+		if($result != null) {
+			while($row = $result->fetch_assoc())
+			{
+				$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $row["endTimeDate"], $row["title"], $row["description"]);
+				array_push($reservesTimes, $temp);
+			}
+		}
+
+		closeServerConn($conn);
+
+		return $reservesTimes; 
+	}
+
 	/* The Update methods for all Entities in the reservation table can be found here
      */
 	

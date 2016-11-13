@@ -63,29 +63,31 @@ else
 	//Converting the Date to the Proper Format
 	//Should Obtain DD/MM/YYYY
 	$dateEU = date('d-m-Y', strtotime($passedDate));
+	$dateAmer = date('m/d/Y', strtotime($passedDate));
+	$start = $dateAmer." ".$start;//." ".$Meridiem1;
+	$end = $dateAmer." ".$end;//." ".$Meridiem2;
 
 	//Check for presence of more than 3 reservations in the same week 
 	//before actually adding the reservation
-
-	//INSTEAD PULL BASED ON STUDENT ID, THEN CHANGE THE DATES OF EACH
-	//NOT BASED ON DATE
 	$currentReservations = $reservation->getReservations($sID);
-	
-	if(checkWeek($dateEU, $sID, $currentReservations)) {
-		$dateAmer = date('m/d/Y', strtotime($passedDate));
-		$start = $dateAmer." ".$start;//." ".$Meridiem1;
-		$end = $dateAmer." ".$end;//." ".$Meridiem2;
 
+
+	//Get the list of reservations in same room and on same day
+	$availableTimes = $reservation->getReservationsByRoomAndDate($rID, $start);
+
+	//Get start and end time of new reservation, convert the difference to mins to find duration
+	$startDate = new DateTime($start);
+	$endDate = new DateTime($end);
+
+	//Total duration of new reservation
+//	$total = getDuration($startDate, $endDate);
+
+	if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) {
 		//Just realize display message is in format mm/dd/yyyy
 		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
 		$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end. " in Room ".$name."!";
 		$_SESSION["msgClass"] = "success";
 	}
-	
-	else {
-		$_SESSION["userMSG"] = "You have already made 3 reservations this week";
-	  	$_SESSION["msgClass"] = "failure";
-	  }
 }
 
 header("Location: Home.php");
@@ -124,10 +126,55 @@ function checkWeek($d, $s, $current) {
 	if($counter < 3) {
 		return true;
 	}
+
+	$_SESSION["userMSG"] = "You have already made 3 reservations this week";
+	$_SESSION["msgClass"] = "failure";
 	return false;
 }
 
-function checkOverlap($start) {
+function checkOverlap($start, $end, $current) {
+	$newStartTime = $start->format("Hi");
+	$newEndTime = $end->format("Hi");
 
+	for($x = 0; $x < count($current); $x++) {
+		//Get start and end time of new reservation, convert the difference to mins to find duration
+		$startTime = new DateTime($current[$x]->getStartTimeDate());
+		$endTime = new DateTime($current[$x]->getEndTimeDate());
+
+		$tempStart = $startTime->format("Hi");
+		$tempEnd = $endTime->format("Hi");
+		
+	//	echo "Start: " . $tempStart . " End: " . $tempEnd."<br>";
+		
+		//If pulled value starts after the ending of the new reservation, ignore this case
+		if($tempStart >= $newEndTime) {
+			continue;
+		}
+
+		//If pulled value ends before the start of the new reservation, ignore this case
+		else if($tempEnd <= $newStartTime) {
+			continue;
+		}
+		//If it's not ignored, then this case is a conflict, return false
+		else {
+			$startFormat = $startTime->format("H:i");
+			$endFormat = $endTime->format("H:i");
+
+			$_SESSION["userMSG"] = "This option overlaps with the reservation beginning at " .$startFormat. " and ending at ".$endFormat;
+	  		$_SESSION["msgClass"] = "failure";
+			return false;
+		}
+	}
+	return true;
 }
+
+//Get duration of reservation, from start to end, in mins
+//LEAVE FOR NOW, MIGHT NEED DURATION IN FUTURE
+
+// function getDuration($startTime, $endTime) {
+// 	$diff = date_diff($startTime, $endTime);
+// 	$dateArray = explode(":", $diff->format('%h:%i'));
+// 	$totalMinutes = $dateArray[0]*60 + $dateArray[1];
+// 	return $totalMinutes;
+// }
 ?>

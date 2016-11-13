@@ -99,6 +99,10 @@ class ReservationMapper
 	public function getReservationsByDate($start, $sID) {
 		return $this->reservationData->getReservationsByDate($start);
 	}
+
+	public function getReservationsByRoomAndDate($rID, $start) {
+		return $this->reservationData->getReservationsByRoomAndDate($rID, $start);
+	}
 	
 	/*	Update methods for the Reservation TDG and Domain objects
 	*/
