@@ -29,10 +29,10 @@ else
 	
 	
 	//Really shouldn't be calling the database all the time (need that identity map eventually)
-	$reserve = array();
+	//$reserve = array();
 	//$reserve = $reservation->getReservation($rID);
 	//$startDateTime = explode(" ", $reserve["startTimeDate"]);
-	$_SESSION['reserveDate'] = $reserve["startTimeDate"];
+	//$_SESSION['reserveDate'] = $reserve["startTimeDate"];
 	
 	header("Location: Home.php");
 }

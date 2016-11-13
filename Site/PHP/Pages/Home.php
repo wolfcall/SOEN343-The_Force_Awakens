@@ -39,6 +39,8 @@ $studentReservations = $reserve->getReservations($student->getSID());
 
 //If user selects a reservation to modify, this will obtain the reservation details
 $modReserve = array();
+$modDate;
+$modTimeEnd;
 if($modify)
 {
 	//echo $_SESSION['reserveDate'];
@@ -50,21 +52,41 @@ if($modify)
 			$modReserve = $singleReservation;
 		}
 	}
+	$modDate = explode(" ", $modReserve['startTimeDate']);
+	$modTimeEnd = explode(" ", $modReserve['endTimeDate']);
 }
+
+$getStartHoursSelect = false;
+$getEndHoursSelect = false;
 //$non_studentRes = $reserve->getReservationsByDate("2016-11-11");
 //var_dump($non_studentRes);
 
 $today = date("d/m/Y");
 $today = $reserve->getReservationsByDate($today);
 function getHours(){
+	global $getStartHoursSelect, $getEndHoursSelect;
+	global $modDate, $modTimeEnd;
 	for($x = 0; $x < 48; $x++){
-	$time = (int)($x/2) . ":";
-	if($x % 2 == 1){
-		$time .= "30";
-	}else{
-		$time .= "00";
-	}
-	echo "<option value = '".$time."'>".$time."</option>";
+		$time = (int)($x/2) . ":";
+		if($x % 2 == 1){
+			$time .= "30";
+		}else{
+			$time .= "00";
+		}
+		$timeMod = $time;
+		if(strlen($timeMod)==4)$timeMod = "0".$time;
+		if($getStartHoursSelect && $timeMod == $modDate[1])
+		{
+			echo "<option selected='selected' value = '".$time."'>".$time."</option>";
+		}
+		elseif($getEndHoursSelect && $timeMod == $modTimeEnd[1])
+		{
+			echo "<option selected='selected' value = '".$time."'>".$time."</option>";
+		}
+		else
+		{
+			echo "<option value = '".$time."'>".$time."</option>";
+		}
 	}
 }
 
@@ -237,9 +259,9 @@ function getHours(){
 												<?php getHours()?>
 											</select>&nbsp &nbsp &nbsp
 										<select readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum">
-											<?php
+											<?php														
 												foreach($rooms->getRoomList() as $val){
-													echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
+														echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
 												}
 											?>
 										</select>
@@ -292,20 +314,35 @@ function getHours(){
 									<!-- Time slots should be inserted here-->
 									<div class="form-group">
 										<label>Date:</label>
-										<input readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" value="<?php echo $_SESSION['reserveDate']; ?>"/>
+										<input readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" value="<?php echo $modDate[0]; ?>"/>
 										<br>										
 										<label>Start Time:</label> 
 											<select name = "startTime">
-												<?php getHours()?>
+												<?php
+												$getStartHoursSelect = true;
+												getHours();
+												$getStartHoursSelect = false;
+												?>
 											</select>&nbsp &nbsp &nbsp
 										<label>End Time:</label>
 											<select name = "endTime">
-												<?php getHours()?>
+												<?php
+												$getEndHoursSelect = true;
+												getHours();
+												$getEndHoursSelect = false;
+												?>
 											</select>&nbsp &nbsp &nbsp
 										<select readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum">
 											<?php
 												foreach($rooms->getRoomList() as $val){
-													echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
+													if($val[0]->getRID() == $modReserve['roomID'])
+													{
+														echo "<option selected='selected' value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
+													}
+													else
+													{
+														echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
+													}
 												}
 											?>
 										</select>

@@ -78,6 +78,8 @@ class ReservationTDG
                                                 "endTimeDate" => $result["endTimeDate"]);
 		
 		closeServerConn($conn);
+		echo $singleReservation;
+		die();
 		return $singleReservation;
 	}	
 	 
