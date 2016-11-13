@@ -136,6 +136,9 @@ function getHours(){
 
     <!-- Custom CSS -->
     <link href="../../CSS/landing-page-Registration.css" rel="stylesheet">
+	
+	<!-- Table CSS -->
+    <link href="../../CSS/Table.css" rel="stylesheet">
 
 	<!-- jQuery -->
     <script src="../../Javascript/jquery.js"></script>

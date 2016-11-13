@@ -31,7 +31,7 @@ $values = array();
 for($x = 0 ; $x < 24 ; $x++){
 	$values[] = sprintf("%02.0f",$x).":00";
 }
-$table .= $thelper->populateHeader(array("colspan" => "2"), "time", $values, " ", "date", "datetoday");
+$table .= $thelper->populateHeader(array("class"=>"time", "id"=>"time","colspan" => "2"), "time", $values, " ", "date", "datetoday");
 
 $roomRes = $rooms->getRoomList();
 foreach($today as $res){
@@ -52,7 +52,7 @@ foreach($today as $res){
 }
 
 foreach($roomRes as $val){
-	$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $val[1], $val[0]->getName()." (".$val[0]->getLocation().")", "room");
+	$table .= $thelper->populateRow(array("class"=>"slot","id"=>"slot","colspan" => "1"), "slot", $val[1], $val[0]->getName()." (".$val[0]->getLocation().")", "room");
 }
 
 $table .= $thelper->closeTable();
