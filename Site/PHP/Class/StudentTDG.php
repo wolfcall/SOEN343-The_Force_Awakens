@@ -140,15 +140,14 @@ class StudentTDG
 		
 		if ($conn->affected_rows > 0)
 		{
-			$string = "Password Updated Successfully";
 			$_SESSION["msgClass"] = "success";
+			return true;
 		}
 		else
 		{
-			$string = "Your current Password is not the one you entered. Please try again!";
 			$_SESSION["msgClass"] = "failure";
+			return false;
 		}
-		return $string;
     }
 }
 ?>
