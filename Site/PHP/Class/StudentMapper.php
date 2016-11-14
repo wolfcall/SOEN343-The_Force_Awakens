@@ -19,7 +19,7 @@ class StudentMapper
 	*	In which case they simply need access to the checkUserAndPass or checkUserExist methods
 	*	No variables need to be instantiated until they actually log in
 	*/
-	public function __construct($email) {
+	public function __construct($email, $conn) {
 
 		if(empty($email))
 		{
@@ -31,20 +31,20 @@ class StudentMapper
 			$this->studentActive = new StudentDomain();
 			$this->studentData = new StudentTDG();
 		
-			$this->setFirstName($this->studentData->getFirstName($email));
-			$this->setLastName($this->studentData->getLastName($email));
+			$this->setFirstName($this->studentData->getFirstName($email, $conn));
+			$this->setLastName($this->studentData->getLastName($email, $conn));
 			$this->setEmailAddress($email);
-			$this->setProgram($this->studentData->getProgram($email));
-			$this->setSID($this->studentData->getSID($email));			
+			$this->setProgram($this->studentData->getProgram($email, $conn));
+			$this->setSID($this->studentData->getSID($email, $conn));			
 		}
 	}
 
-	public function checkUserAndPass($email, $pass){
-		return $this->studentData->checkUserAndPass($email, $pass); 
+	public function checkUserAndPass($email, $pass, $conn){
+		return $this->studentData->checkUserAndPass($email, $pass, $conn); 
 	}
 	
-	public function checkUserExist($email){
-		return $this->studentData->checkUserExist($email);
+	public function checkUserExist($email, $conn){
+		return $this->studentData->checkUserExist($email, $conn);
 	}
 	
 	/* Set methods for the Student Domain object
@@ -82,8 +82,8 @@ class StudentMapper
     public function getEmailAddress() {
         return $this->studentActive->getEmailAddress();
     }
-    public function getEmailAddressFromDB($email) {
-    	return $this->studentData->getEmailAddress($email);
+    public function getEmailAddressFromDB($email, $conn) {
+    	return $this->studentData->getEmailAddress($email, $conn);
     }
     
     public function getProgram() {
@@ -96,33 +96,33 @@ class StudentMapper
 		
 	/*	Update methods for the Student TDG and Domain objects
 	*/
-	public function updateFirstName($email, $first){
-		$this->studentData->updateFirstName($email, $first);
+	public function updateFirstName($email, $first, $conn){
+		$this->studentData->updateFirstName($email, $first, $conn);
 		$this->setFirstName($first);
     }
     
-    public function updateLastName($email,$last){
-		$this->studentData->updateLastName($email, $last);
+    public function updateLastName($email,$last, $conn){
+		$this->studentData->updateLastName($email, $last, $conn);
 		$this->setLastName($last);
     }
     
-    public function updateEmailAddress($email, $new) {
-        $this->studentData->updateEmailAddress($email, $new);
+    public function updateEmailAddress($email, $new, $conn) {
+        $this->studentData->updateEmailAddress($email, $new, $conn);
 		$this->setEmailAddress($new);
     }
     
-    public function updateProgram($email, $program) {
-        $this->studentData->updateProgram($email,$program);
+    public function updateProgram($email, $program, $conn) {
+        $this->studentData->updateProgram($email,$program, $conn);
 		$this->setProgram($program);
     }
 	
-	public function updateSID($email, $sID) {
-        $this->studentData->updateSID($email, $sID);
+	public function updateSID($email, $sID, $conn) {
+        $this->studentData->updateSID($email, $sID, $conn);
 		$this->setSID($sID);
     }
     
-    public function updatePassword($email, $oldPass, $newPass) {
-        $temp = $this->studentData->updatePassword($email, $oldPass, $newPass);
+    public function updatePassword($email, $oldPass, $newPass, $conn) {
+        $temp = $this->studentData->updatePassword($email, $oldPass, $newPass, $conn);
         return $temp;
     }
 }

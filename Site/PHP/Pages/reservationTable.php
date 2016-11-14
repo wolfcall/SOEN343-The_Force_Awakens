@@ -9,17 +9,21 @@
 include "../Class/ReservationMapper.php";
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
 include "../Class/RoomList.php";
+include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
+$conn = getServerConn();
+
+$rooms = new RoomList($conn);
 $reserve = new ReservationMapper();
 echo "<br />"; 
-$rooms = new RoomList();
+
 if(isset($_GET["Date"])){
 	$date = explode("/", $_GET["Date"]);
 	//var_dump($date);
-	$today = $reserve->getReservationsByDate($date[2]."/".$date[1]."/".$date[0]);
+	$today = $reserve->getReservationsByDate($date[2]."/".$date[1]."/".$date[0], $conn);
 }else{
 	$today = date("d/m/Y");
-	$today = $reserve->getReservationsByDate($today);
+	$today = $reserve->getReservationsByDate($today, $conn);
 }
 
 $thelper = new tableHelper();
@@ -28,12 +32,14 @@ $params = array("class"=>"reservations", "id"=>"reservations");
 
 $table = $thelper->initTable($params);
 $values = array();
+
 for($x = 0 ; $x < 24 ; $x++){
 	$values[] = sprintf("%02.0f",$x).":00";
 }
 $table .= $thelper->populateHeader(array("class"=>"time", "id"=>"time","colspan" => "2"), "time", $values, " ", "date", "datetoday");
 
 $roomRes = $rooms->getRoomList();
+
 foreach($today as $res){
 	$start = $res->getStartTimeDate();
 	$start = explode(" ", $start);

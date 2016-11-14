@@ -19,13 +19,13 @@ class RoomList {
 	
 	private $roomList;
 	private $tdg;
-	public function __construct() {
+	public function __construct($conn) {
 		$this->roomList = array();
 		$this->tdg = new RoomTDG();
 		//$this->roomList = $this->tdg->getAllRooms();
 		
 		
-		foreach($this->tdg->getAllRooms() as $val){
+		foreach($this->tdg->getAllRooms($conn) as $val){
 			$tmp = new RoomDomain();
 			$tmp->setRID($val["roomID"]);
 			$tmp->setName($val["name"]);

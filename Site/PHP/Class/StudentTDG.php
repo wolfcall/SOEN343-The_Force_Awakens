@@ -16,172 +16,127 @@ class StudentTDG
 	*/
 	
 	//Verify User Credentials
-    public function checkUserAndPass($email, $pass){
-		$conn = getServerConn();
+    public function checkUserAndPass($email, $pass, $conn){
 		
 		$sql = "SELECT studentId, email, password FROM student WHERE email ='".$email."' AND password = password('".$pass."')";
 		$result = $conn->query($sql);
-		closeServerConn($conn);
+		
 		if ($result->num_rows == 1){
 			$row = $result->fetch_assoc();
 			return $row["studentId"];
 		}else 
 			return false;
-		
 	}
 	
 	//Verify User exsitence in the db
-	public function checkUserExist($email){
-		$conn = getServerConn();
+	public function checkUserExist($email, $conn){
 		
 		$sql = "SELECT * FROM student WHERE email ='".$email."'";
 		$result = $conn->query($sql);
-		closeServerConn($conn);
+		
 		if ($result->num_rows > 0)
 			return true;
 		else 
 			return false;
-		
 	}
 		
 	/* 
 		The Get methods for all Entities in the Student table can be found here
     */
-    public function getFirstName($email){
-		
-		$conn = getServerConn();
+    public function getFirstName($email, $conn){
 		
 		$sql = "SELECT firstName FROM student WHERE email ='".$email."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["firstName"];
     }
     
-    public function getLastName($email){
-		
-		$conn = getServerConn();
+    public function getLastName($email, $conn) {
 		
 		$sql = "SELECT lastName FROM student WHERE email ='".$email."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["lastName"];
     }
   
-    public function getEmailAddress($email){
-		
-		$conn = getServerConn();
+    public function getEmailAddress($email, $conn) {
 		
 		$sql = "SELECT email FROM student WHERE email ='".$email."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["email"];
     }
     
-    public function getProgram($email){
-		
-		$conn = getServerConn();
+    public function getProgram($email, $conn) {
 		
 		$sql = "SELECT program FROM student WHERE email ='".$email."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["program"];
     }
 	
-	public function getSID($email){
-		
-		$conn = getServerConn();
+	public function getSID($email, $conn) {
 		
 		$sql = "SELECT studentID FROM student WHERE email ='".$email."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["studentID"];
     }
 	
-	public function getPassword($email){
-		
-		$conn = getServerConn();
+	public function getPassword($email, $conn) {
 		
 		$sql = "SELECT password FROM student WHERE email ='".$email."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["password"];
     }
 	
 	/* The Update methods for all Entities in the Student table can be found here
      */
-    public function updateFirstName($email, $first){
-		
-		$conn = getServerConn();
+    public function updateFirstName($email, $first, $conn) {
 		
 		$sql = "Update student SET firstName ='".$first."' WHERE email ='".$email."'";
 		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
     }
     
-    public function updateLastName($email, $last){
-		
-		$conn = getServerConn();
+    public function updateLastName($email, $last, $conn) {
 		
 		$sql = "Update student SET lastName ='".$last."' WHERE email ='".$email."'";
 		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
     }
   
-    public function updateEmailAddress($email, $new){
-		
-		$conn = getServerConn();
+    public function updateEmailAddress($email, $new, $conn) {
 		
 		$sql = "Update student SET email ='".$new."' WHERE email ='".$email."' ";
 		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
     }
     
-    public function updateProgram($email, $program){
-		
-		$conn = getServerConn();
+    public function updateProgram($email, $program, $conn) {
 		
 		$sql = "Update student SET program ='".$program."' WHERE email ='".$email."'";
 		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
     }
 	
-	public function updateSID($email, $id){
-		
-		$conn = getServerConn();
+	public function updateSID($email, $id, $conn) {
 		
 		$sql = "Update student SET studentID ='".$id."' WHERE email ='".$email."'";
 		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
     }
 	
 	/*
 		Should be called by a changedetails.php file
 		Should validate previous password to set new one
 	*/
-	public function updatePassword($email, $oldPass, $newPass) {
+	public function updatePassword($email, $oldPass, $newPass, $conn) {
 		
-		$conn = getServerConn();
-		
-        $sql = "Update student SET password = password('".$newPass."') WHERE email ='".$email."' AND password = password('".$oldPass."')";
-		 $result = $conn->query($sql);
-		 
+		$sql = "Update student SET password = password('".$newPass."') WHERE email ='".$email."' AND password = password('".$oldPass."')";
+		$result = $conn->query($sql);
 		
 		if ($conn->affected_rows > 0)
 		{
@@ -193,10 +148,7 @@ class StudentTDG
 			$string = "Your current Password is not the one you entered. Please try again!";
 			$_SESSION["msgClass"] = "failure";
 		}
-		closeServerConn($conn);
-		
 		return $string;
-		
     }
 }
 ?>

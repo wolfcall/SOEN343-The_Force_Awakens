@@ -19,9 +19,8 @@ class ReservationMapper
 		$this->reservationData = new ReservationTDG();
 	}
 	
-	
-	public function addReservation($sID, $rID, $start, $end, $title, $desc){
-		$this->reservationData->addReservation($sID, $rID, $start, $end, $title, $desc);
+	public function addReservation($sID, $rID, $start, $end, $title, $desc, $conn){
+		$this->reservationData->addReservation($sID, $rID, $start, $end, $title, $desc, $conn);
     }	
 	
 	/* Set methods for the Reservation Domain object
@@ -60,88 +59,89 @@ class ReservationMapper
 	/*	The REID takes the sID as a parameter so it can find the appropriate information of the student's reservation
 	*	Only get from the database
 	*/
-	public function getReservation($reID){
-		return $this->reservationData->getReservation($reID);
+	public function getReservation($reID, $conn){
+		return $this->reservationData->getReservation($reID, $conn);
 	}
 	
-	public function getREID($sID){
-		return $this->reservationData->getREID($sID);
+	public function getREID($sID, $conn){
+		return $this->reservationData->getREID($sID, $conn);
     }
     
-    public function getSID($reID) {
+    public function getSID($reID){
         return $this->reservationActive->getSID($reID);
     }
     
-    public function getRID($reID) {
+    public function getRID($reID){
         return $this->reservationActive->getRID($reID);
     }
 	
-	public function getStartTimeDate($reID) {
+	public function getStartTimeDate($reID){
         return $this->reservationActive->getStartTimeDate($reID);
     }	
 	
-	public function getEndTimeDate($reID) {
+	public function getEndTimeDate($reID){
         return $this->reservationActive->getEndTimeDate($reID);
     }
 	
-	public function getTitle($reID) {
+	public function getTitle($reID){
        return $this->reservationActive->getTitle($reID);
     }
 	
-	public function getDescription($reID) {
+	public function getDescription($reID){
         return $this->reservationActive->getDescription($reID);
     }
     
-	public function getReservations($sID) {
-		return $this->reservationData->getReservations($sID);
+	public function getReservations($sID, $conn){
+		return $this->reservationData->getReservations($sID, $conn);
 	}
 
-	public function getReservationsByDate($start, $sID) {
-		return $this->reservationData->getReservationsByDate($start);
+	public function getReservationsByDate($start, $conn) {
+		return $this->reservationData->getReservationsByDate($start, $conn);
 	}
 
-	public function getReservationsByRoomAndDate($rID, $start) {
-		return $this->reservationData->getReservationsByRoomAndDate($rID, $start);
+	public function getReservationsByRoomAndDate($rID, $start, $conn) {
+		return $this->reservationData->getReservationsByRoomAndDate($rID, $start, $conn);
 	}
 	
 	/*	Update methods for the Reservation TDG and Domain objects
 	*/
-	public function updateReservationID($reID, $new){
-		$this->reservationData->updateReservationID($reID, $new);
+	public function updateReservationID($reID, $new, $conn){
+		$this->reservationData->updateReservationID($reID, $new, $conn);
 		$this->reservationActive->setREID($new);
     }
 	
-	public function updateStudentID($reID, $sID){
-		$this->reservationData->updateStudentID($reID, $sID);
+	public function updateStudentID($reID, $sID, $conn){
+		$this->reservationData->updateStudentID($reID, $sID, $conn);
 		$this->reservationActive->setSID($sID);
     }
 	
-	public function updateRoomID($reID, $rID){
-		$this->reservationData->updateRoomID($reID, $rID);
+	public function updateRoomID($reID, $rID, $conn){
+		$this->reservationData->updateRoomID($reID, $rID, $conn);
 		$this->reservationActive->setRID($rID);
     }
 	
-	public function updateStart($reID, $start){
-		$this->reservationData->updateStart($reID, $start);
+	public function updateStart($reID, $start, $conn){
+		$this->reservationData->updateStart($reID, $start, $conn);
 		$this->reservationActive->setStartTimeDate($start);
     }
 	
-	public function updateEnd($reID, $end){
-		$this->reservationData->updateEnd($reID, $end);
+	public function updateEnd($reID, $end, $conn){
+		$this->reservationData->updateEnd($reID, $end, $conn);
 		$this->reservationActive->setEndTimeDate($end);
     }
 	
-	public function updateTitle($reID, $title){
-		$this->reservationData->updateTitle($reID, $title);
+	public function updateTitle($reID, $title, $conn){
+		$this->reservationData->updateTitle($reID, $title, $conn);
 		$this->reservationActive->setTitle($title);
     }
 	
-	public function updateDescription($reID, $desc){
-		$this->reservationData->updateDescription($reID, $desc);
+	public function updateDescription($reID, $desc, $conn){
+		$this->reservationData->updateDescription($reID, $desc, $conn);
 		$this->reservationActive->setDescription($desc);
     }	
-        public function deleteReservation($reID) {
-                $this->reservationData->deleteReservation($reID);
-       }
+	
+	public function deleteReservation($reID, $conn) {
+			$this->reservationData->deleteReservation($reID, $conn);
+	}
 }
 ?>

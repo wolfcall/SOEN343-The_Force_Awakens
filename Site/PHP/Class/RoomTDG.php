@@ -21,56 +21,44 @@ class RoomTDG
 	/* 
 		The Get methods for all Entities in the room table can be found here
      */
-    public function getName($rID){
-		
-		$conn = getServerConn();
-		
+    public function getName($rID, $conn){
+	
 		$sql = "SELECT name FROM room WHERE roomID ='".$rID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["name"];
     }
     
-    public function getRoomID($rID){
-		
-		$conn = getServerConn();
+    public function getRoomID($rID, $conn){
 		
 		$sql = "SELECT roomID FROM room WHERE roomID ='".$rID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["roomID"];
     }
   
-    public function getLocation($rID){
-		
-		$conn = getServerConn();
+    public function getLocation($rID, $conn){
 		
 		$sql = "SELECT location FROM room WHERE roomID ='".$rID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["location"];
     }
 	
-	public function getDescription($rID){
-		
-		$conn = getServerConn();
+	public function getDescription($rID, $conn){
 		
 		$sql = "SELECT description FROM room WHERE roomID ='".$rID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["description"];
     }
 	
-	public function getAllRooms(){
-		$conn = getServerConn();
+	public function getAllRooms($conn){
+		
 		$sql = "Select * from room";
 		$result = $conn->query($sql);
 		
@@ -79,8 +67,6 @@ class RoomTDG
 		while($row = $result->fetch_assoc()){
 			$resultSet[] = $row;
 		}
-		
-		closeServerConn($conn);
 		
 		return $resultSet;
 	}
