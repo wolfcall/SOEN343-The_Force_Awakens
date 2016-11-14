@@ -157,8 +157,8 @@ $uow->closeServerConn($conn);
 <?php
     if($modify)
     {
-            echo '<script> $(document).ready(function(){$("#editModal").modal("show");}); </script>';
-            $_SESSION['modify'] = NULL; //Should clear out modify session if user refreshes
+		echo '<script> $(document).ready(function(){$("#editModal").modal("show");}); </script>';
+		$_SESSION['modify'] = NULL; //Should clear out modify session if user refreshes
     }
 	
 ?>
@@ -209,6 +209,14 @@ $uow->closeServerConn($conn);
 				
 				<br><br>
 
+				<div style = "float: left">
+					<p> Legend </p>
+					<p> Green Symbolizes reservations made by you </p>
+					<p> Red Symbolizes reservations made by others </p>
+					<p> White are Symbolizes available times </p>
+				</div>
+				
+				
 				<!-- Div for datepicker -->
 				<div id="datepickerContainer">
 					<div id="datepickerInline"></div>
