@@ -15,8 +15,6 @@ include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 $uow = new UnitOfWork();
 $conn = $uow->getServerConn();
 
-var_dump($_SESSION);
-
 $email = $_SESSION['email'];
 $userMSG = $_SESSION["userMSG"] ;
 $msgClass = $_SESSION["msgClass"];
@@ -450,47 +448,7 @@ $uow->closeServerConn($conn);
 						</div><!-- End modal content -->
 					</div><!-- End modal-dialog -->
 				</div><!-- End MyReservations Modal -->
-				<div id="reservation-table"><br>
-					<?php
-						/*$thelper = new tableHelper();
-						
-						$params = array("class"=>"reservations", "id"=>"reservations");
-
-						$table = $thelper->initTable($params);
-						$values = array();
-						for($x = 0 ; $x < 24 ; $x++){
-							$values[] = sprintf("%02.0f",$x).":00";
-						}
-						
-						$table .= $thelper->populateHeader(array("colspan" => "2"), "time", $values, " ", "date", "datetoday");
-
-						$roomRes = $rooms->getRoomList();
-						foreach($today as $res){
-							$start = $res->getStartTimeDate();
-							$start = explode(" ", $start);
-							$start = explode(":", $start[1]);
-							$end = $res->getEndTimeDate();
-							$end = explode(" ", $end);
-							$end = explode(":", $end[1]);
-
-							$slots = (2*($end[0] - $start[0])) + (($end[1] == $start[1])?0:1);
-							$begin = (2*$start[0]) + ((strcmp($start[1],"00")==0)?0:1);
-							for($x = 0 ; $x < $slots ; $x++){
-								$id = $res->getRID();
-								$pos = $begin + $x;
-								$roomRes[$id][1][$pos] = '11';
-							}
-						}
-
-						foreach($roomRes as $val){
-							$table .= $thelper->populateRow(array("colspan" => "1"), "slot", $val[1], $val[0]->getName()." (".$val[0]->getLocation().")", "room");
-						}
-
-						$table .= $thelper->closeTable();
-
-						echo $table;*/
-					?>
-				</div>
+				<div id="reservation-table"><br></div>
 				<!-- id reservation-table -->
 			</div>
 			<!-- Class row -->
@@ -498,7 +456,6 @@ $uow->closeServerConn($conn);
 		<!-- class containter -->
 	</div>
 	<!-- class="intro-header" -->
-
 </body>
 
 </html>

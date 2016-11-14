@@ -40,18 +40,10 @@ $(document).ready(function() {
 	});
 });
 
-
-
 $(document).ready(function(){
 	$("#myBtn").click(function(){
 		var selected = document.getElementById("roomOptions").selectedIndex;
 		document.getElementById("roomOptionsMod").selectedIndex = selected;
-		$("#myModal").modal();
-	});
-});
-
-$(document).ready(function(){
-	$(".slot").click(function(){
 		$("#myModal").modal();
 	});
 });

@@ -126,11 +126,6 @@ td {
   vertical-align: middle;
 }
 
-.slot{
-	cursor: pointer;
-	background-color:grey;
-}
-
 .date{
 	background-color:blue;
 }
