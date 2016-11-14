@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `soen343`.`reservation` (
   `endTimeDate` DATETIME NOT NULL,
   `title` VARCHAR(45) NOT NULL,
   `description` VARCHAR(45) NOT NULL,
+  `waitlisted` boolean default false,
   PRIMARY KEY (`reservationID`),
   UNIQUE INDEX `reservationID_UNIQUE` (`reservationID` ASC),
   INDEX `fk_reservation_student_idx` (`studentID` ASC),
@@ -112,10 +113,21 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = 'This will store the waitlist for specific rooms\nWill have an association to UserID who is on the waiting list\nWill have an association to roomID that the user is waiting for';
 
+set global event_scheduler = on;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+Drop event if exists soen343.`past_reservation_cleanup`;
+CREATE EVENT IF NOT EXISTS soen343.`past_reservation_cleanup`
+ON SCHEDULE
+  EVERY 1 DAY
+  Starts (timestamp('2016-11-14 00:00:00'))
+  COMMENT 'Clean up past reservations at 1AM!'
+  DO
+    DELETE FROM soen343.reservation
+    where soen343.reservation.endTimeDate < sysdate();
 
 Insert into `soen343`.`Student` (studentID, FirstName, LastName, `password`, email, program) values (26863477,'Georges','Mathieu',password('pass123'),'gm@email.com', 'Software Engineering');
 Insert into `soen343`.`Student` (studentID, FirstName, LastName, `password`, email, program) values (27454716,'Stefano','Pace',password('pass123'),'sp@email.com', 'Software Engineering');
@@ -129,17 +141,17 @@ Insert into `soen343`.`room` (name, location, description) values ('California',
 Insert into `soen343`.`room` (name, location, description) values ('Hawaii', 'H9337', 'Beautiful');
 Insert into `soen343`.`room` (name, location, description) values ('Iowa', 'H9323', 'Beautiful');
 Insert into `soen343`.`room` (name, location, description) values ('Florida', 'H9345', 'Beautiful');
-Insert into `soen343`.`room` (name, location, description) values ('Navada', 'H9822', 'Beautiful');
-Insert into `soen343`.`room` (name, location, description) values ('New Mexico', 'H9312', 'Beautiful');
+Insert into `soen343`.`room` (name, location, description) values ('Nevada', 'H9822', 'Beautiful');
+/*Insert into `soen343`.`room` (name, location, description) values ('New Mexico', 'H9312', 'Beautiful');
 Insert into `soen343`.`room` (name, location, description) values ('New York', 'H9145', 'Beautiful');
 Insert into `soen343`.`room` (name, location, description) values ('Texas', 'H9311', 'Beautiful');
 Insert into `soen343`.`room` (name, location, description) values ('Oklahoma', 'H9312', 'Beautiful');
-Insert into `soen343`.`room` (name, location, description) values ('Maine', 'H9329', 'Beautiful');
+Insert into `soen343`.`room` (name, location, description) values ('Maine', 'H9329', 'Beautiful');*/
 
 Insert into `soen343`.`reservation` (studentID, roomId, startTimeDate, endTimeDate, title, description)
-	values (26863477, 1, STR_TO_DATE('17/3/2016 13:00:00', '%e/%c/%Y %T'), str_to_date('17/3/2016 15:00:00', '%e/%c/%Y %T'), ';lkhdsa','dodoahohj');
-Insert into `soen343`.`waitlist` (studentID, roomId, startTimeDate, endTimeDate, title, description)
-	values (26863477, 1, STR_TO_DATE('17/3/2016 13:00:00', '%e/%c/%Y %T'), str_to_date('17/3/2016 15:00:00', '%e/%c/%Y %T'), ';09886','794179');
+	values (26863477, 1, STR_TO_DATE('12/11/2016 13:00:00', '%d/%m/%Y %T'), STR_TO_DATE('12/11/2016 17:00:00', '%d/%m/%Y %T'), ';lkhdsa','dodoahohj');
+    Insert into `soen343`.`reservation` (studentID, roomId, startTimeDate, endTimeDate, title, description)
+	values (26863477, 2, STR_TO_DATE('13/11/2016 13:00:00', '%d/%m/%Y %T'), STR_TO_DATE('13/11/2016 14:00:00', '%d/%m/%Y %T'), ';lkhdsa','fdsa');
+    Insert into `soen343`.`reservation` (studentID, roomId, startTimeDate, endTimeDate, title, description)
+	values (26863477, 5, STR_TO_DATE('13/11/2016 13:00:00', '%d/%m/%Y %T'), STR_TO_DATE('13/11/2016 15:00:00', '%d/%m/%Y %T'), ';lkhdsa','sfd');
     
-Delete from reservation
-where reservationID = 3;

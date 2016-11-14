@@ -265,20 +265,20 @@ $uow->closeServerConn($conn);
 										<input readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" placeholder = "Nothing" />
 										<br>										
 										<label>Start Time:</label> 
-											<select name = "startTime">
+											<select id ="startTime" name = "startTime">
 												<?php getHours()?>
 											</select>&nbsp &nbsp &nbsp
 										<label>End Time:</label>
-											<select name = "endTime">
+											<select id ="endTime" name = "endTime">
 												<?php getHours()?>
 											</select>&nbsp &nbsp &nbsp
-										<select readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum">
-											<?php														
-												foreach($rooms->getRoomList() as $val){
-														echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
-												}
-											?>
-										</select>
+											<select readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum">
+												<?php														
+													foreach($rooms->getRoomList() as $val){
+															echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
+													}
+												?>
+											</select>
 									</div>
 									<div class="form-group">
 										<label>Name</label>

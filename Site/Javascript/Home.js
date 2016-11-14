@@ -1,5 +1,5 @@
 //The Javascript file containing the javascript from PHP/Pages/Home.php.
-
+var diff = 2;
 $(document).ready(function() {
 	disappear();
 	
@@ -44,7 +44,18 @@ $(document).ready(function(){
 	$("#myBtn").click(function(){
 		var selected = document.getElementById("roomOptions").selectedIndex;
 		document.getElementById("roomOptionsMod").selectedIndex = selected;
+		$("#endTime").children().eq(2).attr('selected', 'selected');
 		$("#myModal").modal();
+	});
+	
+	$("#startTime").change(function(){
+		$("#endTime").children().eq($("#endTime").prop('selectedIndex')).removeAttr('selected');
+		$("#endTime").children().eq(($("#startTime").prop('selectedIndex') + diff >48)? 48 : $("#startTime").prop('selectedIndex') + diff).attr('selected', 'selected');
+	});
+	
+	$("#endTime").change(function(){
+		diff = $("#endTime").prop('selectedIndex') - $("#startTime").prop('selectedIndex');
+		alert(diff);
 	});
 });
 
