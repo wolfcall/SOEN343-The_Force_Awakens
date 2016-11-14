@@ -17,6 +17,7 @@ class ReservationTDG
 	/* The Insert method to add a new reservation into the reservation table
 	*/
 	
+	//Replacement for the * in sql due to special formatting required for the DateTime columns
 	private $star;
 	
 	public function __construct() {
@@ -239,7 +240,7 @@ class ReservationTDG
 		$dateElements = explode("/", $date);
 		$reformatDate = $dateElements[2]."-".$dateElements[0]."-".$dateElements[1];
 
-		$sql = "SELECT * FROM reservation WHERE date(startTimeDate) = date '".$reformatDate."'"
+		$sql = "SELECT ".$this->star." FROM reservation WHERE date(startTimeDate) = date '".$reformatDate."'"
 				. " AND roomID = '".$roomID."' and waitlisted = false";
 		
 		$result = $conn->query($sql);
@@ -338,14 +339,14 @@ class ReservationTDG
 		closeServerConn($conn);
     }
     
-        public function deleteReservation($reID) {
-			
-			$conn = getServerConn();
-			
-			$sql = "DELETE FROM reservation WHERE reservationID ='".$reID."'";
-			$result = $conn->query($sql);
-			
-			closeServerConn($conn);
-        }
+	public function deleteReservation($reID) {
+
+		$conn = getServerConn();
+
+		$sql = "DELETE FROM reservation WHERE reservationID ='".$reID."'";
+		$result = $conn->query($sql);
+
+		closeServerConn($conn);
+	}
 }
 ?>

@@ -19,6 +19,7 @@ class RoomList {
 	
 	private $roomList;
 	private $tdg;
+	
 	public function __construct() {
 		$this->roomList = array();
 		$this->tdg = new RoomTDG();
