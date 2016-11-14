@@ -54,9 +54,9 @@ $endEx = explode(":", $end);
 $endFloat = ($endEx[0] + ($endEx[1]/60));
 
 $ourTime = date('H:i');
+
 $ourTimeEx = explode(":", $ourTime);
 $ourTimeFloat = ($ourTimeEx[0] + ($ourTimeEx[1]/60));
-
 
 $ourDate = date('y-m-d');
 $ourDateFormat = strtotime($ourDate);
@@ -67,24 +67,41 @@ $dateAmerFormat = strtotime($dateAmer);
 $dateDiff = $ourDateFormat - $dateAmerFormat;
 
 /*
-*	If reservation will last more than 3 hours
+*	Check if the OS is for MAC. If it is, we must subtract 6 hours from the time
+*	If it is Windows time, then leave the time as it
+*/
+if(PHP_OS == "Darwin")
+{
+	$ourTimeFloat = $ourTimeFloat - 21600;
+}
+
+/*
+*	Check if the reservation will be before the current time
 */
 if($ourTimeFloat > $startFloat && $dateDiff == 0)
 {
 	$_SESSION["userMSG"] = $currentTime;
 	$_SESSION["msgClass"] = "failure";
 }
+/*
+*	If reservation will last more than 3 hours
+*/
 else if ( ($endFloat-$startFloat) > 3)
 {
 	$_SESSION["userMSG"] = $tooLong;
 	$_SESSION["msgClass"] = "failure";
 }
-
+/*
+*	Check if the end time of the reservation will be before the start time
+*/
 else if ($endFloat <= $startFloat)
 {
 	$_SESSION["userMSG"] = $wrongTime;
 	$_SESSION["msgClass"] = "failure";
 }	
+/*
+*	Continue with the Reservation normally
+*/
 else
 {
 	//Converting the Date to the Proper Format
