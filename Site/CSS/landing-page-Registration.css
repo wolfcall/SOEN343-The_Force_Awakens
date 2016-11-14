@@ -126,18 +126,6 @@ td {
   vertical-align: middle;
 }
 
-.date{
-	background-color:blue;
-}
-
-.time{
-	background-color:red;
-}
-
-.room{
-	background-color:yellow;
-}
-
 .leftcolumn {
     float: left;
     max-width: 40%;
