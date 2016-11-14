@@ -17,15 +17,16 @@
 }
 fieldset {
     margin: 8px;
-    border: 1px solid silver;
+    border: 1px solid black;
     padding: 8px;    
     border-radius: 4px;
-	width: 15%;
+	width: 20%;
 	position: absolute;
+    background-color: darkgrey;
 }
 #white {
 	list-style-type: square;
-	color: silver;
+	color: white;
 	font-size: 20px;
 }
 #red {
