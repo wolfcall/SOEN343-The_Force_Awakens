@@ -55,7 +55,6 @@ $(document).ready(function(){
 	
 	$("#endTime").change(function(){
 		diff = $("#endTime").prop('selectedIndex') - $("#startTime").prop('selectedIndex');
-		alert(diff);
 	});
 });
 
