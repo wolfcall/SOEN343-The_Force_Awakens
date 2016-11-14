@@ -20,8 +20,6 @@ if($_POST["action"] == "modifying")
 //Reservation ID for modification purposes only
 $reservationID = htmlspecialchars($_POST["reservationID"]);
 
-
-
 $wrongTime = "Your End Time must be after your Start Time! Please try again.";
 $tooLong = "You cannot reserve for a time of more than 3 hours!";
 $currentTime = "You cannot make a reservation on a time that already passed!";
@@ -90,8 +88,7 @@ else if ($endFloat <= $startFloat)
 else
 {
 	//Converting the Date to the Proper Format
-	//Should Obtain DD/MM/YYYY
-	
+	//Should Obtain DD/MM/YYYY	
 	$dateEU = date('d-m-Y', strtotime($passedDate));
 	$dateAmer = date('m/d/Y', strtotime($passedDate));
 	$start = $dateAmer." ".$start;
@@ -108,11 +105,6 @@ else
 	//Get start and end time of new reservation, convert the difference to mins to find duration
 	$startDate = new DateTime($start);
 	$endDate = new DateTime($end);
-
-	//Total duration of new reservation
-//	$total = getDuration($startDate, $endDate);
-
-	
 
 	if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) {
 		if($modifying)
