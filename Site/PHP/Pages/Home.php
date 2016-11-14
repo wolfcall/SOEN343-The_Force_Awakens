@@ -118,7 +118,8 @@ $uow->closeServerConn($conn);
 	!-Still necessary to pass entity ID of time selected
 	!-Colors are not permanent, was done to check if CSS worked for table
 	!-Red should indicate times that are booked
-	!-Grey should indicate times that are not booked
+	!-White should indicate times that are not booked
+    !-Green should indicate times that are booked by user
 -->
 
 <head>
