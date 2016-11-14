@@ -20,7 +20,8 @@ fieldset {
     border: 1px solid silver;
     padding: 8px;    
     border-radius: 4px;
-	width: 30%;
+	width: 15%;
+	position: absolute;
 }
 #white {
 	list-style-type: square;
@@ -36,4 +37,7 @@ fieldset {
 	list-style-type: square;
 	color: green;
 	font-size: 20px;
+}
+legend {
+	font-size:15px;
 }
