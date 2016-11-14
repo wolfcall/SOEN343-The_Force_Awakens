@@ -34,10 +34,13 @@ class RoomList {
 			$tmp->setDescription($val["description"]);
 			$this->roomList[$val["roomID"]][0] = $tmp;
 			$values = array();
+			$classes = array();
 			for($x = 0 ; $x < 48 ; $x++){
-				$values[] = "00";
+				$values[] = "";
+				$classes[] = "";
 			}
 			$this->roomList[$val["roomID"]][1] = $values;
+			$this->roomList[$val["roomID"]][1] = $classes;
 		}
 		
 	}

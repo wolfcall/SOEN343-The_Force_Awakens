@@ -33,6 +33,7 @@ $params = array("class"=>"reservations", "id"=>"reservations");
 
 $table = $thelper->initTable($params);
 $values = array();
+$classes = array();
 
 for($x = 0 ; $x < 24 ; $x++){
 	$values[] = sprintf("%02.0f",$x).":00";
@@ -54,12 +55,16 @@ foreach($today as $res){
 	for($x = 0 ; $x < $slots ; $x++){
 		$id = $res->getRID();
 		$pos = $begin + $x;
-		$roomRes[$id][1][$pos] = '11';
+		//$roomRes[$id][1][$pos] = "11";
+		if($res->getSID() == $_SESSION["sID"])
+			$roomRes[$id][2][$pos] = 'yourBooking';
+		else
+			$roomRes[$id][2][$pos] = 'booked';
 	}
 }
 
 foreach($roomRes as $val){
-	$table .= $thelper->populateRow(array("class"=>"slot","id"=>"slot","colspan" => "1"), "slot", $val[1], $val[0]->getName()." (".$val[0]->getLocation().")", "room");
+	$table .= $thelper->populateRow(array("class"=>"slot","id"=>"slot","colspan" => "1"), $val[2], $val[1], $val[0]->getName()." (".$val[0]->getLocation().")", "room");
 }
 
 $table .= $thelper->closeTable();

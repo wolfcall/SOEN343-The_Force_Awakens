@@ -48,7 +48,7 @@ class tableHelper {
 		}
 		
 		foreach ($content as $cellkey => $value){
-			$row .= "<td id='".$this->tableID."_".$this->rowNum."_".$cellkey."' class='".$class."' ";
+			$row .= "<td id='".$this->tableID."_".$this->rowNum."_".$cellkey."' class='".$params["class"]." ".$class[$cellkey]."' ";
 			
 			foreach ($params as $key => $pvalue){
 				$row .= $key." = '".$pvalue."' ";
@@ -73,10 +73,10 @@ class tableHelper {
 		}
 		
 		foreach ($content as $key => $value){
-			$row .= "<th class='".$class."' ";
+			$row .= "<th class='".$params["class"][$key]." ".$class."' ";
 			
-			foreach ($params as $key => $pvalue){
-				$row .= $key." = '".$pvalue."' ";
+			foreach ($params as $pkey => $pvalue){
+				$row .= $pkey." = '".$pvalue."' ";
 			}
 		
 			$row .= ">".$value."</th>";

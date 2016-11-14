@@ -7,3 +7,11 @@
 .slot {
 	background: white;
 }
+
+.yourBooking {
+	background: #F00;
+}
+
+.booked {
+	background: #0F0;
+}
