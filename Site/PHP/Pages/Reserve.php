@@ -10,6 +10,16 @@ session_start();
 $uow = new UnitOfWork();
 $conn = $uow->getServerConn();
 
+//Modify specific flag
+$modifying = false;
+if($_POST["action"] == "modifying")
+{
+	$modifying - true;
+}
+
+//Reservation ID for modification purposes only
+$reservationID = htmlspecialchars($_POST["reservationID"]);
+
 $wrongTime = "Your End Time must be after your Start Time! Please try again.";
 $tooLong = "You cannot reserve for a time of more than 3 hours!";
 $currentTime = "You cannot make a reservation on a time that already passed!";
@@ -100,10 +110,23 @@ else
 //	$total = getDuration($startDate, $endDate);
 
 	if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) {
-		//Just realize display message is in format mm/dd/yyyy
-		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc, $conn);
-		$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end. " in Room ".$name."!";
-		$_SESSION["msgClass"] = "success";
+		if($modifying)
+		{
+			//Updates reservation instead of adding a new one
+			$reservation->updateRoomID($reservationID, $rID, $conn);
+			$reservation->updateStart($reservationID, $start, $conn);
+			$reservation->updateEnd($reservationID, $end, $conn);
+			$reservation->updateTitle($reservationID, $title, $conn);
+			$reservation->updateDescription($reservationID, $desc, $conn);
+			$_SESSION["userMSG"] = "You have successfully updated your reservation ID ".$rID." for ".$start." to ".$end." in Room ".$name."!";
+		}
+		else
+		{
+			//Just realize display message is in format mm/dd/yyyy
+			$reservation->addReservation($sID, $rID, $start, $end, $title, $desc, $conn);
+			$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end. " in Room ".$name."!";
+			$_SESSION["msgClass"] = "success";
+		}
 	}
 }
 
@@ -113,6 +136,11 @@ header("Location: Home.php");
 
 
 function checkWeek($d, $s, $current) {
+	//returns true if you are modifying a reservation, it is assumed existing reservations are within 3/week limit
+	if($modifying)
+	{
+		return true;
+	}
 	//Using slashes like we are, strtotime assumes mm/dd/yyyy, so fix
 	//Reformate date and check for week in the year (of date being added)
 	$reformatDate = date("j-m-Y", strtotime($d));
@@ -145,7 +173,7 @@ function checkWeek($d, $s, $current) {
 	if($counter < 3) {
 		return true;
 	}
-
+	
 	$_SESSION["userMSG"] = "You have already made 3 reservations this week";
 	$_SESSION["msgClass"] = "failure";
 	return false;
@@ -156,32 +184,36 @@ function checkOverlap($start, $end, $current) {
 	$newEndTime = $end->format("Hi");
 
 	for($x = 0; $x < count($current); $x++) {
-		//Get start and end time of new reservation, convert the difference to mins to find duration
-		$startTime = new DateTime($current[$x]->getStartTimeDate());
-		$endTime = new DateTime($current[$x]->getEndTimeDate());
+		//Added IF check for modification, won't check overlap against itself
+		if(current[$x]->getREID() != $reservationID)
+		{
+			//Get start and end time of new reservation, convert the difference to mins to find duration
+			$startTime = new DateTime($current[$x]->getStartTimeDate());
+			$endTime = new DateTime($current[$x]->getEndTimeDate());
 
-		$tempStart = $startTime->format("Hi");
-		$tempEnd = $endTime->format("Hi");
-		
-	//	echo "Start: " . $tempStart . " End: " . $tempEnd."<br>";
-		
-		//If pulled value starts after the ending of the new reservation, ignore this case
-		if($tempStart >= $newEndTime) {
-			continue;
-		}
+			$tempStart = $startTime->format("Hi");
+			$tempEnd = $endTime->format("Hi");
+			
+		//	echo "Start: " . $tempStart . " End: " . $tempEnd."<br>";
+			
+			//If pulled value starts after the ending of the new reservation, ignore this case
+			if($tempStart >= $newEndTime) {
+				continue;
+			}
 
-		//If pulled value ends before the start of the new reservation, ignore this case
-		else if($tempEnd <= $newStartTime) {
-			continue;
-		}
-		//If it's not ignored, then this case is a conflict, return false
-		else {
-			$startFormat = $startTime->format("H:i");
-			$endFormat = $endTime->format("H:i");
+			//If pulled value ends before the start of the new reservation, ignore this case
+			else if($tempEnd <= $newStartTime) {
+				continue;
+			}
+			//If it's not ignored, then this case is a conflict, return false
+			else {
+				$startFormat = $startTime->format("H:i");
+				$endFormat = $endTime->format("H:i");
 
-			$_SESSION["userMSG"] = "This option overlaps with the reservation beginning at " .$startFormat. " and ending at ".$endFormat;
-	  		$_SESSION["msgClass"] = "failure";
-			return false;
+				$_SESSION["userMSG"] = "This option overlaps with the reservation beginning at " .$startFormat. " and ending at ".$endFormat;
+				$_SESSION["msgClass"] = "failure";
+				return false;
+			}
 		}
 	}
 	return true;

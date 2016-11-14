@@ -315,7 +315,10 @@ $uow->closeServerConn($conn);
 							</div>
 							<div class="modal-body">
 								<form id="form" action="Reserve.php" method="post">
-
+									<div class="form-group">
+										<label>Reservation ID</label>
+										<input readonly="readonly" type="text" class="form-control" name = "reservationID" id="reservationID" value="<?php echo $modReserve['reservationID']; ?>"/>
+									</div>
 									<div class="form-group">
 										<label>Title of Reservation</label>
 										<input type="text" class="form-control" placeholder="Enter a Title"  name="title" value = "<?php echo $modReserve['title']; ?>">
@@ -360,7 +363,23 @@ $uow->closeServerConn($conn);
 											?>
 										</select>
 									</div>
-									<button type="submit" class="btn btn-default btn-success btn-block">Submit</button>
+									<div class="form-group">
+										<label>Name</label>
+										<input readonly="readonly" type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName." ".$lastName; ?>"/>
+									</div>
+									<div class="form-group">
+										<label>Student ID</label>
+										<input readonly="readonly" type="text" class="form-control" name="studentID" value = "<?php echo $sID; ?>"/>
+									</div>
+									<div class="form-group">
+										<label>Program</label>
+										<input readonly="readonly" type="text" class="form-control" name="program" value = "<?php echo $program; ?>"/>
+									</div>
+									<div class="form-group">
+										<label>Email Address</label>
+										<input readonly="readonly" type="text" class="form-control" name="email" value = "<?php echo $email; ?>"/>
+									</div>
+									<button type="submit" name="action" value="modifying" class="btn btn-default btn-success btn-block">Submit</button>
 								</form>
 							</div>
 						</div>

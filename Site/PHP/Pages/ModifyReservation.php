@@ -28,21 +28,20 @@ if($action == "delete")
 	
 	header("Location: Home.php");
 }
-else
+elseif($action == "modify")
 {
 	$_SESSION['modify'] = true;
 	$_SESSION['reservation'] = $rID;
-	
-	
-	//Really shouldn't be calling the database all the time (need that identity map eventually)
-	//$reserve = array();
-	//$reserve = $reservation->getReservation($rID);
-	//$startDateTime = explode(" ", $reserve["startTimeDate"]);
-	//$_SESSION['reserveDate'] = $reserve["startTimeDate"];
 	
 	$uow->closeServerConn($conn);
 	
 	header("Location: Home.php");
 }
+/*elseif($action == "modifying")
+{
+	$_SESSION["userMSG"] = "You are modifying a Reservation";
+	$_SESSION["msgClass"] = "success";
+	header("Location: Home.php");
+}*/
 
 ?>
