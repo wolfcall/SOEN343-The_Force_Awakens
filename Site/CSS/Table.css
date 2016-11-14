@@ -1,6 +1,6 @@
 .time {
-	background: steelblue;
-	color: white;
+	background: #87CEFA;
+	color: black;
     border-collapse: collapse;
 	text-align: center;
 }
@@ -22,7 +22,7 @@ fieldset {
     border-radius: 4px;
 	width: 20%;
 	position: absolute;
-    background-color: darkgrey;
+    background-color: LightSteelBlue ;
 }
 #white {
 	list-style-type: square;
@@ -41,4 +41,10 @@ fieldset {
 }
 legend {
 	font-size:15px;
+}
+.room {
+	background: #D3D3D3;
+}
+.date {
+	background: #B0C4DE;
 }
