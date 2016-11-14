@@ -2,7 +2,8 @@
 include "../Class/StudentMapper.php";
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
-$conn = getServerConn();
+$uow = new UnitOfWork();
+$conn = $uow->getServerConn();
 
 $email = htmlspecialchars($_POST["email"]);
 $password = htmlspecialchars($_POST["password"]);
@@ -33,7 +34,7 @@ $exist = $log->checkUserExist($email, $conn);
 
 $_SESSION["sID"] = $validate;
 
-closeServerConn($conn);
+$uow->closeServerConn($conn);
 
 if ($validate == true)
 {

@@ -7,7 +7,8 @@ include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 // Start the session
 session_start();
 
-$conn = getServerConn();
+$uow = new UnitOfWork();
+$conn = $uow->getServerConn();
 
 $wrongTime = "Your End Time must be after your Start Time! Please try again.";
 $tooLong = "You cannot reserve for a time of more than 3 hours!";
@@ -87,7 +88,7 @@ else
 	}
 }
 
-closeServerConn($conn);
+$uow->closeServerConn($conn);
 
 header("Location: Home.php");
 

@@ -11,7 +11,8 @@ include dirname(__FILE__)."/../Utilities/tableHelper.php";
 include "../Class/RoomList.php";
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
-$conn = getServerConn();
+$uow = new UnitOfWork();
+$conn = $uow->getServerConn();
 
 $rooms = new RoomList($conn);
 $reserve = new ReservationMapper();
@@ -64,3 +65,6 @@ foreach($roomRes as $val){
 $table .= $thelper->closeTable();
 
 echo $table;
+
+$uow->closeServerConn($conn);
+?>

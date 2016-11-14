@@ -6,7 +6,8 @@ include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 // Start the session
 session_start();
 
-$conn = getServerConn();
+$uow = new UnitOfWork();
+$conn = $uow->getServerConn();
 
 $reservation = new ReservationMapper();
 
@@ -23,7 +24,7 @@ if($action == "delete")
 	$_SESSION["userMSG"] = "You have successfully deleted Reservation ID#" .$rID;
 	$_SESSION["msgClass"] = "success";
 
-	closeServerConn($conn);
+	$uow->closeServerConn($conn);
 	
 	header("Location: Home.php");
 }
@@ -39,7 +40,7 @@ else
 	//$startDateTime = explode(" ", $reserve["startTimeDate"]);
 	//$_SESSION['reserveDate'] = $reserve["startTimeDate"];
 	
-	closeServerConn($conn);
+	$uow->closeServerConn($conn);
 	
 	header("Location: Home.php");
 }
