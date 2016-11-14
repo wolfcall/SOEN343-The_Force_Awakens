@@ -211,13 +211,13 @@ $uow->closeServerConn($conn);
 				<br><br>
 
 				<fieldset>
-						  <legend><center>Legend</center></legend>
+						  <center>Legend</center><br>
 							<ul>
 							  <li id="white">Available</li>
 							  <li id="green">Your Reservations</li>
 							  <li id="red">Booked</li>
 							</ul>
-						</fieldset>
+				</fieldset>
 			 
 				<!-- Div for datepicker -->
 				<div id="datepickerContainer">
