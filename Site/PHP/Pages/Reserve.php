@@ -2,9 +2,12 @@
 include "../Class/StudentMapper.php";
 include "../Class/RoomMapper.php";
 include "../Class/ReservationMapper.php";
+include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
 // Start the session
 session_start();
+
+$conn = getServerConn();
 
 $wrongTime = "Your End Time must be after your Start Time! Please try again.";
 $tooLong = "You cannot reserve for a time of more than 3 hours!";
@@ -22,18 +25,12 @@ $sID = htmlspecialchars($_POST["studentID"]);
 $prog = htmlspecialchars($_POST["program"]);
 $email = htmlspecialchars($_POST["email"]);
 
-/*
-*	Getting the ID of the Room 1
-*	Should Obtain Either 1,2,3,4,5
-*	Correlates to the Database ID's for the rooms!
-*/
-
 //Getting the ID of the Room 1
 //Should Obtain Either 1,2,3,4,5
 $rID = htmlspecialchars($_POST["roomNum"]);
 
-$student = new StudentMapper($email);
-$room = new RoomMapper($rID);
+$student = new StudentMapper($email, $conn);
+$room = new RoomMapper($rID, $conn);
 $reservation = new ReservationMapper();
 
 $name = $room->getName();
@@ -64,16 +61,16 @@ else
 	//Should Obtain DD/MM/YYYY
 	$dateEU = date('d-m-Y', strtotime($passedDate));
 	$dateAmer = date('m/d/Y', strtotime($passedDate));
-	$start = $dateAmer." ".$start;//." ".$Meridiem1;
-	$end = $dateAmer." ".$end;//." ".$Meridiem2;
+	$start = $dateAmer." ".$start;
+	$end = $dateAmer." ".$end;
 
 	//Check for presence of more than 3 reservations in the same week 
 	//before actually adding the reservation
-	$currentReservations = $reservation->getReservations($sID);
+	$currentReservations = $reservation->getReservations($sID, $conn);
 
 
 	//Get the list of reservations in same room and on same day
-	$availableTimes = $reservation->getReservationsByRoomAndDate($rID, $start);
+	$availableTimes = $reservation->getReservationsByRoomAndDate($rID, $start, $conn);
 
 	//Get start and end time of new reservation, convert the difference to mins to find duration
 	$startDate = new DateTime($start);
@@ -84,11 +81,13 @@ else
 
 	if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) {
 		//Just realize display message is in format mm/dd/yyyy
-		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc);
+		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc, $conn);
 		$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end. " in Room ".$name."!";
 		$_SESSION["msgClass"] = "success";
 	}
 }
+
+closeServerConn($conn);
 
 header("Location: Home.php");
 

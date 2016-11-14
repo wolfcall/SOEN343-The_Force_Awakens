@@ -1,5 +1,8 @@
 <?php
 include "../Class/StudentMapper.php";
+include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
+
+$conn = getServerConn();
 
 $email = htmlspecialchars($_POST["email"]);
 $password = htmlspecialchars($_POST["password"]);
@@ -24,9 +27,13 @@ elseif (empty($password))
 		</script>";
 }
     
-$log = new StudentMapper($email);
-$validate = $log->checkUserAndPass($email,$password);
+$log = new StudentMapper($email, $conn);
+$validate = $log->checkUserAndPass($email,$password, $conn);
+$exist = $log->checkUserExist($email, $conn);
+
 $_SESSION["sID"] = $validate;
+
+closeServerConn($conn);
 
 if ($validate == true)
 {
@@ -34,8 +41,6 @@ if ($validate == true)
 }
 else
 {
-	$exist = $log->checkUserExist($email);
-	
 	if ($exist == true)
 	{
 		echo "<script type='text/javascript'>alert('$wrongPass');

@@ -1,0 +1,9 @@
+.time {
+	background: steelblue;
+	color: white;
+    border-collapse: collapse;
+	text-align: center;
+}
+.slot {
+	background: white;
+}

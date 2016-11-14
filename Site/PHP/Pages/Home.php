@@ -10,32 +10,32 @@ include "../Class/ReservationMapper.php";
 include "../Class/WaitlistMapper.php";
 include "../Class/RoomList.php";
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
+include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
+$conn = getServerConn();
 
 $email = $_SESSION['email'];
 $userMSG = $_SESSION["userMSG"] ;
 $msgClass = $_SESSION["msgClass"];
 $modify = $_SESSION["modify"];
 
-
 if(isset($_SESSION["userMSG"])){
 	unset($_SESSION["userMSG"]);
     unset($_SESSION["msgClass"]);
 }
 
-
-
-$student = new StudentMapper($email);
+$student = new StudentMapper($email, $conn);
 $reserve = new ReservationMapper();
-$rooms = new RoomList();
+$rooms = new RoomList($conn);
+$active = new RoomMapper($singleReservation["roomID"], $conn);
 
 $firstName = $student->getFirstName();
 $lastName = $student->getLastName();
 $program = $student->getProgram();
 $sID = $student->getSID();
 
-$test = $reserve->getREID($sID);
-$studentReservations = $reserve->getReservations($student->getSID());
+$test = $reserve->getREID($sID, $conn);
+$studentReservations = $reserve->getReservations($student->getSID(), $conn);
 
 //If user selects a reservation to modify, this will obtain the reservation details
 $modReserve = array();
@@ -62,7 +62,7 @@ $getEndHoursSelect = false;
 //var_dump($non_studentRes);
 
 $today = date("d/m/Y");
-$today = $reserve->getReservationsByDate($today);
+$today = $reserve->getReservationsByDate($today, $conn);
 function getHours(){
 	global $getStartHoursSelect, $getEndHoursSelect;
 	global $modDate, $modTimeEnd;
@@ -90,9 +90,8 @@ function getHours(){
 	}
 }
 
+closeServerConn($conn);
 ?>
-
-
 
 <html lang="en">
 
@@ -112,8 +111,8 @@ function getHours(){
 	October 9, 2016 (Joey)
 	-Fixed connection to db for populating Make Reservation popup
 	
-        Novemeber 6, 2016 (Nick)
-        -Added reservation tab functionality
+	Novemeber 6, 2016 (Nick)
+	-Added reservation tab functionality
 
 	!-Still necessary to pass entity ID of time selected
 	!-Colors are not permanent, was done to check if CSS worked for table
@@ -136,6 +135,9 @@ function getHours(){
 
     <!-- Custom CSS -->
     <link href="../../CSS/landing-page-Registration.css" rel="stylesheet">
+	
+	<!-- Table CSS -->
+    <link href="../../CSS/Table.css" rel="stylesheet">
 
 	<!-- jQuery -->
     <script src="../../Javascript/jquery.js"></script>
@@ -175,7 +177,7 @@ function getHours(){
                     <span class="icon-bar"></span>
                 </button>
                 
-				<a class="navbar-brand topnav first r" id="first-r" href="LogOut.php">Log Out</a>
+				<a class="navbar-brand topnav first r" id="first-r" href="../../index.php">Log Out</a>
 				<a class="navbar-brand topnav second r" id="second-r" href="#">My Profile</a>
 				<a class="navbar-brand topnav third r" id="third-r" href="#">My Reservations</a>
 				<a class="navbar-brand topnav fourth r" id="fourth-r" href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a>
@@ -418,7 +420,6 @@ function getHours(){
 									$count = 1;
 									foreach($studentReservations as &$singleReservation)
 									{   
-										$active = new RoomMapper($singleReservation["roomID"]);
 										$activeRoom = $active->getName();
 										$deleteButton = '<button type="Submit" name="action" value = "delete" class="center btn btn-default"> Delete Reservation '.$count.'</button>';
 										$modifyButton = '<br><button type="Submit" data-target="myModal" id = "modify" name="action" value = "modify" class="center btn btn-default"> Modify Reservation '.$count.'</button>';
@@ -448,7 +449,7 @@ function getHours(){
 				</div><!-- End MyReservations Modal -->
 				<div id="reservation-table"><br>
 					<?php
-						/*$thelper = new tableHelper();
+						$thelper = new tableHelper();
 						
 						$params = array("class"=>"reservations", "id"=>"reservations");
 
@@ -484,7 +485,7 @@ function getHours(){
 
 						$table .= $thelper->closeTable();
 
-						echo $table;*/
+						echo $table;
 					?>
 				</div>
 				<!-- id reservation-table -->

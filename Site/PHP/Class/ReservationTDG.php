@@ -23,11 +23,12 @@ class ReservationTDG
 	public function __construct() {
 		$this->star = "reservationID, studentID, roomID, date_format(startTimeDate,'%Y/%m/%d %H:%i') as startTimeDate, date_format(endTimeDate,'%Y/%m/%d %H:%i') as endTimeDate, title, description, waitlisted";
 	}
-	
-	public function addReservation($sID, $rID, $start, $end, $title, $desc)
-	{
-		$conn = getServerConn();
+
 		
+	/* The Insert method to add a new reservation into the reservation table
+	*/
+	public function addReservation($sID, $rID, $start, $end, $title, $desc, $conn)
+	{
 		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %H:%i')";
 		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";
 
@@ -35,8 +36,6 @@ class ReservationTDG
 			Values ('".$sID."','".$rID."',".$startTrans.",".$endTrans.",'".$title."','".$desc."')";
 		
 		$result = $conn->query($sql);
-		
-		closeServerConn($conn);		
 	}
 	
 	/*
@@ -62,12 +61,8 @@ class ReservationTDG
 				
 	/* The Get methods for all Entities in the reservation table can be found here
      */
-	
-	public function getReservation($reID)
+	public function getReservation($reID, $conn)
 	{
-		//This needs to be fixed, doesnt work right now
-		$conn = getServerConn();
-
 		$sql = "SELECT {$this->star} FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$singleReservation = array("title" => $result["title"],
@@ -78,15 +73,12 @@ class ReservationTDG
                                                 "startTimeDate" => $result["startTimeDate"],
                                                 "endTimeDate" => $result["endTimeDate"]);
 		
-		closeServerConn($conn);
 		echo $singleReservation;
 		die();
 		return $singleReservation;
 	}	
 	 
-    public function getREID($sID){
-		
-		$conn = getServerConn();
+    public function getREID($sID, $conn){
 		
 		$sql = "SELECT reservationID FROM reservation WHERE studentID ='".$sID."'";
 		$result = $conn->query($sql);
@@ -96,88 +88,66 @@ class ReservationTDG
 		{
 			array_push($num, $row["reservationID"]);
 		}
-				
-		closeServerConn($conn);
 		
 		return $num;
     }
     
-    public function getStudentID($reID){
-		
-		$conn = getServerConn();
+    public function getStudentID($reID, $conn){
 		
 		$sql = "SELECT studentID FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["studentID"];
     }
       
-    public function getRoomID($reID){
-		
-		$conn = getServerConn();
+    public function getRoomID($reID, $conn){
 		
 		$sql = "SELECT roomID FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["roomID"];
     }
 	
-	public function getStart($reID){
-		
-		$conn = getServerConn();
+	public function getStart($reID, $conn){
 		
 		$sql = "SELECT startTimeDate FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["startTimeDate"];
     }
 	
-	public function getEnd($reID){
-		
-		$conn = getServerConn();
+	public function getEnd($reID, $conn){
 		
 		$sql = "SELECT endTimeDate FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["endTimeDate"];
     }
 	
-	public function getTitle($reID){
-		
-		$conn = getServerConn();
-		
+	public function getTitle($reID, $conn){
+
 		$sql = "SELECT title FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
-		
-		closeServerConn($conn);
 		return $row["title"];
     }
 	
-	public function getDescription($reID){
-		
-		$conn = getServerConn();
-		
+	public function getDescription($reID, $conn){
+
 		$sql = "SELECT description FROM reservation WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		
-		closeServerConn($conn);
 		return $row["description"];
     }
 	
 	//Get reservations by Student ID
-	public function getReservations($sID) {
-		$conn = getServerConn();
-
+	public function getReservations($sID, $conn) {
+		
 		$sql = "SELECT {$this->star} FROM reservation WHERE studentID ='".$sID."'";
 		$result = $conn->query($sql);
 
@@ -196,14 +166,12 @@ class ReservationTDG
 			array_push($reservesDates, $singleReservation);
 		}
 		
-		closeServerConn($conn);
 		return $reservesDates;
 	}
     
 	//Get reservations by Date ONLY
-	public function getReservationsByDate($start) {
-		$conn = getServerConn();
-
+	public function getReservationsByDate($start, $conn) {
+		
 		$date = substr($start,0,10);
 		
 		//Need to reformate date so that it can be used in the database
@@ -225,15 +193,12 @@ class ReservationTDG
 			}
 		}
 
-		closeServerConn($conn);
-
 		return $reservesTimes; 
 	}
 	
 	//Get reservations by room ID AND Date (for overlap checking)
-	public function getReservationsByRoomAndDate($roomID, $start) {
-		$conn = getServerConn();
-
+	public function getReservationsByRoomAndDate($roomID, $start, $conn) {
+		
 		$date = substr($start,0,10);
 
 		//Need to reformate date so that it can be used in the database
@@ -255,90 +220,57 @@ class ReservationTDG
 			}
 		}
 
-		closeServerConn($conn);
-
 		return $reservesTimes; 
 	}
 
 	/* The Update methods for all Entities in the reservation table can be found here
      */
 	
-	public function updateReservationID($reID, $new){
-		
-		$conn = getServerConn();
-		
+	public function updateReservationID($reID, $new, $conn){
+
 		$sql = "Update reservation SET reservationID ='".$new."' WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
     }
     
-    public function updateStudentID($reID, $sID){
-		
-		$conn = getServerConn();
+    public function updateStudentID($reID, $sID, $conn){
 		
 		$sql = "Update reservation SET studentID ='".$sID."' WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
-    }
+	}
       
-    public function updateRoomID($reID, $rID){
-		
-		$conn = getServerConn();
-		
+    public function updateRoomID($reID, $rID, $conn){
+	
 		$sql = "Update reservation SET roomID ='".$rID."' WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
-    }
+	}
 	
-	public function updateStart($reID, $start){
-		
-		$conn = getServerConn();
+	public function updateStart($reID, $start, $conn){
 		
 		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %H:%i')";
-		
 		$sql = "Update reservation SET startTimeDate ='".$startTrans."' WHERE reservationID ='".reID."'";
-
 		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
-    }
+	}
 	
-	public function updateEnd($reID, $end){
-		
-		$conn = getServerConn();
-		
-		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";
-		
+	public function updateEnd($reID, $end, $conn){
+	
+		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";	
 		$sql = "Update reservation SET endTimeDate ='".$endTrans."' WHERE reservationID ='".reID."'";
-
 		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
-    }
+	}
 	
-	public function updateTitle($reID, $title){
-		
-		$conn = getServerConn();
+	public function updateTitle($reID, $title, $conn){
 		
 		$sql = "Update reservation SET title ='".$title."' WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
-    }
+	}
 	
-	public function updateDescription($reID, $desc){
-		
-		$conn = getServerConn();
+	public function updateDescription($reID, $desc, $conn){
 		
 		$sql = "Update reservation SET description ='".$desc."' WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
-		
-		closeServerConn($conn);
-    }
+	}
     
+<<<<<<< HEAD
 	public function deleteReservation($reID) {
 
 		$conn = getServerConn();
@@ -347,6 +279,12 @@ class ReservationTDG
 		$result = $conn->query($sql);
 
 		closeServerConn($conn);
+=======
+	public function deleteReservation($reID, $conn){
+	
+		$sql = "DELETE FROM reservation WHERE reservationID ='".$reID."'";
+		$result = $conn->query($sql);
+>>>>>>> 0ef06b3c18f3eb75cb21459aa92fd1f06bb2ad6a
 	}
 }
 ?>

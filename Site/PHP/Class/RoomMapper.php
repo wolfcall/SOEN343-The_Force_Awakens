@@ -2,7 +2,6 @@
 
 // Start the session
 session_start();
-
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
 include "RoomDomain.php";
@@ -17,19 +16,19 @@ class RoomMapper
 		Constructors for the Student Mapper object
 	*/
         
-	public function __construct($rID) {
+	public function __construct($rID, $conn) {
 
 		$this->roomActive = new RoomDomain();
 		$this->roomData = new RoomTDG();
 		
-		$conn = getServerConn();
+		//$conn = getServerConn();
 						
-		$this->roomActive->setName($this->roomData->getName($rID));
-		$this->roomActive->setLocation($this->roomData->getLocation($rID));
-		$this->roomActive->setDescription($this->roomData->getDescription($rID));
+		$this->roomActive->setName($this->roomData->getName($rID, $conn));
+		$this->roomActive->setLocation($this->roomData->getLocation($rID, $conn));
+		$this->roomActive->setDescription($this->roomData->getDescription($rID, $conn));
 		$this->roomActive->setRID($rID);
 				
-		closeServerConn($conn);
+		//closeServerConn($conn);
 	}
 	
 	/* Get methods for the Student Domain object
