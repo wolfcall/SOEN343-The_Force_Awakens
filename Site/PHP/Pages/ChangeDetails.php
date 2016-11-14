@@ -63,8 +63,17 @@ else
 	//Check to see if new email already exists in the DB
 	if (empty($checkEmail))
 	{
-		$msg = $begin.$changeEmail." and".$changePass."!";
-		$student->updatePassword($oldEmail, $oldPass, $newPass, $conn);
+		$temp = $student->updatePassword($oldEmail, $oldPass, $newPass, $conn);
+		
+		if($temp === true)
+		{
+			$msg = $begin.$changeEmail." and".$changePass."!";
+		}
+		else
+		{
+			$msg = $begin.$changeEmail.", but your current password is not the one you entered. Please try again!";
+		}
+		
 		$student->updateEmailAddress($oldEmail, $newEmail, $conn);
 		$_SESSION["email"] = $newEmail;
 		$_SESSION["msgClass"] = "success";

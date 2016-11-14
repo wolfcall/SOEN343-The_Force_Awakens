@@ -12,6 +12,7 @@ $conn = $uow->getServerConn();
 
 $wrongTime = "Your End Time must be after your Start Time! Please try again.";
 $tooLong = "You cannot reserve for a time of more than 3 hours!";
+$currentTime = "You cannot make a reservation on a time that already passed!";
 
 $title = htmlspecialchars($_POST["title"]);
 $desc = htmlspecialchars($_POST["description"]);
@@ -42,10 +43,19 @@ $startFloat = ($startEx[0] + ($startEx[1]/60));
 $endEx = explode(":", $end);
 $endFloat = ($endEx[0] + ($endEx[1]/60));
 
+$ourTime = date('H:i');
+$ourTimeEx = explode(":", $ourTime);
+$ourTimeFloat = ($ourTimeEx[0] + ($ourTimeEx[1]/60));
+
 /*
 *	If reservation will last more than 3 hours
 */
-if ( ($endFloat-$startFloat) > 3)
+if($ourTimeFloat > $startFloat)
+{
+	$_SESSION["userMSG"] = $currentTime;
+	$_SESSION["msgClass"] = "failure";
+}
+else if ( ($endFloat-$startFloat) > 3)
 {
 	$_SESSION["userMSG"] = $tooLong;
 	$_SESSION["msgClass"] = "failure";
