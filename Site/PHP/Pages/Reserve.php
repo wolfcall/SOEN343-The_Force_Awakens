@@ -56,6 +56,9 @@ $endFloat = ($endEx[0] + ($endEx[1]/60));
 $ourTime = date('H:i');
 
 $ourTimeEx = explode(":", $ourTime);
+
+//REMOVE THE MINUS SIX BEFORE COMMITING
+//$ourTimeFloat = (($ourTimeEx[0]-6) + ($ourTimeEx[1]/60));
 $ourTimeFloat = ($ourTimeEx[0] + ($ourTimeEx[1]/60));
 
 $ourDate = date('y-m-d');
@@ -65,6 +68,8 @@ $dateAmer = date('y-m-d', strtotime($passedDate));
 $dateAmerFormat = strtotime($dateAmer);
 
 $dateDiff = $ourDateFormat - $dateAmerFormat;
+
+
 
 /*
 *	Check if the OS is for MAC. If it is, we must subtract 6 hours from the time
@@ -123,7 +128,7 @@ else
 	$startDate = new DateTime($start);
 	$endDate = new DateTime($end);
 
-	if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) {
+	if(checkOverlap($startDate, $endDate, $availableTimes) && checkWeek($dateEU, $sID, $currentReservations)) {
 		if($modifying)
 		{
 			//Updates reservation instead of adding a new one
@@ -138,10 +143,13 @@ else
 		else
 		{
 			//Just realize display message is in format mm/dd/yyyy
-			$reservation->addReservation($sID, $rID, $start, $end, $title, $desc, $conn);
+			$reservation->addReservation($sID, $rID, $start, $end, $title, $desc, $conn, "0");
 			$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end. " in Room ".$name."!";
 			$_SESSION["msgClass"] = "success";
 		}
+	}
+	else if ($_SESSION["userMSG"] == "This option overlaps, you've been added to the waitlist") {
+		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc, $conn, "1");
 	}
 }
 
@@ -228,7 +236,8 @@ function checkOverlap($start, $end, $current) {
 				$startFormat = $startTime->format("H:i");
 				$endFormat = $endTime->format("H:i");
 
-				$_SESSION["userMSG"] = "This option overlaps with the reservation beginning at " .$startFormat. " and ending at ".$endFormat;
+				//If there's an overlap, add new date to waitlist
+				$_SESSION["userMSG"] = "This option overlaps, you've been added to the waitlist";
 				$_SESSION["msgClass"] = "failure";
 				return false;
 			}
