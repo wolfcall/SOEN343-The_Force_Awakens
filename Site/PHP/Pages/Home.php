@@ -191,6 +191,7 @@ $uow->closeServerConn($conn);
 
     <!-- Header -->
 	<div class="intro-header">
+	
 		<div class="container">
 			<div class="row">
 				<!-- Id space to confirm if the data was saved or not -->
@@ -209,14 +210,15 @@ $uow->closeServerConn($conn);
 				
 				<br><br>
 
-				<div style = "float: left">
-					<p> Legend </p>
-					<p> Green Symbolizes reservations made by you </p>
-					<p> Red Symbolizes reservations made by others </p>
-					<p> White are Symbolizes available times </p>
-				</div>
-				
-				
+				<fieldset>
+						  <legend><center>Legend</center></legend>
+							<ul>
+							  <li id="white">Available</li>
+							  <li id="green">Your Reservations</li>
+							  <li id="red">Booked</li>
+							</ul>
+						</fieldset>
+			 
 				<!-- Div for datepicker -->
 				<div id="datepickerContainer">
 					<div id="datepickerInline"></div>
