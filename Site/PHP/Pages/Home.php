@@ -28,7 +28,6 @@ if(isset($_SESSION["userMSG"])){
 $student = new StudentMapper($email, $conn);
 $reserve = new ReservationMapper();
 $rooms = new RoomList($conn);
-$active = new RoomMapper($singleReservation["roomID"], $conn);
 
 $firstName = $student->getFirstName();
 $lastName = $student->getLastName();
@@ -212,12 +211,12 @@ $uow->closeServerConn($conn);
 				<br><br>
 
 				<fieldset>
-						  <center>Legend</center><br>
-							<ul>
-							  <li id="white">Available</li>
-							  <li id="green">Your Reservations</li>
-							  <li id="red">Booked</li>
-							</ul>
+					<center>Legend</center><br>
+						<ul>
+						<li id="white">Available</li>
+						<li id="green">Your Reservations</li>
+						<li id="red">Booked</li>
+						</ul>
 				</fieldset>
 			 
 				<!-- Div for datepicker -->
@@ -364,22 +363,6 @@ $uow->closeServerConn($conn);
 											?>
 										</select>
 									</div>
-									<div class="form-group">
-										<label>Name</label>
-										<input readonly="readonly" type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName." ".$lastName; ?>"/>
-									</div>
-									<div class="form-group">
-										<label>Student ID</label>
-										<input readonly="readonly" type="text" class="form-control" name="studentID" value = "<?php echo $sID; ?>"/>
-									</div>
-									<div class="form-group">
-										<label>Program</label>
-										<input readonly="readonly" type="text" class="form-control" name="program" value = "<?php echo $program; ?>"/>
-									</div>
-									<div class="form-group">
-										<label>Email Address</label>
-										<input readonly="readonly" type="text" class="form-control" name="email" value = "<?php echo $email; ?>"/>
-									</div>
 									<button type="submit" name="action" value="modifying" class="btn btn-default btn-success btn-block">Submit</button>
 								</form>
 							</div>
@@ -445,12 +428,15 @@ $uow->closeServerConn($conn);
 							</div>
 							<div class="modal-body">
 									<?php 
+									$conn = $uow->getServerConn();
+									
 									$startDateTime;
 									$endDateTime;
 									$deleteButton;
 									$count = 1;
 									foreach($studentReservations as &$singleReservation)
 									{   
+										$active = new RoomMapper($singleReservation["roomID"], $conn);
 										$activeRoom = $active->getName();
 										$deleteButton = '<button type="Submit" name="action" value = "delete" class="center btn btn-default"> Delete Reservation '.$count.'</button>';
 										$modifyButton = '<br><button type="Submit" data-target="myModal" id = "modify" name="action" value = "modify" class="center btn btn-default"> Modify Reservation '.$count.'</button>';
@@ -473,6 +459,8 @@ $uow->closeServerConn($conn);
 										echo "</form>";
 										$count = $count + 1;
 									}
+									
+									$uow->closeServerConn($conn);
 									?>
 							</div><!-- End modal-body -->
 						</div><!-- End modal content -->
