@@ -12,7 +12,8 @@ include "../Class/RoomList.php";
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
-$conn = getServerConn();
+$uow = new UnitOfWork();
+$conn = $uow->getServerConn();
 
 $email = $_SESSION['email'];
 $userMSG = $_SESSION["userMSG"] ;
@@ -90,7 +91,7 @@ function getHours(){
 	}
 }
 
-closeServerConn($conn);
+$uow->closeServerConn($conn);
 ?>
 
 <html lang="en">
