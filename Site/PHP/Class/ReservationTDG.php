@@ -246,15 +246,15 @@ class ReservationTDG
 	
 	public function updateStart($reID, $start, $conn){
 		
-		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %H:%i')";
-		$sql = "Update reservation SET startTimeDate ='".$startTrans."' WHERE reservationID ='".reID."'";
+		$startTrans = date("Y-m-d H:i:s", strtotime($start));
+		$sql = "Update reservation SET startTimeDate ='".$startTrans."' WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 	}
 	
 	public function updateEnd($reID, $end, $conn){
 	
-		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";	
-		$sql = "Update reservation SET endTimeDate ='".$endTrans."' WHERE reservationID ='".reID."'";
+		$endTrans = date("Y-m-d H:i:s", strtotime($end));		
+		$sql = "Update reservation SET endTimeDate ='".$endTrans."' WHERE reservationID ='".$reID."'";
 		$result = $conn->query($sql);
 	}
 	
