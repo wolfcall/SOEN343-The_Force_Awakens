@@ -135,10 +135,12 @@ header("Location: Home.php");
 
 function checkWeek($d, $s, $current) {
 	//returns true if you are modifying a reservation, it is assumed existing reservations are within 3/week limit
+	global $modifying;
 	if($modifying)
 	{
 		return true;
 	}
+	
 	//Using slashes like we are, strtotime assumes mm/dd/yyyy, so fix
 	//Reformate date and check for week in the year (of date being added)
 	$reformatDate = date("j-m-Y", strtotime($d));
