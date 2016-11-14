@@ -47,10 +47,19 @@ $ourTime = date('H:i');
 $ourTimeEx = explode(":", $ourTime);
 $ourTimeFloat = ($ourTimeEx[0] + ($ourTimeEx[1]/60));
 
+
+$ourDate = date('y-m-d');
+$ourDateFormat = strtotime($ourDate);
+
+$dateAmer = date('y-m-d', strtotime($passedDate));
+$dateAmerFormat = strtotime($dateAmer);
+
+$dateDiff = $ourDateFormat - $dateAmerFormat;
+
 /*
 *	If reservation will last more than 3 hours
 */
-if($ourTimeFloat > $startFloat)
+if($ourTimeFloat > $startFloat && $dateDiff == 0)
 {
 	$_SESSION["userMSG"] = $currentTime;
 	$_SESSION["msgClass"] = "failure";
