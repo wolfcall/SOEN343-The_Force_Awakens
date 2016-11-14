@@ -3,9 +3,11 @@
 	color: black;
     border-collapse: collapse;
 	text-align: center;
+    padding: 0.15em;
 }
 .slot {
 	background: white;
+    padding: 0.15em;
 }
 
 .yourBooking {
@@ -23,6 +25,7 @@ fieldset {
 	width: 20%;
 	position: absolute;
     background-color: LightSteelBlue ;
+    padding: 0.15em;
 }
 #white {
 	list-style-type: square;
@@ -44,7 +47,9 @@ legend {
 }
 .room {
 	background: #D3D3D3;
+    padding: 0.15em;
 }
 .date {
 	background: #B0C4DE;
+    padding: 0.15em;
 }
