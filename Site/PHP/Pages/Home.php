@@ -192,7 +192,7 @@ $uow->closeServerConn($conn);
     <!-- Header -->
 	<div class="intro-header">
 	
-		<div class="container" style="width:960px;">
+		<div class="container">
 			<div class="row">
 				<!-- Id space to confirm if the data was saved or not -->
 				<div>
@@ -210,7 +210,7 @@ $uow->closeServerConn($conn);
 				
 				<br><br>
 
-				<fieldset style="margin-left:auto; margin-right:auto; width:250px;">
+				<fieldset style="margin-left:auto; margin-right:auto; max-width:250px; min-width:250px;">
 					<center>Legend</center><br>
 						<ul>
 						<li id="white" >Available</li>
@@ -220,7 +220,7 @@ $uow->closeServerConn($conn);
 				</fieldset>
 			 
 				<!-- Div for datepicker -->
-				<div id="datepickerContainer">
+				<div id="datepickerContainer" style="width:1200px;">
 					<div id="datepickerInline"></div>
 					<br><br>
 					<div>
