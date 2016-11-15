@@ -1,5 +1,5 @@
 //The Javascript file containing the javascript from PHP/Pages/Home.php.
-var diff = 2;
+var diff = 1;
 $(document).ready(function() {
 	disappear();
 	
@@ -44,7 +44,7 @@ $(document).ready(function(){
 	$("#myBtn").click(function(){
 		var selected = document.getElementById("roomOptions").selectedIndex;
 		document.getElementById("roomOptionsMod").selectedIndex = selected;
-		$("#endTime").children().eq(2).attr('selected', 'selected');
+		$("#endTime").children().eq(diff).attr('selected', 'selected');
 		$("#myModal").modal();
 	});
 	

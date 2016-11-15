@@ -63,11 +63,16 @@ $getEndHoursSelect = false;
 
 $today = date("d/m/Y");
 $today = $reserve->getReservationsByDate($today, $conn);
-function getHours(){
+function getHours($endTime = FALSE){
 	global $getStartHoursSelect, $getEndHoursSelect;
 	global $modDate, $modTimeEnd;
-	for($x = 0; $x < 48; $x++){
-		$time = (int)($x/2) . ":";
+	if($endTime){
+		$SOL = 1; //Start of list
+	}else
+		$SOL = 0;
+	for($x = 0 + $SOL; $x < 48 + $SOL; $x++){
+		
+		$time = ((int)(($x%48)/2)) . ":";
 		if($x % 2 == 1){
 			$time .= "30";
 		}else{
@@ -269,7 +274,7 @@ $uow->closeServerConn($conn);
 											</select>&nbsp &nbsp &nbsp
 										<label>End Time:</label>
 											<select id ="endTime" name = "endTime">
-												<?php getHours()?>
+												<?php getHours( TRUE)?>
 											</select>&nbsp &nbsp &nbsp
 											<select readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum">
 												<?php														
@@ -344,7 +349,7 @@ $uow->closeServerConn($conn);
 											<select name = "endTime">
 												<?php
 												$getEndHoursSelect = true;
-												getHours();
+												getHours(TRUE);
 												$getEndHoursSelect = false;
 												?>
 											</select>&nbsp &nbsp &nbsp
