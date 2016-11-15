@@ -139,10 +139,12 @@ else
 	}
 }
 
+$room->setBusy(0, $rID, $conn);
+$_SESSION['roomAvailable'] = false;
+
 $uow->closeServerConn($conn);
 
 header("Location: Home.php");
-
 
 function checkWeek($d, $s, $current) {
 	//returns true if you are modifying a reservation, it is assumed existing reservations are within 3/week limit

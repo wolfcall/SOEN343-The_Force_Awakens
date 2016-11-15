@@ -70,4 +70,21 @@ class RoomTDG
 		
 		return $resultSet;
 	}
+	
+	public function checkBusy($rID, $conn){
+		
+		$sql = "Select busy from room WHERE roomID ='".$rID."'";
+		$result = $conn->query($sql);
+		
+		$row = $result->fetch_assoc();
+		
+		return $row["busy"];
+	}
+	
+	public function setBusy($status, $rID, $conn){
+		
+		$sql = "Update room SET busy ='".$status."' WHERE roomID ='".$rID."'";
+		$result = $conn->query($sql);
+		
+	}
 }

@@ -56,5 +56,13 @@ class RoomMapper
     public function getRoomLocation($rID){
         return $this->roomActive->getLocation($rID);
     }
+	
+	public function checkBusy($rID, $conn){
+        return $this->roomData->checkBusy($rID, $conn);
+    }
+	
+	public function setBusy($status, $rID, $conn){
+        return $this->roomData->setBusy($status, $rID, $conn);
+    }
 }
 ?>

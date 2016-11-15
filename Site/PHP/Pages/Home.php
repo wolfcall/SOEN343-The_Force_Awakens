@@ -19,6 +19,7 @@ $email = $_SESSION['email'];
 $userMSG = $_SESSION["userMSG"] ;
 $msgClass = $_SESSION["msgClass"];
 $modify = $_SESSION["modify"];
+$roomAvailable = $_SESSION['roomAvailable'];
 
 if(isset($_SESSION["userMSG"])){
 	unset($_SESSION["userMSG"]);
@@ -161,6 +162,11 @@ $uow->closeServerConn($conn);
 		$_SESSION['modify'] = NULL; //Should clear out modify session if user refreshes
     }
 	
+	if($roomAvailable)
+    {
+		echo '<script> $(document).ready(function(){$("#myModal").modal("show");}); </script>';
+    }
+	
 ?>
 </head>
 
@@ -223,18 +229,19 @@ $uow->closeServerConn($conn);
 				<div id="datepickerContainer" style="width:1200px;">
 					<div id="datepickerInline"></div>
 					<br><br>
-					<div>
-						<select id = "roomOptions" class="btn btn-default btn-lg network-name" name = "roomNum">
-							<?php
-								foreach($rooms->getRoomList() as $val){
-									echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
-								}
-							?>
-						</select>
-					</div>
-					<br>
 					<div id="reserveButton">
-						<a class="btn btn-default btn-lg" data-target="myModal" id="myBtn"><span class="network-name">Make a Reservation</span></a>
+						<form id="form" action="CheckRoomAvailable.php" method="post">
+							<div>
+								<select id = "roomOptions" class="btn btn-default btn-lg network-name" name = "roomNum">
+									<?php
+										foreach($rooms->getRoomList() as $val){
+											echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
+										}
+									?>
+								</select>
+							</div><br>
+							<button type="submit" class="btn btn-default btn-lg"><span class="network-name">Make a Reservation</span></button>
+						</form>
 					</div>
 				</div>
 
