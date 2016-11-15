@@ -205,7 +205,7 @@ $uow->closeServerConn($conn);
 				
 				<!-- class greeting -->
 				<div class="greeting">
-					<h1>Please select a Day and Room to Begin!</h1>
+					<h1>Please select a day and room to begin!</h1>
 				</div>
 				
 				<br><br>
@@ -245,7 +245,7 @@ $uow->closeServerConn($conn);
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 style="color:red;">Please enter the specifications for your Reservation</h4>
+								<h4>Please enter the specifications for your reservation</h4>
 							</div>
 							<div class="modal-body">
 								<form id="form" action="Reserve.php" method="post">
@@ -311,7 +311,7 @@ $uow->closeServerConn($conn);
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 style="color:red;">Please Edit the specifications of your Reservation</h4>
+								<h4>Please edit the specifications of your reservation</h4>
 							</div>
 							<div class="modal-body">
 								<form id="form" action="Reserve.php" method="post">
@@ -377,7 +377,7 @@ $uow->closeServerConn($conn);
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 style="color:red;">Edit any of your profile info!</h4>
+								<h4>Edit any of your profile info!</h4>
 							</div>
 							<div class="modal-body">
 								<form id="profileForm" name = "form" action="ChangeDetails.php" method="post" onclick ="showResult();">
@@ -424,9 +424,11 @@ $uow->closeServerConn($conn);
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 style="color:red;">Your Reservations:</h4>
+								<h4>Your Reservations:</h4>
 							</div>
 							<div class="modal-body">
+                                <h5 id="legendC">Confirmed Reservations</h5>
+                                <h5 id="legendW">Waitlisted Reservations</h5><br>
 									<?php 
 									$conn = $uow->getServerConn();
 									
@@ -460,13 +462,6 @@ $uow->closeServerConn($conn);
 												echo "Start Time : ".$startDateTime[1]."<br>";
 												echo "End Time : ".$endDateTime[1];
                                         }
-
-												//If on the waitlist, add that as another line
-												/*if ($waitlisted[0] == "1") {
-													echo "<font color='red'>Currently Waitlisted</font>";
-												} else {
-                                                    echo "Confirmed";
-                                                }*/
 
 											echo "</section>";
 											echo "<aside class = 'rightcolumn'>";

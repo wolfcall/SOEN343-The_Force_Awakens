@@ -130,7 +130,7 @@ td {
     float: left;
     width: 45%;
     margin: 0px;
-    padding: 1em;
+    padding: 0.5em;
     border: solid;
     border-width: 1px;
     border-color: green;
@@ -138,8 +138,8 @@ td {
 }
 
 .rightcolumn {
-	margin-left: 50%;
-    border-left: 1px solid gray;
+	margin-left: 60%;
+    /*border-left: 1px solid gray;*/
     padding: 1em;
     overflow: hidden;
 }
@@ -148,20 +148,24 @@ td {
     float: left;
     width: 45%;
     margin: 0px;
-    padding: 1em;
+    padding: 0.5em;
     border: solid;
     border-width: 1px;
     border-color: red;
     border-radius: 5px;
 }
 
-.rightcolumnW {
-	margin-left: 50%;
-    border-left: 1px solid gray;
-    padding: 1em;
-    overflow: hidden;
-}
-
 .disLen {
 	width: 100px;
+}
+
+#legendC {
+    color: green;
+    text-align: center
+}
+
+#legendW {
+    color: red;
+    text-align: center
+    
 }
