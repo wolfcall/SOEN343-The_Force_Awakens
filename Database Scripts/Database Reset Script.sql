@@ -83,36 +83,6 @@ DEFAULT CHARACTER SET = utf8
 COMMENT = 'Room reservations will be stored here\nWill be associated to the ID of the user who instantiated the reservation\nWill be associated to the ID of the room it will take place';
 
 
--- -----------------------------------------------------
--- Table `soen343`.`waitlist`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `soen343`.`waitlist` ;
-
-CREATE TABLE IF NOT EXISTS `soen343`.`waitlist` (
-  `waitlistID` INT(11) NOT NULL AUTO_INCREMENT,
-  `studentID` INT(11) NOT NULL,
-  `roomID` INT(11) NOT NULL,
-  `startTimeDate` DATETIME NOT NULL,
-  `endTimeDate` DATETIME NOT NULL,
-  `title` VARCHAR(45) NOT NULL,
-  `description` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`waitlistID`),
-  INDEX `fk_waitlist_room1_idx` (`roomID` ASC),
-  INDEX `fk_waitlist_student1_idx` (`studentID` ASC),
-  CONSTRAINT `fk_waitlist_room1`
-    FOREIGN KEY (`roomID`)
-    REFERENCES `soen343`.`room` (`roomID`)
-    ON DELETE cascade
-    ON UPDATE cascade,
-  CONSTRAINT `fk_waitlist_student1`
-    FOREIGN KEY (`studentID`)
-    REFERENCES `soen343`.`student` (`studentID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'This will store the waitlist for specific rooms\nWill have an association to UserID who is on the waiting list\nWill have an association to roomID that the user is waiting for';
-
 set global event_scheduler = on;
 
 SET SQL_MODE=@OLD_SQL_MODE;
