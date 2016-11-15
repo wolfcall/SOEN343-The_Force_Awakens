@@ -45,7 +45,7 @@ $(document).ready(function(){
 		var selected = document.getElementById("roomOptions").selectedIndex;
 		document.getElementById("roomOptionsMod").selectedIndex = selected;
 		$("#endTime").children().eq(2).attr('selected', 'selected');
-		$("#myModal").modal();
+		
 	});
 	
 	$("#startTime").change(function(){

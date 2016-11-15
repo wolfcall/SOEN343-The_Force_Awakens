@@ -19,6 +19,7 @@ $email = $_SESSION['email'];
 $userMSG = $_SESSION["userMSG"] ;
 $msgClass = $_SESSION["msgClass"];
 $modify = $_SESSION["modify"];
+$roomAvailable = $_SESSION['roomAvailable'];
 
 if(isset($_SESSION["userMSG"])){
 	unset($_SESSION["userMSG"]);
@@ -161,6 +162,11 @@ $uow->closeServerConn($conn);
 		$_SESSION['modify'] = NULL; //Should clear out modify session if user refreshes
     }
 	
+	if($roomAvailable)
+    {
+		echo '<script> $(document).ready(function(){$("#myModal").modal("show");}); </script>';
+    }
+	
 ?>
 </head>
 
@@ -177,11 +183,11 @@ $uow->closeServerConn($conn);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                
 				<a class="navbar-brand topnav first r" id="first-r" href="../../index.php">Log Out</a>
 				<a class="navbar-brand topnav second r" id="second-r" href="#">My Profile</a>
 				<a class="navbar-brand topnav third r" id="third-r" href="#">My Reservations</a>
 				<a class="navbar-brand topnav fourth r" id="fourth-r" href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a>
+			
         
             </div>
             <!-- /.navbar-collapse -->
@@ -204,35 +210,45 @@ $uow->closeServerConn($conn);
 				</div>
 				
 				<!-- class greeting -->
+<<<<<<< HEAD
 				<div class="greeting">
 					<h1>Please select a day and room to begin</h1>
+=======
+				<div class="greeting" style="margin-left:auto; margin-right:auto; width:960px;">
+					<h1>Please select a Day and Room to Begin!</h1>
+>>>>>>> origin/master
 				</div>
 
+<<<<<<< HEAD
 				<!--<fieldset>
+=======
+				<fieldset style="margin-left:auto; margin-right:auto; max-width:250px; min-width:250px;">
+>>>>>>> origin/master
 					<center>Legend</center><br>
 						<ul>
-						<li id="white">Available</li>
+						<li id="white" >Available</li>
 						<li id="green">Your Reservations</li>
 						<li id="red">Booked</li>
 						</ul>
 				</fieldset>-->
 			 
 				<!-- Div for datepicker -->
-				<div id="datepickerContainer">
+				<div id="datepickerContainer" style="width:1200px;">
 					<div id="datepickerInline"></div>
 					<br><br>
-					<div>
-						<select id = "roomOptions" class="btn btn-default btn-lg network-name" name = "roomNum">
-							<?php
-								foreach($rooms->getRoomList() as $val){
-									echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
-								}
-							?>
-						</select>
-					</div>
-					<br>
 					<div id="reserveButton">
-						<a class="btn btn-default btn-lg" data-target="myModal" id="myBtn"><span class="network-name">Make a Reservation</span></a>
+						<form id="form" action="CheckRoomAvailable.php" method="post">
+							<div>
+								<select id = "roomOptions" class="btn btn-default btn-lg network-name" name = "roomNum">
+									<?php
+										foreach($rooms->getRoomList() as $val){
+											echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
+										}
+									?>
+								</select>
+							</div><br>
+							<button type="submit" class="btn btn-default btn-lg"><span class="network-name">Make a Reservation</span></button>
+						</form>
 					</div>
                     <br>
                     <div id="legendContainer">
