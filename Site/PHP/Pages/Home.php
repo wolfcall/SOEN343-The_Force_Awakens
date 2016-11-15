@@ -215,27 +215,9 @@ $uow->closeServerConn($conn);
 				</div>
 				
 				<!-- class greeting -->
-<<<<<<< HEAD
 				<div class="greeting">
 					<h1>Please select a day and room to begin</h1>
-=======
-				<div class="greeting" style="margin-left:auto; margin-right:auto; width:960px;">
-					<h1>Please select a Day and Room to Begin!</h1>
->>>>>>> origin/master
 				</div>
-
-<<<<<<< HEAD
-				<!--<fieldset>
-=======
-				<fieldset style="margin-left:auto; margin-right:auto; max-width:250px; min-width:250px;">
->>>>>>> origin/master
-					<center>Legend</center><br>
-						<ul>
-						<li id="white" >Available</li>
-						<li id="green">Your Reservations</li>
-						<li id="red">Booked</li>
-						</ul>
-				</fieldset>-->
 			 
 				<!-- Div for datepicker -->
 				<div id="datepickerContainer" style="width:1200px;">
