@@ -22,6 +22,7 @@ $modify = $_SESSION["modify"];
 $roomAvailable = $_SESSION['roomAvailable'];
 
 if(isset($_SESSION["userMSG"])){
+	unset($_SESSION['roomID']);
 	unset($_SESSION["userMSG"]);
     unset($_SESSION["msgClass"]);
 }
@@ -170,6 +171,7 @@ $uow->closeServerConn($conn);
 	if($roomAvailable)
     {
 		echo '<script> $(document).ready(function(){$("#myModal").modal("show");}); </script>';
+		$_SESSION['roomAvailable'] = false;
     }
 	
 ?>

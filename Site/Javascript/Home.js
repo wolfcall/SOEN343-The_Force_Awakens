@@ -45,7 +45,6 @@ $(document).ready(function(){
 		var selected = document.getElementById("roomOptions").selectedIndex;
 		document.getElementById("roomOptionsMod").selectedIndex = selected;
 		$("#endTime").children().eq(diff).attr('selected', 'selected');
-		$("#myModal").modal();
 	});
 	
 	$("#startTime").change(function(){
@@ -56,19 +55,20 @@ $(document).ready(function(){
 	$("#endTime").change(function(){
 		diff = $("#endTime").prop('selectedIndex') - $("#startTime").prop('selectedIndex');
 	});
-});
-
-$(document).ready(function(){
+	
 	$("#second-r").click(function(){
 		$("#profilemyModal").modal();
 	});
-});
-
-$(document).ready(function(){
+	
 	$("#third-r").click(function(){
 		$("#reservationmyModal").modal();
 	});
+	
+	$('#myModal').on('hidden.bs.modal', function () {
+		location.href = 'ClearRoom.php';
+	})
 });
+
 
 function disappear(){
 	setTimeout(function(){ 

@@ -9,9 +9,10 @@ session_start();
 $uow = new UnitOfWork();
 $conn = $uow->getServerConn();
 
-$reservation = new ReservationMapper();
-
 $rID = $_POST['roomNum'];
+
+//In case the User clicks out of the Modal
+$_SESSION['roomID'] = $rID;
 
 $roomAsked = new RoomMapper($rID, $conn);
 $roomAnswer = $roomAsked->checkBusy($rID, $conn);
@@ -24,7 +25,7 @@ if($roomAnswer == 0)
 }
 else
 {
-	$_SESSION["userMSG"] = "This room is being used by another Student!";
+	$_SESSION["userMSG"] = "Room ".$roomName." is being used by another Student!";
 	$_SESSION["msgClass"] = "failure";
 	$_SESSION['roomAvailable'] = false;
 }
