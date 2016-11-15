@@ -1,5 +1,5 @@
 .time {
-	background: #87CEFA;
+	background: #D3D3D3;
 	color: black;
     border-collapse: collapse;
 	text-align: center;
@@ -17,6 +17,7 @@
 .booked {
 	background: #F00;
 }
+
 fieldset {
     margin: 8px;
     border: 1px solid black;
@@ -24,32 +25,43 @@ fieldset {
     border-radius: 4px;
 	width: 20%;
 	position: absolute;
-    background-color: LightSteelBlue ;
+    background-color: white;
     padding: 0.15em;
 }
-#white {
+
+.white {
 	list-style-type: square;
 	color: white;
 	font-size: 20px;
 }
-#red {
-	list-style-type: square;
-	color: red;
-	font-size: 20px;
+
+.red {
+	color: #F00;
 }
-#green {
-	list-style-type: square;
-	color: green;
-	font-size: 20px;
+
+.green {
+	color: limegreen;
 }
+
 legend {
 	font-size:15px;
 }
+
 .room {
 	background: #D3D3D3;
     padding: 0.15em;
 }
+
 .date {
-	background: #B0C4DE;
+	background: lightslategray;
     padding: 0.15em;
+    color: white;
+    font-weight: normal;
+}
+
+#legendContainer {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 10%;
+    margin: auto;
 }

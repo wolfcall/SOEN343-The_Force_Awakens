@@ -11,6 +11,7 @@ html {
 	margin-right: auto;
 	margin-top:auto;
 	margin-bottom:auto;
+    background-color: #FAFAFA;
 }
 body,
 h1,
@@ -81,6 +82,7 @@ h6 {
 
 #datepickerContainer {
     text-align: center;
+    margin-top: 2%;
 }
 
 #datepickerInline {
@@ -130,16 +132,16 @@ td {
     float: left;
     width: 45%;
     margin: 0px;
-    padding: 1em;
+    padding: 0.5em;
     border: solid;
-    border-width: 2px;
+    border-width: 1px;
     border-color: green;
     border-radius: 5px;
 }
 
 .rightcolumn {
-	margin-left: 50%;
-    border-left: 1px solid gray;
+	margin-left: 60%;
+    /*border-left: 1px solid gray;*/
     padding: 1em;
     overflow: hidden;
 }
@@ -148,20 +150,28 @@ td {
     float: left;
     width: 45%;
     margin: 0px;
-    padding: 1em;
+    padding: 0.5em;
     border: solid;
-    border-width: 2px;
+    border-width: 1px;
     border-color: red;
     border-radius: 5px;
 }
 
-.rightcolumnW {
-	margin-left: 50%;
-    border-left: 1px solid gray;
-    padding: 1em;
-    overflow: hidden;
-}
-
 .disLen {
 	width: 100px;
+}
+
+#legendC {
+    color: green;
+    text-align: center
+}
+
+#legendW {
+    color: red;
+    text-align: center
+    
+}
+
+.network-name {
+    font-size: 16px;
 }
