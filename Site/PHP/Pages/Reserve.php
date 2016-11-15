@@ -55,17 +55,8 @@ $endFloat = ($endEx[0] + ($endEx[1]/60));
 
 date_default_timezone_set('US/Eastern');
 $ourTime = date('H:i');
-
-var_dump($ourTime);
 $ourTimeEx = explode(":", $ourTime);
-
-//REMOVE THE MINUS SIX BEFORE COMMITING
-//$ourTimeFloat = (($ourTimeEx[0]-6) + ($ourTimeEx[1]/60));
 $ourTimeFloat = ($ourTimeEx[0] + ($ourTimeEx[1]/60));
-
-var_dump($ourTimeFloat);
-die();
-
 
 $ourDate = date('y-m-d');
 $ourDateFormat = strtotime($ourDate);
@@ -75,17 +66,6 @@ $dateAmerFormat = strtotime($dateAmer);
 
 $dateDiff = $ourDateFormat - $dateAmerFormat;
 
-
-
-/*
-*	Check if the OS is for MAC. If it is, we must subtract 6 hours from the time
-*	If it is Windows time, then leave the time as it
-
-if(PHP_OS == "Darwin")
-{
-	$ourTimeFloat = $ourTimeFloat - 21600;
-}
-*/
 /*
 *	Check if the reservation will be before the current time
 */
