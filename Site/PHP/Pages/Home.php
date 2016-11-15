@@ -171,7 +171,6 @@ $uow->closeServerConn($conn);
 	if($roomAvailable)
     {
 		echo '<script> $(document).ready(function(){$("#myModal").modal("show");}); </script>';
-		$_SESSION['roomAvailable'] = false;
     }
 	
 ?>
