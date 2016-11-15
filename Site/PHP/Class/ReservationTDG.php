@@ -162,7 +162,8 @@ class ReservationTDG
                                                 "studentID" => $row["studentID"],
                                                 "roomID" => $row["roomID"],
                                                 "startTimeDate" => $row["startTimeDate"],
-                                                "endTimeDate" => $row["endTimeDate"]);
+                                                "endTimeDate" => $row["endTimeDate"],
+												"waitlisted" => $row["waitlisted"]);
 			array_push($reservesDates, $singleReservation);
 		}
 		

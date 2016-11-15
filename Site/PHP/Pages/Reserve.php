@@ -114,7 +114,7 @@ else
 	$startDate = new DateTime($start);
 	$endDate = new DateTime($end);
 
-	if(checkOverlap($startDate, $endDate, $availableTimes) && checkWeek($dateEU, $sID, $currentReservations)) {
+	if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) {
 		if($modifying)
 		{
 			//Updates reservation instead of adding a new one
@@ -232,6 +232,7 @@ function checkOverlap($start, $end, $current) {
 	
 	return true;
 }
+
 
 //Get duration of reservation, from start to end, in mins
 //LEAVE FOR NOW, MIGHT NEED DURATION IN FUTURE

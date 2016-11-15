@@ -430,9 +430,6 @@ $uow->closeServerConn($conn);
 									<?php 
 									$conn = $uow->getServerConn();
 									
-									$startDateTime;
-									$endDateTime;
-									$deleteButton;
 									$count = 1;
 									foreach($studentReservations as &$singleReservation)
 									{   
@@ -443,6 +440,8 @@ $uow->closeServerConn($conn);
 										$hidden = '<input type="hidden" name="rID" value="'.$singleReservation["reservationID"].'"></input>';
 										$startDateTime = explode(" ", $singleReservation["startTimeDate"]);
 										$endDateTime = explode(" ", $singleReservation["endTimeDate"]);
+										$waitlisted = explode(" ", $singleReservation["waitlisted"]);
+
 										echo "<form id='myReservationform' action='ModifyReservation.php' method='post'>";
 											echo "<section class = 'leftcolumn'>";
 												echo $hidden;
@@ -451,6 +450,12 @@ $uow->closeServerConn($conn);
 												echo "Date : ".$startDateTime[0]."<br>";
 												echo "Start Time : ".$startDateTime[1]."<br>";
 												echo "End Time : ".$endDateTime[1];
+
+												//If on the waitlist, add that as another line
+												if ($waitlisted[0] == "1") {
+													echo "<br>This reservation is currently on the waitlist";
+												}
+
 											echo "</section>";
 											echo "<aside class = 'rightcolumn'>";
 												echo $deleteButton."<br>";
