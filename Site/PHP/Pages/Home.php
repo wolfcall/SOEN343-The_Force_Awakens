@@ -205,19 +205,17 @@ $uow->closeServerConn($conn);
 				
 				<!-- class greeting -->
 				<div class="greeting">
-					<h1>Please select a day and room to begin!</h1>
+					<h1>Please select a day and room to begin</h1>
 				</div>
-				
-				<br><br>
 
-				<fieldset>
+				<!--<fieldset>
 					<center>Legend</center><br>
 						<ul>
 						<li id="white">Available</li>
 						<li id="green">Your Reservations</li>
 						<li id="red">Booked</li>
 						</ul>
-				</fieldset>
+				</fieldset>-->
 			 
 				<!-- Div for datepicker -->
 				<div id="datepickerContainer">
@@ -236,6 +234,11 @@ $uow->closeServerConn($conn);
 					<div id="reserveButton">
 						<a class="btn btn-default btn-lg" data-target="myModal" id="myBtn"><span class="network-name">Make a Reservation</span></a>
 					</div>
+                    <br>
+                    <div id="legendContainer">
+                        <h6 class="green">Your Booking</h4>
+                        <h6 class="red">Booked</h4>
+                    </div>
 				</div>
 
 				<!-- Reservation Modal -->
@@ -377,7 +380,7 @@ $uow->closeServerConn($conn);
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4>Edit any of your profile info!</h4>
+								<h4>Edit any of your profile info</h4>
 							</div>
 							<div class="modal-body">
 								<form id="profileForm" name = "form" action="ChangeDetails.php" method="post" onclick ="showResult();">
@@ -424,7 +427,7 @@ $uow->closeServerConn($conn);
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4>Your Reservations:</h4>
+								<h4>Your Reservations</h4>
 							</div>
 							<div class="modal-body">
                                 <h5 id="legendC">Confirmed Reservations</h5>

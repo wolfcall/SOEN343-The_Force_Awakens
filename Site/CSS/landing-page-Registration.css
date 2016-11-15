@@ -11,6 +11,7 @@ html {
 	margin-right: auto;
 	margin-top:auto;
 	margin-bottom:auto;
+    background-color: #FAFAFA;
 }
 body,
 h1,
@@ -81,6 +82,7 @@ h6 {
 
 #datepickerContainer {
     text-align: center;
+    margin-top: 2%;
 }
 
 #datepickerInline {
@@ -168,4 +170,8 @@ td {
     color: red;
     text-align: center
     
+}
+
+.network-name {
+    font-size: 16px;
 }
