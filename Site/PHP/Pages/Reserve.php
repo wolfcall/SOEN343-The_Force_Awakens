@@ -54,9 +54,12 @@ $endEx = explode(":", $end);
 $endFloat = ($endEx[0] + ($endEx[1]/60));
 
 $ourTime = date('H:i');
-$ourTimeEx = explode(":", $ourTime);
-$ourTimeFloat = ($ourTimeEx[0] + ($ourTimeEx[1]/60));
 
+$ourTimeEx = explode(":", $ourTime);
+
+//REMOVE THE MINUS SIX BEFORE COMMITING
+//$ourTimeFloat = (($ourTimeEx[0]-6) + ($ourTimeEx[1]/60));
+$ourTimeFloat = ($ourTimeEx[0] + ($ourTimeEx[1]/60));
 
 $ourDate = date('y-m-d');
 $ourDateFormat = strtotime($ourDate);
@@ -66,25 +69,44 @@ $dateAmerFormat = strtotime($dateAmer);
 
 $dateDiff = $ourDateFormat - $dateAmerFormat;
 
+
+
 /*
-*	If reservation will last more than 3 hours
+*	Check if the OS is for MAC. If it is, we must subtract 6 hours from the time
+*	If it is Windows time, then leave the time as it
+*/
+if(PHP_OS == "Darwin")
+{
+	$ourTimeFloat = $ourTimeFloat - 21600;
+}
+
+/*
+*	Check if the reservation will be before the current time
 */
 if($ourTimeFloat > $startFloat && $dateDiff == 0)
 {
 	$_SESSION["userMSG"] = $currentTime;
 	$_SESSION["msgClass"] = "failure";
 }
+/*
+*	If reservation will last more than 3 hours
+*/
 else if ( ($endFloat-$startFloat) > 3)
 {
 	$_SESSION["userMSG"] = $tooLong;
 	$_SESSION["msgClass"] = "failure";
 }
-
+/*
+*	Check if the end time of the reservation will be before the start time
+*/
 else if ($endFloat <= $startFloat)
 {
 	$_SESSION["userMSG"] = $wrongTime;
 	$_SESSION["msgClass"] = "failure";
 }	
+/*
+*	Continue with the Reservation normally
+*/
 else
 {
 	//Converting the Date to the Proper Format
@@ -106,7 +128,7 @@ else
 	$startDate = new DateTime($start);
 	$endDate = new DateTime($end);
 
-	if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) {
+	if(checkOverlap($startDate, $endDate, $availableTimes) && checkWeek($dateEU, $sID, $currentReservations)) {
 		if($modifying)
 		{
 			//Updates reservation instead of adding a new one
@@ -121,10 +143,13 @@ else
 		else
 		{
 			//Just realize display message is in format mm/dd/yyyy
-			$reservation->addReservation($sID, $rID, $start, $end, $title, $desc, $conn);
+			$reservation->addReservation($sID, $rID, $start, $end, $title, $desc, $conn, "0");
 			$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end. " in Room ".$name."!";
 			$_SESSION["msgClass"] = "success";
 		}
+	}
+	else if ($_SESSION["userMSG"] == "This option overlaps, you've been added to the waitlist") {
+		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc, $conn, "1");
 	}
 }
 
@@ -211,7 +236,8 @@ function checkOverlap($start, $end, $current) {
 				$startFormat = $startTime->format("H:i");
 				$endFormat = $endTime->format("H:i");
 
-				$_SESSION["userMSG"] = "This option overlaps with the reservation beginning at " .$startFormat. " and ending at ".$endFormat;
+				//If there's an overlap, add new date to waitlist
+				$_SESSION["userMSG"] = "This option overlaps, you've been added to the waitlist";
 				$_SESSION["msgClass"] = "failure";
 				return false;
 			}

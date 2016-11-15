@@ -27,14 +27,14 @@ class ReservationTDG
 		
 	/* The Insert method to add a new reservation into the reservation table
 	*/
-	public function addReservation($sID, $rID, $start, $end, $title, $desc, $conn)
+	public function addReservation($sID, $rID, $start, $end, $title, $desc, $conn, $wait)
 	{
 		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %H:%i')";
 		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";
 
-		$sql = "INSERT INTO reservation (studentID, roomID, startTimeDate, endTimeDate, title, description) 
-			Values ('".$sID."','".$rID."',".$startTrans.",".$endTrans.",'".$title."','".$desc."')";
-		
+		$sql = "INSERT INTO reservation (studentID, roomID, startTimeDate, endTimeDate, title, description, waitlisted) 
+			Values ('".$sID."','".$rID."',".$startTrans.",".$endTrans.",'".$title."','".$desc."','".$wait."')";
+
 		$result = $conn->query($sql);
 	}
 	

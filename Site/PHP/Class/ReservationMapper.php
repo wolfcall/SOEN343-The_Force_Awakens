@@ -19,8 +19,8 @@ class ReservationMapper
 		$this->reservationData = new ReservationTDG();
 	}
 	
-	public function addReservation($sID, $rID, $start, $end, $title, $desc, $conn){
-		$this->reservationData->addReservation($sID, $rID, $start, $end, $title, $desc, $conn);
+	public function addReservation($sID, $rID, $start, $end, $title, $desc, $conn, $wait){
+		$this->reservationData->addReservation($sID, $rID, $start, $end, $title, $desc, $conn, $wait);
     }	
 	
 	/* Set methods for the Reservation Domain object
