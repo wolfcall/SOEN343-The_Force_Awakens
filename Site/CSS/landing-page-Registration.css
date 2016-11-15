@@ -128,9 +128,13 @@ td {
 
 .leftcolumn {
     float: left;
-    max-width: 40%;
-    margin: 0;
+    width: 45%;
+    margin: 0px;
     padding: 1em;
+    border: solid;
+    border-width: 2px;
+    border-color: green;
+    border-radius: 5px;
 }
 
 .rightcolumn {
@@ -140,6 +144,24 @@ td {
     overflow: hidden;
 }
 
-.disLen{
+.leftcolumnW {
+    float: left;
+    width: 45%;
+    margin: 0px;
+    padding: 1em;
+    border: solid;
+    border-width: 2px;
+    border-color: red;
+    border-radius: 5px;
+}
+
+.rightcolumnW {
+	margin-left: 50%;
+    border-left: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
+}
+
+.disLen {
 	width: 100px;
 }

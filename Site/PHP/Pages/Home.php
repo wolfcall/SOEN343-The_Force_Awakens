@@ -443,18 +443,30 @@ $uow->closeServerConn($conn);
 										$waitlisted = explode(" ", $singleReservation["waitlisted"]);
 
 										echo "<form id='myReservationform' action='ModifyReservation.php' method='post'>";
-											echo "<section class = 'leftcolumn'>";
+										if ($waitlisted[0] == "1") {	
+                                            echo "<section class = 'leftcolumnW'>";
 												echo $hidden;
 												echo "Room Name : ".$activeRoom."<br>";
 												echo "Title : ".$singleReservation['title']."<br>";
 												echo "Date : ".$startDateTime[0]."<br>";
 												echo "Start Time : ".$startDateTime[1]."<br>";
 												echo "End Time : ".$endDateTime[1];
+                                        } else {
+                                            echo "<section class = 'leftcolumn'>";
+												echo $hidden;
+												echo "Room Name : ".$activeRoom."<br>";
+												echo "Title : ".$singleReservation['title']."<br>";
+												echo "Date : ".$startDateTime[0]."<br>";
+												echo "Start Time : ".$startDateTime[1]."<br>";
+												echo "End Time : ".$endDateTime[1];
+                                        }
 
 												//If on the waitlist, add that as another line
-												if ($waitlisted[0] == "1") {
-													echo "<br>This reservation is currently on the waitlist";
-												}
+												/*if ($waitlisted[0] == "1") {
+													echo "<font color='red'>Currently Waitlisted</font>";
+												} else {
+                                                    echo "Confirmed";
+                                                }*/
 
 											echo "</section>";
 											echo "<aside class = 'rightcolumn'>";
