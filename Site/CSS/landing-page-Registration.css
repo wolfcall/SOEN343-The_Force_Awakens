@@ -132,7 +132,7 @@ td {
     margin: 0px;
     padding: 1em;
     border: solid;
-    border-width: 2px;
+    border-width: 1px;
     border-color: green;
     border-radius: 5px;
 }
@@ -150,7 +150,7 @@ td {
     margin: 0px;
     padding: 1em;
     border: solid;
-    border-width: 2px;
+    border-width: 1px;
     border-color: red;
     border-radius: 5px;
 }
