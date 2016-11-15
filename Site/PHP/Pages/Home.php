@@ -177,11 +177,11 @@ $uow->closeServerConn($conn);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                
 				<a class="navbar-brand topnav first r" id="first-r" href="../../index.php">Log Out</a>
 				<a class="navbar-brand topnav second r" id="second-r" href="#">My Profile</a>
 				<a class="navbar-brand topnav third r" id="third-r" href="#">My Reservations</a>
 				<a class="navbar-brand topnav fourth r" id="fourth-r" href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a>
+			
         
             </div>
             <!-- /.navbar-collapse -->
@@ -192,7 +192,7 @@ $uow->closeServerConn($conn);
     <!-- Header -->
 	<div class="intro-header">
 	
-		<div class="container">
+		<div class="container" style="width:960px;">
 			<div class="row">
 				<!-- Id space to confirm if the data was saved or not -->
 				<div>
@@ -204,16 +204,16 @@ $uow->closeServerConn($conn);
 				</div>
 				
 				<!-- class greeting -->
-				<div class="greeting">
+				<div class="greeting" style="margin-left:auto; margin-right:auto; width:960px;">
 					<h1>Please select a Day and Room to Begin!</h1>
 				</div>
 				
 				<br><br>
 
-				<fieldset>
+				<fieldset style="margin-left:auto; margin-right:auto; width:250px;">
 					<center>Legend</center><br>
 						<ul>
-						<li id="white">Available</li>
+						<li id="white" >Available</li>
 						<li id="green">Your Reservations</li>
 						<li id="red">Booked</li>
 						</ul>
