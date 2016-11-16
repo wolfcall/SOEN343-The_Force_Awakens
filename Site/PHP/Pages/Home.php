@@ -240,6 +240,7 @@ $uow->closeServerConn($conn);
 					</div>
                     <br>
                     <div id="legendContainer">
+                        <h6 class="legendTitle">Legend</h6>
                         <h6 class="green">Your Booking</h4>
                         <h6 class="red">Booked</h4>
                     </div>

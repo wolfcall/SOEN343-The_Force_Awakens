@@ -60,11 +60,14 @@ legend {
     font-weight: normal;
 }
 
+.legendTitle {
+    text-decoration: underline;
+}
+
 #legendContainer {
-    border: 2px solid black;
-    border-radius: 5px;
-    width: 10%;
-    margin: auto;
-    margin-bottom: -2%;
-    background-color: white;
+    border-left: 1px solid grey;
+    width: 13.7%;
+    padding: 0.8%;
+    float: left;
+    text-align: left;
 }
