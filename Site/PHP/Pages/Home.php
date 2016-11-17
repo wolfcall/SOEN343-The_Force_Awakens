@@ -97,6 +97,8 @@ function getHours($endTime = FALSE){
 	}
 }
 
+
+
 $uow->closeServerConn($conn);
 ?>
 
@@ -453,33 +455,37 @@ $uow->closeServerConn($conn);
 										$startDateTime = explode(" ", $singleReservation["startTimeDate"]);
 										$endDateTime = explode(" ", $singleReservation["endTimeDate"]);
 										$waitlisted = explode(" ", $singleReservation["waitlisted"]);
+										
+										$timeNow = date("Y-m-d H:i:s");
+										
+										if(strtotime($singleReservation["startTimeDate"]) > strtotime($timeNow)) {
+											echo "<form id='myReservationform' action='ModifyReservation.php' method='post'>";
+											if ($waitlisted[0] == "1") {	
+												echo "<section class = 'leftcolumnW'>";
+													echo $hidden;
+													echo "Room Name : ".$activeRoom."<br>";
+													echo "Title : ".$singleReservation['title']."<br>";
+													echo "Date : ".$startDateTime[0]."<br>";
+													echo "Start Time : ".$startDateTime[1]."<br>";
+													echo "End Time : ".$endDateTime[1];
+											} else {
+												echo "<section class = 'leftcolumn'>";
+													echo $hidden;
+													echo "Room Name : ".$activeRoom."<br>";
+													echo "Title : ".$singleReservation['title']."<br>";
+													echo "Date : ".$startDateTime[0]."<br>";
+													echo "Start Time : ".$startDateTime[1]."<br>";
+													echo "End Time : ".$endDateTime[1];
+											}
 
-										echo "<form id='myReservationform' action='ModifyReservation.php' method='post'>";
-										if ($waitlisted[0] == "1") {	
-                                            echo "<section class = 'leftcolumnW'>";
-												echo $hidden;
-												echo "Room Name : ".$activeRoom."<br>";
-												echo "Title : ".$singleReservation['title']."<br>";
-												echo "Date : ".$startDateTime[0]."<br>";
-												echo "Start Time : ".$startDateTime[1]."<br>";
-												echo "End Time : ".$endDateTime[1];
-                                        } else {
-                                            echo "<section class = 'leftcolumn'>";
-												echo $hidden;
-												echo "Room Name : ".$activeRoom."<br>";
-												echo "Title : ".$singleReservation['title']."<br>";
-												echo "Date : ".$startDateTime[0]."<br>";
-												echo "Start Time : ".$startDateTime[1]."<br>";
-												echo "End Time : ".$endDateTime[1];
-                                        }
-
-											echo "</section>";
-											echo "<aside class = 'rightcolumn'>";
-												echo $deleteButton."<br>";
-												echo $modifyButton."<br><br>";
-											echo "</aside>";
-										echo "</form>";
-										$count = $count + 1;
+												echo "</section>";
+												echo "<aside class = 'rightcolumn'>";
+													echo $deleteButton."<br>";
+													echo $modifyButton."<br><br>";
+												echo "</aside>";
+											echo "</form>";
+											$count = $count + 1;
+										}
 									}
 									
 									$uow->closeServerConn($conn);
