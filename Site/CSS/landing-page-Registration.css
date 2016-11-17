@@ -39,6 +39,10 @@ h6 {
     font-weight: 400;
 }
 
+.nav {
+    margin-top: -0.3em;
+}
+
 .intro-header {
     padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
@@ -69,7 +73,7 @@ ul.topnav li a {
     color: midnightblue;
     background-color: aliceblue;
     text-align: center;
-    padding: 0.7em 3em 2em 2em;
+    padding: 0.7em 3em;
     text-decoration: none;
     transition: 0.3s;
     font-size: 140%;

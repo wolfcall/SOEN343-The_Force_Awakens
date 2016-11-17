@@ -188,10 +188,10 @@ $uow->closeServerConn($conn);
 
     <!-- Navigation -->
     <ul class="topnav" id="myTopnav">
-        <li><a href="../../index.php"><span style= "font-color:white">Log Out</span></a></li>
-        <li><a id = "second-r" href="#">My Profile</a></li>
-        <li><a id = "third-r" href="#">My Reservations</a></li>
-        <li><a href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a></li>
+        <li><a class="nav" href="../../index.php"><span style= "font-color:white">Log Out</span></a></li>
+        <li><a class="nav" id = "second-r" href="#">My Profile</a></li>
+        <li><a class="nav" id = "third-r" href="#">My Reservations</a></li>
+        <li><a class="nav" href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a></li>
     </ul>
 
     <!-- Header -->
