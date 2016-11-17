@@ -41,6 +41,9 @@ $email = htmlspecialchars($_POST["email"]);
 $repeatReservation = 0;
 if(htmlspecialchars($_POST["repeatReservation"]) > 0) $repeatReservation = htmlspecialchars($_POST["repeatReservation"]);
 
+//Variable to hold the number of reservations to add in sequence (week repeats)
+$reserveCount = 1 + $repeatReservation;
+
 //Getting the ID of the Room 1
 //Should Obtain Either 1,2,3,4,5
 $rID = htmlspecialchars($_POST["roomID"]);
@@ -100,57 +103,80 @@ else if ($endFloat <= $startFloat)
 */
 else
 {
-	//Converting the Date to the Proper Format
-	//Should Obtain DD/MM/YYYY	
-	$dateEU = date('d-m-Y', strtotime($passedDate));
-	$dateAmer = date('m/d/Y', strtotime($passedDate));
-	$start = $dateAmer." ".$start;
-	$end = $dateAmer." ".$end;
-
 	//Check for presence of more than 3 reservations in the same week 
 	//before actually adding the reservation
 	$currentReservations = $reservation->getReservations($sID, $conn);
 
-
-	//Get the list of reservations in same room and on same day
-	$availableTimes = $reservation->getReservationsByRoomAndDate($rID, $start, $conn);
-
-	//Get start and end time of new reservation, convert the difference to mins to find duration
-	$startDate = new DateTime($start);
-	$endDate = new DateTime($end);
+	$multiReserveSuccess = true;
 	
-	/*if($repeatReservation > 0)
+	//For multi reservations, this count the number of successes and waitlists and weekfailures (cant reserve more than 3 in that week)
+	$successes = 0;
+	$waitlists = 0;
+	$weekfailures = 0;
+	
+	for($a = 0; $a < $reserveCount; $a++)
 	{
-		$_SESSION["userMSG"] = "Date time: " . date('Y-m-d', strtotime($date. ' + 7 days'));
+		//Converting the Date to the Proper Format
+		//Should Obtain DD/MM/YYYY	
+		$dateEU = date('d-m-Y', strtotime($passedDate . ' + ' . (7*$a) . ' days'));
+		$dateAmer = date('m/d/Y', strtotime($passedDate . ' + ' . (7*$a) . ' days'));
+		//changed to newStart to facilitate repeat reservations
+		$newStart = $dateAmer." ".$start;
+		$newEnd = $dateAmer." ".$end;
+		
+		//Get the list of reservations in same room and on same day
+		$availableTimes = $reservation->getReservationsByRoomAndDate($rID, $newStart, $conn);
 
-	*/
-	
-	if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) {
-		if($modifying)
-		{
-			//Updates reservation instead of adding a new one
-			$reservation->updateRoomID($reservationID, $rID, $conn);
-			$reservation->updateStart($reservationID, $start, $conn);
-			$reservation->updateEnd($reservationID, $end, $conn);
-			$reservation->updateTitle($reservationID, $title, $conn);
-			$reservation->updateDescription($reservationID, $desc, $conn);
-			$_SESSION["userMSG"] = "You have successfully updated your reservation ID ".$reservationID." for ".$start." to ".$end." in Room ".$name."!";
-			$_SESSION["msgClass"] = "success";
+		//Get start and end time of new reservation, convert the difference to mins to find duration
+		$startDate = new DateTime($newStart);
+		$endDate = new DateTime($newEnd);
+		
+		if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) {
+			if($modifying)
+			{
+				//Updates reservation instead of adding a new one
+				$reservation->updateRoomID($reservationID, $rID, $conn);
+				$reservation->updateStart($reservationID, $newStart, $conn);
+				$reservation->updateEnd($reservationID, $newEnd, $conn);
+				$reservation->updateTitle($reservationID, $title, $conn);
+				$reservation->updateDescription($reservationID, $desc, $conn);
+				$_SESSION["userMSG"] = "You have successfully updated your reservation ID ".$reservationID." for ".$newStart." to ".$newEnd." in Room ".$name."!";
+				$_SESSION["msgClass"] = "success";
+			}
+			else
+			{
+				//Just realize display message is in format mm/dd/yyyy
+				$reservation->addReservation($sID, $rID, $newStart, $newEnd, $title, $desc, $conn, "0");
+				if($reserveCount == 1) {
+					//Display for single reservation (no repeat)
+					$_SESSION["userMSG"] = "You have successfully made a reservation for ".$newStart." to ".$newEnd. " in Room ".$name."!";
+					$_SESSION["msgClass"] = "success";
+				}
+				else
+				{
+					$reserves++;
+				}
+			}
 		}
-		else
-		{
-			//Just realize display message is in format mm/dd/yyyy
-			$reservation->addReservation($sID, $rID, $start, $end, $title, $desc, $conn, "0");
-			$_SESSION["userMSG"] = "You have successfully made a reservation for ".$start." to ".$end. " in Room ".$name."!";
-			$_SESSION["msgClass"] = "success";
+		else if ($_SESSION["userMSG"] == "This option overlaps, you've been added to the waitlist") {
+			if($reserveCount == 1) {
+				//Display for single reservation (no repeat)
+				$reservation->addReservation($sID, $rID, $newStart, $newEnd, $title, $desc, $conn, "1");
+			}
+			else{
+				$waitlists++;
+			}
 		}
 	}
-	else if ($_SESSION["userMSG"] == "This option overlaps, you've been added to the waitlist") {
-		$reservation->addReservation($sID, $rID, $start, $end, $title, $desc, $conn, "1");
+	//To display message after multireservation
+	if($reserveCount > 1)
+	{
+		$_SESSION["userMSG"] = "Multireservations happened!";
+		$_SESSION["msgClass"] = "success";
 	}
 }
 
-$room->setBusy(0, $rID, $conn);
+$room->setBusy(0);
 $_SESSION['roomAvailable'] = false;
 
 $db->closeServerConn($conn);
@@ -160,6 +186,7 @@ header("Location: Home.php");
 function checkWeek($d, $s, $current) {
 	//returns true if you are modifying a reservation, it is assumed existing reservations are within 3/week limit
 	global $modifying;
+	global $weekfailures;
 	if($modifying)
 	{
 		return true;
@@ -200,6 +227,7 @@ function checkWeek($d, $s, $current) {
 	
 	$_SESSION["userMSG"] = "You have already made 3 reservations this week";
 	$_SESSION["msgClass"] = "failure";
+	$weekfailures++; //This should modify the variable outside the function
 	return false;
 }
 

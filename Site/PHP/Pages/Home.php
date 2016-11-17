@@ -20,6 +20,7 @@ $userMSG = $_SESSION["userMSG"] ;
 $msgClass = $_SESSION["msgClass"];
 $modify = $_SESSION["modify"];
 $roomAvailable = $_SESSION['roomAvailable'];
+$passedDate = $_SESSION['selectedDate']; //Temporary fix for datepicker
 
 $roomReserveID = $_SESSION['roomReserveID'];
 $roomReserve;
@@ -232,6 +233,8 @@ $db->closeServerConn($conn);
 										}
 									?>
 								</select>
+								<!-- Hidden input for temporary datepicker fix-->
+								<input type="hidden" readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" placeholder = "Nothing" />
                                 <button type="submit" class="btn btn-default btn-lg"><span class="network-name">Make a Reservation</span></button>
 							</div><br>
 						</form>
@@ -268,7 +271,7 @@ $db->closeServerConn($conn);
 									<!-- Time slots should be inserted here-->
 									<div class="form-group">
 										<label>Date:</label>
-										<input readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" placeholder = "Nothing" />
+										<input readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" value="<?php echo $passedDate; ?>" />
 										<br>										
 										<label>Start Time:</label> 
 											<select id ="startTime" name = "startTime">
