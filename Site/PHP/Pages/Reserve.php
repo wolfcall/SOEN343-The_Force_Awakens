@@ -118,6 +118,12 @@ else
 	$startDate = new DateTime($start);
 	$endDate = new DateTime($end);
 	
+	/*if($repeatReservation > 0)
+	{
+		$_SESSION["userMSG"] = "Date time: " . date('Y-m-d', strtotime($date. ' + 7 days'));
+
+	*/
+	
 	if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) {
 		if($modifying)
 		{
