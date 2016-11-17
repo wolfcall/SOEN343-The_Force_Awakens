@@ -1,9 +1,6 @@
 <?php
 
-// Start the session
-session_start();
-
-include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
+include_once dirname(__FILE__).'RoomMapper.php';
 
 class RoomTDG
 {
@@ -86,5 +83,14 @@ class RoomTDG
 		$sql = "Update room SET busy ='".$status."' WHERE roomID ='".$rID."'";
 		$result = $conn->query($sql);
 		
+	}
+	
+	public function updateRoom($roomUpdateList, $conn){
+				
+		foreach($roomUpdateList as &$roomUpdated)
+		{
+			$sql = "Update room SET busy ='".$roomUpdated->getBusy()."' WHERE roomID ='".$roomUpdated->getRID()."'";
+			$result = $conn->query($sql);
+		}
 	}
 }

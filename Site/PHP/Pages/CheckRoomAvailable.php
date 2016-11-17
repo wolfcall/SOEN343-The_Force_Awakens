@@ -1,6 +1,7 @@
 <?php
-include "../Class/ReservationMapper.php";
+
 include "../Class/RoomMapper.php";
+include "../Class/Unit.php";
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
 // Start the session
@@ -8,6 +9,8 @@ session_start();
 
 $db = new ServerConnection();
 $conn = $db->getServerConn();
+
+$unit = new UnitOfWork($conn);
 
 $rID = $_POST['roomNum'];
 
@@ -20,7 +23,8 @@ $roomName = $roomAsked->getName();
 
 if($roomAnswer == 0)
 {
-	$roomAsked->setBusy(true, $rID, $conn);
+	$roomAsked->setBusy(true);
+	$unit->registerDirtyRoom($roomAsked);
 	$_SESSION['roomAvailable'] = true;
 	$_SESSION['roomReserveID'] = $rID;
 }
@@ -31,8 +35,10 @@ else
 	$_SESSION['roomAvailable'] = false;
 }
 
-header("Location: Home.php");
+//good until here
 
+$unit->commit();
 $db->closeServerConn($conn);
 
+header("Location: Home.php");
 ?>

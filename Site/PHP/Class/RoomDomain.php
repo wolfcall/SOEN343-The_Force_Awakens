@@ -1,14 +1,12 @@
 <?php
 
-// Start the session
-session_start();
-
 class RoomDomain
 {
 	private $name;
     private $location;
     private $description;
-	private $rID;	
+	private $rID;
+	private $busy;
 	
 	/*
 		No Default Constructor is Necessary for this class
@@ -32,6 +30,10 @@ class RoomDomain
         return $this->rID;
     }
 	
+	public function getBusy() {
+        return $this->busy;
+    }
+	
 	/* Set methods for the Room Domain object
 	*/
 	public function setName($name){
@@ -48,5 +50,9 @@ class RoomDomain
       
 	public function setRID($rID) {
         $this->rID = $rID;
+    }
+	
+	public function setBusy($busy) {
+        $this->busy = $busy;
     }
 }

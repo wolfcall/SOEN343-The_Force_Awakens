@@ -1,10 +1,5 @@
 <?php
 
-// Start the session
-session_start();
-
-include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
-
 include "ReservationDomain.php";
 include "ReservationTDG.php";
 
