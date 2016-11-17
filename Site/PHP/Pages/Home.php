@@ -162,6 +162,10 @@ $uow->closeServerConn($conn);
     
 	<!-- All Javascript for Home.php page -->
 	<script src="../../Javascript/Home.js"></script>
+    
+    <!-- Google Web Font Format for title -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
         
 <?php
     if($modify)
@@ -221,7 +225,8 @@ $uow->closeServerConn($conn);
 				
 				<!-- class greeting -->
 				<div class="greeting">
-					<h1>Please select a day and room to begin</h1>
+                    <h1 class="title">THE FORCE</h1>
+                    <h3 class="subtitle">Room Reserver</h3>
 				</div>
 			 
 				<!-- Div for datepicker -->
@@ -238,13 +243,13 @@ $uow->closeServerConn($conn);
 										}
 									?>
 								</select>
+                                <button type="submit" class="btn btn-default btn-lg"><span class="network-name">Make a Reservation</span></button>
 							</div><br>
-							<button type="submit" class="btn btn-default btn-lg"><span class="network-name">Make a Reservation</span></button>
 						</form>
 					</div>
                     <br>
                     <div id="legendContainer">
-                        <h6 class="legendTitle">Legend</h6>
+                        <h6 class="legendTitle">LEGEND</h6>
                         <h6 class="green">Your Booking</h4>
                         <h6 class="red">Booked</h4>
                     </div>
