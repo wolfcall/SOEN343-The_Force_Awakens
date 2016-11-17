@@ -22,6 +22,8 @@ $modify = $_SESSION["modify"];
 $roomAvailable = $_SESSION['roomAvailable'];
 
 $roomReserveID = $_SESSION['roomReserveID'];
+$roomReserve;
+if($roomReserveID != NULL) $roomReserve = new RoomMapper($roomReserveID, $conn);
 
 if(isset($_SESSION["userMSG"])){
 	unset($_SESSION['roomID']);
@@ -45,6 +47,7 @@ $studentReservations = $reserve->getReservations($student->getSID(), $conn);
 $modReserve = array();
 $modDate;
 $modTimeEnd;
+
 if($modify)
 {
 	//echo $_SESSION['reserveDate'];
@@ -58,6 +61,7 @@ if($modify)
 	}
 	$modDate = explode(" ", $modReserve['startTimeDate']);
 	$modTimeEnd = explode(" ", $modReserve['endTimeDate']);
+	$roomReserve = new RoomMapper($modReserve['roomID'], $conn);
 }
 
 $getStartHoursSelect = false;
@@ -273,20 +277,7 @@ $uow->closeServerConn($conn);
 											<select id ="endTime" name = "endTime">
 												<?php getHours( TRUE)?>
 											</select>&nbsp &nbsp &nbsp
-											<select readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum">
-												<?php														
-													foreach($rooms->getRoomList() as $val){
-													if($val[0]->getRID() == $roomReserveID)
-													{
-														echo "<option selected='selected' value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
-													}
-													else
-													{
-														echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
-													}
-												}
-												?>
-											</select>
+											<input readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum" value="<?php echo $roomReserve->getName(); ?>" />
 									</div>
 									<div class="form-group">
 										<label>Name</label>
@@ -357,20 +348,7 @@ $uow->closeServerConn($conn);
 												$getEndHoursSelect = false;
 												?>
 											</select>&nbsp &nbsp &nbsp
-										<select readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum">
-											<?php
-												foreach($rooms->getRoomList() as $val){
-													if($val[0]->getRID() == $modReserve['roomID'])
-													{
-														echo "<option selected='selected' value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
-													}
-													else
-													{
-														echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
-													}
-												}
-											?>
-										</select>
+										<input readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum" value="<?php echo $roomReserve->getName(); ?>" />
 									</div>
 									<button type="submit" name="action" value="modifying" class="btn btn-default btn-success btn-block">Submit</button>
 								</form>
