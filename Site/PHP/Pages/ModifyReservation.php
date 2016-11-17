@@ -6,8 +6,8 @@ include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 // Start the session
 session_start();
 
-$uow = new UnitOfWork();
-$conn = $uow->getServerConn();
+$db = new ServerConnection();
+$conn = $db->getServerConn();
 
 $reservation = new ReservationMapper();
 
@@ -24,7 +24,7 @@ if($action == "delete")
 	$_SESSION["userMSG"] = "You have successfully deleted Reservation ID#" .$rID;
 	$_SESSION["msgClass"] = "success";
 
-	$uow->closeServerConn($conn);
+	$db->closeServerConn($conn);
 	
 	header("Location: Home.php");
 }
@@ -33,7 +33,7 @@ elseif($action == "modify")
 	$_SESSION['modify'] = true;
 	$_SESSION['reservation'] = $rID;
 	
-	$uow->closeServerConn($conn);
+	$db->closeServerConn($conn);
 	
 	header("Location: Home.php");
 }

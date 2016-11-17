@@ -6,8 +6,8 @@ include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 // Start the session
 session_start();
 
-$uow = new UnitOfWork();
-$conn = $uow->getServerConn();
+$db = new ServerConnection();
+$conn = $db->getServerConn();
 
 $rID = $_POST['roomNum'];
 
@@ -33,6 +33,6 @@ else
 
 header("Location: Home.php");
 
-$uow->closeServerConn($conn);
+$db->closeServerConn($conn);
 
 ?>

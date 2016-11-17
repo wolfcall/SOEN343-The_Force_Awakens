@@ -6,8 +6,8 @@ include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 // Start the session
 session_start();
 
-$uow = new UnitOfWork();
-$conn = $uow->getServerConn();
+$db = new ServerConnection();
+$conn = $db->getServerConn();
 
 $rID = $_SESSION['roomID'];
 
@@ -21,6 +21,6 @@ $_SESSION["msgClass"] = "failure";
 
 header("Location: Home.php");
 
-$uow->closeServerConn($conn);
+$db->closeServerConn($conn);
 
 ?>

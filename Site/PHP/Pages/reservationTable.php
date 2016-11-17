@@ -11,8 +11,8 @@ include dirname(__FILE__)."/../Utilities/tableHelper.php";
 include "../Class/RoomList.php";
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
-$uow = new UnitOfWork();
-$conn = $uow->getServerConn();
+$db = new ServerConnection();
+$conn = $db->getServerConn();
 
 $rooms = new RoomList($conn);
 $reserve = new ReservationMapper();
@@ -71,5 +71,5 @@ $table .= $thelper->closeTable();
 
 echo $table;
 
-$uow->closeServerConn($conn);
+$db->closeServerConn($conn);
 ?>

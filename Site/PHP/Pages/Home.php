@@ -12,8 +12,8 @@ include "../Class/RoomList.php";
 include dirname(__FILE__)."/../Utilities/tableHelper.php";
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
-$uow = new UnitOfWork();
-$conn = $uow->getServerConn();
+$db = new ServerConnection();
+$conn = $db->getServerConn();
 
 $email = $_SESSION['email'];
 $userMSG = $_SESSION["userMSG"] ;
@@ -105,7 +105,7 @@ function getHours($endTime = FALSE){
 
 
 
-$uow->closeServerConn($conn);
+$db->closeServerConn($conn);
 ?>
 
 <html lang="en">
@@ -192,10 +192,10 @@ $uow->closeServerConn($conn);
 
     <!-- Navigation -->
     <ul class="topnav" id="myTopnav">
-        <li style="padding-left:31%;float:left;"><a class="nav" href="../../index.php"><span style= "font-color:white">Log Out</span></a></li>
-        <li style="float:left;"><a class="nav" id = "second-r" href="#">My Profile</a></li>
-        <li style="float:left;"><a class="nav" id = "third-r" href="#">My Reservations</a></li>
-        <li style="float:left;"><a class="nav" href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a></li>
+		<li><a class="nav" href="../../index.php"><span style= "font-color:white">Log Out</span></a></li>
+        <li><a class="nav" id = "second-r" href="#">My Profile</a></li>
+        <li><a class="nav" id = "third-r" href="#">My Reservations</a></li>
+        <li><a class="nav" href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a></li>
     </ul>
 
     <!-- Header -->
@@ -417,7 +417,7 @@ $uow->closeServerConn($conn);
                                 <h5 id="legendC">Confirmed Reservations</h5>
                                 <h5 id="legendW">Waitlisted Reservations</h5><br>
 									<?php 
-									$conn = $uow->getServerConn();
+									$conn = $db->getServerConn();
 									
 									$count = 1;
 									foreach($studentReservations as &$singleReservation)
@@ -463,7 +463,7 @@ $uow->closeServerConn($conn);
 										}
 									}
 									
-									$uow->closeServerConn($conn);
+									$db->closeServerConn($conn);
 									?>
 							</div><!-- End modal-body -->
 						</div><!-- End modal content -->

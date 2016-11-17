@@ -9,7 +9,7 @@
  * Changed connection schema to soen343 to access correct tables (NB)
  */
 
-class UnitOfWork
+class ServerConnection
 { 
 	function getServerConn(){
 		$servernamelocal = "192.168.2.36";

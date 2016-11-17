@@ -8,8 +8,8 @@ include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 // Start the session
 session_start();
 
-$uow = new UnitOfWork();
-$conn = $uow->getServerConn();
+$db = new ServerConnection();
+$conn = $db->getServerConn();
 
 $oldPass = htmlspecialchars($_POST["oldPass"]);
 $newPass = htmlspecialchars($_POST["newPass"]);
@@ -87,7 +87,7 @@ else
 
 $_SESSION["userMSG"] = $msg;
 
-$uow->closeServerConn($conn);
+$db->closeServerConn($conn);
 
 header("Location: Home.php");
 ?>

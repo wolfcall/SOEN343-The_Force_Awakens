@@ -7,8 +7,8 @@ include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 // Start the session
 session_start();
 
-$uow = new UnitOfWork();
-$conn = $uow->getServerConn();
+$db = new ServerConnection();
+$conn = $db->getServerConn();
 
 //Modify specific flag
 $modifying = false;
@@ -142,7 +142,7 @@ else
 $room->setBusy(0, $rID, $conn);
 $_SESSION['roomAvailable'] = false;
 
-$uow->closeServerConn($conn);
+$db->closeServerConn($conn);
 
 header("Location: Home.php");
 
