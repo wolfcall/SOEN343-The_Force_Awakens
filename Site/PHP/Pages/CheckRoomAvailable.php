@@ -24,6 +24,10 @@ $roomAsked = new RoomMapper($rID, $conn);
 $roomAnswer = $roomAsked->checkBusy($rID, $conn);
 $roomName = $roomAsked->getName();
 
+//Temporary fix until datePicker is changed (?)
+$passedDate = htmlspecialchars($_POST["dateDrop"]);
+$_SESSION['selectedDate'] = $passedDate;
+
 if($roomAnswer == 0)
 {
 	$roomAsked->setBusy(true);
