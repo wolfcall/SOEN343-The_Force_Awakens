@@ -53,11 +53,13 @@ h6 {
 
 ul.topnav {
     list-style-type: none;
+    height: 5%;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: aliceblue;
     width: 100%;
+    min-width: 60em;
 }
 
 ul.topnav li {float: left;}
