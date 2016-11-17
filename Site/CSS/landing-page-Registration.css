@@ -12,7 +12,8 @@ html {
 	margin-top:auto;
 	margin-bottom:auto;
     /*background-color: #FAFAFA;*/
-	 background: radial-gradient(#e6f6ff, #e7f2f8, #99cff5);
+	 /*background: radial-gradient(#e6f6ff, #e7f2f8, #99cff5);*/
+	 background: url(../img/starwars.jpg);
 }
 body,
 h1,

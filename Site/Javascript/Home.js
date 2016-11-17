@@ -1,5 +1,6 @@
 //The Javascript file containing the javascript from PHP/Pages/Home.php.
 var diff = 1;
+var clickDisabled = false;
 $(document).ready(function() {
 	disappear();
 	
@@ -41,11 +42,27 @@ $(document).ready(function() {
 });
 
 $(document).ready(function(){
+	
+   
+      if (clickDisabled == true)
+	  {
+		  $("#myBtn").click(function(){return false;});
+		
+	 }
+	 else{
 	$("#myBtn").click(function(){
-		var selected = document.getElementById("roomOptions").selectedIndex;
+	 var selected = document.getElementById("roomOptions").selectedIndex;
 		document.getElementById("roomOptionsMod").selectedIndex = selected;
 		$("#endTime").children().eq(diff).attr('selected', 'selected');
+	 clickDisabled = true;
+	 });
+	 }
+	
+	$("#myBtn").unload(function () {
+		setTimeout(function(){clickDisabled = true;}, 30000);
+		clickDisabled = false;
 	});
+	
 	
 	$("#startTime").change(function(){
 		$("#endTime").children().eq($("#endTime").prop('selectedIndex')).removeAttr('selected');
