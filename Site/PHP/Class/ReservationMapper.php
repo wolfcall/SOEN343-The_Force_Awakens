@@ -8,10 +8,26 @@ class ReservationMapper
 	private $reservationActive;
 	private $reservationData;
 		
-	public function __construct() {
+	public function __construct($reID, $conn) {
 
-		$this->reservationActive = new ReservationDomain();
-		$this->reservationData = new ReservationTDG();
+		if(empty($reID))
+		{
+			$this->reservationActive = new ReservationDomain();
+			$this->reservationData = new ReservationTDG();
+		}
+		else
+		{
+			$this->reservationActive = new ReservationDomain();
+			$this->reservationData = new ReservationTDG();
+			
+			$this->reservationActive->setSID($this->reservationData->getStudentID($reID, $conn));
+			$this->reservationActive->setRID($this->reservationData->getRoomID($reID, $conn));
+			$this->reservationActive->setStartTimeDate($this->reservationData->getStart($reID, $conn));
+			$this->reservationActive->setEndTimeDate($this->reservationData->getEnd($reID, $conn));
+			$this->reservationActive->setTitle($this->reservationData->getTitle($reID, $conn));
+			$this->reservationActive->setDescription($this->reservationData->getDescription($reID, $conn));
+			$this->reservationActive->setREID($reID);
+		}
 	}
 	
 	public function addReservation($sID, $rID, $start, $end, $title, $desc, $conn, $wait){
@@ -62,6 +78,10 @@ class ReservationMapper
 		return $this->reservationData->getREID($sID, $conn);
     }
     
+	public function getID($sID, $conn){
+		return $this->reservationActive->getID();
+    }
+	
     public function getSID($reID){
         return $this->reservationActive->getSID($reID);
     }
@@ -135,8 +155,8 @@ class ReservationMapper
 		$this->reservationActive->setDescription($desc);
     }	
 	
-	public function deleteReservation($reID, $conn) {
-			$this->reservationData->deleteReservation($reID, $conn);
+	public function deleteReservation($reservationDeletedList, $conn) {
+			$this->reservationData->deleteReservation($reservationDeletedList, $conn);
 	}
 }
 ?>

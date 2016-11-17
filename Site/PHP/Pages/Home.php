@@ -444,6 +444,7 @@ $db->closeServerConn($conn);
 										$deleteButton = '<button type="Submit" name="action" value = "delete" class="center btn btn-default"> Delete Reservation '.$count.'</button>';
 										$modifyButton = '<br><button type="Submit" data-target="myModal" id = "modify" name="action" value = "modify" class="center btn btn-default"> Modify Reservation '.$count.'</button>';
 										$hidden = '<input type="hidden" name="reID" value="'.$singleReservation["reservationID"].'"></input>';
+										$hidden2 ='<input type="hidden" name="rID" value="'.$singleReservation['roomID'].'"></input>';
 										$startDateTime = explode(" ", $singleReservation["startTimeDate"]);
 										$endDateTime = explode(" ", $singleReservation["endTimeDate"]);
 										$waitlisted = explode(" ", $singleReservation["waitlisted"]);
@@ -455,6 +456,7 @@ $db->closeServerConn($conn);
 											if ($waitlisted[0] == "1") {	
 												echo "<section class = 'leftcolumnW'>";
 													echo $hidden;
+													echo $hidden2;
 													echo "Room Name : ".$activeRoom."<br>";
 													echo "Title : ".$singleReservation['title']."<br>";
 													echo "Date : ".$startDateTime[0]."<br>";
@@ -463,6 +465,7 @@ $db->closeServerConn($conn);
 											} else {
 												echo "<section class = 'leftcolumn'>";
 													echo $hidden;
+													echo $hidden2;
 													echo "Room Name : ".$activeRoom."<br>";
 													echo "Title : ".$singleReservation['title']."<br>";
 													echo "Date : ".$startDateTime[0]."<br>";

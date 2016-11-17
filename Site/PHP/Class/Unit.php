@@ -89,20 +89,21 @@ class UnitOfWork
 		//Commit changes to the Student
 		$student->updateStudent($this->studentUpdateList, $this->conn);
 		
+		//Commit change to the Reservations	
+		$reservation->deleteReservation($this->reservationDeletedList, $this->conn);
+		
+		
+		//Clear the lists after completetion
+		$this->reservationDeletedList = null;
 		$this->studentUpdateList = null;
 		$this->roomUpdateList = null;
 		
 		/*
-		//Commit changes to the student
-		$student->updateStudent($this->studentUpdateList, $this->conn);
 		
-		//Commit change to the Reservations
 		$reservation->addReservation($this->reservationNewList, $this->conn);
 		$reservation->updateReservation($this->reservationUpdateList, $this->conn);
-		$reservation->deleteReservation($this->reservationDeletedList, $this->conn);
 		
-		//Clear the list after completetion
-		
+						
 		$this->reservationNewList = null;
 		$this->reservationUpdateList = null;
 		$this->reservationDeletedList = null;

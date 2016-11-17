@@ -1,7 +1,9 @@
 <?php
-include "../Class/StudentMapper.php";
 include "../Class/RoomMapper.php";
+include "../Class/StudentMapper.php";
 include "../Class/ReservationMapper.php";
+
+include "../Class/Unit.php";
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
 // Start the session
@@ -9,6 +11,8 @@ session_start();
 
 $db = new ServerConnection();
 $conn = $db->getServerConn();
+
+$unit = new UnitOfWork($conn);
 
 //Modify specific flag
 $modifying = false;
@@ -53,7 +57,6 @@ $reservation = new ReservationMapper();
 $room = new RoomMapper($rID, $conn);
 
 $name = $room->getName();
-
 
 $startEx = explode(":", $start);
 $startFloat = ($startEx[0] + ($startEx[1]/60));
@@ -131,7 +134,9 @@ else
 		$startDate = new DateTime($newStart);
 		$endDate = new DateTime($newEnd);
 		
-		if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) {
+		if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) 
+		{
+			
 			if($modifying)
 			{
 				//Updates reservation instead of adding a new one
@@ -158,12 +163,15 @@ else
 				}
 			}
 		}
-		else if ($_SESSION["userMSG"] == "This option overlaps, you've been added to the waitlist") {
-			if($reserveCount == 1) {
+		else if ($_SESSION["userMSG"] == "This option overlaps, you've been added to the waitlist") 
+		{
+			if($reserveCount == 1) 
+			{
 				//Display for single reservation (no repeat)
 				$reservation->addReservation($sID, $rID, $newStart, $newEnd, $title, $desc, $conn, "1");
 			}
-			else{
+			else
+			{
 				$waitlists++;
 			}
 		}
@@ -176,12 +184,12 @@ else
 	}
 }
 
-$room->setBusy(0);
 $_SESSION['roomAvailable'] = false;
 
+$unit->commit();
 $db->closeServerConn($conn);
 
-header("Location: Home.php");
+header("Location: ClearRoom.php");
 
 function checkWeek($d, $s, $current) {
 	//returns true if you are modifying a reservation, it is assumed existing reservations are within 3/week limit
@@ -238,7 +246,7 @@ function checkOverlap($start, $end, $current) {
 	global $reservationID;
 	for($x = 0; $x < count($current); $x++) {
 		//Added IF check for modification, won't check overlap against itself
-		if($current[$x]->getREID() != $reservationID)
+		if($current[$x]->getID() != $reservationID)
 		{
 			//Get start and end time of new reservation, convert the difference to mins to find duration
 			$startTime = new DateTime($current[$x]->getStartTimeDate());
