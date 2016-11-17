@@ -69,7 +69,30 @@ $(document).ready(function(){
 	})
 });
 
+$(function(){
 
+	 minuteTimer(60, $('#timer'));
+    $('#myModal').on('show.bs.modal', function(){
+        var myModal = $(this);
+        clearTimeout(myModal.data('hideInterval'),60000);
+        myModal.data('hideInterval', setTimeout(function(){
+            myModal.modal('hide');
+        }, 60000));
+    });
+});
+
+function minuteTimer(duration, display) {
+    var seconds = duration;
+	display.text(seconds);
+    setInterval(function () {
+		
+		seconds--;				
+
+        display.text(seconds);
+		
+        
+    }, 1000);
+}
 function disappear(){
 	setTimeout(function(){ 
 		$("#details").slideUp(1000);

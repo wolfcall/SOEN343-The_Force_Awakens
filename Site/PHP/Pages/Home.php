@@ -255,8 +255,9 @@ $db->closeServerConn($conn);
 							</div>
 							<div class="modal-body">
 								<form id="form" action="Reserve.php" method="post">
-
+								
 									<div class="form-group">
+									<div>Reservation closes in <span id="timer"></span> seconds!</div>
 										<label>Title of Reservation</label>
 										<input required type="text" class="form-control" placeholder="Enter a Title"  name="title" >
 									</div>
