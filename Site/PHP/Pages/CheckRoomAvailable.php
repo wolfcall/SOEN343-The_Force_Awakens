@@ -22,6 +22,7 @@ if($roomAnswer == 0)
 {
 	$roomAsked->setBusy(true, $rID, $conn);
 	$_SESSION['roomAvailable'] = true;
+	$_SESSION['roomReserveID'] = $rID;
 }
 else
 {
