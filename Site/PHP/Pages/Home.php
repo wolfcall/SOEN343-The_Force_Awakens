@@ -21,6 +21,8 @@ $msgClass = $_SESSION["msgClass"];
 $modify = $_SESSION["modify"];
 $roomAvailable = $_SESSION['roomAvailable'];
 
+$roomReserveID = $_SESSION['roomReserveID'];
+
 if(isset($_SESSION["userMSG"])){
 	unset($_SESSION['roomID']);
 	unset($_SESSION["userMSG"]);
@@ -291,8 +293,15 @@ $uow->closeServerConn($conn);
 											<select readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum">
 												<?php														
 													foreach($rooms->getRoomList() as $val){
-															echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
+													if($val[0]->getRID() == $roomReserveID)
+													{
+														echo "<option selected='selected' value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
 													}
+													else
+													{
+														echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
+													}
+												}
 												?>
 											</select>
 									</div>
