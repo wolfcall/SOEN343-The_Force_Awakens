@@ -277,7 +277,7 @@ $uow->closeServerConn($conn);
 											<select id ="endTime" name = "endTime">
 												<?php getHours( TRUE)?>
 											</select>&nbsp &nbsp &nbsp
-											<input readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum" value="<?php echo $roomReserve->getName(); ?>" />
+											<input readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum" value="<?php if($roomReserve != NULL) echo $roomReserve->getName(); ?>" />
 									</div>
 									<div class="form-group">
 										<label>Name</label>
@@ -348,7 +348,7 @@ $uow->closeServerConn($conn);
 												$getEndHoursSelect = false;
 												?>
 											</select>&nbsp &nbsp &nbsp
-										<input readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum" value="<?php echo $roomReserve->getName(); ?>" />
+										<input readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum" value="<?php if($roomReserve != NULL) echo $roomReserve->getName(); ?>" />
 									</div>
 									<button type="submit" name="action" value="modifying" class="btn btn-default btn-success btn-block">Submit</button>
 								</form>
