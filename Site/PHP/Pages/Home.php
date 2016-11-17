@@ -260,7 +260,7 @@ $db->closeServerConn($conn);
 								<form id="form" action="Reserve.php" method="post">
 								
 									<div class="form-group">
-									<div>Reservation closes in <span id="timer"></span> seconds!</div>
+									<div class = "timer" style="color:red;text-align: center;">Reservation closes in <span id="timer"></span> seconds!</div>
 										<label>Title of Reservation</label>
 										<input required type="text" class="form-control" placeholder="Enter a Title"  name="title" >
 									</div>
@@ -287,7 +287,9 @@ $db->closeServerConn($conn);
 									<div class="form-group">
 										<label>Repeat Reservation for:</label>
 										<select id="repeatReservation" name="repeatReservation">
-											<option value="0">No Repeat</option>
+											<option selected="selected">
+											No Repeat
+											</option>
 											<option value="1">1 Week</option>
 											<option value="2">2 Weeks</option>
 											<option value="3">3 Weeks </option>
