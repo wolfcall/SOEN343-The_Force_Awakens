@@ -81,6 +81,7 @@ class UnitOfWork
 	{
 		$room = new RoomMapper();
 		$student = new StudentMapper();
+		$reservation = new ReservationMapper();
 		
 		//Commit changes to the Room
 		$room->updateRoom($this->roomUpdateList, $this->conn);

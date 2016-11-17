@@ -12,17 +12,14 @@ $conn = $db->getServerConn();
 $reservation = new ReservationMapper();
 
 $action = $_POST['action'];
-$rID = $_POST['rID'];
+$reID = $_POST['reID'];
 
 if($action == "delete")
 {	
 	//Dropped date from message for the moment since its not being posted - NB
 	$date = $_POST['date'];
 
-	$reservation->deleteReservation($rID, $conn);
-
-	$_SESSION["userMSG"] = "You have successfully deleted Reservation ID#" .$rID;
-	$_SESSION["msgClass"] = "success";
+	$reservation->deleteReservation($reID, $conn);
 
 	$db->closeServerConn($conn);
 	
@@ -31,17 +28,11 @@ if($action == "delete")
 elseif($action == "modify")
 {
 	$_SESSION['modify'] = true;
-	$_SESSION['reservation'] = $rID;
-	
-	$db->closeServerConn($conn);
-	
-	header("Location: Home.php");
+	$_SESSION['reservation'] = $reID;
 }
-/*elseif($action == "modifying")
-{
-	$_SESSION["userMSG"] = "You are modifying a Reservation";
-	$_SESSION["msgClass"] = "success";
-	header("Location: Home.php");
-}*/
+
+$db->closeServerConn($conn);
+	
+header("Location: Home.php");
 
 ?>

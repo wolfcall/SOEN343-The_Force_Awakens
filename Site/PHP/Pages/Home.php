@@ -443,7 +443,7 @@ $db->closeServerConn($conn);
 										$activeRoom = $active->getName();
 										$deleteButton = '<button type="Submit" name="action" value = "delete" class="center btn btn-default"> Delete Reservation '.$count.'</button>';
 										$modifyButton = '<br><button type="Submit" data-target="myModal" id = "modify" name="action" value = "modify" class="center btn btn-default"> Modify Reservation '.$count.'</button>';
-										$hidden = '<input type="hidden" name="rID" value="'.$singleReservation["reservationID"].'"></input>';
+										$hidden = '<input type="hidden" name="reID" value="'.$singleReservation["reservationID"].'"></input>';
 										$startDateTime = explode(" ", $singleReservation["startTimeDate"]);
 										$endDateTime = explode(" ", $singleReservation["endTimeDate"]);
 										$waitlisted = explode(" ", $singleReservation["waitlisted"]);
