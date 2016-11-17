@@ -96,3 +96,11 @@ h6 {
 top:35%;
 outline: none;
 }
+
+.title {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.subtitle {
+    font-family: 'Open Sans Condensed', sans-serif;
+}

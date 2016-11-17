@@ -22,6 +22,9 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../Javascript/bootstrap.min.js"></script>
+    
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
 	
 </head>
 
@@ -55,8 +58,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
-                        <h1>Room Reserver</h1>
-                        <h3>SOEN343 Fall 2016</h3>
+                        <h1><span class="title" style="font-size: 150%">The Force Awakens</span></h1>
+                        <h3><span class="subtitle" style="font-size: 130%">Concordia University Room Reserver</span></h3>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                             <li>
