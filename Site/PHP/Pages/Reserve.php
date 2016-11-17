@@ -37,6 +37,10 @@ $sID = htmlspecialchars($_POST["studentID"]);
 $prog = htmlspecialchars($_POST["program"]);
 $email = htmlspecialchars($_POST["email"]);
 
+//This holds the number of weeks repeated for a reservation. Defaults to 0 in case modify comes through here
+$repeatReservation = 0;
+if(htmlspecialchars($_POST["repeatReservation"]) > 0) $repeatReservation = htmlspecialchars($_POST["repeatReservation"]);
+
 //Getting the ID of the Room 1
 //Should Obtain Either 1,2,3,4,5
 $rID = htmlspecialchars($_POST["roomNum"]);
@@ -113,7 +117,7 @@ else
 	//Get start and end time of new reservation, convert the difference to mins to find duration
 	$startDate = new DateTime($start);
 	$endDate = new DateTime($end);
-
+	
 	if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) {
 		if($modifying)
 		{

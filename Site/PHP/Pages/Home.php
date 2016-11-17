@@ -280,6 +280,15 @@ $db->closeServerConn($conn);
 											<input readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum" value="<?php if($roomReserve != NULL) echo $roomReserve->getName(); ?>" />
 									</div>
 									<div class="form-group">
+										<label>Repeat Reservation for:</label>
+										<select id="repeatReservation" name="repeatReservation">
+											<option value="0">No Repeat</option>
+											<option value="1">1 Week</option>
+											<option value="2">2 Weeks</option>
+											<option value="3">3 Weeks </option>
+										</select>
+									</div>
+									<div class="form-group">
 										<label>Name</label>
 										<input readonly="readonly" type="text" class="form-control" name="firstName" placeholder="First Name" value = "<?php echo $firstName." ".$lastName; ?>"/>
 									</div>
