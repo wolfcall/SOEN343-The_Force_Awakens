@@ -277,7 +277,8 @@ $db->closeServerConn($conn);
 											<select id ="endTime" name = "endTime">
 												<?php getHours( TRUE)?>
 											</select>&nbsp &nbsp &nbsp
-											<input readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum" value="<?php if($roomReserve != NULL) echo $roomReserve->getName(); ?>" />
+											<input readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomName" value="<?php if($roomReserve != NULL) echo $roomReserve->getName(); ?>"/>
+											<input hidden name = "roomID" value="<?php if($roomReserve != NULL) echo $roomReserve->getRID(); ?>">
 									</div>
 									<div class="form-group">
 										<label>Repeat Reservation for:</label>
@@ -357,7 +358,8 @@ $db->closeServerConn($conn);
 												$getEndHoursSelect = false;
 												?>
 											</select>&nbsp &nbsp &nbsp
-										<input readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomNum" value="<?php if($roomReserve != NULL) echo $roomReserve->getName(); ?>" />
+										<input readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomName" value="<?php if($roomReserve != NULL) echo $roomReserve->getName(); ?>"/>
+										<input hidden name = "roomID" value="<?php if($roomReserve != NULL) echo $roomReserve->getRID(); ?>">
 									</div>
 									<button type="submit" name="action" value="modifying" class="btn btn-default btn-success btn-block">Submit</button>
 								</form>

@@ -80,26 +80,31 @@ class UnitOfWork
 	public function commit()
 	{
 		$room = new RoomMapper();
-
+		$student = new StudentMapper();
+		
 		//Commit changes to the Room
 		$room->updateRoom($this->roomUpdateList, $this->conn);
 		
-		$roomUpdateList = null;
+		//Commit changes to the Student
+		$student->updateStudent($this->studentUpdateList, $this->conn);
+		
+		$this->studentUpdateList = null;
+		$this->roomUpdateList = null;
 		
 		/*
 		//Commit changes to the student
-		$student->updateStudent($studentUpdateList, $this->conn);
+		$student->updateStudent($this->studentUpdateList, $this->conn);
 		
 		//Commit change to the Reservations
-		$reservation->addReservation($reservationNewList, $this->conn);
-		$reservation->updateReservation($reservationUpdateList, $this->conn);
-		$reservation->deleteReservation($reservationDeletedList, $this->conn);
+		$reservation->addReservation($this->reservationNewList, $this->conn);
+		$reservation->updateReservation($this->reservationUpdateList, $this->conn);
+		$reservation->deleteReservation($this->reservationDeletedList, $this->conn);
 		
 		//Clear the list after completetion
-		$studentUpdateList = null;
-		$reservationNewList = null;
-		$reservationUpdateList = null;
-		$reservationDeletedList = null;
+		
+		$this->reservationNewList = null;
+		$this->reservationUpdateList = null;
+		$this->reservationDeletedList = null;
 		*/
 	}
 }

@@ -43,13 +43,14 @@ if(htmlspecialchars($_POST["repeatReservation"]) > 0) $repeatReservation = htmls
 
 //Getting the ID of the Room 1
 //Should Obtain Either 1,2,3,4,5
-$rID = htmlspecialchars($_POST["roomNum"]);
+$rID = htmlspecialchars($_POST["roomID"]);
 
 $student = new StudentMapper($email, $conn);
-$room = new RoomMapper($rID, $conn);
 $reservation = new ReservationMapper();
+$room = new RoomMapper($rID, $conn);
 
 $name = $room->getName();
+
 
 $startEx = explode(":", $start);
 $startFloat = ($startEx[0] + ($startEx[1]/60));

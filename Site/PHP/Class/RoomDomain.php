@@ -2,11 +2,11 @@
 
 class RoomDomain
 {
-	private $name;
-    private $location;
-    private $description;
-	private $rID;
-	private $busy;
+	private $name = "";
+    private $location = "";
+    private $description = "";
+	private $rID = "";
+	private $busy = "";
 	
 	/*
 		No Default Constructor is Necessary for this class

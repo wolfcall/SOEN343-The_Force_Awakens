@@ -2,7 +2,7 @@
 include "../Class/StudentMapper.php";
 include "../Class/RoomMapper.php";
 include "../Class/ReservationMapper.php";
-include "../../Javascript/Home.js";
+include "../Class/Unit.php";
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 
 // Start the session
@@ -10,6 +10,8 @@ session_start();
 
 $db = new ServerConnection();
 $conn = $db->getServerConn();
+
+$unit = new UnitOfWork($conn);
 
 $oldPass = htmlspecialchars($_POST["oldPass"]);
 $newPass = htmlspecialchars($_POST["newPass"]);
@@ -24,29 +26,44 @@ $changePass = " password";
 $changeEmail = " email";
 $msg = "";
 
-//Should pop up with Javascript if old password doesn't match
-//Although it will not overwrite in the database.
-
 //Both Email and password are empty
 if(empty($newEmail) and empty($newPass))
 {
+	//Tell user that he tried to submit an empty form and do nothing
 	$msg = "No Data has been saved!";
 	$_SESSION["msgClass"] = "failure";
 }
 //If Email only is empty
 else if (empty($newEmail))
 {
-	$msg = $student->updatePassword($oldEmail, $oldPass, $newPass, $conn);
+	var_dump(empty($newEmail));
+	echo "<br>";
+	var_dump(empty($oldPass));
+	echo "<br>";
+	var_dump(empty($newPass));
+	echo "<br>";
+		
+	//Set the new password in the active
+	$student->setNewPassword($oldPass, $newPass, $conn);
+	
+	//var_dump($student->getOldPass());
+	//var_dump($student->getNewPass());
+	//die();
+	
+	$unit->registerDirtyStudent($student);
 }
 //If Password only is empty
 else if (empty($newPass))
 {
-	$checkEmail = $student->getEmailAddressFromDB($newEmail, $conn);
 	//Check to see if new email already exists in the DB	
+	$checkEmail = $student->getEmailAddressFromDB($newEmail, $conn);
 	if (empty($checkEmail))
 	{
 		$msg = $begin.$changeEmail."!";
-		$student->updateEmailAddress($oldEmail, $newEmail, $conn);
+		
+		$student->setNewEmail($newEmail);
+		$unit->registerDirtyStudent($student);
+		
 		$_SESSION["email"] = $newEmail;
 		$_SESSION["msgClass"] = "success";
 	}
@@ -59,11 +76,13 @@ else if (empty($newPass))
 //If both fields are filled
 else
 {
-	$checkEmail = $student->getEmailAddressFromDB($newEmail, $conn);
 	//Check to see if new email already exists in the DB
+	$checkEmail = $student->getEmailAddressFromDB($newEmail, $conn);
 	if (empty($checkEmail))
 	{
-		$temp = $student->updatePassword($oldEmail, $oldPass, $newPass, $conn);
+		//Need to implement the checker to know what it changed
+		$student->setNewPassword($oldPass, $newPass, $conn);
+		$student->setNewEmail($newEmail);
 		
 		if($temp === true)
 		{
@@ -73,8 +92,9 @@ else
 		{
 			$msg = $begin.$changeEmail.", but your current password is not the one you entered. Please try again!";
 		}
+
+		$unit->registerDirtyStudent($student);
 		
-		$student->updateEmailAddress($oldEmail, $newEmail, $conn);
 		$_SESSION["email"] = $newEmail;
 		$_SESSION["msgClass"] = "success";
 	}
@@ -87,6 +107,7 @@ else
 
 $_SESSION["userMSG"] = $msg;
 
+$unit->commit();
 $db->closeServerConn($conn);
 
 header("Location: Home.php");

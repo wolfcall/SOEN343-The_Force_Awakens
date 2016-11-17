@@ -69,6 +69,30 @@ class StudentMapper
         $this->studentActive->setSID($sID);
     }
 	
+	public function setNewPassword($oldPass,$newPass, $conn){
+		
+		var_dump("deep");
+		echo "<br>";
+		
+		var_dump(empty($oldPass));
+		echo "<br>";
+		var_dump(empty($newPass));
+		echo "<br>";
+			
+		
+			
+		$hashOld = $this->studentData->hashPassword($oldPass, $conn);
+		$hashNew = $this->studentData->hashPassword($newPass, $conn);
+		
+			
+		$this->studentActive->setOldPassword($hashOld);
+		$this->studentActive->setNewPassword($hashNew);
+	}
+	
+	public function setNewEmail($newEmail) {
+        $this->studentActive->setNewEmail($newEmail);
+    }
+	
 	/* Get methods for the Student Domain object
 	*/
 	public function getFirstName(){
@@ -93,37 +117,32 @@ class StudentMapper
 	public function getSID() {
         return $this->studentActive->getSID();
     }
-		
-	/*	Update methods for the Student TDG and Domain objects
-	*/
-	public function updateFirstName($email, $first, $conn){
-		$this->studentData->updateFirstName($email, $first, $conn);
-		$this->setFirstName($first);
-    }
-    
-    public function updateLastName($email,$last, $conn){
-		$this->studentData->updateLastName($email, $last, $conn);
-		$this->setLastName($last);
-    }
-    
-    public function updateEmailAddress($email, $new, $conn) {
-        $this->studentData->updateEmailAddress($email, $new, $conn);
-		$this->setEmailAddress($new);
-    }
-    
-    public function updateProgram($email, $program, $conn) {
-        $this->studentData->updateProgram($email,$program, $conn);
-		$this->setProgram($program);
+	
+	public function getNewPass() {
+        return $this->studentActive->getNewPass();
     }
 	
-	public function updateSID($email, $sID, $conn) {
-        $this->studentData->updateSID($email, $sID, $conn);
-		$this->setSID($sID);
+	public function getOldPass() {
+        return $this->studentActive->getOldPass();
     }
-    
-    public function updatePassword($email, $oldPass, $newPass, $conn) {
-        $temp = $this->studentData->updatePassword($email, $oldPass, $newPass, $conn);
-        return $temp;
+	
+	public function getNewEmail() {
+        return $this->studentActive->getNewEmail();
+    }
+		
+	/* 
+		The Update methods for all Entities in the Student table can be found here
+		Student ID cannot be updated
+		First Name cannot be updated
+		Last Name cannot be updated
+		Program cannot be updated
+     */
+        
+	/*
+		Unit of Work (TDG Functions for Student)
+	*/
+	public function updateStudent($studentUpdateList, $conn){
+        $this->studentData->updateStudent($studentUpdateList, $conn);
     }
 }
 ?>

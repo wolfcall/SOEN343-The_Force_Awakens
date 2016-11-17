@@ -1,6 +1,9 @@
 <?php
-include "../Class/ReservationMapper.php";
+
 include "../Class/RoomMapper.php";
+include "../Class/StudentMapper.php";
+include "../Class/ReservationMapper.php";
+
 include "../Class/Unit.php";
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
 

@@ -1,15 +1,17 @@
 <?php
 
-// Start the session
-session_start();
+include_once dirname(__FILE__).'RoomMapper.php';
 
 class StudentDomain
 {
 	private $firstName = "";
     private $lastName = "";
     private $emailAddress = "";
+	private $newEmail = "";
     private $program = "";
 	private $sID = "";
+	private $oldPass = "";
+	private $newPass = "";
 	
 	/*
 		No Default Constructor is Necessary for this class
@@ -37,7 +39,20 @@ class StudentDomain
         return $this->sID;
     }
 	
-	/* Set methods for the Student Domain object
+	public function getOldPass() {
+        return $this->oldPass;
+    }
+	
+	public function getNewPass() {
+        return $this->newPass;
+    }
+	
+	public function getNewEmail() {
+        return $this->newEmail;
+    }
+	
+	/* 
+		Set methods for the Student Domain object
 	*/
 	public function setFirstName($first){
 		$this->firstName = $first;
@@ -50,6 +65,10 @@ class StudentDomain
     public function setEmailAddress($email) {
         $this->emailAddress = $email;
     }
+	
+	 public function setNewEmail($newEmail) {
+        $this->newEmail = $newEmail;
+    }
     
     public function setProgram($program) {
         $this->program = $program;
@@ -58,9 +77,13 @@ class StudentDomain
 	public function setSID($sID) {
         $this->sID = $sID;
     }
-    
-    public function setPassword($password) {
-        $this->password = $password;
+	
+	public function setOldPassword($oldPass) {
+        $this->oldPass = $password;
+    }
+	
+	public function setNewPassword($newPass) {
+        $this->newPass = $password;
     }
 }
 ?>

@@ -23,7 +23,7 @@ class RoomMapper
 		{
 			$this->roomActive = new RoomDomain();
 			$this->roomData = new RoomTDG();
-						
+			
 			$this->roomActive->setName($this->roomData->getName($rID, $conn));
 			$this->roomActive->setLocation($this->roomData->getLocation($rID, $conn));
 			$this->roomActive->setDescription($this->roomData->getDescription($rID, $conn));
@@ -49,17 +49,9 @@ class RoomMapper
 	public function getRID(){
 		return $this->roomActive->getRID();
     }
-    
-    public function getRoomName($rID){
-        return $this->roomActive->getName($rID);
-    }
-    
-    public function getRoomLocation($rID){
-        return $this->roomActive->getLocation($rID);
-    }
-	
-	public function getBusy($rID){
-        return $this->roomActive->getBusy($rID);
+
+	public function getBusy(){
+        return $this->roomActive->getBusy();
     }
 	
 	public function setBusy($status){
