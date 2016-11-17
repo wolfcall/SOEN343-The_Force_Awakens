@@ -77,14 +77,7 @@ class RoomTDG
 		
 		return $row["busy"];
 	}
-	
-	public function setBusy($status, $rID, $conn){
-		
-		$sql = "Update room SET busy ='".$status."' WHERE roomID ='".$rID."'";
-		$result = $conn->query($sql);
-		
-	}
-	
+
 	public function updateRoom($roomUpdateList, $conn){
 				
 		foreach($roomUpdateList as &$roomUpdated)
