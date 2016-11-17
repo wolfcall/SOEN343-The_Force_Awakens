@@ -71,20 +71,9 @@ class StudentMapper
 	
 	public function setNewPassword($oldPass,$newPass, $conn){
 		
-		var_dump("deep");
-		echo "<br>";
-		
-		var_dump(empty($oldPass));
-		echo "<br>";
-		var_dump(empty($newPass));
-		echo "<br>";
-			
-		
-			
 		$hashOld = $this->studentData->hashPassword($oldPass, $conn);
 		$hashNew = $this->studentData->hashPassword($newPass, $conn);
 		
-			
 		$this->studentActive->setOldPassword($hashOld);
 		$this->studentActive->setNewPassword($hashNew);
 	}

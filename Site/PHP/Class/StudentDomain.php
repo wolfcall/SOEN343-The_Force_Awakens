@@ -79,11 +79,11 @@ class StudentDomain
     }
 	
 	public function setOldPassword($oldPass) {
-        $this->oldPass = $password;
+        $this->oldPass = $oldPass;
     }
 	
 	public function setNewPassword($newPass) {
-        $this->newPass = $password;
+        $this->newPass = $newPass;
     }
 }
 ?>

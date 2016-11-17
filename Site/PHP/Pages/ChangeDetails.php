@@ -27,7 +27,7 @@ $changeEmail = " email";
 $msg = "";
 
 //Both Email and password are empty
-if(empty($newEmail) and empty($newPass))
+if(empty($newEmail) and empty($newPass) and empty($oldPass))
 {
 	//Tell user that he tried to submit an empty form and do nothing
 	$msg = "No Data has been saved!";
@@ -36,40 +36,25 @@ if(empty($newEmail) and empty($newPass))
 //If Email only is empty
 else if (empty($newEmail))
 {
-	var_dump(empty($newEmail));
-	echo "<br>";
-	var_dump(empty($oldPass));
-	echo "<br>";
-	var_dump(empty($newPass));
-	echo "<br>";
-		
 	//Set the new password in the active
 	$student->setNewPassword($oldPass, $newPass, $conn);
-	
-	//var_dump($student->getOldPass());
-	//var_dump($student->getNewPass());
-	//die();
-	
-	$unit->registerDirtyStudent($student);
+	$unit->registerDirtyStudent($student);	
 }
-//If Password only is empty
+//If New Password only is empty
 else if (empty($newPass))
 {
 	//Check to see if new email already exists in the DB	
 	$checkEmail = $student->getEmailAddressFromDB($newEmail, $conn);
 	if (empty($checkEmail))
 	{
-		$msg = $begin.$changeEmail."!";
-		
 		$student->setNewEmail($newEmail);
 		$unit->registerDirtyStudent($student);
 		
 		$_SESSION["email"] = $newEmail;
-		$_SESSION["msgClass"] = "success";
 	}
 	else 
 	{
-		$msg = "Email already exists! Please select a new one.";
+		$_SESSION["userMSG"] = "Email already exists! Please select a new one!";
 		$_SESSION["msgClass"] = "failure";
 	}
 }

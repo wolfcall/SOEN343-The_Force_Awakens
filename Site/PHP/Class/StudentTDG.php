@@ -134,18 +134,11 @@ class StudentTDG
 	//Encrypt password for local storing	
 	public function hashPassword($pass, $conn){
 		
-		var_dump("deeper");
-		echo "<br>";
-		
-		var_dump(empty($pass));
-		echo "<br>";
-		
-		die();
-		
-		$sql = "SELECT password = password('".$pass."')";
+		$sql = "SELECT password('".$pass."') as hashed";
 		$result = $conn->query($sql);
+		$row = $result->fetch_assoc();
 		
-		return $row["password"];
+		return $row["hashed"];
 	}
 
 	/*
@@ -155,32 +148,73 @@ class StudentTDG
        
 	    foreach($studentUpdateList as &$studentUpdated)
 		{
-			if(empty($studentUpdated->getNewPass()))
-			{
-				//Then update the Email
+			//When both the new password and old password fields are empty
+			//We will only update the email
+			if(empty($studentUpdated->getNewPass()) and empty($studentUpdated->getOldPass())){
+				//Then only update the Email
 				$sql = "Update student SET email ='".$studentUpdated->getNewEmail()."' WHERE email ='".$studentUpdated->getEmailAddress()."' ";
-				$result = $conn->query($sql);	
-			}
-			else if(empty($studentUpdated->getNewEmail()))
-			{
-				$sql = "Update student SET password = '".$studentUpdated->getNewPass()."' WHERE email ='".$studentUpdated->getEmailAddress()."' AND password = '".$studentUpdate->getOldPass()."'";
-				var_dump($sql);
-				die();
-				
-				
-				//First Update the Password
-				$sql = "Update student SET password = '".$studentUpdated->getNewPass()."' WHERE email ='".$studentUpdated->getEmailAddress()."' AND password = '".$studentUpdate->getOldPass()."'";
 				$result = $conn->query($sql);
+				
+				if ($conn->affected_rows > 0){
+					$_SESSION["msgClass"] = "success";
+					$_SESSION["userMSG"] = "You have successfully changed your Email!";
+				}
+				else{
+					$_SESSION["msgClass"] = "failure";
+					$_SESSION["userMSG"] = "You cannot change your email at this time!";
+				}
+			}
+			//When the email field are empty
+			//We will only update the Password
+			else if(empty($studentUpdated->getNewEmail())){
+				if(empty($studentUpdated->getOldPass())){
+					$_SESSION["msgClass"] = "failure";
+					$_SESSION["userMSG"] = "You have left the old password field empty! Please try again!";
+				}
+				else{
+					//Then only update the Password
+					$sql = "Update student SET password = '".$studentUpdated->getNewPass()."' WHERE email ='".$studentUpdated->getEmailAddress()."' AND password = '".$studentUpdated->getOldPass()."'";
+					$result = $conn->query($sql);
+
+					if ($conn->affected_rows > 0){
+						$_SESSION["msgClass"] = "success";
+						$_SESSION["userMSG"] = "You have successfully changed your password!";
+					}
+					else{
+						$_SESSION["msgClass"] = "failure";
+						$_SESSION["userMSG"] = "Your current password is not the one you entered. Please try again!";
+					}
+				}
+			}
+			else
+			{
+				//Then update the Password first
+				$sql = "Update student SET password = '".$studentUpdated->getNewPass()."' WHERE email ='".$studentUpdated->getEmailAddress()."' AND password = '".$studentUpdated->getOldPass()."'";
+				$result = $conn->query($sql);
+				$_SESSION["msgClass"] = "success";
+				
+				if ($conn->affected_rows > 0) {
+					$temp = "You have successfully changed your password!";
+				}
+				else{
+					$_SESSION["msgClass"] = "failure";
+					$temp = $temp. "Your current password is not the one you entered!";
+				}
+				
+				//Then only update the Email
+				$sql = "Update student SET email ='".$studentUpdated->getNewEmail()."' WHERE email ='".$studentUpdated->getEmailAddress()."' ";
+				$result = $conn->query($sql);
+				
+				if ($conn->affected_rows > 0){
+					$temp = $temp." You have changed your Email!";
+				}
+				else{
+					$_SESSION["msgClass"] = "failure";
+					$temp = $temp." You have not changed your Email!";
+				}
+				$_SESSION["userMSG"] = $temp;
 			}
 		}
-		/*		
-		foreach($studentUpdateList as &$studentUpdated)
-		{
-			//Then update the Email
-			$sql = "Update student SET email ='".$studentUpdated->getNewEmail()."' WHERE email ='".$studentUpdated->getEmailAddress()."' ";
-			$result = $conn->query($sql);	
-		}
-		*/
     }
 }
 ?>
