@@ -189,9 +189,11 @@ $uow->closeServerConn($conn);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+				<!-- If the ID's for the second-r and third-r get deleted, we cannot open modals anymore -->
+				<!-- DO NOT DELETE THEM -->
 				<a class="navbar-brand topnav first r"  href="../../index.php"><span style= "font-color:white">Log Out</span></a>
-				<a class="navbar-brand topnav second r"  href="#">My Profile</a>
-				<a class="navbar-brand topnav third r"  href="#">My Reservations</a>
+				<a class="navbar-brand topnav second r" id = "second-r" href="#">My Profile</a>
+				<a class="navbar-brand topnav third r"  id = "third-r" href="#">My Reservations</a>
 				<a class="navbar-brand topnav fourth r"  href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a>
 			
         
