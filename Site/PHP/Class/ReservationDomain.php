@@ -28,7 +28,7 @@ class ReservationDomain
 	
 	/* Get methods for the Reservation Domain object
 	*/
-	public function getREID(){
+	public function getID(){
 		return $this->reID;
     }
     

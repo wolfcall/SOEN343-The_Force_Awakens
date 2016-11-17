@@ -3,7 +3,7 @@
 // Start the session
 session_start();
 
-include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
+include_once dirname(__FILE__).'ReservationMapper.php';
 
 class ReservationTDG
 {
@@ -272,13 +272,16 @@ class ReservationTDG
 	}
     
 
-	public function deleteReservation($reID, $conn){
+	public function deleteReservation($reservationDeletedList, $conn){
 	
-		$sql = "DELETE FROM reservation WHERE reservationID ='".$reID."'";
-		$result = $conn->query($sql);
-		
-		$_SESSION["userMSG"] = "You have successfully deleted Reservation ID#" .$reID;
-		$_SESSION["msgClass"] = "success";
+		foreach($reservationDeletedList as &$reservationDeleted)
+		{
+			$sql = "DELETE FROM reservation WHERE reservationID ='".$reservationDeleted->getID()."'";
+			$result = $conn->query($sql);
+			
+			$_SESSION["userMSG"] = "You have successfully deleted Reservation ID#" .$reservationDeleted->getID();
+			$_SESSION["msgClass"] = "success";
+		}
 	}
 }
 ?>
