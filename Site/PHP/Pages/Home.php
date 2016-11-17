@@ -187,29 +187,12 @@ $uow->closeServerConn($conn);
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top topnav">
-        <div class="container topnav">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-				<!-- If the ID's for the second-r and third-r get deleted, we cannot open modals anymore -->
-				<!-- DO NOT DELETE THEM -->
-				<a class="navbar-brand topnav first r"  href="../../index.php"><span style= "font-color:white">Log Out</span></a>
-				<a class="navbar-brand topnav second r" id = "second-r" href="#">My Profile</a>
-				<a class="navbar-brand topnav third r"  id = "third-r" href="#">My Reservations</a>
-				<a class="navbar-brand topnav fourth r"  href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a>
-			
-        
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+    <ul class="topnav" id="myTopnav">
+        <li><a href="../../index.php"><span style= "font-color:white">Log Out</span></a></li>
+        <li><a id = "second-r" href="#">My Profile</a></li>
+        <li><a id = "third-r" href="#">My Reservations</a></li>
+        <li><a href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">MyConcordia</a></li>
+    </ul>
 
     <!-- Header -->
 	<div class="intro-header">
