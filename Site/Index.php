@@ -16,7 +16,7 @@
 
     <!-- Custom CSS -->
     <link href="../CSS/landing-page.css" rel="stylesheet">
-
+	
 	<!-- jQuery -->
     <script src="../Javascript/jquery.js"></script>
 
@@ -29,26 +29,6 @@
 </head>
 
 <body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top topnav">
-        <div class="container topnav">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                
-				<a class="navbar-brand topnav second-r" id="second-r" href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2">Welcome to Concorida's Official Room Reservation System! Click here for access to MyConcordia</a>
-			            
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
 
     <!-- Header -->
 
@@ -65,8 +45,8 @@
                             <li>
                                 <a class="btn btn-default btn-lg" data-target="myModal" id="myBtn"><span class="network-name">Login</span></a>   
                             </li>
-                            <li>
-                                <a href="https://github.com/wolfcall/SOEN343" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+							<li>
+                                <a href="https://my.concordia.ca/psp/upprpr9/EMPLOYEE/EMPL/h/?tab=CU_MY_FRONT_PAGE2" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">MyConcordia</span></a>
                             </li>
                         </ul>
                     </div>
