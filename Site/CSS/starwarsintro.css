@@ -34,7 +34,7 @@ body, html{
   color: #4ee;
   opacity: 0;
   z-index: 1;
-  text-align: center;
+  text-align: left;
   -webkit-animation: intro 2s ease-out;
   -moz-animation: intro 2s ease-out;
   -ms-animation: intro 2s ease-out;
