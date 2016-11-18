@@ -119,6 +119,8 @@ else
 	
 	for($a = 0; $a < $reserveCount; $a++)
 	{
+		$res = new ReservationMapper();
+		
 		//Converting the Date to the Proper Format
 		//Should Obtain DD/MM/YYYY	
 		$dateEU = date('d-m-Y', strtotime($passedDate . ' + ' . (7*$a) . ' days'));
@@ -139,14 +141,14 @@ else
 			if($modifying)
 			{
 				//Updates reservation instead of adding a new one
-				$reservation->setStartTimeDate($newStart);
-				$reservation->setEndTimeDate($newEnd);
-				$reservation->setTitle($title);
-				$reservation->setDescription($desc);
-				$reservation->setREID($reservationID);
-				$reservation->setWait(0);
+				$res->setStartTimeDate($newStart);
+				$res->setEndTimeDate($newEnd);
+				$res->setTitle($title);
+				$res->setDescription($desc);
+				$res->setREID($reservationID);
+				$res->setWait(0);
 				
-				$unit->registerDirtyReservation($reservation);
+				$unit->registerDirtyReservation($res);
 				
 				$_SESSION["userMSG"] = "You have successfully updated your reservation ID ".$reservationID." for ".$newStart." to ".$newEnd." in Room ".$name."!";
 				$_SESSION["msgClass"] = "success";
@@ -154,15 +156,15 @@ else
 			else
 			{
 				//Just realize display message is in format mm/dd/yyyy
-				$reservation->setSID($sID);
-				$reservation->setRID($rID);
-				$reservation->setStartTimeDate($newStart);
-				$reservation->setEndTimeDate($newEnd);
-				$reservation->setTitle($title);
-				$reservation->setDescription($desc);
-				$reservation->setWait(0);
+				$res->setSID($sID);
+				$res->setRID($rID);
+				$res->setStartTimeDate($newStart);
+				$res->setEndTimeDate($newEnd);
+				$res->setTitle($title);
+				$res->setDescription($desc);
+				$res->setWait(0);
 				
-				$unit->registerNewReservation($reservation);
+				$unit->registerNewReservation($res);
 				
 				if($reserveCount == 1) {
 					//Display for single reservation (no repeat)
@@ -180,15 +182,15 @@ else
 			if($reserveCount == 1) 
 			{
 				//Display for single reservation (no repeat)
-				$reservation->setSID($sID);
-				$reservation->setRID($rID);
-				$reservation->setStartTimeDate($newStart);
-				$reservation->setEndTimeDate($newEnd);
-				$reservation->setTitle($title);
-				$reservation->setDescription($desc);
-				$reservation->setWait(1);
+				$res->setSID($sID);
+				$res->setRID($rID);
+				$res->setStartTimeDate($newStart);
+				$res->setEndTimeDate($newEnd);
+				$res->setTitle($title);
+				$res->setDescription($desc);
+				$res->setWait(1);
 				
-				$unit->registerNewReservation($reservation);
+				$unit->registerNewReservation($res);
 			}
 			else
 			{
