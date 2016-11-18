@@ -93,7 +93,7 @@ Drop event if exists soen343.`past_reservation_cleanup`;
 CREATE EVENT IF NOT EXISTS soen343.`past_reservation_cleanup`
 ON SCHEDULE
   EVERY 1 DAY
-  Starts (timestamp('2016-11-14 00:00:00'))
+  Starts curdate() + interval 6 - weekday(curdate()) DAY
   COMMENT 'Clean up past reservations at 1AM!'
   DO
     DELETE FROM soen343.reservation
