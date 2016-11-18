@@ -12,6 +12,7 @@ class ReservationDomain
 	private $endTimeDate;
 	private $title;
 	private $description;
+	private $wait;
 	
 	
 	/* Default Constructor for the Room Domain object
@@ -56,6 +57,10 @@ class ReservationDomain
         return $this->description;
     }
 	
+	public function getWait() {
+        return $this->wait;
+    }
+	
 	/* Set methods for the Reservation Domain object
 	*/
 	public function setREID($reID){
@@ -84,6 +89,10 @@ class ReservationDomain
 	
 	public function setDescription($desc) {
 		$this->description = $desc;
+    }
+	
+	public function setWait($wait) {
+		$this->wait = $wait;
     }
 }
 ?>

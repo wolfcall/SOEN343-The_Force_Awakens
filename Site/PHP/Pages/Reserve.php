@@ -136,22 +136,34 @@ else
 		
 		if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) 
 		{
-			
 			if($modifying)
 			{
 				//Updates reservation instead of adding a new one
-				$reservation->updateRoomID($reservationID, $rID, $conn);
-				$reservation->updateStart($reservationID, $newStart, $conn);
-				$reservation->updateEnd($reservationID, $newEnd, $conn);
-				$reservation->updateTitle($reservationID, $title, $conn);
-				$reservation->updateDescription($reservationID, $desc, $conn);
+				$reservation->setStartTimeDate($newStart);
+				$reservation->setEndTimeDate($newEnd);
+				$reservation->setTitle($title);
+				$reservation->setDescription($desc);
+				$reservation->setREID($reservationID);
+				$reservation->setWait(0);
+				
+				$unit->registerDirtyReservation($reservation);
+				
 				$_SESSION["userMSG"] = "You have successfully updated your reservation ID ".$reservationID." for ".$newStart." to ".$newEnd." in Room ".$name."!";
 				$_SESSION["msgClass"] = "success";
 			}
 			else
 			{
 				//Just realize display message is in format mm/dd/yyyy
-				$reservation->addReservation($sID, $rID, $newStart, $newEnd, $title, $desc, $conn, "0");
+				$reservation->setSID($sID);
+				$reservation->setRID($rID);
+				$reservation->setStartTimeDate($newStart);
+				$reservation->setEndTimeDate($newEnd);
+				$reservation->setTitle($title);
+				$reservation->setDescription($desc);
+				$reservation->setWait(0);
+				
+				$unit->registerNewReservation($reservation);
+				
 				if($reserveCount == 1) {
 					//Display for single reservation (no repeat)
 					$_SESSION["userMSG"] = "You have successfully made a reservation for ".$newStart." to ".$newEnd. " in Room ".$name."!";
@@ -163,12 +175,20 @@ else
 				}
 			}
 		}
-		else if ($_SESSION["userMSG"] == "This option overlaps, you've been added to the waitlist") 
+		else if ($_SESSION["userMSG"] == "This option overlaps, you've been added to the Waitlist!") 
 		{
 			if($reserveCount == 1) 
 			{
 				//Display for single reservation (no repeat)
-				$reservation->addReservation($sID, $rID, $newStart, $newEnd, $title, $desc, $conn, "1");
+				$reservation->setSID($sID);
+				$reservation->setRID($rID);
+				$reservation->setStartTimeDate($newStart);
+				$reservation->setEndTimeDate($newEnd);
+				$reservation->setTitle($title);
+				$reservation->setDescription($desc);
+				$reservation->setWait(1);
+				
+				$unit->registerNewReservation($reservation);
 			}
 			else
 			{

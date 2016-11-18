@@ -24,20 +24,6 @@ class ReservationTDG
 		$this->star = "reservationID, studentID, roomID, date_format(startTimeDate,'%Y/%m/%d %H:%i') as startTimeDate, date_format(endTimeDate,'%Y/%m/%d %H:%i') as endTimeDate, title, description, waitlisted";
 	}
 
-		
-	/* The Insert method to add a new reservation into the reservation table
-	*/
-	public function addReservation($sID, $rID, $start, $end, $title, $desc, $conn, $wait)
-	{
-		$startTrans = "STR_TO_DATE('".$start."', '%m/%d/%Y %H:%i')";
-		$endTrans = "STR_TO_DATE('".$end."', '%m/%d/%Y %H:%i')";
-
-		$sql = "INSERT INTO reservation (studentID, roomID, startTimeDate, endTimeDate, title, description, waitlisted) 
-			Values ('".$sID."','".$rID."',".$startTrans.",".$endTrans.",'".$title."','".$desc."','".$wait."')";
-
-		$result = $conn->query($sql);
-	}
-	
 	/*
 	*	The Check method will take the Original start time and end time of the reservation as well as the room ID
 	*	It will check check all 30 minute increments between the start and end times of the game
@@ -224,54 +210,49 @@ class ReservationTDG
 		return $reservesTimes; 
 	}
 
-	/* The Update methods for all Entities in the reservation table can be found here
-     */
 	
-	public function updateReservationID($reID, $new, $conn){
+	/* 
+		The Insert method to add a new reservation into the reservation table
+	*/
+	public function addReservation($reservationNewList, $conn)
+	{
+		foreach($reservationNewList as &$reservationNew)
+		{
+			$startTrans = "STR_TO_DATE('".$reservationNew->getStartTimeDate()."', '%m/%d/%Y %H:%i')";
+			$endTrans = "STR_TO_DATE('".$reservationNew->getEndTimeDate()."', '%m/%d/%Y %H:%i')";
 
-		$sql = "Update reservation SET reservationID ='".$new."' WHERE reservationID ='".$reID."'";
-		$result = $conn->query($sql);
-    }
-    
-    public function updateStudentID($reID, $sID, $conn){
-		
-		$sql = "Update reservation SET studentID ='".$sID."' WHERE reservationID ='".$reID."'";
-		$result = $conn->query($sql);
-	}
-      
-    public function updateRoomID($reID, $rID, $conn){
-	
-		$sql = "Update reservation SET roomID ='".$rID."' WHERE reservationID ='".$reID."'";
-		$result = $conn->query($sql);
+			$sID = $reservationNew->getSID();
+			$rID = $reservationNew->getRID();
+			$title = $reservationNew->getTitle();
+			$desc = $reservationNew->getDescription();
+			$wait = $reservationNew->getWait();
+			
+			$sql = "INSERT INTO reservation (studentID, roomID, startTimeDate, endTimeDate, title, description, waitlisted) 
+				Values ('".$sID."','".$rID."',".$startTrans.",".$endTrans.",'".$title."','".$desc."','".$wait."')";
+			$result = $conn->query($sql);
+		}
 	}
 	
-	public function updateStart($reID, $start, $conn){
-		
-		$startTrans = date("Y-m-d H:i:s", strtotime($start));
-		$sql = "Update reservation SET startTimeDate ='".$startTrans."' WHERE reservationID ='".$reID."'";
-		$result = $conn->query($sql);
-	}
+	public function updateReservation($reservationUpdateList, $conn){
 	
-	public function updateEnd($reID, $end, $conn){
-	
-		$endTrans = date("Y-m-d H:i:s", strtotime($end));		
-		$sql = "Update reservation SET endTimeDate ='".$endTrans."' WHERE reservationID ='".$reID."'";
-		$result = $conn->query($sql);
-	}
-	
-	public function updateTitle($reID, $title, $conn){
-		
-		$sql = "Update reservation SET title ='".$title."' WHERE reservationID ='".$reID."'";
-		$result = $conn->query($sql);
-	}
-	
-	public function updateDescription($reID, $desc, $conn){
-		
-		$sql = "Update reservation SET description ='".$desc."' WHERE reservationID ='".$reID."'";
-		$result = $conn->query($sql);
-	}
-    
+		foreach($reservationUpdateList as &$reservationUpdate)
+		{
+			$startTrans = "STR_TO_DATE('".$reservationUpdate->getStartTimeDate()."', '%m/%d/%Y %H:%i')";
+			$endTrans = "STR_TO_DATE('".$reservationUpdate->getEndTimeDate()."', '%m/%d/%Y %H:%i')";
 
+			$reID = $reservationUpdate->getID();
+			$title = $reservationUpdate->getTitle();
+			$desc = $reservationUpdate->getDescription();
+			$wait = $reservationUpdate->getWait();
+			
+			$sql = "Update reservation set startTimeDate = ".$startTrans.", endTimeDate = ".$endTrans.",
+				title = '".$title."', description = '".$desc."', waitlisted = '".$wait."'
+				WHERE reservationID ='".$reID."'";
+
+			$result = $conn->query($sql);
+		}
+	}
+	
 	public function deleteReservation($reservationDeletedList, $conn){
 	
 		foreach($reservationDeletedList as &$reservationDeleted)

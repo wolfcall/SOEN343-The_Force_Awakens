@@ -29,11 +29,11 @@ class ReservationMapper
 			$this->reservationActive->setREID($reID);
 		}
 	}
-	
+	/*
 	public function addReservation($sID, $rID, $start, $end, $title, $desc, $conn, $wait){
 		$this->reservationData->addReservation($sID, $rID, $start, $end, $title, $desc, $conn, $wait);
     }	
-	
+	*/
 	/* Set methods for the Reservation Domain object
 	*/
 	public function setREID($reID){
@@ -64,6 +64,10 @@ class ReservationMapper
 		$this->reservationActive->setDescription($desc);
     }
 	
+	public function setWait($wait) {
+		$this->reservationActive->setWait($wait);
+    }
+	
 	/* Get methods for the Reservation Domain object
 	*/
 	
@@ -82,28 +86,32 @@ class ReservationMapper
 		return $this->reservationActive->getID();
     }
 	
-    public function getSID($reID){
-        return $this->reservationActive->getSID($reID);
+    public function getSID(){
+        return $this->reservationActive->getSID();
     }
     
-    public function getRID($reID){
-        return $this->reservationActive->getRID($reID);
+    public function getRID(){
+        return $this->reservationActive->getRID();
     }
 	
-	public function getStartTimeDate($reID){
-        return $this->reservationActive->getStartTimeDate($reID);
+	public function getStartTimeDate(){
+        return $this->reservationActive->getStartTimeDate();
     }	
 	
-	public function getEndTimeDate($reID){
-        return $this->reservationActive->getEndTimeDate($reID);
+	public function getEndTimeDate(){
+        return $this->reservationActive->getEndTimeDate();
     }
 	
-	public function getTitle($reID){
-       return $this->reservationActive->getTitle($reID);
+	public function getTitle(){
+       return $this->reservationActive->getTitle();
     }
 	
-	public function getDescription($reID){
-        return $this->reservationActive->getDescription($reID);
+	public function getDescription(){
+        return $this->reservationActive->getDescription();
+    }
+	
+	public function getWait(){
+        return $this->reservationActive->getWait();
     }
     
 	public function getReservations($sID, $conn){
@@ -117,46 +125,20 @@ class ReservationMapper
 	public function getReservationsByRoomAndDate($rID, $start, $conn) {
 		return $this->reservationData->getReservationsByRoomAndDate($rID, $start, $conn);
 	}
-	
-	/*	Update methods for the Reservation TDG and Domain objects
-	*/
-	public function updateReservationID($reID, $new, $conn){
-		$this->reservationData->updateReservationID($reID, $new, $conn);
-		$this->reservationActive->setREID($new);
-    }
-	
-	public function updateStudentID($reID, $sID, $conn){
-		$this->reservationData->updateStudentID($reID, $sID, $conn);
-		$this->reservationActive->setSID($sID);
-    }
-	
-	public function updateRoomID($reID, $rID, $conn){
-		$this->reservationData->updateRoomID($reID, $rID, $conn);
-		$this->reservationActive->setRID($rID);
-    }
-	
-	public function updateStart($reID, $start, $conn){
-		$this->reservationData->updateStart($reID, $start, $conn);
-		$this->reservationActive->setStartTimeDate($start);
-    }
-	
-	public function updateEnd($reID, $end, $conn){
-		$this->reservationData->updateEnd($reID, $end, $conn);
-		$this->reservationActive->setEndTimeDate($end);
-    }
-	
-	public function updateTitle($reID, $title, $conn){
-		$this->reservationData->updateTitle($reID, $title, $conn);
-		$this->reservationActive->setTitle($title);
-    }
-	
-	public function updateDescription($reID, $desc, $conn){
-		$this->reservationData->updateDescription($reID, $desc, $conn);
-		$this->reservationActive->setDescription($desc);
-    }	
-	
+
+	/*
+		Unit of Work (TDG Functions for Room)
+	*/	
 	public function deleteReservation($reservationDeletedList, $conn) {
 			$this->reservationData->deleteReservation($reservationDeletedList, $conn);
+	}
+	
+	public function addReservation($reservationNewList, $conn) {
+		$this->reservationData->addReservation($reservationNewList, $conn);
+	}
+	
+	public function updateReservation($reservationUpdateList, $conn) {
+		$this->reservationData->updateReservation($reservationUpdateList, $conn);
 	}
 }
 ?>
