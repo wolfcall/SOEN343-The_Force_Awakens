@@ -77,6 +77,11 @@ $dateAmerFormat = strtotime($dateAmer);
 
 $dateDiff = $ourDateFormat - $dateAmerFormat;
 
+//Array to store status messages for repeat reservations
+$statusArray = array();
+
+$selfReservation = false;
+
 /*
 *	Check if the reservation will be before the current time
 */
@@ -110,16 +115,12 @@ else
 	//before actually adding the reservation
 	$currentReservations = $reservation->getReservations($sID, $conn);
 
-	$multiReserveSuccess = true;
-	
-	//For multi reservations, this count the number of successes and waitlists and weekfailures (cant reserve more than 3 in that week)
-	$successes = 0;
-	$waitlists = 0;
-	$weekfailures = 0;
-	
 	for($a = 0; $a < $reserveCount; $a++)
 	{
 		$res = new ReservationMapper();
+		
+		//Incase student tries to make a reservation over his own
+		$selfReservation = false;
 		
 		//Converting the Date to the Proper Format
 		//Should Obtain DD/MM/YYYY	
@@ -135,6 +136,8 @@ else
 		//Get start and end time of new reservation, convert the difference to mins to find duration
 		$startDate = new DateTime($newStart);
 		$endDate = new DateTime($newEnd);
+		
+		$_SESSION["userMSG"] = "";
 		
 		if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) 
 		{
@@ -173,13 +176,24 @@ else
 				}
 				else
 				{
-					$reserves++;
+					array_push($statusArray, "reserved");
 				}
 			}
 		}
 		else if ($_SESSION["userMSG"] == "This option overlaps, you've been added to the Waitlist!") 
 		{
-			if($reserveCount == 1) 
+			if($modifying)
+			{
+				$res->setStartTimeDate($newStart);
+				$res->setEndTimeDate($newEnd);
+				$res->setTitle($title);
+				$res->setDescription($desc);
+				$res->setREID($reservationID);
+				$res->setWait(1);
+				
+				$unit->registerDirtyReservation($res);
+			}
+			if((!$modifying)) 
 			{
 				//Display for single reservation (no repeat)
 				$res->setSID($sID);
@@ -192,16 +206,51 @@ else
 				
 				$unit->registerNewReservation($res);
 			}
-			else
+			if((!$modifying) && $reserveCount > 1)
 			{
-				$waitlists++;
+				array_push($statusArray, "waitlisted");
+			}
+		}
+		elseif($selfReservation)
+		{
+			if((!$modifying) && $reserveCount == 1)
+			{
+				$_SESSION["userMSG"] = "You already have a reservation at that time!";
+				$_SESSION["msgClass"] = "failure";
+			}
+			elseif((!$modifying) && $reserveCount > 1)
+			{
+				array_push($statusArray, "selfreserve");
 			}
 		}
 	}
 	//To display message after multireservation
 	if($reserveCount > 1)
 	{
-		$_SESSION["userMSG"] = "Multireservations happened!";
+		$statusString = "| ";
+		$count = 1;
+		foreach($statusArray as &$val)
+		{
+			if($val == "reserved")
+			{
+				$statusString .= "Week ". $count . " Reserved | ";
+			}
+			elseif($val == "waitlisted")
+			{
+				$statusString .= "Week ". $count . " Waitlisted | ";
+			}
+			elseif($val == "weeklimited")
+			{
+				$statusString .= "Week ". $count . " Reserves Exceeded | ";
+			}
+			elseif($val == "selfreserve")
+			{
+				$statusString .= "Week ". $count . " Reservation Already Exists |";
+			}
+			$count++;
+		}
+		
+		$_SESSION["userMSG"] = $statusString;
 		$_SESSION["msgClass"] = "success";
 	}
 }
@@ -216,7 +265,7 @@ header("Location: ClearRoom.php");
 function checkWeek($d, $s, $current) {
 	//returns true if you are modifying a reservation, it is assumed existing reservations are within 3/week limit
 	global $modifying;
-	global $weekfailures;
+	global $statusArray;
 	if($modifying)
 	{
 		return true;
@@ -257,7 +306,8 @@ function checkWeek($d, $s, $current) {
 	
 	$_SESSION["userMSG"] = "You have already made 3 reservations this week";
 	$_SESSION["msgClass"] = "failure";
-	$weekfailures++; //This should modify the variable outside the function
+	array_push($statusArray, "weeklimited");
+	
 	return false;
 }
 
@@ -266,6 +316,8 @@ function checkOverlap($start, $end, $current) {
 	$newEndTime = $end->format("Hi");
 	//made global to get variable above
 	global $reservationID;
+	global $selfReservation;
+	global $sID;
 	for($x = 0; $x < count($current); $x++) {
 		//Added IF check for modification, won't check overlap against itself
 		if($current[$x]->getID() != $reservationID)
@@ -290,11 +342,16 @@ function checkOverlap($start, $end, $current) {
 			}
 			//If it's not ignored, then this case is a conflict, return false
 			else {
+				if($sID == $current[$x]->getSID())
+				{
+					$selfReservation = true;
+					return false;
+				}
 				$startFormat = $startTime->format("H:i");
 				$endFormat = $endTime->format("H:i");
 
 				//If there's an overlap, add new date to waitlist
-				$_SESSION["userMSG"] = "This option overlaps, you've been added to the waitlist";
+				$_SESSION["userMSG"] = "This option overlaps, you've been added to the Waitlist!";
 				$_SESSION["msgClass"] = "failure";
 				return false;
 			}
