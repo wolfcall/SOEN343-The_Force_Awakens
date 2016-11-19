@@ -38,7 +38,15 @@ $end = htmlspecialchars($_POST["endTime"]);
 
 $first = htmlspecialchars($_POST["firstName"]);
 $last = htmlspecialchars($_POST["lastName"]);
-$_SESSION["sID"] = htmlspecialchars($_POST["studentID"]);
+if(htmlspecialchars($_POST["studentID"]) != "") {
+	$_SESSION["sID"] = htmlspecialchars($_POST["studentID"]);
+}
+
+$_SESSION["sID"];
+
+// if($_SESSION["sID"] = "") {
+// 	$_SESSION["sID"] = $_POST["studentID2"];
+// }
 $prog = htmlspecialchars($_POST["program"]);
 $email = htmlspecialchars($_POST["email"]);
 
@@ -114,6 +122,7 @@ else
 {
 	//Check for presence of more than 3 reservations in the same week 
 	//before actually adding the reservation
+
 	$currentReservations = $reservation->getReservations($_SESSION["sID"], $conn);
 
 	for($a = 0; $a < $reserveCount; $a++)
@@ -146,6 +155,7 @@ else
 
 		if(checkWeek($dateEU, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes, 0)) 
 		{
+
 			if($_SESSION["modifying"])
 			{
 				//Updates reservation instead of adding a new one
@@ -157,10 +167,17 @@ else
 				$res->setWait(0);
 
 				$unit->registerDirtyReservation($res);
+
 				//If they've already had 2 reservations, the third will prompt an alert. On confirm, it removes all waitlists for student
 				if($_SESSION["confirmedRes"] == 2) {
 					$_SESSION["confirmedRes"] = 3;
-					$res->emptyWaitlist($_SESSION["sID"], $conn);
+					$waitListValues = $res->getWaitlistIDByStudent($_SESSION["sID"], $_SESSION["reservationID"], $conn);
+					foreach($waitListValues as $entry) {
+						$resTemp = new ReservationMapper();
+						$resTemp->setREID($entry);
+
+						$unit->registerDeletedReservation($resTemp);
+					}
 				}
 
 				//If they have less than 2 confirmed reservations, once you get off waitlist delete entries that overlap and are on waitlist
@@ -201,7 +218,14 @@ else
 				//If they've already had 2 reservations, the third will prompt an alert. On confirm, it removes all waitlists for student
 				if($_SESSION["confirmedRes"] == 2) {
 					$_SESSION["confirmedRes"] = 3;
-					$res->emptyWaitlist($_SESSION["sID"], $conn);
+					$waitListValues = $res->getWaitlistIDByStudent($_SESSION["sID"], 0, $conn);
+
+					foreach($waitListValues as $entry) {
+						$resTemp = new ReservationMapper();
+						$resTemp->setREID($entry);
+
+						$unit->registerDeletedReservation($resTemp);
+					}
 				}
 				
 				if($reserveCount == 1) {

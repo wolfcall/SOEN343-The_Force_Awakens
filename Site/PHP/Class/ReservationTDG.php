@@ -208,6 +208,7 @@ class ReservationTDG
 		return $reservesTimes; 
 	}
 
+	//Returns waitlisted options
 	public function getReservationsBySIDAndDate($sID, $start, $conn) {
 		$reserves = array();
 
@@ -234,9 +235,18 @@ class ReservationTDG
 		return $reserves;
 	}
 
-	public function emptyWaitlist($sID, $conn) {
-		$sql = "DELETE FROM reservation WHERE studentID ='".$sID."' AND waitlisted = true";
+	public function getWaitlistIDByStudent($sID, $reID, $conn) {
+		$sql = "SELECT * FROM reservation WHERE studentID ='".$sID."' AND reservationID != '".$reID."' AND waitlisted = true";
 		$result = $conn->query($sql);
+
+		$waitListDates = array();
+		
+		while($row = $result->fetch_assoc())
+		{   
+			array_push($waitListDates, $row["reservationID"]);
+		}
+		
+		return $waitListDates;
 	}
 
 	public function removeOverlapWaitListEntry($reID, $conn) {

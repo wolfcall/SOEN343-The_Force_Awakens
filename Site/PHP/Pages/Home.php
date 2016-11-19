@@ -40,7 +40,7 @@ $firstName = $student->getFirstName();
 $lastName = $student->getLastName();
 $program = $student->getProgram();
 $sID = $student->getSID();
-
+$_SESSION["sID"] = $sID;
 $test = $reserve->getREID($sID, $conn);
 $studentReservations = $reserve->getReservations($student->getSID(), $conn);
 
@@ -365,6 +365,7 @@ $db->closeServerConn($conn);
 												$getEndHoursSelect = false;
 												?>
 											</select>&nbsp &nbsp &nbsp
+										
 										<input readonly = "readonly" id = "roomOptionsMod" class="roomNum" name = "roomName" value="<?php if($roomReserve != NULL) echo $roomReserve->getName(); ?>"/>
 										<input hidden name = "roomID" value="<?php if($roomReserve != NULL) echo $roomReserve->getRID(); ?>">
 									</div>

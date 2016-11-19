@@ -4,10 +4,6 @@ session_start();
 function checkWeek($d, $current) {
 	$_SESSION["confirmedRes"] = 0;
 	//returns true if you are modifying a reservation, it is assumed existing reservations are within 3/week limit
-	if($_SESSION["modifying"])
-	{
-		return true;
-	}
 	
 	//Using slashes like we are, strtotime assumes mm/dd/yyyy, so fix
 	//Reformate date and check for week in the year (of date being added)
@@ -37,8 +33,13 @@ function checkWeek($d, $current) {
 	}
 	
 	//return true if there aren't already 3 reservations made for that week
-
 	$_SESSION["confirmedRes"] = $counter;
+
+	if($_SESSION["modifying"])
+	{
+		return true;
+	}
+
 	if($counter < 3) {
 		return true;
 	}

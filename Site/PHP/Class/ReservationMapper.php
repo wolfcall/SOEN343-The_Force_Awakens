@@ -126,8 +126,8 @@ class ReservationMapper
 		return $this->reservationData->getReservationsByRoomAndDate($rID, $start, $wait, $conn);
 	}
 
-	public function emptyWaitlist($sID, $conn) {
-		return $this->reservationData->emptyWaitlist($sID, $conn);
+	public function getWaitlistIDByStudent($sID, $reID, $conn) {
+		return $this->reservationData->getWaitlistIDByStudent($sID, $reID, $conn);
 	}
 
 	public function getReservationsBySIDAndDate($sID, $start, $conn) {
