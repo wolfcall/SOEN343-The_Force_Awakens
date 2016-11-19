@@ -50,13 +50,10 @@ elseif($action == "modify")
 	$_SESSION['reservation'] = $reID;
 }
 
-var_dump("cock sucker motherfucker");
-die();
-
 $unit->commit();
 $db->closeServerConn($conn);
 
 
-//header("Location: Home.php");
+header("Location: Home.php");
 
 ?>
