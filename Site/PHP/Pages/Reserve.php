@@ -157,6 +157,30 @@ else
 				$res->setWait(0);
 
 				$unit->registerDirtyReservation($res);
+				//If they've already had 2 reservations, the third will prompt an alert. On confirm, it removes all waitlists for student
+				if($_SESSION["confirmedRes"] == 2) {
+					$_SESSION["confirmedRes"] = 3;
+					$res->emptyWaitlist($_SESSION["sID"], $conn);
+				}
+
+				//If they have less than 2 confirmed reservations, once you get off waitlist delete entries that overlap and are on waitlist
+				// elseif($_SESSION["confirmedRes"] < 2) {
+				// 	$_SESSION["confirmedRes"]++;
+				// 	echo $_SESSION["confirmedRes"];
+
+				// 	$tempValues = $res->getReservationsBySIDAndDate($_SESSION["sID"], $newStart, $conn);
+					
+				// 	$tempArray = array();
+				// 	foreach($tempValues as $reservation) {
+				// 		array_push($reservation);
+
+				// 		//If overlaps, then remove it
+				// 		if (checkOverlap($startDate, $endDate, $tempArray, $reservation->getID())){
+				// 			$res->removeOverlapWaitListEntry($reservation->getID());
+				// 		}
+				// 		array_pop($tempArray);
+				// 	 }
+				// }
 				
 				$_SESSION["userMSG"] = "You have successfully updated your reservation ID ".$_SESSION["reservationID"]." for ".$newStart." to ".$newEnd." in Room ".$name."!";
 				$_SESSION["msgClass"] = "success";

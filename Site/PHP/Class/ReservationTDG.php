@@ -208,9 +208,39 @@ class ReservationTDG
 		return $reservesTimes; 
 	}
 
+	public function getReservationsBySIDAndDate($sID, $start, $conn) {
+		$reserves = array();
+
+		$date = substr($start,0,10);
+
+		//Need to reformate date so that it can be used in the database
+		$dateElements = explode("/", $date);
+		$reformatDate = $dateElements[2]."-".$dateElements[0]."-".$dateElements[1];
+
+		//First, get all elements which share a startDate and are on the waitlist from the student
+		$sql1 = "SELECT * FROM reservation WHERE date(startTimeDate) = date '".$reformatDate."'"
+		. "AND studentID = '".$sID."' AND waitlisted = true"; 
+
+		$result = $conn->query($sql1);
+
+		if($result != null) {
+			while($row = $result->fetch_assoc())
+			{
+				$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $row["endTimeDate"], $row["title"], $row["description"], $row["waitlisted"]);
+				array_push($reserves, $temp);
+			}
+		}
+
+		return $reserves;
+	}
+
 	public function emptyWaitlist($sID, $conn) {
 		$sql = "DELETE FROM reservation WHERE studentID ='".$sID."' AND waitlisted = true";
 		$result = $conn->query($sql);
+	}
+
+	public function removeOverlapWaitListEntry($reID, $conn) {
+		$sql = "DELETE FROM reservation WHERE reservationID = '".$reID."'";
 	}
 	
 	/* 
