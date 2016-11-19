@@ -462,8 +462,6 @@ $db->closeServerConn($conn);
 										
 										date_default_timezone_set('US/Eastern');
 										$timeNow = date("Y-m-d H:i:s");
-										
-										echo $singleReservation["startTimeDate"]."<br>";
 
 										if(strtotime($singleReservation["startTimeDate"]) > strtotime($timeNow)) {
 											echo "<form id='myReservationform' action='ModifyReservation.php' method='post'>";
