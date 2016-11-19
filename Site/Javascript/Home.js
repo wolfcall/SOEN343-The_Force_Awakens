@@ -120,7 +120,7 @@ function minuteTimer(duration, display) {
 $(function(){
 
 	 minuteTimer2(60, $('#timer2'));
-    $('#reservationmyModal').on('show.bs.modal', function(){
+    $('#editModal').on('show.bs.modal', function(){
         var myModal = $(this);
         clearTimeout(myModal.data('hideInterval'),60000);
         myModal.data('hideInterval', setTimeout(function(){
@@ -135,7 +135,7 @@ function minuteTimer2(duration, display) {
     setInterval(function () {
 		
 		if(performance.navigation.type  == 1) {
-			$('#reservationmyModal').modal('hide');
+			$('#editModal').modal('hide');
 		}
 		else {
 		seconds--;				
