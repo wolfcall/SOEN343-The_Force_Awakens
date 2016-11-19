@@ -126,6 +126,10 @@ class ReservationMapper
 		return $this->reservationData->getReservationsByRoomAndDate($rID, $start, $wait, $conn);
 	}
 
+	public function emptyWaitlist($sID, $conn) {
+		return $this->reservationData->emptyWaitlist($sID, $conn);
+	}
+
 	/*
 		Unit of Work (TDG Functions for Room)
 	*/	

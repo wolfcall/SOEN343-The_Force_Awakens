@@ -207,6 +207,11 @@ class ReservationTDG
 
 		return $reservesTimes; 
 	}
+
+	public function emptyWaitlist($sID, $conn) {
+		$sql = "DELETE FROM reservation WHERE studentID ='".$sID."' AND waitlisted = true";
+		$result = $conn->query($sql);
+	}
 	
 	/* 
 		The Insert method to add a new reservation into the reservation table

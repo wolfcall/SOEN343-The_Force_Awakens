@@ -2,7 +2,7 @@
 session_start();
 
 function checkWeek($d, $current) {
-	$_SESSION["2confirmed"] = false;
+	$_SESSION["confirmedRes"] = 0;
 	//returns true if you are modifying a reservation, it is assumed existing reservations are within 3/week limit
 	if($_SESSION["modifying"])
 	{
@@ -38,11 +38,8 @@ function checkWeek($d, $current) {
 	
 	//return true if there aren't already 3 reservations made for that week
 
-	if($counter == 2) {
-		$_SESSION["2confirmed"] = true;
-		return true;
-	}
-	elseif($counter < 3) {
+	$_SESSION["confirmedRes"] = $counter;
+	if($counter < 3) {
 		return true;
 	}
 	
