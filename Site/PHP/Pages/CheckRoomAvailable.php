@@ -50,7 +50,14 @@ $db->closeServerConn($conn);
 
 if($action == "modify" or $action == "delete")
 {
-	header("Location: ModifyReservation.php");
+	if($roomAnswer == 0)
+	{
+		header("Location: ModifyReservation.php");
+	}
+	else
+	{
+		header("Location: Home.php");
+	}
 }
 else
 {
