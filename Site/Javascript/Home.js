@@ -113,6 +113,26 @@ $(document).ready(function(){
 	
 });
 
+$("#profilemyModal").submit(function(){
+
+    $.ajax({
+           type: "POST",
+           url: "../PHP/Pages/ChangeDetails.php",
+		   async : true,
+           data: $("#profilemyModal"), // serializes the form's elements.
+           success: function(data)
+		    {
+				$("#profilemyModal").modal('hide');
+               alert(data); // show response from the php script.
+            },
+			failure:function(data)
+		    {
+               alert(data); // show response from the php script.
+            }
+         });
+});
+
+
 $(function(){
 
 	 minuteTimer(60, $('#timer'));
