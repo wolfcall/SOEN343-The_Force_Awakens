@@ -40,40 +40,30 @@ $(document).ready(function() {
 		}
 	});
 });
-function lockoutSubmit(button) {
-    var oldValue = button.value;
+function lockoutSubmit(timeExpire) {
+    
+   btn = document.getElementById('makeReserve');
+	
+	//Get current Time
+	var dt = new Date();
+	var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
+	
+	
+	//If expering time is greater than the current time
+	//Then initiate the timer
+	if(timeExpire > secs)
+	{
+		var left = timeExpire-secs;
+		
+		btn.setAttribute('disabled', true);
 
-    button.setAttribute('disabled', true);
-    button.value = '...processing...';
-
-    setTimeout(function(){
-        button.value = oldValue;
-        button.removeAttribute('disabled');
-    }, 2000)
+		setTimeout(function(){
+		   btn.removeAttribute('disabled');
+		},left*1000)
+	}	
 }
 
 $(document).ready(function(){
-	
-   
-      if (clickDisabled == true)
-	  {
-		  $("#myBtn").click(function(){return false;});
-		
-	 }
-	 else{
-	$("#myBtn").click(function(){
-	 var selected = document.getElementById("roomOptions").selectedIndex;
-		document.getElementById("roomOptionsMod").selectedIndex = selected;
-		$("#endTime").children().eq(diff).attr('selected', 'selected');
-	 clickDisabled = true;
-	 });
-	 }
-	
-	$("#myBtn").unload(function () {
-		setTimeout(function(){clickDisabled = true;}, 30000);
-		clickDisabled = false;
-	});
-	
 	
 	$("#startTime").change(function(){
 		$("#endTime").children().eq($("#endTime").prop('selectedIndex')).removeAttr('selected');

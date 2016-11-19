@@ -19,6 +19,7 @@ $email = $_SESSION['email'];
 $userMSG = $_SESSION["userMSG"] ;
 $msgClass = $_SESSION["msgClass"];
 $modify = $_SESSION["modify"];
+$made = $_SESSION['cleared'];
 $roomAvailable = $_SESSION['roomAvailable'];
 $passedDate = $_SESSION['selectedDate']; //Temporary fix for datepicker
 
@@ -28,6 +29,7 @@ if($roomReserveID != NULL) $roomReserve = new RoomMapper($roomReserveID, $conn);
 
 if(isset($_SESSION["userMSG"])){
 	unset($_SESSION['roomID']);
+	unset($_SESSION['cleared']);
 	unset($_SESSION["userMSG"]);
     unset($_SESSION["msgClass"]);
 }
@@ -188,10 +190,17 @@ $db->closeServerConn($conn);
 	
 ?>
 </head>
-
-<body onload="lockoutSubmit(document.getElementById('makeReserve'))">
-
-    <!-- Navigation -->
+<?php
+	
+	$regular = "<body>";
+	$timer = '<body onload="lockoutSubmit('.$made.')">';
+	
+	echo $timer;
+	
+?>
+   
+<!--<body onload="lockoutSubmit(document.getElementById('makeReserve'))"> -->
+   <!-- Navigation -->
     <ul class="topnav" id="myTopnav">
 		<li><a class="nav" href="../../index.php"><span style= "font-color:white">Log Out</span></a></li>
         <li><a class="nav" id = "second-r" href="#">My Profile</a></li>
