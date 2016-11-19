@@ -17,7 +17,7 @@ class ReservationDomain
 	
 	/* Default Constructor for the Room Domain object
 	*/
-	public function __construct($reID, $sID, $rID, $start, $end, $title, $desc) {
+	public function __construct($reID, $sID, $rID, $start, $end, $title, $desc, $wait) {
 		$this->reID = $reID;
 		$this->sID = $sID;
 		$this->rID = $rID;
@@ -25,6 +25,7 @@ class ReservationDomain
 		$this->endTimeDate = $end;
 		$this->title = $title;
 		$this->description = $desc;
+		$this->wait = $wait;
     }
 	
 	/* Get methods for the Reservation Domain object

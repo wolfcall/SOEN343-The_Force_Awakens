@@ -3,10 +3,11 @@ include "../Class/RoomMapper.php";
 include "../Class/StudentMapper.php";
 include "../Class/ReservationMapper.php";
 
-include "../Class/Unit.php";
+include_once "../Class/Unit.php";
 include_once dirname(__FILE__).'/../Utilities/ServerConnection.php';
-
+include '../Utilities/Function.php';
 // Start the session
+
 session_start();
 
 $db = new ServerConnection();
@@ -15,14 +16,14 @@ $conn = $db->getServerConn();
 $unit = new UnitOfWork($conn);
 
 //Modify specific flag
-$modifying = false;
+$_SESSION["modifying"] = false;
 if($_POST["action"] == "modifying")
 {
-	$modifying = true;
+	$_SESSION["modifying"] = true;
 }
 
 //Reservation ID for modification purposes only
-$reservationID = htmlspecialchars($_POST["reservationID"]);
+$_SESSION["reservationID"] = htmlspecialchars($_POST["reservationID"]);
 
 $wrongTime = "Your End Time must be after your Start Time! Please try again.";
 $tooLong = "You cannot reserve for a time of more than 3 hours!";
@@ -37,7 +38,7 @@ $end = htmlspecialchars($_POST["endTime"]);
 
 $first = htmlspecialchars($_POST["firstName"]);
 $last = htmlspecialchars($_POST["lastName"]);
-$sID = htmlspecialchars($_POST["studentID"]);
+$_SESSION["sID"] = htmlspecialchars($_POST["studentID"]);
 $prog = htmlspecialchars($_POST["program"]);
 $email = htmlspecialchars($_POST["email"]);
 
@@ -78,9 +79,9 @@ $dateAmerFormat = strtotime($dateAmer);
 $dateDiff = $ourDateFormat - $dateAmerFormat;
 
 //Array to store status messages for repeat reservations
-$statusArray = array();
+$_SESSION["statusArray"] = array();
 
-$selfReservation = false;
+$_SESSION["selfReservation"] = false;
 
 /*
 *	Check if the reservation will be before the current time
@@ -113,19 +114,20 @@ else
 {
 	//Check for presence of more than 3 reservations in the same week 
 	//before actually adding the reservation
-	$currentReservations = $reservation->getReservations($sID, $conn);
+	$currentReservations = $reservation->getReservations($_SESSION["sID"], $conn);
 
 	for($a = 0; $a < $reserveCount; $a++)
 	{
 		$res = new ReservationMapper();
 		
 		//Incase student tries to make a reservation over his own
-		$selfReservation = false;
+		$_SESSION["selfReservation"] = false;
 		
 		//Converting the Date to the Proper Format
 		//Should Obtain DD/MM/YYYY	
 		$dateEU = date('d-m-Y', strtotime($passedDate . ' + ' . (7*$a) . ' days'));
 		$dateAmer = date('m/d/Y', strtotime($passedDate . ' + ' . (7*$a) . ' days'));
+
 		//changed to newStart to facilitate repeat reservations
 		$newStart = $dateAmer." ".$start;
 		
@@ -134,37 +136,35 @@ else
 		}
 		
 		$newEnd = $dateAmer." ".$end;
-		
 		//Get the list of reservations in same room and on same day
-		$availableTimes = $reservation->getReservationsByRoomAndDate($rID, $newStart, $conn);
+		$availableTimes = $reservation->getReservationsByRoomAndDate($rID, $newStart, 0, $conn);
 
 		//Get start and end time of new reservation, convert the difference to mins to find duration
 		$startDate = new DateTime($newStart);
 		$endDate = new DateTime($newEnd);
-		
 		$_SESSION["userMSG"] = "";
-		
-		if(checkWeek($dateEU, $sID, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes)) 
+
+		if(checkWeek($dateEU, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes, 0)) 
 		{
-			if($modifying)
+			if($_SESSION["modifying"])
 			{
 				//Updates reservation instead of adding a new one
 				$res->setStartTimeDate($newStart);
 				$res->setEndTimeDate($newEnd);
 				$res->setTitle($title);
 				$res->setDescription($desc);
-				$res->setREID($reservationID);
+				$res->setREID($_SESSION["reservationID"]);
 				$res->setWait(0);
-				
+
 				$unit->registerDirtyReservation($res);
 				
-				$_SESSION["userMSG"] = "You have successfully updated your reservation ID ".$reservationID." for ".$newStart." to ".$newEnd." in Room ".$name."!";
+				$_SESSION["userMSG"] = "You have successfully updated your reservation ID ".$_SESSION["reservationID"]." for ".$newStart." to ".$newEnd." in Room ".$name."!";
 				$_SESSION["msgClass"] = "success";
 			}
 			else
 			{
 				//Just realize display message is in format mm/dd/yyyy
-				$res->setSID($sID);
+				$res->setSID($_SESSION["sID"]);
 				$res->setRID($rID);
 				$res->setStartTimeDate($newStart);
 				$res->setEndTimeDate($newEnd);
@@ -181,27 +181,27 @@ else
 				}
 				else
 				{
-					array_push($statusArray, "reserved");
+					array_push($_SESSION["statusArray"], "reserved");
 				}
 			}
 		}
 		else if ($_SESSION["userMSG"] == "This option overlaps, you've been added to the Waitlist!") 
 		{
-			if($modifying)
+			if($_SESSION["modifying"])
 			{
 				$res->setStartTimeDate($newStart);
 				$res->setEndTimeDate($newEnd);
 				$res->setTitle($title);
 				$res->setDescription($desc);
-				$res->setREID($reservationID);
+				$res->setREID($_SESSION["reservationID"]);
 				$res->setWait(1);
 				
 				$unit->registerDirtyReservation($res);
 			}
-			if((!$modifying)) 
+			if((!$_SESSION["modifying"])) 
 			{
 				//Display for single reservation (no repeat)
-				$res->setSID($sID);
+				$res->setSID($_SESSION["sID"]);
 				$res->setRID($rID);
 				$res->setStartTimeDate($newStart);
 				$res->setEndTimeDate($newEnd);
@@ -211,21 +211,21 @@ else
 				
 				$unit->registerNewReservation($res);
 			}
-			if((!$modifying) && $reserveCount > 1)
+			if((!$_SESSION["modifying"]) && $reserveCount > 1)
 			{
-				array_push($statusArray, "waitlisted");
+				array_push($_SESSION["statusArray"], "waitlisted");
 			}
 		}
-		elseif($selfReservation)
+		elseif($_SESSION["selfReservation"])
 		{
-			if((!$modifying) && $reserveCount == 1)
+			if((!$_SESSION["modifying"]) && $reserveCount == 1)
 			{
 				$_SESSION["userMSG"] = "You already have a reservation at that time!";
 				$_SESSION["msgClass"] = "failure";
 			}
-			elseif((!$modifying) && $reserveCount > 1)
+			elseif((!$_SESSION["modifying"]) && $reserveCount > 1)
 			{
-				array_push($statusArray, "selfreserve");
+				array_push($_SESSION["statusArray"], "selfreserve");
 			}
 		}
 	}
@@ -234,7 +234,7 @@ else
 	{
 		$statusString = "| ";
 		$count = 1;
-		foreach($statusArray as &$val)
+		foreach($_SESSION["statusArray"] as &$val)
 		{
 			if($val == "reserved")
 			{
@@ -266,114 +266,4 @@ $unit->commit();
 $db->closeServerConn($conn);
 
 header("Location: ClearRoom.php");
-
-function checkWeek($d, $s, $current) {
-	//returns true if you are modifying a reservation, it is assumed existing reservations are within 3/week limit
-	global $modifying;
-	global $statusArray;
-	if($modifying)
-	{
-		return true;
-	}
-	
-	//Using slashes like we are, strtotime assumes mm/dd/yyyy, so fix
-	//Reformate date and check for week in the year (of date being added)
-	$reformatDate = date("j-m-Y", strtotime($d));
-
-	// //Reformate date and check for week in the year (of date being added)
-
-	$year = date("Y", strtotime($reformatDate));
-	$week = date("W", strtotime($reformatDate));
-
-	//Create counter, to be used to track if less than 3 reservations were made for that week 
-	$counter = 0;
-
-	//Check database table for all reservations under this student's ID
-	// Compare the dates pulled with the week found
-	for($x = 0; $x < count($current); $x++) {
-
-		//Using slashes makes strtotime assume american date, aka m/d/y
-		$tempDate = date("j-m-Y", strtotime($current[$x]["startTimeDate"]));
-		$tempWeek = date("W", strtotime($tempDate));
-
-		//    echo "Current week: " . $week . " Pulled week: " . $tempWeek;
-		//    echo "<br>";
-
-		if($week == $tempWeek) {
-			$counter++;
-		}
-	}
-	
-	//return true if there aren't already 3 reservations made for that week
-	if($counter < 3) {
-		return true;
-	}
-	
-	$_SESSION["userMSG"] = "You have already made 3 reservations this week";
-	$_SESSION["msgClass"] = "failure";
-	array_push($statusArray, "weeklimited");
-	
-	return false;
-}
-
-function checkOverlap($start, $end, $current) {
-	$newStartTime = $start->format("Hi");
-	$newEndTime = $end->format("Hi");
-	//made global to get variable above
-	global $reservationID;
-	global $selfReservation;
-	global $sID;
-	for($x = 0; $x < count($current); $x++) {
-		//Added IF check for modification, won't check overlap against itself
-		if($current[$x]->getID() != $reservationID)
-		{
-			//Get start and end time of new reservation, convert the difference to mins to find duration
-			$startTime = new DateTime($current[$x]->getStartTimeDate());
-			$endTime = new DateTime($current[$x]->getEndTimeDate());
-
-			$tempStart = $startTime->format("Hi");
-			$tempEnd = $endTime->format("Hi");
-			
-		//	echo "Start: " . $tempStart . " End: " . $tempEnd."<br>";
-			
-			//If pulled value starts after the ending of the new reservation, ignore this case
-			if($tempStart >= $newEndTime) {
-				continue;
-			}
-
-			//If pulled value ends before the start of the new reservation, ignore this case
-			else if($tempEnd <= $newStartTime) {
-				continue;
-			}
-			//If it's not ignored, then this case is a conflict, return false
-			else {
-				if($sID == $current[$x]->getSID())
-				{
-					$selfReservation = true;
-					return false;
-				}
-				$startFormat = $startTime->format("H:i");
-				$endFormat = $endTime->format("H:i");
-
-				//If there's an overlap, add new date to waitlist
-				$_SESSION["userMSG"] = "This option overlaps, you've been added to the Waitlist!";
-				$_SESSION["msgClass"] = "failure";
-				return false;
-			}
-		}
-	}
-	
-	return true;
-}
-
-
-//Get duration of reservation, from start to end, in mins
-//LEAVE FOR NOW, MIGHT NEED DURATION IN FUTURE
-
-// function getDuration($startTime, $endTime) {
-// 	$diff = date_diff($startTime, $endTime);
-// 	$dateArray = explode(":", $diff->format('%h:%i'));
-// 	$totalMinutes = $dateArray[0]*60 + $dateArray[1];
-// 	return $totalMinutes;
-// }
 ?>

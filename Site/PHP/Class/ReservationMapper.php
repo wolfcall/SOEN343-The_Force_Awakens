@@ -122,8 +122,8 @@ class ReservationMapper
 		return $this->reservationData->getReservationsByDate($start, $conn);
 	}
 
-	public function getReservationsByRoomAndDate($rID, $start, $conn) {
-		return $this->reservationData->getReservationsByRoomAndDate($rID, $start, $conn);
+	public function getReservationsByRoomAndDate($rID, $start, $wait, $conn) {
+		return $this->reservationData->getReservationsByRoomAndDate($rID, $start, $wait, $conn);
 	}
 
 	/*

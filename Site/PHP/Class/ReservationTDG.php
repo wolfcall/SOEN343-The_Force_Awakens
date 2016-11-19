@@ -50,17 +50,16 @@ class ReservationTDG
 	public function getReservation($reID, $conn)
 	{
 		$sql = "SELECT {$this->star} FROM reservation WHERE reservationID ='".$reID."'";
+
 		$result = $conn->query($sql);
-		$singleReservation = array("title" => $result["title"],
-												"description" => $result["description"],
-												"reservationID" => $result["reservationID"],
-                                                "studentID" => $result["studentID"],
-                                                "roomID" => $result["roomID"],
-                                                "startTimeDate" => $result["startTimeDate"],
-                                                "endTimeDate" => $result["endTimeDate"]);
-		
-		echo $singleReservation;
-		die();
+		$row = $result->fetch_assoc();
+		$singleReservation = array("title" => $row["title"],
+												"description" => $row["description"],
+												"reservationID" => $row["reservationID"],
+                                                "studentID" => $row["studentID"],
+                                                "roomID" => $row["roomID"],
+                                                "startTimeDate" => $row["startTimeDate"],
+                                                "endTimeDate" => $row["endTimeDate"]);
 		return $singleReservation;
 	}	
 	 
@@ -184,8 +183,7 @@ class ReservationTDG
 	}
 	
 	//Get reservations by room ID AND Date (for overlap checking)
-	public function getReservationsByRoomAndDate($roomID, $start, $conn) {
-		
+	public function getReservationsByRoomAndDate($roomID, $start, $wait, $conn) {
 		$date = substr($start,0,10);
 
 		//Need to reformate date so that it can be used in the database
@@ -193,7 +191,7 @@ class ReservationTDG
 		$reformatDate = $dateElements[2]."-".$dateElements[0]."-".$dateElements[1];
 
 		$sql = "SELECT ".$this->star." FROM reservation WHERE date(startTimeDate) = date '".$reformatDate."'"
-				. " AND roomID = '".$roomID."' and waitlisted = false";
+				. " AND roomID = '".$roomID."' and waitlisted = '".$wait."' ORDER BY reservationID ASC";
 		
 		$result = $conn->query($sql);
 
@@ -202,14 +200,13 @@ class ReservationTDG
 		if($result != null) {
 			while($row = $result->fetch_assoc())
 			{
-				$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $row["endTimeDate"], $row["title"], $row["description"]);
+				$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $row["endTimeDate"], $row["title"], $row["description"], $row["waitlisted"]);
 				array_push($reservesTimes, $temp);
 			}
 		}
 
 		return $reservesTimes; 
 	}
-
 	
 	/* 
 		The Insert method to add a new reservation into the reservation table
@@ -254,7 +251,7 @@ class ReservationTDG
 	}
 	
 	public function deleteReservation($reservationDeletedList, $conn){
-	
+
 		foreach($reservationDeletedList as &$reservationDeleted)
 		{
 			$sql = "DELETE FROM reservation WHERE reservationID ='".$reservationDeleted->getID()."'";

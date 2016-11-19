@@ -32,7 +32,7 @@ $log = new StudentMapper($email, $conn);
 $validate = $log->checkUserAndPass($email,$password, $conn);
 $exist = $log->checkUserExist($email, $conn);
 
-$_SESSION["sID"] = $validate;
+$_SESSION["sIDForTable"] = $validate;
 
 $db->closeServerConn($conn);
 

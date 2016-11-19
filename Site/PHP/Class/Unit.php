@@ -57,7 +57,7 @@ class UnitOfWork
 	}
 
 	/*
-		Trigger Modification of a Student
+		Trigger Modification of a Reservation
 	*/
 	public function registerDirtyReservation($reservationObject){
 		

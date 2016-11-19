@@ -61,7 +61,7 @@ foreach($today as $res){
 		$id = $res->getRID();
 		$pos = $begin + $x;
 		//$roomRes[$id][1][$pos] = "11";
-		if($res->getSID() == $_SESSION["sID"])
+		if($res->getSID() == $_SESSION["sIDForTable"])
 			$roomRes[$id][2][$pos] = 'yourBooking';
 		else
 			$roomRes[$id][2][$pos] = 'booked';
