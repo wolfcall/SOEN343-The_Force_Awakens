@@ -14,13 +14,26 @@ $conn = $db->getServerConn();
 
 $unit = new UnitOfWork($conn);
 
-$rID = $_POST['rID'];
-$action = $_POST['action'];
-$reID = $_POST['reID'];
+if(empty($_POST['rID'])){
+	$rID = $_SESSION['roomID'];
+}
+else{
+	$rID = $_POST['rID'];
+}
 
-$roomAsked = new RoomMapper($rID, $conn);
-$roomAnswer = $roomAsked->checkBusy($rID, $conn);
-$roomName = $roomAsked->getName();
+if(empty($_POST['action'])){
+	$action = $_SESSION['action'];
+}
+else{
+	$action = $_POST['action'];
+}
+
+if(empty($_POST['reID'])){
+	$reID = $_SESSION['reID'];
+}
+else{
+	$reID = $_POST['reID'];
+}
 
 $reservation = new ReservationMapper($reID, $conn);
 
@@ -38,21 +51,9 @@ if($action == "delete")
 	//Dropped date from message for the moment since its not being posted - NB
 	$date = $_POST['date'];
 
-	if($roomAnswer == 0)
-	{
-		$roomAsked->setBusy(true);
-		$unit->registerDirtyRoom($roomAsked);
-		$unit->registerDeletedReservation($reservation);
-		updateWaitlist($reservation, $rID, $reformatStart, $conn);
-		$roomAsked->setBusy(0);
-		$unit->registerDirtyRoom($roomAsked);
-		
-	}
-	else
-	{
-		$_SESSION["userMSG"] = "Room ".$roomName." is being used by another Student!";
-		$_SESSION["msgClass"] = "failure";
-	}
+	$unit->registerDeletedReservation($reservation);
+	updateWaitlist($reservation, $rID, $reformatStart, $conn);
+	header("Location: ClearRoom.php");
 }
 elseif($action == "modify")
 {
@@ -62,7 +63,6 @@ elseif($action == "modify")
 
 $unit->commit();
 $db->closeServerConn($conn);
-
 
 header("Location: Home.php");
 

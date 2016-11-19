@@ -235,7 +235,7 @@ $db->closeServerConn($conn);
 					<div id="reserveButton">
 						<form id="form" action="CheckRoomAvailable.php" method="post">
 							<div>
-								<select id = "roomOptions" class="btn btn-default btn-lg network-name" name = "roomNum">
+								<select id = "roomOptions" class="btn btn-default btn-lg network-name" name = "rID">
 									<?php
 										foreach($rooms->getRoomList() as $val){
 											echo "<option value = '{$val[0]->getRID()}'>{$val[0]->getName()}</option>\n";
@@ -344,6 +344,10 @@ $db->closeServerConn($conn);
 									<div class="form-group">
 										<label>Reservation ID</label>
 										<input readonly="readonly" type="text" class="form-control" name = "reservationID" id="reservationID" value="<?php echo $modReserve['reservationID']; ?>"/>
+									</div>
+									<div class="form-group">
+										<label>Room ID</label>
+										<input readonly="readonly" type="text" class="form-control" name = "roomID" id="reservationID" value="<?php echo $modReserve['roomID']; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Title of Reservation</label>
@@ -464,7 +468,7 @@ $db->closeServerConn($conn);
 										$timeNow = date("Y-m-d H:i:s");
 
 										if(strtotime($singleReservation["startTimeDate"]) > strtotime($timeNow)) {
-											echo "<form id='myReservationform' action='ModifyReservation.php' method='post'>";
+											echo "<form id='myReservationform' action='CheckRoomAvailable.php' method='post'>";
 											if ($waitlisted[0] == "1") {	
 												echo "<section class = 'leftcolumnW'>";
 													echo $hidden;
