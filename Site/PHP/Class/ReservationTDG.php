@@ -134,7 +134,7 @@ class ReservationTDG
 	//Get reservations by Student ID
 	public function getReservations($sID, $conn) {
 		
-		$sql = "SELECT {$this->star} FROM reservation WHERE studentID ='".$sID."'";
+		$sql = "SELECT {$this->star} FROM reservation WHERE studentID ='".$sID."' ORDER BY startTimeDate ASC";
 		$result = $conn->query($sql);
 
 		$reservesDates = array();

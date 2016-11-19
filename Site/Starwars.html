@@ -1,41 +1,45 @@
 <head> <!-- Place in document head -->
-<link rel="stylesheet" href="CSS/starwarsintro.css">
-<embed src="Music/starwars.mp3" autostart="true" loop="true"
-width="2" height="0">
-</embed>
+	<link rel="stylesheet" href="CSS/starwarsintro.css">
+	<embed src="Music/starwars.mp3" autostart="true" loop="true"
+		width="2" height="0">
+	</embed>
+	
+	
 <script>
     setTimeout(function(){
-       window.location='Index.php';
-    }, 16000);
+       window.location='../Index.php';
+    }, 22000);
 </script>
 
 <!-- Place in Body where you'd like intro to appear -->
 <div class="star-wars-intro">
+<button type="submit" onclick="location.href = 'Index.php';">
+<img src="img/skip.png" style="background-position:relative;" alt="submit" />
+</button>
 
-  <!-- Blue Intro Text -->
-  <p class="intro-text">
-    A long time time ago, in a university far, far away...
-  </p>
 
-  <!-- Logo Image or Text goes in here -->
-  <h2 class="main-logo">
-    <img src="img/starwarsintro.png">
-  </h2>
+	<!-- Blue Intro Text -->
+	<p class="intro-text">
+	A long time time ago, in a university far, far away...
+	</p>
 
-  <!-- All Scrolling Content Goes in here -->
-  <div class="main-content">
+	<!-- Logo Image or Text goes in here -->
+	<h2 class="main-logo">
+	<img src="img/starwarsintro.png">
+	</h2>
 
-    <div class="title-content">
-      <p class="content-header"><br>A reservation system was built<br/>and the force has awaken...</p>
+	<!-- All Scrolling Content Goes in here -->
+	<div class="main-content">
+		<div class="title-content">
+			<h2 class="content-header">SOEN343: Software Architecture and Design I<br/>Term Project</h2>
 
-      <br>
+			<h1 class="content-header">The Force Awakens</h1>
 
-      <p class="content-body">
-        A group got together to create the best reservation system in the entire galaxy. Hope everyone enjoys!
-      </p>
-
-        
-    </div>
-  </div>
+			<p class="content-body">
+				A brave group of students was tasked with developing an on-line conference room reservation system to be used by 
+				Concordia University....This is the End Result....
+			</p>
+		</div>
+	</div>
 </div>
 </head>
