@@ -43,13 +43,6 @@ if($action == "delete")
 		$_SESSION["userMSG"] = "Room ".$roomName." is being used by another Student!";
 		$_SESSION["msgClass"] = "failure";
 	}
-
-	$unit->commit();
-	$reservation->deleteReservation($reID, $conn);
-
-	$db->closeServerConn($conn);
-	
-	header("Location: Home.php");
 }
 elseif($action == "modify")
 {
@@ -57,9 +50,13 @@ elseif($action == "modify")
 	$_SESSION['reservation'] = $reID;
 }
 
+var_dump("cock sucker motherfucker");
+die();
+
 $unit->commit();
 $db->closeServerConn($conn);
 
-header("Location: Home.php");
+
+//header("Location: Home.php");
 
 ?>
