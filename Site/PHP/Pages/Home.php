@@ -189,7 +189,7 @@ $db->closeServerConn($conn);
 ?>
 </head>
 
-<body>
+<body onload="lockoutSubmit(document.getElementById('makeReserve'))">
 
     <!-- Navigation -->
     <ul class="topnav" id="myTopnav">
@@ -235,7 +235,8 @@ $db->closeServerConn($conn);
 								</select>
 								<!-- Hidden input for temporary datepicker fix-->
 								<input type="hidden" readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" placeholder = "Nothing" />
-                                <button type="submit" class="btn btn-default btn-lg"><span class="network-name">Make a Reservation</span></button>
+                                <button type="submit" class="btn btn-default btn-lg" id = "makeReserve"><span class="network-name">Make a Reservation</span></button>
+								
 							</div><br>
 						</form>
 					</div>

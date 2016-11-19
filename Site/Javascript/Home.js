@@ -64,7 +64,17 @@ $(document).ready(function() {
 		}
 	});*/
 });
+function lockoutSubmit(button) {
+    var oldValue = button.value;
 
+    button.setAttribute('disabled', true);
+    button.value = '...processing...';
+
+    setTimeout(function(){
+        button.value = oldValue;
+        button.removeAttribute('disabled');
+    }, 2000)
+}
 
 $(document).ready(function(){
 	
