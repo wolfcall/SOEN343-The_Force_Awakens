@@ -444,6 +444,7 @@ $db->closeServerConn($conn);
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4>Your Reservations</h4>
+								<div class = "timer2" style="color:red;text-align: center;">Reservation closes in <span id="timer2"></span> seconds!</div>
 							</div>
 							<div class="modal-body">
                                 <h5 id="legendC">Confirmed Reservations</h5>

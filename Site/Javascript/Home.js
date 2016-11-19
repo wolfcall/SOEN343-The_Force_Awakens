@@ -117,6 +117,34 @@ function minuteTimer(duration, display) {
         
     }, 1000);
 }
+$(function(){
+
+	 minuteTimer2(60, $('#timer2'));
+    $('#reservationmyModal').on('show.bs.modal', function(){
+        var myModal = $(this);
+        clearTimeout(myModal.data('hideInterval'),60000);
+        myModal.data('hideInterval', setTimeout(function(){
+            myModal.modal('hide');
+        }, 60000));
+    });
+});
+
+function minuteTimer2(duration, display) {
+    var seconds = duration;
+	display.text(seconds);
+    setInterval(function () {
+		
+		if(performance.navigation.type  == 1) {
+			$('#reservationmyModal').modal('hide');
+		}
+		else {
+		seconds--;				
+
+        display.text(seconds);
+	}
+        
+    }, 1000);
+}
 function disappear(){
 	setTimeout(function(){ 
 		$("#details").slideUp(1000);
