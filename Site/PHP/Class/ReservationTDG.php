@@ -248,10 +248,6 @@ class ReservationTDG
 		
 		return $waitListDates;
 	}
-
-	public function removeOverlapWaitListEntry($reID, $conn) {
-		$sql = "DELETE FROM reservation WHERE reservationID = '".$reID."'";
-	}
 	
 	/* 
 		The Insert method to add a new reservation into the reservation table

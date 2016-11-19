@@ -42,11 +42,6 @@ if(htmlspecialchars($_POST["studentID"]) != "") {
 	$_SESSION["sID"] = htmlspecialchars($_POST["studentID"]);
 }
 
-$_SESSION["sID"];
-
-// if($_SESSION["sID"] = "") {
-// 	$_SESSION["sID"] = $_POST["studentID2"];
-// }
 $prog = htmlspecialchars($_POST["program"]);
 $email = htmlspecialchars($_POST["email"]);
 
@@ -236,6 +231,33 @@ else
 
 						$unit->registerDeletedReservation($resTemp);
 					}
+				}
+
+				elseif($_SESSION["confirmedRes"] < 2) {
+					$_SESSION["confirmedRes"]++;
+
+					//Get waitlist options for student on same day
+					$studentsWaitlist = $res->getReservationsBySIDAndDate($_SESSION["sID"], $newStart, $conn);
+					
+					$tempArray = array();
+					foreach($studentsWaitlist as $reservation) {
+						array_push($tempArray, $reservation);
+
+						//If overlaps, then remove it
+						//Compare new addtion's start and end time to other waitList options for that day
+						//If overlap occurs, and the reservation is not itself, remove
+						if (checkOverlap($startDate, $endDate, $studentsWaitlist, $reservation->getID())){
+				 			$resTemp = new ReservationMapper();
+							$resTemp->setREID($reservation->getID());
+
+							$unit->registerDeletedReservation($resTemp);
+
+							$roomTemp = new RoomMapper($reservation->getRID(), $conn);
+							$roomTemp->setBusy(0);
+							$unit->registerDirtyRoom($roomAsked);
+						}
+						array_pop($tempArray);
+					 }
 				}
 				
 				if($reserveCount == 1) {

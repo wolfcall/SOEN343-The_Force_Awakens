@@ -134,10 +134,6 @@ class ReservationMapper
 		return $this->reservationData->getReservationsBySIDAndDate($sID, $start, $conn);
 	}
 
-	public function removeOverlapWaitListEntry($reID, $conn) {
-		return $this->reservationData->removeOverlapWaitListEntry($reID, $conn);
-	}
-
 	/*
 		Unit of Work (TDG Functions for Room)
 	*/	

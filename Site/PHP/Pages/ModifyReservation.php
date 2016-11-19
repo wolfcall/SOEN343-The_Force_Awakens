@@ -74,6 +74,7 @@ function updateWaitlist($reserve, $roomID, $start, $conn) {
 	$waitingReserves = $reserve->getReservationsByRoomAndDate($roomID, $start, 1, $conn);
 
 	//For each reservation on waiting list for this section, checkWeek and Overlap, and add if passes
+	$addedReservations = array();
 	foreach($waitingReserves as $reservation) {
 		//Values for checkWeek
 		//Reformate start date for checkWeek
@@ -109,16 +110,20 @@ function updateWaitlist($reserve, $roomID, $start, $conn) {
 		//If new value is insertable, add it
 
 		if(checkWeek($dateEU, $currentReservations) && checkOverlap($startDateTime, $endDateTime, $availableTimes, $previousID)) {
-			$res = new ReservationMapper($reID, $conn);
+			//Check for overlap with values which will be "added", comparing to next item to be added.
+			if(checkOverlap($startDateTime, $endDateTime, $addedReservations, $reservation->getID())) {
+				$res = new ReservationMapper($reID, $conn);
 
-			$res->setStartTimeDate($reformStart);
-			$res->setEndTimeDate($reformEnd);
-			$res->setTitle($reservation->getTitle());
-			$res->setDescription($reservation->getDescription());
-			$res->setREID($reservation->getID());
-			$res->setWait(0);
+				$res->setStartTimeDate($reformStart);
+				$res->setEndTimeDate($reformEnd);
+				$res->setTitle($reservation->getTitle());
+				$res->setDescription($reservation->getDescription());
+				$res->setREID($reservation->getID());
+				$res->setWait(0);
 
-			$unit->registerDirtyReservation($res);
+				array_push($addedReservations, $res);
+				$unit->registerDirtyReservation($res);
+			}
 	 	}
 	}
 }
