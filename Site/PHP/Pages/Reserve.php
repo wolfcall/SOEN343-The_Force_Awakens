@@ -181,23 +181,33 @@ else
 				}
 
 				//If they have less than 2 confirmed reservations, once you get off waitlist delete entries that overlap and are on waitlist
-				// elseif($_SESSION["confirmedRes"] < 2) {
-				// 	$_SESSION["confirmedRes"]++;
-				// 	echo $_SESSION["confirmedRes"];
+				elseif($_SESSION["confirmedRes"] < 2) {
+					$_SESSION["confirmedRes"]++;
 
-				// 	$tempValues = $res->getReservationsBySIDAndDate($_SESSION["sID"], $newStart, $conn);
+					//Get waitlist options for student on same day
+					$studentsWaitlist = $res->getReservationsBySIDAndDate($_SESSION["sID"], $newStart, $conn);
 					
-				// 	$tempArray = array();
-				// 	foreach($tempValues as $reservation) {
-				// 		array_push($reservation);
 
-				// 		//If overlaps, then remove it
-				// 		if (checkOverlap($startDate, $endDate, $tempArray, $reservation->getID())){
-				// 			$res->removeOverlapWaitListEntry($reservation->getID());
-				// 		}
-				// 		array_pop($tempArray);
-				// 	 }
-				// }
+					$tempArray = array();
+					foreach($studentsWaitlist as $reservation) {
+						array_push($tempArray, $reservation);
+
+						//If overlaps, then remove it
+						//Compare new addtion's start and end time to other waitList options for that day
+						//If overlap occurs, and the reservation is not itself, remove
+						if (checkOverlap($startDate, $endDate, $studentsWaitlist, $reservation->getID())){
+				 			$resTemp = new ReservationMapper();
+							$resTemp->setREID($reservation->getID());
+
+							$unit->registerDeletedReservation($resTemp);
+
+							$roomTemp = new RoomMapper($reservation->getRID(), $conn);
+							$roomTemp->setBusy(0);
+							$unit->registerDirtyRoom($roomAsked);
+						}
+						array_pop($tempArray);
+					 }
+				}
 				
 				$_SESSION["userMSG"] = "You have successfully updated your reservation ID ".$_SESSION["reservationID"]." for ".$newStart." to ".$newEnd." in Room ".$name."!";
 				$_SESSION["msgClass"] = "success";

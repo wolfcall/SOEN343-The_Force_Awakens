@@ -60,10 +60,11 @@ function checkOverlap($start, $end, $current, $previousID) {
 		//Added if check for soon to be deleted value
 		if(($current[$x]->getID() != $_SESSION["reservationID"]) && ($current[$x]->getID() != $previousID))
 		{
-			//Get start and end time of new reservation, convert the difference to mins to find duration
+			//Get start and end time of new reservation
 			$startTime = new DateTime($current[$x]->getStartTimeDate());
 			$endTime = new DateTime($current[$x]->getEndTimeDate());
 
+			//Format to Hi, allowing mathematical operators to be used on 24-hour clock
 			$tempStart = $startTime->format("Hi");
 			$tempEnd = $endTime->format("Hi");
 			
