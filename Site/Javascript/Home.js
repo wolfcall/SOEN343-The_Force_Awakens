@@ -39,7 +39,32 @@ $(document).ready(function() {
 			
 		}
 	});
+	
+	/*$("#formRes").submit(function(){
+		var tomorrowDate = new Date($("#datepickerInline").datepicker("getDate"));
+		tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+		var select = $("#formRes [name='endTime'] [selected='selected']").text();
+		if(select == "00:00"){
+			$("#formRes [name='dateDrop']").text(dayNames[tomorrowDate.getDay()] + ", " 
+						+ monthNames[tomorrowDate.getMonth()] + " " 
+						+ tomorrowDate.getDate() + " "
+						+ tomorrowDate.getUTCFullYear());
+		}
+	});
+	
+	$("#formEdit").submit(function(){
+		var tomorrowDate = new Date($("#datepickerInline").datepicker("getDate"));
+		tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+		var select = $("#formRes [name='endTime'] [selected='selected']").text();
+		if(select == "00:00"){
+			$("#formRes [name='dateDrop']").text(dayNames[tomorrowDate.getDay()] + ", " 
+						+ monthNames[tomorrowDate.getMonth()] + " " 
+						+ tomorrowDate.getDate() + " "
+						+ tomorrowDate.getUTCFullYear());
+		}
+	});*/
 });
+
 
 $(document).ready(function(){
 	
@@ -83,7 +108,9 @@ $(document).ready(function(){
 	
 	$('#myModal').on('hidden.bs.modal', function () {
 		location.href = 'ClearRoom.php';
-	})
+	});
+	
+	
 });
 
 $(function(){

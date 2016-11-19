@@ -96,7 +96,7 @@ else if ( ($endFloat-$startFloat) > 3)
 /*
 *	Check if the end time of the reservation will be before the start time
 */
-else if ($endFloat <= $startFloat)
+else if ($endFloat <= $startFloat && strcmp("0:00",$end) != 0)
 {
 	$_SESSION["userMSG"] = $wrongTime;
 	$_SESSION["msgClass"] = "failure";
@@ -127,6 +127,11 @@ else
 		$dateAmer = date('m/d/Y', strtotime($passedDate . ' + ' . (7*$a) . ' days'));
 		//changed to newStart to facilitate repeat reservations
 		$newStart = $dateAmer." ".$start;
+		
+		if(strcmp("0:00",$end) == 0){
+			$dateAmer = date('m/d/Y', strtotime($passedDate . ' + ' . ((7*$a)+1) . ' days'));
+		}
+		
 		$newEnd = $dateAmer." ".$end;
 		
 		//Get the list of reservations in same room and on same day

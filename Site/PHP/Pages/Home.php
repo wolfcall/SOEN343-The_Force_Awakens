@@ -257,7 +257,7 @@ $db->closeServerConn($conn);
 								<h4>Please enter the specifications for your reservation</h4>
 							</div>
 							<div class="modal-body">
-								<form id="form" action="Reserve.php" method="post">
+								<form id="formRes" action="Reserve.php" method="post">
 								
 									<div class="form-group">
 									<div class = "timer" style="color:red;text-align: center;">Reservation closes in <span id="timer"></span> seconds!</div>
@@ -330,7 +330,7 @@ $db->closeServerConn($conn);
 								<h4>Please edit the specifications of your reservation</h4>
 							</div>
 							<div class="modal-body">
-								<form id="form" action="Reserve.php" method="post">
+								<form id="formEdit" action="Reserve.php" method="post">
 									<div class="form-group">
 										<label>Reservation ID</label>
 										<input readonly="readonly" type="text" class="form-control" name = "reservationID" id="reservationID" value="<?php echo $modReserve['reservationID']; ?>"/>

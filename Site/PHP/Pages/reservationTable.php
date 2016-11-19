@@ -48,10 +48,15 @@ foreach($today as $res){
 	$start = explode(":", $start[1]);
 	$end = $res->getEndTimeDate();
 	$end = explode(" ", $end);
+	
+	if(strcmp($end[1],"00:00")==0)
+		$end[1] = "24:00";
+			
 	$end = explode(":", $end[1]);
-
+	
 	$slots = (2*($end[0] - $start[0])) + (($end[1] == $start[1])?0:1);
 	$begin = (2*$start[0]) + ((strcmp($start[1],"00")==0)?0:1);
+	
 	for($x = 0 ; $x < $slots ; $x++){
 		$id = $res->getRID();
 		$pos = $begin + $x;
