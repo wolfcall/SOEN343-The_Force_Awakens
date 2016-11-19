@@ -106,10 +106,14 @@ function minuteTimer(duration, display) {
 	display.text(seconds);
     setInterval(function () {
 		
+		if(performance.navigation.type  == 1) {
+			$('#myModal').modal('hide');
+		}
+		else {
 		seconds--;				
 
         display.text(seconds);
-		
+	}
         
     }, 1000);
 }
