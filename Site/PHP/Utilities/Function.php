@@ -97,4 +97,66 @@ function checkOverlap($start, $end, $current, $previousID) {
 	
 	return true;
 }
+
+function updateWaitlist($reserve, $roomID, $start, $conn) {
+	$unit = $_SESSION["unit"];
+	
+	$previousID = $reserve->getID();
+	//Get all individuals on waitlist for room on this date
+	$waitingReserves = $reserve->getReservationsByRoomAndDate($roomID, $start, 1, $conn);
+
+	//For each reservation on waiting list for this section, checkWeek and Overlap, and add if passes
+	$addedReservations = array();
+	foreach($waitingReserves as $reservation) {
+		//Values for checkWeek
+		//Reformate start date for checkWeek
+		$waitStartDate = substr($reservation->getStartTimeDate(),0,10);
+		$dateElementsStart = explode("/", $waitStartDate);
+		$dateEU = $dateElementsStart[2]."-".$dateElementsStart[1]."-".$dateElementsStart[0];
+		
+		//Get current reservations for this student
+		$sID = $reservation->getSID();
+	 	$currentReservations = $reserve->getReservations($sID, $conn);
+	 	//All values for checkWeek present
+
+		//Values for checkOverlap
+		//Reformate before converting to DateTime
+		$dateAmerStart = $dateElementsStart[1]."/".$dateElementsStart[2]."/".$dateElementsStart[0];
+		$reformStart = $dateAmerStart.substr($reservation->getStartTimeDate(),10);
+
+		//Reformate enddatetime
+		$waitEndDate = substr($reservation->getEndTimeDate(),0,10);
+		$dateElementsEnd = explode("/", $waitEndDate);
+		$dateAmerEnd = $dateElementsEnd[1]."/".$dateElementsEnd[2]."/".$dateElementsEnd[0];
+		$reformEnd = $dateAmerEnd.substr($reservation->getEndTimeDate(),10);
+
+		//Convert to DateTime
+		$startDateTime = new DateTime($reformStart);
+		$endDateTime = new DateTime($reformEnd);
+
+		//Get all reservations for the room that shares the start date 
+		$availableTimes = $reserve->getReservationsByRoomAndDate($roomID, $start, 0, $conn);
+		//All values for checkOverlap present
+
+		//For each entry found, try to insert in order
+		//If new value is insertable, add it
+
+		if(checkWeek($dateEU, $currentReservations) && checkOverlap($startDateTime, $endDateTime, $availableTimes, $previousID)) {
+			//Check for overlap with values which will be "added", comparing to next item to be added.
+			if(checkOverlap($startDateTime, $endDateTime, $addedReservations, $reservation->getID())) {
+				$res = new ReservationMapper($reID, $conn);
+
+				$res->setStartTimeDate($reformStart);
+				$res->setEndTimeDate($reformEnd);
+				$res->setTitle($reservation->getTitle());
+				$res->setDescription($reservation->getDescription());
+				$res->setREID($reservation->getID());
+				$res->setWait(0);
+
+				array_push($addedReservations, $res);
+				$unit->registerDirtyReservation($res);
+			}
+	 	}
+	}
+}
 ?>
