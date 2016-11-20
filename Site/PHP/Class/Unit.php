@@ -84,6 +84,7 @@ class UnitOfWork
 		$reservation = new ReservationMapper();
 		
 		//Commit changes to the Room
+		error_log("HERE I AM5".print_r($this->roomUpdateList,true));
 		$room->updateRoom($this->roomUpdateList, $this->conn);
 		
 		//Commit changes to the Student

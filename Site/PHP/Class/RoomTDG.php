@@ -80,9 +80,10 @@ class RoomTDG
 
 	public function updateRoom($roomUpdateList, $conn){
 				
-		foreach($roomUpdateList as &$roomUpdated)
+		foreach($roomUpdateList as $roomUpdated)
 		{
-			$sql = "Update room SET busy ='".$roomUpdated->getBusy()."' WHERE roomID ='".$roomUpdated->getRID()."'";
+			$sql = "Update room SET busy = ".(String)$roomUpdated->getBusy()." WHERE roomID = ".$roomUpdated->getRID();
+			error_log("HERE I AM 5".$sql);
 			$result = $conn->query($sql);
 		}
 	}

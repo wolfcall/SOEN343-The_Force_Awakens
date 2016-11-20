@@ -48,6 +48,7 @@ class tableHelper {
 		}
 		
 		foreach ($content as $cellkey => $value){
+			
 			$row .= "<td id='".$this->tableID."_".$this->rowNum."_".$cellkey."' class='".$params["class"]." ".$class[$cellkey]."' ";
 			
 			foreach ($params as $key => $pvalue){

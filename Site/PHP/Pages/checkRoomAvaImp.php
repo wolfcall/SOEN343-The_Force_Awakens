@@ -18,6 +18,11 @@ $unit = new UnitOfWork($conn);
 $rID = $_POST['rID'];
 $action = $_POST['action'];
 
+//In case the User clicks out of the Modal
+$_SESSION['roomID'] = $rID;
+$_SESSION['action'] = $action;
+$_SESSION['reID'] = $reID;
+
 $roomAsked = new RoomMapper($rID, $conn);
 $roomAnswer = $roomAsked->checkBusy($rID, $conn);
 $roomName = $roomAsked->getName();
@@ -45,3 +50,23 @@ else
 
 $unit->commit();
 $db->closeServerConn($conn);
+
+if($action == "modify" or $action == "delete")
+{
+	if($roomAnswer == 0)
+	{
+		//header("Location: ModifyReservation.php");
+	}
+	else
+	{
+		//header("Location: Home.php");
+	}
+}
+else
+{
+	if($roomAnswer == 0)
+	{
+		$_SESSION['roomAvailable'] = true;
+	}
+	//header("Location: Home.php");
+}

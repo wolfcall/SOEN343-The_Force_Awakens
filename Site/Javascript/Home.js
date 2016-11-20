@@ -188,7 +188,6 @@ function openModel(){
 			var tags = document.createElement("DIV");
 			tags.innerHTML = data;
 			var available = $(tags).children("#CRAroomAvailable").val();
-			alert(available);
 			if(available === "true"){
 				$("#details").removeClass("failure");
 				$("#details").html("");
