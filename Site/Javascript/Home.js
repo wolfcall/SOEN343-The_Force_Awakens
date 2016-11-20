@@ -16,7 +16,9 @@ $(document).ready(function() {
 
 	loadTable(currentDate.getUTCFullYear() + "/" + (currentDate.getMonth()+1) + "/" + currentDate.getDate());
 	document.getElementById("datetoday").innerHTML = todayDate;
-	document.getElementById("dateDrop").value = todayDate;
+	$("[name='dateDrop']").val(todayDate);
+	//document.getElementById("dateDrop").value = todayDate;
+	
 	/** end of the function, resued in "onSelect" feature of datepicker */
 
 	$("#datepickerInline").datepicker({
@@ -35,8 +37,8 @@ $(document).ready(function() {
 						+ pickedDate.getUTCFullYear();
 			loadTable(pickedDate.getUTCFullYear() + "/" + (pickedDate.getMonth()+1) + "/" + pickedDate.getDate());
 			document.getElementById("datetoday").innerHTML = todayDate;
-			document.getElementById("dateDrop").value = todayDate;
-			
+			//document.getElementById("dateDrop").value = todayDate;
+			$("[name='dateDrop']").val(todayDate);
 		}
 	});
 });
@@ -90,6 +92,9 @@ $(document).ready(function(){
 		location.href = 'ClearRoom.php';
 	});
 	
+	$('#makeReserve').click(function(){
+		openModel();
+	});
 });
 
 $(function(){
@@ -149,9 +154,14 @@ function minuteTimer2(duration, display) {
     }, 1000);
 }
 function disappear(){
-	setTimeout(function(){ 
-		$("#details").slideUp(1000);
-	}, 3000); 
+	if($("#details").text() === ""){
+		$("#details").hide();
+	}else{
+		$("#details").show();
+		setTimeout(function(){ 
+			$("#details").slideUp(1000);
+		}, 3000);	
+	}
 }
 
 function loadTable(date) {
@@ -164,6 +174,33 @@ function loadTable(date) {
 	xhttp.open("GET", "reservationTable.php?Date=" + date + "", false);
 	xhttp.send();
 } 
+
+function openModel(){
+	$.ajax({
+		url:"checkRoomAvaImp.php",
+		type:"POST",
+		data:{
+			dateDrop: $("#mkResdateDrop").val(),
+			action:"make",
+			rID: $("#roomOptions").val()
+		},
+		success:function(data){
+			var tags = document.createElement("DIV");
+			tags.innerHTML = data;
+			var available = $(tags).children("#CRAroomAvailable").val();
+			alert(available);
+			if(available === "true"){
+				$("#details").removeClass("failure");
+				$("#details").html("");
+				$("#myModal").modal();
+			}else{
+				$("#details").addClass("failure");
+				$("#details").text($(tags).children("#CRAuserMsg").val())
+			}
+			disappear();
+		}
+	});
+}
 
 function myNav() {
     var x = document.getElementById("myTopnav");
