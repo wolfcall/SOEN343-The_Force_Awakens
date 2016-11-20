@@ -216,9 +216,7 @@ $db->closeServerConn($conn);
 				<!-- Id space to confirm if the data was saved or not -->
 				<div>
 					<?php
-						if(!empty($userMSG)){
-							echo '<div id = "details" class = "details '.$msgClass.'">'.$userMSG.'</div>';
-						}
+						echo '<div id = "details" class = "details '.$msgClass.'">'.$userMSG.'</div>';
 					?>
 				</div>
 				
@@ -233,7 +231,7 @@ $db->closeServerConn($conn);
 					<div id="datepickerInline"></div>
 					<br><br>
 					<div id="reserveButton">
-						<form id="form" action="CheckRoomAvailable.php" method="post">
+						<!--form id="form" action="CheckRoomAvailable.php" method="post"-->
 							<div>
 								<select id = "roomOptions" class="btn btn-default btn-lg network-name" name = "rID">
 									<?php
@@ -243,11 +241,11 @@ $db->closeServerConn($conn);
 									?>
 								</select>
 								<!-- Hidden input for temporary datepicker fix-->
-								<input type="hidden" readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" placeholder = "Nothing" />
-                                <button type="submit" class="btn btn-default btn-lg" id = "makeReserve"><span class="network-name">Make a Reservation</span></button>
+								<input type="hidden" type="text" class="form-control" name = "dateDrop" id="mkResdateDrop" />
+                                <button class="btn btn-default btn-lg" id = "makeReserve"><span class="network-name">Make a Reservation</span></button>
 								
 							</div><br>
-						</form>
+						<!--/form-->
 					</div>
                     <br>
                     <div id="legendContainer">
@@ -281,7 +279,7 @@ $db->closeServerConn($conn);
 									<!-- Time slots should be inserted here-->
 									<div class="form-group">
 										<label>Date:</label>
-										<input readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" value="<?php echo $passedDate; ?>" />
+										<input readonly="readonly" type="text" class="form-control" name = "dateDrop" id="ResdateDrop" value="<?php echo $passedDate; ?>" />
 										<br>										
 										<label>Start Time:</label> 
 											<select id ="startTime" name = "startTime">
@@ -361,7 +359,7 @@ $db->closeServerConn($conn);
 									<!-- Time slots should be inserted here-->
 									<div class="form-group">
 										<label>Date:</label>
-										<input readonly="readonly" type="text" class="form-control" name = "dateDrop" id="dateDrop" value="<?php echo $modDate[0]; ?>"/>
+										<input readonly="readonly" type="text" class="form-control" name = "dateDrop" id="EditdateDrop" value="<?php echo $modDate[0]; ?>"/>
 										<br>										
 										<label>Start Time:</label> 
 											<select name = "startTime">
