@@ -29,7 +29,7 @@ date_default_timezone_set('US/Eastern');
 $ourDate = time() - strtotime("today");
 
 //timestamp for 10 seconds in the future when the button should be cleared
-$_SESSION['cleared'] = $ourDate+10;
+$_SESSION['cleared'] = $ourDate+30;
 
 $unit->commit();
 $db->closeServerConn($conn);

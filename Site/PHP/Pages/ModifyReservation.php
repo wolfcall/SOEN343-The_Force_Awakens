@@ -55,18 +55,20 @@ if($action == "delete")
 
 	$unit->registerDeletedReservation($reservation);
 	updateWaitlist($reservation, $rID, $reformatStart, $conn);
+	$unit->commit();
+	$db->closeServerConn($conn);
 	header("Location: ClearRoom.php");
 }
 elseif($action == "modify")
 {
 	$_SESSION['modify'] = true;
 	$_SESSION['reservation'] = $reID;
+	
+	$unit->commit();
+	$db->closeServerConn($conn);
+	header("Location: Home.php");
 }
 
-$unit->commit();
-$db->closeServerConn($conn);
-
-header("Location: Home.php");
 
 
 ?>
