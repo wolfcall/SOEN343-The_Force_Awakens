@@ -86,6 +86,9 @@ $(document).ready(function(){
 		location.href = 'ClearRoom.php';
 	});
 	
+	$('#editModal').on('hidden.bs.modal', function () {
+		location.href = 'ClearRoom.php';
+	});
 	
 });
 
