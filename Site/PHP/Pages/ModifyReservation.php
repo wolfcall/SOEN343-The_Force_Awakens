@@ -56,6 +56,10 @@ if($action == "delete")
 	$unit->registerDeletedReservation($reservation);
 	updateWaitlist($reservation, $rID, $reformatStart, $conn);
 	$unit->commit();
+	
+	$_SESSION["userMSG"] = "You have successfully deleted your Reservation!";
+	$_SESSION["msgClass"] = "success";
+
 	$db->closeServerConn($conn);
 	header("Location: ClearRoom.php");
 }

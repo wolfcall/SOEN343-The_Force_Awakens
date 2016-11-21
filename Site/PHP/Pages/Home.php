@@ -65,6 +65,7 @@ if($modify)
 	$modDate = explode(" ", $modReserve['startTimeDate']);
 	$modTimeEnd = explode(" ", $modReserve['endTimeDate']);
 	$roomReserve = new RoomMapper($modReserve['roomID'], $conn);
+	$roomChosen = $roomReserve->getName();
 }
 
 $getStartHoursSelect = false;
@@ -342,13 +343,11 @@ $db->closeServerConn($conn);
 							</div>
 							<div class="modal-body">
 								<form id="formEdit" action="Reserve.php" method="post">
+										<input readonly="readonly" type="hidden" class="form-control" name = "reservationID" id="reservationID" value="<?php echo $modReserve['reservationID']; ?>"/>
+										<input readonly="readonly" type="hidden" class="form-control" name = "roomID" id="reservationID" value="<?php echo $modReserve['roomID']; ?>"/>
 									<div class="form-group">
-										<label>Reservation ID</label>
-										<input readonly="readonly" type="text" class="form-control" name = "reservationID" id="reservationID" value="<?php echo $modReserve['reservationID']; ?>"/>
-									</div>
-									<div class="form-group">
-										<label>Room ID</label>
-										<input readonly="readonly" type="text" class="form-control" name = "roomID" id="reservationID" value="<?php echo $modReserve['roomID']; ?>"/>
+										<label>Room Name</label>
+										<input readonly="readonly" type="text" class="form-control" name = "roomID" id="reservationID" value="<?php echo $roomChosen; ?>"/>
 									</div>
 									<div class="form-group">
 										<label>Title of Reservation</label>

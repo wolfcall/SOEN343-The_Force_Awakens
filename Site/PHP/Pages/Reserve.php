@@ -204,7 +204,7 @@ else
 					 }
 				}
 				
-				$_SESSION["userMSG"] = "You have successfully updated your reservation ID ".$_SESSION["reservationID"]." for ".$newStart." to ".$newEnd." in Room ".$name."!";
+				$_SESSION["userMSG"] = "You have successfully updated your Reservation for ".$newStart." to ".$newEnd." in Room ".$name."!";
 				$_SESSION["msgClass"] = "success";
 			}
 			else

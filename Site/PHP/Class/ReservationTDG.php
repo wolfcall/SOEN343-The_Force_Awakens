@@ -276,9 +276,6 @@ class ReservationTDG
 		{
 			$sql = "DELETE FROM reservation WHERE reservationID ='".$reservationDeleted->getID()."'";
 			$result = $conn->query($sql);
-			
-			$_SESSION["userMSG"] = "You have successfully deleted Reservation ID#" .$reservationDeleted->getID();
-			$_SESSION["msgClass"] = "success";
 		}
 	}
 }

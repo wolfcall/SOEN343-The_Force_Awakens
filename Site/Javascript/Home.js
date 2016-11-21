@@ -151,7 +151,7 @@ function minuteTimer2(duration, display) {
 function disappear(){
 	setTimeout(function(){ 
 		$("#details").slideUp(1000);
-	}, 3000); 
+	}, 10000); 
 }
 
 function loadTable(date) {
