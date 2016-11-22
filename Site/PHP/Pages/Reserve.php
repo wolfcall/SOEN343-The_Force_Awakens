@@ -161,7 +161,6 @@ else
 				$res->setWait(0);
 
 				$unit->registerDirtyReservation($res);
-				$unit->commit();
 				//If they've already had 2 reservations, the third will prompt an alert. On confirm, it removes all waitlists for student
 				if($_SESSION["confirmedRes"] == 2) {
 					$_SESSION["confirmedRes"] = 3;
