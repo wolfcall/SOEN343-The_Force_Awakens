@@ -10,6 +10,9 @@ SAD Full Document - Final
 SRS Full Document - Final
   
 Live Version of site can be found here: http://wolfcall.ddns.net/  
+
+Please note that the Live Version of the site is from the Stable-Version branch.
+When Downloading please verify you downloaded the Stable-Version branch.
   
 Sample credentials to access live version of website:
 
