@@ -53,14 +53,16 @@ function checkWeek($d, $current) {
 }
 
 function checkOverlap($start, $end, $current, $previousID) {
+
 	$newStartTime = $start->format("Hi");
 	$newEndTime = $end->format("Hi");
 	//made global to get variable above
 	for($x = 0; $x < count($current); $x++) {
 		//Added IF check for modification, won't check overlap against itself
 		//Added if check for soon to be deleted value
-		if(($current[$x]->getID() != $_SESSION["reservationID"]) && ($current[$x]->getID() != $previousID))
+		if(($current[$x]->getID() != $_SESSION["reservationID"]))
 		{
+		
 			//Get start and end time of new reservation
 			$startTime = new DateTime($current[$x]->getStartTimeDate());
 			$endTime = new DateTime($current[$x]->getEndTimeDate());
@@ -101,7 +103,6 @@ function checkOverlap($start, $end, $current, $previousID) {
 
 function updateWaitlist($reserve, $roomID, $start, $conn) {
 	$unit = new UnitOfWork($conn);
-
 	
 	$previousID = $reserve->getID();
 	//Get all individuals on waitlist for room on this date
@@ -138,12 +139,13 @@ function updateWaitlist($reserve, $roomID, $start, $conn) {
 
 		//Get all reservations for the room that shares the start date 
 		$availableTimes = $reserve->getReservationsByRoomAndDate($roomID, $start, 0, $conn);
-
+	
 		//All values for checkOverlap present
 
 		//For each entry found, try to insert in order
 		//If new value is insertable, add it
-
+		$_SESSION["reservationID"] = $reservation->getID();
+		
 		if(checkWeek($dateEU, $currentReservations) && checkOverlap($startDateTime, $endDateTime, $availableTimes, $previousID)) {
 			if(empty($addedReservations)) {
 				$res = new ReservationMapper($reservation->getID(), $conn);
