@@ -150,7 +150,6 @@ else
 
 		if(checkWeek($dateEU, $currentReservations) && checkOverlap($startDate, $endDate, $availableTimes, 0)) 
 		{
-
 			if($_SESSION["modifying"])
 			{
 				//Updates reservation instead of adding a new one
@@ -162,7 +161,7 @@ else
 				$res->setWait(0);
 
 				$unit->registerDirtyReservation($res);
-
+				$unit->commit();
 				//If they've already had 2 reservations, the third will prompt an alert. On confirm, it removes all waitlists for student
 				if($_SESSION["confirmedRes"] == 2) {
 					$_SESSION["confirmedRes"] = 3;
@@ -221,7 +220,7 @@ else
 					 }
 				}
 				
-				updateWaitlist($res, $rID, $newStart, $conn);
+				updateWaitlist($res, $rID, $dateAmer, $conn);
 				$_SESSION["userMSG"] = "You have successfully updated your Reservation for ".$newStart." to ".$newEnd." in Room ".$name."!";
 				$_SESSION["msgClass"] = "success";
 			}

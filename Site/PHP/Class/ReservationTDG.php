@@ -138,7 +138,7 @@ class ReservationTDG
 	public function getReservationsByDate($start, $conn) {
 		
 		$date = substr($start,0,10);
-		
+
 		//Need to reformate date so that it can be used in the database
 		$dateElements = explode("/", $date);
 		$reformatDate = $dateElements[2]."-".$dateElements[0]."-".$dateElements[1];
@@ -149,7 +149,6 @@ class ReservationTDG
 		$result = $conn->query($sql);
 
 		$reservesTimes = array();
-
 		if(!is_null($reservesTimes)) {
 			while($row = $result->fetch_assoc())
 			{
@@ -157,12 +156,12 @@ class ReservationTDG
 				array_push($reservesTimes, $temp);
 			}
 		}
-
 		return $reservesTimes; 
 	}
 	
 	//Get reservations by room ID AND Date (for overlap checking)
 	public function getReservationsByRoomAndDate($roomID, $start, $wait, $conn) {
+
 		$date = substr($start,0,10);
 
 		//Need to reformate date so that it can be used in the database
@@ -173,7 +172,7 @@ class ReservationTDG
 				. " AND roomID = '".$roomID."' and waitlisted = '".$wait."' ORDER BY reservationID ASC";
 		
 		$result = $conn->query($sql);
-
+		
 		$reservesTimes = array();
 
 		if($result != null) {

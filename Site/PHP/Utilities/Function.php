@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once "../Class/Unit.php";
 
 function checkWeek($d, $current) {
 	$_SESSION["confirmedRes"] = 0;
@@ -99,14 +100,7 @@ function checkOverlap($start, $end, $current, $previousID) {
 }
 
 function updateWaitlist($reserve, $roomID, $start, $conn) {
-	// var_dump($res);
-	// echo "<br";
-	// echo $roomID;
-	// echo "<br>";
-	// var_dump($start);
-	// echo "<br>";
-	// var_dump($_SESSION["unit"]);
-	// $unit = $_SESSION["unit"];
+	$unit = new UnitOfWork($conn);
 	
 	$previousID = $reserve->getID();
 	//Get all individuals on waitlist for room on this date
@@ -143,15 +137,34 @@ function updateWaitlist($reserve, $roomID, $start, $conn) {
 
 		//Get all reservations for the room that shares the start date 
 		$availableTimes = $reserve->getReservationsByRoomAndDate($roomID, $start, 0, $conn);
+
 		//All values for checkOverlap present
 
 		//For each entry found, try to insert in order
 		//If new value is insertable, add it
 
 		if(checkWeek($dateEU, $currentReservations) && checkOverlap($startDateTime, $endDateTime, $availableTimes, $previousID)) {
+		//	echo $reservation->getID();
+		//	echo "<br><br><br>";
+			if(empty($addedReservations)) {
+				$res = new ReservationMapper($reservation->getID(), $conn);
+
+				$res->setStartTimeDate($reformStart);
+				$res->setEndTimeDate($reformEnd);
+				$res->setTitle($reservation->getTitle());
+				$res->setDescription($reservation->getDescription());
+				$res->setREID($reservation->getID());
+				$res->setWait(0);
+
+				array_push($addedReservations, $res);
+				
+	//			echo "<br>ASASS<br>";
+				$unit->registerDirtyReservation($res);
+//				echo "89234u243hu32jh23";
+			}
 			//Check for overlap with values which will be "added", comparing to next item to be added.
-			if(checkOverlap($startDateTime, $endDateTime, $addedReservations, $reservation->getID())) {
-				$res = new ReservationMapper($reID, $conn);
+			elseif(checkOverlap($startDateTime, $endDateTime, $addedReservations, $reservation->getID())) {
+				$res = new ReservationMapper();
 
 				$res->setStartTimeDate($reformStart);
 				$res->setEndTimeDate($reformEnd);
@@ -165,5 +178,6 @@ function updateWaitlist($reserve, $roomID, $start, $conn) {
 			}
 	 	}
 	}
+	$unit->commit();
 }
 ?>

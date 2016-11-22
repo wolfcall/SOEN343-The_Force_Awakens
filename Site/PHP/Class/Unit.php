@@ -60,7 +60,6 @@ class UnitOfWork
 		Trigger Modification of a Reservation
 	*/
 	public function registerDirtyReservation($reservationObject){
-		
 		array_push($this->reservationUpdateList, $reservationObject);
 	}
 	
