@@ -101,6 +101,7 @@ function checkOverlap($start, $end, $current, $previousID) {
 
 function updateWaitlist($reserve, $roomID, $start, $conn) {
 	$unit = new UnitOfWork($conn);
+
 	
 	$previousID = $reserve->getID();
 	//Get all individuals on waitlist for room on this date
