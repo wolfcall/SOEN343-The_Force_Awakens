@@ -53,8 +53,12 @@ foreach($today as $res){
 		$end[1] = "24:00";
 			
 	$end = explode(":", $end[1]);
-	
-	$slots = (2*($end[0] - $start[0])) + (($end[1] == $start[1])?0:1);
+	if($start[1] > $end[1]){
+		$add_minus = -1;
+	}else{
+		$add_minus = 1;
+	}
+	$slots = (2*($end[0] - $start[0])) + (($end[1] == $start[1])?0:$add_minus);
 	$begin = (2*$start[0]) + ((strcmp($start[1],"00")==0)?0:1);
 	
 	for($x = 0 ; $x < $slots ; $x++){
