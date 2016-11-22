@@ -182,13 +182,12 @@ else
 					//Get waitlist options for student on same day
 					$studentsWaitlist = $res->getReservationsBySIDAndDate($_SESSION["sID"], $newStart, $conn);
 					
-
 					$tempArray = array();
 					foreach($studentsWaitlist as $reservation) {
 						array_push($tempArray, $reservation);
 
 						//If overlaps, then remove it
-						//Compare new addtion's start and end time to other waitList options for that day
+						//Compare new addition's start and end time to other waitList options for that day
 						//If overlap occurs, and the reservation is not itself, remove
 						if (checkOverlap($startDate, $endDate, $studentsWaitlist, $reservation->getID())){
 				 			$resTemp = new ReservationMapper();
