@@ -99,7 +99,14 @@ function checkOverlap($start, $end, $current, $previousID) {
 }
 
 function updateWaitlist($reserve, $roomID, $start, $conn) {
-	$unit = $_SESSION["unit"];
+	// var_dump($res);
+	// echo "<br";
+	// echo $roomID;
+	// echo "<br>";
+	// var_dump($start);
+	// echo "<br>";
+	// var_dump($_SESSION["unit"]);
+	// $unit = $_SESSION["unit"];
 	
 	$previousID = $reserve->getID();
 	//Get all individuals on waitlist for room on this date

@@ -169,8 +169,10 @@ else
 					$waitListValues = $res->getWaitlistIDByStudent($_SESSION["sID"], 0, $conn);
 
 					$waitStartDate = substr($res->getStartTimeDate(),0,10);
+
 					$dateElementsStart = explode("/", $waitStartDate);
-					$dateEU = $dateElementsStart[2]."-".$dateElementsStart[1]."-".$dateElementsStart[0];
+					$dateEU = $dateElementsStart[1]."-".$dateElementsStart[0]."-".$dateElementsStart[2];
+					$week = date("W", strtotime($dateEU));
 
 					foreach($waitListValues as $entry) {
 						$resTemp = new ReservationMapper();
@@ -181,9 +183,10 @@ else
 						$tempStartDate = substr($entry->getStartTimeDate(),0,10);
 						$tempElementsStart = explode("/", $tempStartDate);
 						$tempEU = $tempElementsStart[2]."-".$tempElementsStart[1]."-".$tempElementsStart[0];
-						$tempDate = date("j-m-Y", strtotime($current[$x]["startTimeDate"]));
+						$tempDate = date("j-m-Y", strtotime($entry->getStartTimeDate()));
 						$tempWeek = date("W", strtotime($tempDate));
-						
+
+
 						if($week == $tempWeek) {
 							$unit->registerDeletedReservation($resTemp);
 						}
@@ -217,7 +220,8 @@ else
 						array_pop($tempArray);
 					 }
 				}
-
+				
+				updateWaitlist($res, $rID, $newStart, $conn);
 				$_SESSION["userMSG"] = "You have successfully updated your Reservation for ".$newStart." to ".$newEnd." in Room ".$name."!";
 				$_SESSION["msgClass"] = "success";
 			}
@@ -240,8 +244,10 @@ else
 					$waitListValues = $res->getWaitlistIDByStudent($_SESSION["sID"], 0, $conn);
 
 					$waitStartDate = substr($res->getStartTimeDate(),0,10);
+
 					$dateElementsStart = explode("/", $waitStartDate);
-					$dateEU = $dateElementsStart[2]."-".$dateElementsStart[1]."-".$dateElementsStart[0];
+					$dateEU = $dateElementsStart[1]."-".$dateElementsStart[0]."-".$dateElementsStart[2];
+					$week = date("W", strtotime($dateEU));
 
 					foreach($waitListValues as $entry) {
 						$resTemp = new ReservationMapper();
@@ -252,9 +258,10 @@ else
 						$tempStartDate = substr($entry->getStartTimeDate(),0,10);
 						$tempElementsStart = explode("/", $tempStartDate);
 						$tempEU = $tempElementsStart[2]."-".$tempElementsStart[1]."-".$tempElementsStart[0];
-						$tempDate = date("j-m-Y", strtotime($current[$x]["startTimeDate"]));
+						$tempDate = date("j-m-Y", strtotime($entry->getStartTimeDate()));
 						$tempWeek = date("W", strtotime($tempDate));
-						
+
+
 						if($week == $tempWeek) {
 							$unit->registerDeletedReservation($resTemp);
 						}

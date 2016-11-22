@@ -42,25 +42,25 @@ $(document).ready(function() {
 });
 function lockoutSubmit(timeExpire) {
     
-   btn = document.getElementById('makeReserve');
+//    btn = document.getElementById('makeReserve');
 	
-	//Get current Time
-	var dt = new Date();
-	var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
+// 	//Get current Time
+// 	var dt = new Date();
+// 	var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
 	
 	
-	//If expering time is greater than the current time
-	//Then initiate the timer
-	if(timeExpire > secs)
-	{
-		var left = timeExpire-secs;
+// 	//If expering time is greater than the current time
+// 	//Then initiate the timer
+// 	if(timeExpire > secs)
+// 	{
+// 		var left = timeExpire-secs;
 		
-		btn.setAttribute('disabled', true);
+// 		btn.setAttribute('disabled', true);
 
-		setTimeout(function(){
-		   btn.removeAttribute('disabled');
-		},left*1000)
-	}	
+// 		setTimeout(function(){
+// 		   btn.removeAttribute('disabled');
+// 		},left*1000)
+// 	}	
 }
 
 $(document).ready(function(){
