@@ -63,52 +63,6 @@ function lockoutSubmit(timeExpire) {
 	}	
 }
 
-function lockoutModify(timeExpire) {
-    
-   btnu = document.getElementById('modifyButton');
-	
-	//Get current Time
-	var dt = new Date();
-	var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
-	
-	
-	//If expering time is greater than the current time
-	//Then initiate the timer
-	if(timeExpire > secs)
-	{
-		var left = timeExpire-secs;
-		
-		btnu.setAttribute('disabled', true);
-
-		setTimeout(function(){
-		   btnu.removeAttribute('disabled');
-		},left*1000)
-	}	
-}
-
-function lockoutDelete(timeExpire) {
-    
-   btnd = document.getElementById('deleteButton');
-	
-	//Get current Time
-	var dt = new Date();
-	var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
-	
-	
-	//If expering time is greater than the current time
-	//Then initiate the timer
-	if(timeExpire > secs)
-	{
-		var left = timeExpire-secs;
-		
-		btnd.setAttribute('disabled', true);
-
-		setTimeout(function(){
-		   btnd.removeAttribute('disabled');
-		},left*1000)
-	}	
-}
-
 $(document).ready(function(){
 	
 	$("#startTime").change(function(){
