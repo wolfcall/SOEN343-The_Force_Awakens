@@ -166,12 +166,27 @@ else
 				//If they've already had 2 reservations, the third will prompt an alert. On confirm, it removes all waitlists for student
 				if($_SESSION["confirmedRes"] == 2) {
 					$_SESSION["confirmedRes"] = 3;
-					$waitListValues = $res->getWaitlistIDByStudent($_SESSION["sID"], $_SESSION["reservationID"], $conn);
+					$waitListValues = $res->getWaitlistIDByStudent($_SESSION["sID"], 0, $conn);
+
+					$waitStartDate = substr($res->getStartTimeDate(),0,10);
+					$dateElementsStart = explode("/", $waitStartDate);
+					$dateEU = $dateElementsStart[2]."-".$dateElementsStart[1]."-".$dateElementsStart[0];
+
 					foreach($waitListValues as $entry) {
 						$resTemp = new ReservationMapper();
-						$resTemp->setREID($entry);
+						$resTemp->setREID($entry->getID());
 
-						$unit->registerDeletedReservation($resTemp);
+						//Make sure you only remove waitlists from same week
+						//Get date of current waitlist values
+						$tempStartDate = substr($entry->getStartTimeDate(),0,10);
+						$tempElementsStart = explode("/", $tempStartDate);
+						$tempEU = $tempElementsStart[2]."-".$tempElementsStart[1]."-".$tempElementsStart[0];
+						$tempDate = date("j-m-Y", strtotime($current[$x]["startTimeDate"]));
+						$tempWeek = date("W", strtotime($tempDate));
+						
+						if($week == $tempWeek) {
+							$unit->registerDeletedReservation($resTemp);
+						}
 					}
 				}
 
@@ -202,7 +217,7 @@ else
 						array_pop($tempArray);
 					 }
 				}
-				
+
 				$_SESSION["userMSG"] = "You have successfully updated your Reservation for ".$newStart." to ".$newEnd." in Room ".$name."!";
 				$_SESSION["msgClass"] = "success";
 			}
@@ -224,11 +239,25 @@ else
 					$_SESSION["confirmedRes"] = 3;
 					$waitListValues = $res->getWaitlistIDByStudent($_SESSION["sID"], 0, $conn);
 
+					$waitStartDate = substr($res->getStartTimeDate(),0,10);
+					$dateElementsStart = explode("/", $waitStartDate);
+					$dateEU = $dateElementsStart[2]."-".$dateElementsStart[1]."-".$dateElementsStart[0];
+
 					foreach($waitListValues as $entry) {
 						$resTemp = new ReservationMapper();
-						$resTemp->setREID($entry);
+						$resTemp->setREID($entry->getID());
 
-						$unit->registerDeletedReservation($resTemp);
+						//Make sure you only remove waitlists from same week
+						//Get date of current waitlist values
+						$tempStartDate = substr($entry->getStartTimeDate(),0,10);
+						$tempElementsStart = explode("/", $tempStartDate);
+						$tempEU = $tempElementsStart[2]."-".$tempElementsStart[1]."-".$tempElementsStart[0];
+						$tempDate = date("j-m-Y", strtotime($current[$x]["startTimeDate"]));
+						$tempWeek = date("W", strtotime($tempDate));
+						
+						if($week == $tempWeek) {
+							$unit->registerDeletedReservation($resTemp);
+						}
 					}
 				}
 

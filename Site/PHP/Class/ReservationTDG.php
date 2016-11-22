@@ -222,7 +222,8 @@ class ReservationTDG
 		
 		while($row = $result->fetch_assoc())
 		{   
-			array_push($waitListDates, $row["reservationID"]);
+			$temp = new ReservationDomain($row["reservationID"], $row["studentID"], $row["roomID"], $row["startTimeDate"], $row["endTimeDate"], $row["title"], $row["description"], $row["waitlisted"]);
+			array_push($waitListDates, $temp);
 		}
 		
 		return $waitListDates;
