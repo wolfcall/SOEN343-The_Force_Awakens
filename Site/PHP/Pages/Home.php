@@ -194,7 +194,7 @@ $db->closeServerConn($conn);
 <?php
 	
 	$regular = "<body>";
-	$timer = '<body onload="lockoutSubmit('.$made.')">';
+	$timer = '<body onload="lockoutSubmit('.$made.'),lockoutModify('.$made.'),lockoutDelete('.$made.')">';
 	
 	echo $timer;
 	
@@ -457,8 +457,8 @@ $db->closeServerConn($conn);
 									{   
 										$active = new RoomMapper($singleReservation["roomID"], $conn);
 										$activeRoom = $active->getName();
-										$deleteButton = '<button type="Submit" name="action" value = "delete" class="center btn btn-default"> Delete Reservation '.$count.'</button>';
-										$modifyButton = '<br><button type="Submit" data-target="myModal" id = "modify" name="action" value = "modify" class="center btn btn-default"> Modify Reservation '.$count.'</button>';
+										$deleteButton = '<button type="Submit" name="action" value = "delete" id="deleteButton" class="center btn btn-default"> Delete Reservation '.$count.'</button>';
+										$modifyButton = '<br><button type="Submit" data-target="myModal" id = "modifyButton" name="action" value = "modify" class="center btn btn-default"> Modify Reservation '.$count.'</button>';
 										$hidden = '<input type="hidden" name="reID" value="'.$singleReservation["reservationID"].'"></input>';
 										$hidden2 ='<input type="hidden" name="rID" value="'.$singleReservation['roomID'].'"></input>';
 										$startDateTime = explode(" ", $singleReservation["startTimeDate"]);
