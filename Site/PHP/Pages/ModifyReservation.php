@@ -68,6 +68,7 @@ elseif($action == "modify")
 	$_SESSION['modify'] = true;
 	$_SESSION['reservation'] = $reID;
 	
+	updateWaitlist($reservation, $rID, $reformatStart, $conn);
 	$unit->commit();
 	$db->closeServerConn($conn);
 	header("Location: Home.php");
