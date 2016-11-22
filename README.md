@@ -15,6 +15,5 @@ Sample credentials to access live version of website:
 
 UserName              Password  
 sp@email.com          pass123  
-nb@email.com          pass123  
 oc@email.com          pass123  
-jp@email.com          pass123  
+jt@email.com          pass123  
