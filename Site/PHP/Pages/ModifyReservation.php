@@ -54,7 +54,9 @@ if($action == "delete")
 	$date = $_POST['date'];
 
 	$unit->registerDeletedReservation($reservation);
+
 	updateWaitlist($reservation, $rID, $reformatStart, $conn);
+
 	$unit->commit();
 	
 	$_SESSION["userMSG"] = "You have successfully deleted your Reservation!";

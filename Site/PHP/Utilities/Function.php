@@ -106,7 +106,7 @@ function updateWaitlist($reserve, $roomID, $start, $conn) {
 	// var_dump($start);
 	// echo "<br>";
 	// var_dump($_SESSION["unit"]);
-	// $unit = $_SESSION["unit"];
+	$unit = $_SESSION["unit"];
 	
 	$previousID = $reserve->getID();
 	//Get all individuals on waitlist for room on this date
