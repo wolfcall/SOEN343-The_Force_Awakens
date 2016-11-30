@@ -9,10 +9,8 @@ under the respective folder for both SRS and SAD. They are named as follows:
 SAD Full Document - Final  
 SRS Full Document - Final
   
-Live Version of site can be found here: http://wolfcall.ddns.net/  
-
-Please note that the Live Version of the site is from the Stable-Version branch.
-When Downloading please verify you downloaded the Stable-Version branch.
+Please note that the database configuration has been removed please enter your
+database configuration in Site\PHP\UtilitiesServerConnection.php
   
 Sample credentials to access live version of website:
 

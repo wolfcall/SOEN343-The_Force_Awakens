@@ -12,12 +12,12 @@
 class ServerConnection
 { 
 	function getServerConn(){
-		$servernamelocal = "192.168.2.36";
-		$servernameremote = "wolfcall.ddns.net";
+		$servernamelocal = "";
+		$servernameremote = "";
 		$port = 3306;
-		$username = "SOEN341user";
-		$password = "G3tR3ck3dS0n";
-		$schema = "soen343";
+		$username = "";
+		$password = "";
+		$schema = "";
 		
 		$conn = new mysqli($servernameremote, $username, $password, $schema, $port);
 		
